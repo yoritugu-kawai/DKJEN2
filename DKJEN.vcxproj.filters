@@ -1,0 +1,462 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="4.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <ItemGroup>
+    <Filter Include="ソース ファイル">
+      <UniqueIdentifier>{4FC737F1-C7A5-4376-A066-2A32D752A2FF}</UniqueIdentifier>
+      <Extensions>cpp;c;cc;cxx;c++;cppm;ixx;def;odl;idl;hpj;bat;asm;asmx</Extensions>
+    </Filter>
+    <Filter Include="ヘッダー ファイル">
+      <UniqueIdentifier>{93995380-89BD-4b04-88EB-625FBE52EBFB}</UniqueIdentifier>
+      <Extensions>h;hh;hpp;hxx;h++;hm;inl;inc;ipp;xsd</Extensions>
+    </Filter>
+    <Filter Include="DKJEN">
+      <UniqueIdentifier>{cea1a72f-93b5-40c1-b438-eca232c03331}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="DKJEN\Base">
+      <UniqueIdentifier>{aa3ee7da-5e33-40d2-8712-18f1f8280c2f}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="DKJEN\Utilipy">
+      <UniqueIdentifier>{be0b49cf-5f9f-4333-a89d-d063df1029c5}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="DKJEN\Imgui">
+      <UniqueIdentifier>{8cc35df4-360f-4e91-bdd2-c342afedceb1}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="DKJEN\Management">
+      <UniqueIdentifier>{f7cf9383-a287-4799-88e7-f05c6b7c8aba}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="DKJEN\Math">
+      <UniqueIdentifier>{73be5ec0-347e-4d2d-8f50-26983b897fd1}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="DKJEN\Shader">
+      <UniqueIdentifier>{a401da7e-afff-4101-8493-91fe4cf4e538}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="DKJEN\Type">
+      <UniqueIdentifier>{fdf38c82-c957-481f-aceb-4fbc77966666}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="ImguiEx">
+      <UniqueIdentifier>{f81999c5-8832-4650-bad1-7d9fb5e33586}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="DKJEN\Base\DxCommon">
+      <UniqueIdentifier>{59756443-50a2-4544-9739-d9e410191d33}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="DKJEN\Base\Win">
+      <UniqueIdentifier>{cc4b616d-3206-4cd2-942a-9ca0a3e90cd9}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="DKJEN\Base\Log">
+      <UniqueIdentifier>{f660c6de-7089-4bc7-9605-f19e08233b08}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="DKJEN\Type\2D">
+      <UniqueIdentifier>{4e1367a1-ed4f-4627-a165-5bcfe250df36}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="DKJEN\Type\3D">
+      <UniqueIdentifier>{ef5c8bc5-9c2a-4343-b48a-7498e51e6ef6}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="DKJEN\CameraProjection">
+      <UniqueIdentifier>{c70e3590-af8e-4ca0-9a1d-2bd7482326cd}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="DKJEN\WorldCoordinate">
+      <UniqueIdentifier>{2973903f-d131-4a66-b279-7fcd5a182c89}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="hlsl">
+      <UniqueIdentifier>{cccd3f29-95a6-41bb-b9f3-49214d0ab677}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="DKJEN\Base\PSO">
+      <UniqueIdentifier>{cee9bf10-9630-42ff-af5d-b43297b866de}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="DKJEN\TexInformation">
+      <UniqueIdentifier>{81045715-06bb-4a2d-ad08-6b01c387f5a9}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="DKJEN\TexDeta">
+      <UniqueIdentifier>{ea856ce8-5218-48a7-ae3d-7c7ce67ba277}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="DKJEN\TexDeta\Image">
+      <UniqueIdentifier>{bcfc85f9-e4e5-4f21-91f2-9867bf0efd8d}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="DKJEN\Camera">
+      <UniqueIdentifier>{ac08f034-35f0-42ca-a9ce-6f5aeeeb4fb5}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="DKJEN\WorldTransform">
+      <UniqueIdentifier>{c53ac5ef-4551-48a0-9f8a-7eb949737963}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="DKJEN\Base\CreateBufferResource">
+      <UniqueIdentifier>{d66a846c-70e5-4e57-8e38-74c9e2696e6f}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="GameProject">
+      <UniqueIdentifier>{27acabb8-0b2c-46ab-81b3-bb38ba355ed6}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="GameProject\PLayer">
+      <UniqueIdentifier>{7bce0c8f-fd6e-4a3a-a920-8b3d1b6dc9a1}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="GameProject\Enemy">
+      <UniqueIdentifier>{17086e15-e985-42c5-82c7-0f16d14b7f84}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="GameProject\GameSeen">
+      <UniqueIdentifier>{9bc9cb5b-0eb8-4d77-a6dd-8e306d7bb627}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="GameProject\GameSeen\StartSeen">
+      <UniqueIdentifier>{1a961d99-acb9-44bb-a34f-c23ab7b87fa1}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="GameProject\GameSeen\PlaySeen">
+      <UniqueIdentifier>{ef1e263d-edf5-407c-974d-cce7383fd4fd}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="GameProject\GameManager">
+      <UniqueIdentifier>{764607de-351f-44d7-9fc3-765ec84dc2ba}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="GameProject\GameSeen\IScene">
+      <UniqueIdentifier>{4ec2fd1e-22ed-42d1-b495-58e00011cbd8}</UniqueIdentifier>
+    </Filter>
+  </ItemGroup>
+  <ItemGroup>
+    <None Include=".editorconfig" />
+    <None Include="Object3d.hlsli">
+      <Filter>hlsl</Filter>
+    </None>
+    <None Include="Paticle.hlsli">
+      <Filter>hlsl</Filter>
+    </None>
+  </ItemGroup>
+  <ItemGroup>
+    <ClCompile Include="main.cpp">
+      <Filter>ソース ファイル</Filter>
+    </ClCompile>
+    <ClCompile Include="DKJEN\Utilipy\Input.cpp">
+      <Filter>DKJEN\Utilipy</Filter>
+    </ClCompile>
+    <ClCompile Include="DKJEN\Imgui\imguiManager.cpp">
+      <Filter>DKJEN\Imgui</Filter>
+    </ClCompile>
+    <ClCompile Include="DKJEN\Management\PSOCopileManagement.cpp">
+      <Filter>DKJEN\Management</Filter>
+    </ClCompile>
+    <ClCompile Include="DKJEN\Math\Math.cpp">
+      <Filter>DKJEN\Math</Filter>
+    </ClCompile>
+    <ClCompile Include="DKJEN\Shader\LightCompileShader.cpp">
+      <Filter>DKJEN\Shader</Filter>
+    </ClCompile>
+    <ClCompile Include="DKJEN\Shader\PolygonCompileShader.cpp">
+      <Filter>DKJEN\Shader</Filter>
+    </ClCompile>
+    <ClCompile Include="DKJEN\Shader\SpriteCompileShader.cpp">
+      <Filter>DKJEN\Shader</Filter>
+    </ClCompile>
+    <ClCompile Include="DKJEN\Shader\TextureCompileShader.cpp">
+      <Filter>DKJEN\Shader</Filter>
+    </ClCompile>
+    <ClCompile Include="DKJEN\externals\imgui\imgui.cpp">
+      <Filter>ImguiEx</Filter>
+    </ClCompile>
+    <ClCompile Include="DKJEN\externals\imgui\imgui_demo.cpp">
+      <Filter>ImguiEx</Filter>
+    </ClCompile>
+    <ClCompile Include="DKJEN\externals\imgui\imgui_draw.cpp">
+      <Filter>ImguiEx</Filter>
+    </ClCompile>
+    <ClCompile Include="DKJEN\externals\imgui\imgui_impl_dx12.cpp">
+      <Filter>ImguiEx</Filter>
+    </ClCompile>
+    <ClCompile Include="DKJEN\externals\imgui\imgui_impl_win32.cpp">
+      <Filter>ImguiEx</Filter>
+    </ClCompile>
+    <ClCompile Include="DKJEN\externals\imgui\imgui_tables.cpp">
+      <Filter>ImguiEx</Filter>
+    </ClCompile>
+    <ClCompile Include="DKJEN\externals\imgui\imgui_widgets.cpp">
+      <Filter>ImguiEx</Filter>
+    </ClCompile>
+    <ClCompile Include="DKJEN\Management\FrameManagement.cpp">
+      <Filter>DKJEN\Management</Filter>
+    </ClCompile>
+    <ClCompile Include="DKJEN\Base\PolygonPSO.cpp">
+      <Filter>DKJEN\Base\PSO</Filter>
+    </ClCompile>
+    <ClCompile Include="DKJEN\Base\SpritePSO.cpp">
+      <Filter>DKJEN\Base\PSO</Filter>
+    </ClCompile>
+    <ClCompile Include="DKJEN\Base\TexturePSO.cpp">
+      <Filter>DKJEN\Base\PSO</Filter>
+    </ClCompile>
+    <ClCompile Include="DKJEN\Base\DxCommon.cpp">
+      <Filter>DKJEN\Base\DxCommon</Filter>
+    </ClCompile>
+    <ClCompile Include="DKJEN\Base\WinApp.cpp">
+      <Filter>DKJEN\Base\Win</Filter>
+    </ClCompile>
+    <ClCompile Include="DKJEN\Base\LightPSO.cpp">
+      <Filter>DKJEN\Base\PSO</Filter>
+    </ClCompile>
+    <ClCompile Include="DKJEN\Base\Function.cpp">
+      <Filter>DKJEN\Base\Log</Filter>
+    </ClCompile>
+    <ClCompile Include="DKJEN\Base\ImageLoading.cpp">
+      <Filter>DKJEN\Base\Log</Filter>
+    </ClCompile>
+    <ClCompile Include="DKJEN\Base\Log.cpp">
+      <Filter>DKJEN\Base\Log</Filter>
+    </ClCompile>
+    <ClCompile Include="DKJEN\Type\Polygon.cpp">
+      <Filter>DKJEN\Type\2D</Filter>
+    </ClCompile>
+    <ClCompile Include="DKJEN\Type\Sprite.cpp">
+      <Filter>DKJEN\Type\2D</Filter>
+    </ClCompile>
+    <ClCompile Include="DKJEN\Type\Texture.cpp">
+      <Filter>DKJEN\Type\2D</Filter>
+    </ClCompile>
+    <ClCompile Include="DKJEN\Type\Obj3D.cpp">
+      <Filter>DKJEN\Type\3D</Filter>
+    </ClCompile>
+    <ClCompile Include="DKJEN\Type\Sphere.cpp">
+      <Filter>DKJEN\Type\3D</Filter>
+    </ClCompile>
+    <ClCompile Include="DKJEN\Management\TypeManagement.cpp">
+      <Filter>DKJEN\Management</Filter>
+    </ClCompile>
+    <ClCompile Include="DKJEN\CameraProjection\CameraProjection.cpp">
+      <Filter>DKJEN\CameraProjection</Filter>
+    </ClCompile>
+    <ClCompile Include="DKJEN\WorldCoordinate\WorldCoordinate.cpp">
+      <Filter>DKJEN\WorldCoordinate</Filter>
+    </ClCompile>
+    <ClCompile Include="DKJEN\TexInformation\TexManagement.cpp">
+      <Filter>DKJEN\TexInformation</Filter>
+    </ClCompile>
+    <ClCompile Include="DKJEN\Shader\ParticleCompileShader.cpp">
+      <Filter>DKJEN\Shader</Filter>
+    </ClCompile>
+    <ClCompile Include="DKJEN\Base\ParyiclePSO.cpp">
+      <Filter>DKJEN\Base\PSO</Filter>
+    </ClCompile>
+    <ClCompile Include="DKJEN\Type\Particle.cpp">
+      <Filter>DKJEN\Type</Filter>
+    </ClCompile>
+    <ClCompile Include="DKJEN\Management\DescriptorManagement.cpp">
+      <Filter>DKJEN\Management</Filter>
+    </ClCompile>
+    <ClCompile Include="DKJEN\Camera\CameraData.cpp">
+      <Filter>DKJEN\Camera</Filter>
+    </ClCompile>
+    <ClCompile Include="DKJEN\WorldTransform\WorldTransform.cpp">
+      <Filter>DKJEN\WorldTransform</Filter>
+    </ClCompile>
+    <ClCompile Include="DKJEN\TexDeta\Image\ImageData.cpp">
+      <Filter>DKJEN\TexDeta\Image</Filter>
+    </ClCompile>
+    <ClCompile Include="DKJEN\Base\CreateBufferResource.cpp">
+      <Filter>DKJEN\Base\CreateBufferResource</Filter>
+    </ClCompile>
+    <ClCompile Include="GameProject\Player\Player.cpp">
+      <Filter>GameProject\PLayer</Filter>
+    </ClCompile>
+    <ClCompile Include="GameProject\Player\Bullet.cpp">
+      <Filter>GameProject\PLayer</Filter>
+    </ClCompile>
+    <ClCompile Include="GameProject\Enemy\Enemy.cpp">
+      <Filter>GameProject\Enemy</Filter>
+    </ClCompile>
+    <ClCompile Include="GameProject\GameSeen\PlaySeen\PlaySeen.cpp">
+      <Filter>GameProject\GameSeen\PlaySeen</Filter>
+    </ClCompile>
+    <ClCompile Include="GameProject\GameSeen\StartSeen\StartSeen.cpp">
+      <Filter>GameProject\GameSeen\StartSeen</Filter>
+    </ClCompile>
+    <ClCompile Include="GameProject\GameManager\GameManager.cpp">
+      <Filter>GameProject\GameManager</Filter>
+    </ClCompile>
+  </ItemGroup>
+  <ItemGroup>
+    <ClInclude Include="DKJEN\Utilipy\Input.h">
+      <Filter>DKJEN\Utilipy</Filter>
+    </ClInclude>
+    <ClInclude Include="DKJEN\Utilipy\Pch.h">
+      <Filter>DKJEN\Utilipy</Filter>
+    </ClInclude>
+    <ClInclude Include="DKJEN\Utilipy\rektyk.h">
+      <Filter>DKJEN\Utilipy</Filter>
+    </ClInclude>
+    <ClInclude Include="DKJEN\Imgui\imguiManager.h">
+      <Filter>DKJEN\Imgui</Filter>
+    </ClInclude>
+    <ClInclude Include="DKJEN\Management\PSOCopileManagement.h">
+      <Filter>DKJEN\Management</Filter>
+    </ClInclude>
+    <ClInclude Include="DKJEN\Shader\LightCompileShader.h">
+      <Filter>DKJEN\Shader</Filter>
+    </ClInclude>
+    <ClInclude Include="DKJEN\Shader\PolygonCompileShader.h">
+      <Filter>DKJEN\Shader</Filter>
+    </ClInclude>
+    <ClInclude Include="DKJEN\Shader\SpriteCompileShader.h">
+      <Filter>DKJEN\Shader</Filter>
+    </ClInclude>
+    <ClInclude Include="DKJEN\Shader\TextureCompileShader.h">
+      <Filter>DKJEN\Shader</Filter>
+    </ClInclude>
+    <ClInclude Include="DKJEN\externals\imgui\imconfig.h">
+      <Filter>ImguiEx</Filter>
+    </ClInclude>
+    <ClInclude Include="DKJEN\externals\imgui\imgui.h">
+      <Filter>ImguiEx</Filter>
+    </ClInclude>
+    <ClInclude Include="DKJEN\externals\imgui\imgui_impl_dx12.h">
+      <Filter>ImguiEx</Filter>
+    </ClInclude>
+    <ClInclude Include="DKJEN\externals\imgui\imgui_impl_win32.h">
+      <Filter>ImguiEx</Filter>
+    </ClInclude>
+    <ClInclude Include="DKJEN\externals\imgui\imgui_internal.h">
+      <Filter>ImguiEx</Filter>
+    </ClInclude>
+    <ClInclude Include="DKJEN\externals\imgui\imstb_rectpack.h">
+      <Filter>ImguiEx</Filter>
+    </ClInclude>
+    <ClInclude Include="DKJEN\externals\imgui\imstb_textedit.h">
+      <Filter>ImguiEx</Filter>
+    </ClInclude>
+    <ClInclude Include="DKJEN\externals\imgui\imstb_truetype.h">
+      <Filter>ImguiEx</Filter>
+    </ClInclude>
+    <ClInclude Include="DKJEN\Management\FrameManagement.h">
+      <Filter>DKJEN\Management</Filter>
+    </ClInclude>
+    <ClInclude Include="DKJEN\Base\PolygonPSO.h">
+      <Filter>DKJEN\Base\PSO</Filter>
+    </ClInclude>
+    <ClInclude Include="DKJEN\Base\SpritePSO.h">
+      <Filter>DKJEN\Base\PSO</Filter>
+    </ClInclude>
+    <ClInclude Include="DKJEN\Base\TexturePSO.h">
+      <Filter>DKJEN\Base\PSO</Filter>
+    </ClInclude>
+    <ClInclude Include="DKJEN\Base\DxCommon.h">
+      <Filter>DKJEN\Base\DxCommon</Filter>
+    </ClInclude>
+    <ClInclude Include="DKJEN\Base\WinApp.h">
+      <Filter>DKJEN\Base\Win</Filter>
+    </ClInclude>
+    <ClInclude Include="DKJEN\Base\LightPSO.h">
+      <Filter>DKJEN\Base\PSO</Filter>
+    </ClInclude>
+    <ClInclude Include="DKJEN\Base\Function.h">
+      <Filter>DKJEN\Base\Log</Filter>
+    </ClInclude>
+    <ClInclude Include="DKJEN\Base\ImageLoading.h">
+      <Filter>DKJEN\Base\Log</Filter>
+    </ClInclude>
+    <ClInclude Include="DKJEN\Base\Log.h">
+      <Filter>DKJEN\Base\Log</Filter>
+    </ClInclude>
+    <ClInclude Include="DKJEN\Type\Polygon.h">
+      <Filter>DKJEN\Type\2D</Filter>
+    </ClInclude>
+    <ClInclude Include="DKJEN\Type\Sprite.h">
+      <Filter>DKJEN\Type\2D</Filter>
+    </ClInclude>
+    <ClInclude Include="DKJEN\Type\Texture.h">
+      <Filter>DKJEN\Type\2D</Filter>
+    </ClInclude>
+    <ClInclude Include="DKJEN\Type\Obj3D.h">
+      <Filter>DKJEN\Type\3D</Filter>
+    </ClInclude>
+    <ClInclude Include="DKJEN\Type\Sphere.h">
+      <Filter>DKJEN\Type\3D</Filter>
+    </ClInclude>
+    <ClInclude Include="DKJEN\Management\TypeManagement.h">
+      <Filter>DKJEN\Management</Filter>
+    </ClInclude>
+    <ClInclude Include="DKJEN\CameraProjection\CameraProjection.h">
+      <Filter>DKJEN\CameraProjection</Filter>
+    </ClInclude>
+    <ClInclude Include="DKJEN\WorldCoordinate\WorldCoordinate.h">
+      <Filter>DKJEN\WorldCoordinate</Filter>
+    </ClInclude>
+    <ClInclude Include="DKJEN\TexInformation\TexManagement.h">
+      <Filter>DKJEN\TexInformation</Filter>
+    </ClInclude>
+    <ClInclude Include="DKJEN\Shader\ParticleCompileShader.h">
+      <Filter>DKJEN\Shader</Filter>
+    </ClInclude>
+    <ClInclude Include="DKJEN\Base\ParyiclePSO.h">
+      <Filter>DKJEN\Base\PSO</Filter>
+    </ClInclude>
+    <ClInclude Include="DKJEN\Management\DescriptorManagement.h">
+      <Filter>DKJEN\Management</Filter>
+    </ClInclude>
+    <ClInclude Include="DKJEN\TexDeta\Image\ImageData.h">
+      <Filter>DKJEN\TexDeta\Image</Filter>
+    </ClInclude>
+    <ClInclude Include="DKJEN\Camera\CameraData.h">
+      <Filter>DKJEN\Camera</Filter>
+    </ClInclude>
+    <ClInclude Include="DKJEN\WorldTransform\WorldTransform.h">
+      <Filter>DKJEN\WorldTransform</Filter>
+    </ClInclude>
+    <ClInclude Include="DKJEN\Base\CreateBufferResource.h">
+      <Filter>DKJEN\Base\CreateBufferResource</Filter>
+    </ClInclude>
+    <ClInclude Include="DKJEN\Math\Math.h">
+      <Filter>DKJEN\Math</Filter>
+    </ClInclude>
+    <ClInclude Include="DKJEN\Type\Particle.h">
+      <Filter>DKJEN\Type</Filter>
+    </ClInclude>
+    <ClInclude Include="GameProject\Player\Player.h">
+      <Filter>GameProject\PLayer</Filter>
+    </ClInclude>
+    <ClInclude Include="GameProject\Player\Bullet.h">
+      <Filter>GameProject\PLayer</Filter>
+    </ClInclude>
+    <ClInclude Include="GameProject\Enemy\Enemy.h">
+      <Filter>GameProject\Enemy</Filter>
+    </ClInclude>
+    <ClInclude Include="GameProject\GameSeen\StartSeen\StartSeen.h">
+      <Filter>GameProject\GameSeen\StartSeen</Filter>
+    </ClInclude>
+    <ClInclude Include="GameProject\GameSeen\StateSeen\IScene.h">
+      <Filter>GameProject\GameSeen\IScene</Filter>
+    </ClInclude>
+    <ClInclude Include="GameProject\GameSeen\PlaySeen\PlaySeen.h">
+      <Filter>GameProject\GameSeen\PlaySeen</Filter>
+    </ClInclude>
+    <ClInclude Include="GameProject\GameManager\GameManager.h">
+      <Filter>GameProject\GameManager</Filter>
+    </ClInclude>
+  </ItemGroup>
+  <ItemGroup>
+    <FxCompile Include="LightObject.PS.hlsl">
+      <Filter>hlsl</Filter>
+    </FxCompile>
+    <FxCompile Include="LightObject.VS.hlsl">
+      <Filter>hlsl</Filter>
+    </FxCompile>
+    <FxCompile Include="..\..\..\2年前期課題\CG\DirectＸ\PolygonObiject3d.VS.hlsl">
+      <Filter>hlsl</Filter>
+    </FxCompile>
+    <FxCompile Include="..\..\..\2年前期課題\CG\DirectＸ\PolygonOdject3d.PS.hlsl">
+      <Filter>hlsl</Filter>
+    </FxCompile>
+    <FxCompile Include="..\..\..\2年前期課題\CG\DirectＸ\SpriteObiject2d.PS.hlsl">
+      <Filter>hlsl</Filter>
+    </FxCompile>
+    <FxCompile Include="..\..\..\2年前期課題\CG\DirectＸ\SpriteObiject2d.VS.hlsl">
+      <Filter>hlsl</Filter>
+    </FxCompile>
+    <FxCompile Include="..\..\..\2年前期課題\CG\DirectＸ\TextureObiject3d.VS.hlsl">
+      <Filter>hlsl</Filter>
+    </FxCompile>
+    <FxCompile Include="..\..\..\2年前期課題\CG\DirectＸ\TextureOdject3d.PS.hlsl">
+      <Filter>hlsl</Filter>
+    </FxCompile>
+    <FxCompile Include="Paticle.PS.hlsl">
+      <Filter>hlsl</Filter>
+    </FxCompile>
+    <FxCompile Include="Paticle.VS.hlsl">
+      <Filter>hlsl</Filter>
+    </FxCompile>
+  </ItemGroup>
+  <ItemGroup>
+    <Text Include="DKJEN\externals\imgui\LICENSE.txt">
+      <Filter>ImguiEx</Filter>
+    </Text>
+  </ItemGroup>
+</Project>
