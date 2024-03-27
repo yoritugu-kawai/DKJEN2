@@ -9,8 +9,7 @@ public:
 	void Update(GameManager* gameManager)override;
 	void Draw()override;
 private:
-	Player* player_;
-	Enemy* enemy_;
-	bool des = false;
-	
+	Sprite* uv;
+	Sprite* ball;
+	int time;
 };

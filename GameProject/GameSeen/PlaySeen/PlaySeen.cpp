@@ -2,33 +2,30 @@
 
 void PlaySeen::Initialize()
 {
-	player_ = new Player;
-
-	player_->Initialize();
-
-	enemy_ = new Enemy;
-	enemy_->Initialize();
+	uv = new Sprite;
+	uint32_t uvTex = TexManager::LoadTexture("resource/uvChecker.png");
+	uv->Initialize(uvTex);
+	ball = new Sprite;
+	uint32_t ballTex = TexManager::LoadTexture("resource/monsterBall.png");
+	ball->Initialize(ballTex);
+	time = 12;
 }
 
 void PlaySeen::Update(GameManager* gameManager)
 {
-	//gameManager;
-	player_->Update();
-	enemy_->Update();
-	if (player_->GetBulletPos().x <= enemy_->GetPos().x + 10 &&
-		enemy_->GetPos().x <= player_->GetBulletPos().x + 10 &&
-		player_->GetBulletPos().y <= enemy_->GetPos().y + 10 &&
-		enemy_->GetPos().y <= player_->GetBulletPos().y + 10) {
-		des = true;
+	time -= 1;
+	if(time<0){
+	if (Input::GetInstance()->PushKeyPressed(DIK_SPACE)) {
+		gameManager->ChangeState(new StartSeen);
+
 	}
+	}
+	
 	
 }
 
 void PlaySeen::Draw()
 {
-	if (des == false)
-	{
-		enemy_->Draw();
-	}
-	player_->Draw();
+	uv->Draw({ 20.0f,20.0f,1 }, { 0,0,0 }, {1,1,1}, {1.0f,1.0f,1.0f,1.0f});
+	ball->Draw({ 20.0f,20.0f,1 }, { 0,0,0 }, { 200,1,1 }, { 1.0f,1.0f,1.0f,1.0f });
 }
