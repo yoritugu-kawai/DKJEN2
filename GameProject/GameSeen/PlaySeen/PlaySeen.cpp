@@ -20,8 +20,6 @@ void PlaySeen::Update(GameManager* gameManager)
 
 		}
 	}
-
-
 }
 
 void PlaySeen::Draw()
