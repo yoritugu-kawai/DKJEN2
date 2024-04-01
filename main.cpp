@@ -16,6 +16,7 @@
 
 
 #include"GameProject/GameManager/GameManager.h"
+#include"Test/UP/PowerUP.h"
 const wchar_t Title[] = { L"ド根性エンジン" };
 
 
@@ -39,13 +40,12 @@ int WINAPI WinMain(HINSTANCE, HINSTANCE, LPSTR, int) {
 
 
 
-	GameManager* gameManager_ = new GameManager;
-	gameManager_->Initialize();
-	/*IScene* iseen = new StartSeen;
-	iseen->Initialize();*/
+	
+	PowerUP* powerUP_ = new PowerUP;
+	powerUP_->Initialize();
 
 	//座標
-
+	int k;
 	
 	//　メインループ
 	MSG msg{};
@@ -64,24 +64,27 @@ int WINAPI WinMain(HINSTANCE, HINSTANCE, LPSTR, int) {
 		//////
 	
 
-		/*up = 1.5f * up;
-		hit_ = hit_ * up;*/
+		if (Input::GetInstance()->PushKeyPressed(DIK_SPACE)) {
 
-		//iseen->Update();
-		
+		powerUP_->Update();
+		}
+
+		powerUP_->ImGui();
 		//////
 		//　ゲーム処理
 		//////
 		
-		gameManager_->Update();
+		
 		//////
 		//　　描画処理
 		//////
-		//iseen->Draw();
+		
+
+
 		//////
 		//　　描画処理
 		//////
-		gameManager_->Draw();
+	
 		
 		//終わり
 		FrameManagement::EndFrame();

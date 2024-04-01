@@ -105,6 +105,12 @@
     <Filter Include="GameProject\GameSeen\IScene">
       <UniqueIdentifier>{4ec2fd1e-22ed-42d1-b495-58e00011cbd8}</UniqueIdentifier>
     </Filter>
+    <Filter Include="Test">
+      <UniqueIdentifier>{757cbf8a-6c32-4cb5-8fe3-e332757f0af1}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Test\UP">
+      <UniqueIdentifier>{c9e41c07-df1f-41f1-8f97-d1c3598e1e14}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <None Include=".editorconfig" />
@@ -263,6 +269,9 @@
     <ClCompile Include="GameProject\GameManager\GameManager.cpp">
       <Filter>GameProject\GameManager</Filter>
     </ClCompile>
+    <ClCompile Include="Test\UP\PowerUP.cpp">
+      <Filter>Test\UP</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="DKJEN\Utilipy\Input.h">
@@ -420,6 +429,9 @@
     </ClInclude>
     <ClInclude Include="GameProject\GameManager\GameManager.h">
       <Filter>GameProject\GameManager</Filter>
+    </ClInclude>
+    <ClInclude Include="Test\UP\PowerUP.h">
+      <Filter>Test\UP</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>
