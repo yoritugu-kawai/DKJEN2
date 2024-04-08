@@ -2,17 +2,16 @@
 
 void PlaySeen::Initialize()
 {
-	uv = new Sprite;
-	uint32_t uvTex = TexManager::LoadTexture("resource/uvChecker.png");
-	uv->Initialize(uvTex);
-	ball = new Sprite;
-	uint32_t ballTex = TexManager::LoadTexture("resource/monsterBall.png");
-	ball->Initialize(ballTex);
+	player_ = new Player;
+	player_->Initialize();
 	time = 12;
+	block_ = new Block;
+	block_->Initialize({0,0,0});
 }
 
 void PlaySeen::Update(GameManager* gameManager)
 {
+	player_->Update();
 	time -= 1;
 	if (time < 0) {
 		if (Input::GetInstance()->PushKeyPressed(DIK_SPACE)) {
@@ -26,6 +25,6 @@ void PlaySeen::Update(GameManager* gameManager)
 
 void PlaySeen::Draw()
 {
-	uv->Draw({ 20.0f,20.0f,1 }, { 0,0,0 }, { 1,1,1 }, { 1.0f,1.0f,1.0f,1.0f });
-	ball->Draw({ 20.0f,20.0f,1 }, { 0,0,0 }, { 200,1,1 }, { 1.0f,1.0f,1.0f,1.0f });
+	player_->Draw();
+	block_->Draw();
 }
