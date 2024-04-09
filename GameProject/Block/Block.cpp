@@ -3,7 +3,7 @@
 void Block::Initialize(Vector3 pos)
 {
 	sprite_ = new Sprite;
-	uint32_t tex = TexManager::LoadTexture("resource/tex.png");
+	uint32_t tex = TexManager::LoadTexture("GameResource/block.png");
 	sprite_->Initialize(tex);
 	pos_=pos;
 }
