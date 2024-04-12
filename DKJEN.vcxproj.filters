@@ -264,7 +264,7 @@
       <Filter>GameProject\Block</Filter>
     </ClCompile>
     <ClCompile Include="DKJEN\Utilipy\CSVLoad.cpp">
-      <Filter>ソース ファイル</Filter>
+      <Filter>DKJEN\Utilipy</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
@@ -426,6 +426,9 @@
     </ClInclude>
     <ClInclude Include="DKJEN\Utilipy\CSVLoad.h">
       <Filter>DKJEN\Utilipy</Filter>
+    </ClInclude>
+    <ClInclude Include="GameProject\Ball\Ball.h">
+      <Filter>GameProject</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>

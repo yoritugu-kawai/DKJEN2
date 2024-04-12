@@ -316,6 +316,7 @@ copy "$(WindowsSdkDir)bin\$(TargetPlatformVersion)\x64\dxil.dll" "$(TargetDir)dx
     <ClInclude Include="DKJEN\Utilipy\Pch.h" />
     <ClInclude Include="DKJEN\Utilipy\rektyk.h" />
     <ClInclude Include="DKJEN\WorldTransform\WorldTransform.h" />
+    <ClInclude Include="GameProject\Ball\Ball.h" />
     <ClInclude Include="GameProject\Block\Block.h" />
     <ClInclude Include="GameProject\Enemy\Enemy.h" />
     <ClInclude Include="GameProject\GameManager\GameManager.h" />
