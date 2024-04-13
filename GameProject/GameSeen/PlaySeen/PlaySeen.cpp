@@ -2,6 +2,8 @@
 
 void PlaySeen::Initialize()
 {
+	ball_ = new Ball;
+	ball_->Initialize();
 	player_ = new Player;
 	player_->Initialize();
 	time = 12;
@@ -52,23 +54,54 @@ void PlaySeen::UpdateBlockPopCommands() {
 
 	}
 }
+
+void PlaySeen::AllCollisions() {
+	blocks_.remove_if([](Block* block) {
+		if (block->GetIsErase()) {
+			delete block;
+			return true;
+		}
+
+		return false;
+		});
+	speed_ = ball_->GetSpeedY();
+	if (player_->GetPos().x <= ball_->GetPos().x + 40 &&
+		ball_->GetPos().x <= player_->GetPos().x + 40 &&
+		player_->GetPos().y <= ball_->GetPos().y + 40 &&
+		ball_->GetPos().y <= player_->GetPos().y + 40) {
+		speed_ *= -1;
+		ball_->SetSpeedY(speed_);
+	}
+	for (Block* block_ : blocks_) {
+		if (block_->GetPos().x <= ball_->GetPos().x + 50 &&
+			ball_->GetPos().x <= block_->GetPos().x + 50 &&
+			block_->GetPos().y <= ball_->GetPos().y + 50 &&
+			ball_->GetPos().y <= block_->GetPos().y + 50) {
+			speed_ *= -1;
+			ball_->SetSpeedY(speed_);
+			block_->IsErase();
+		}
+	}
+}
 void PlaySeen::Update(GameManager* gameManager)
 {
 	UpdateBlockPopCommands();
 	player_->Update();
 	time -= 1;
-	if (time < 0) {
-		if (Input::GetInstance()->PushKeyPressed(DIK_SPACE)) {
-			gameManager->ChangeState(new StartSeen);
+	ball_->Update();
+	block_->Update();
+	AllCollisions();
+		
+		
+	if (ball_->GetPos().y >= 720) {
+		gameManager->ChangeState(new StartSeen);
 
-		}
 	}
-
-
 }
 
 void PlaySeen::Draw()
 {
+	ball_->Draw();
 	player_->Draw();
 	for (Block* block_ : blocks_) {
 		block_->Draw();

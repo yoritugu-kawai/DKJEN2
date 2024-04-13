@@ -261,6 +261,7 @@ copy "$(WindowsSdkDir)bin\$(TargetPlatformVersion)\x64\dxil.dll" "$(TargetDir)dx
     <ClCompile Include="DKJEN\Utilipy\CSVLoad.cpp" />
     <ClCompile Include="DKJEN\Utilipy\Input.cpp" />
     <ClCompile Include="DKJEN\WorldTransform\WorldTransform.cpp" />
+    <ClCompile Include="GameProject\Ball\Ball.cpp" />
     <ClCompile Include="GameProject\Block\Block.cpp" />
     <ClCompile Include="GameProject\Enemy\Enemy.cpp" />
     <ClCompile Include="GameProject\GameManager\GameManager.cpp" />

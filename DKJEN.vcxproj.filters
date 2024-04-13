@@ -105,6 +105,9 @@
     <Filter Include="GameProject\Block">
       <UniqueIdentifier>{00091886-7b6b-4e45-bbb9-8b919b0f7330}</UniqueIdentifier>
     </Filter>
+    <Filter Include="GameProject\ball">
+      <UniqueIdentifier>{e2719508-1e10-435f-9d96-1726b5bc63ce}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <None Include=".editorconfig" />
@@ -265,6 +268,9 @@
     </ClCompile>
     <ClCompile Include="DKJEN\Utilipy\CSVLoad.cpp">
       <Filter>DKJEN\Utilipy</Filter>
+    </ClCompile>
+    <ClCompile Include="GameProject\Ball\Ball.cpp">
+      <Filter>GameProject\ball</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
@@ -428,7 +434,7 @@
       <Filter>DKJEN\Utilipy</Filter>
     </ClInclude>
     <ClInclude Include="GameProject\Ball\Ball.h">
-      <Filter>GameProject</Filter>
+      <Filter>GameProject\ball</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>
