@@ -39,10 +39,7 @@ int WINAPI WinMain(HINSTANCE, HINSTANCE, LPSTR, int) {
 
 
 
-	GameManager* gameManager_ = new GameManager;
-	gameManager_->Initialize();
-	/*IScene* iseen = new StartSeen;
-	iseen->Initialize();*/
+	
 
 	//座標
 
@@ -68,7 +65,7 @@ int WINAPI WinMain(HINSTANCE, HINSTANCE, LPSTR, int) {
 		//　ゲーム処理
 		//////
 		
-		gameManager_->Update();
+	
 		//////
 		//　　描画処理
 		//////
@@ -78,7 +75,7 @@ int WINAPI WinMain(HINSTANCE, HINSTANCE, LPSTR, int) {
 		//////
 		//　　描画処理
 		//////
-		gameManager_->Draw();
+		
 		
 		//終わり
 		FrameManagement::EndFrame();
