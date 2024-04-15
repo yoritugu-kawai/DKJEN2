@@ -3,14 +3,17 @@
 #include"../PlaySeen/PlaySeen.h"
 #include"../../../DKJEN/Type/Sprite.h"
 #include"../../GameManager/GameManager.h"
+#include"../../../DKJEN/Camera/CameraData.h"
+#include"../../../DKJEN/Type/Obj3D.h"
+#include"../../../DKJEN/Type/Particle.h"
 class StartSeen:public IScene {
 public:
 	void Initialize()override;
 	void Update(GameManager* gameManager)override;
 	void Draw()override;
 private:
-	Sprite* sprite_;
-	Vector3 pos_ = { 0,0,0 };
-	float color_;
-	bool change_;
+
+	
+	int time;
+	
 };

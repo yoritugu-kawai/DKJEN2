@@ -9,13 +9,13 @@ public:
 	void Input();
 	void Update();
 	void Draw();
-	Vector3 GetBulletPos() {return bulletPos_;}
+	Vector3 GetPos() {return pos_;}
 
 
 private:
 	Bullet* bullet_;
 	Sprite* sprite_;
 	Vector3 pos_;
-	Vector3 bulletPos_;
+
 	bool isShot_;
 };

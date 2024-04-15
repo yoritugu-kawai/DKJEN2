@@ -258,9 +258,11 @@ copy "$(WindowsSdkDir)bin\$(TargetPlatformVersion)\x64\dxil.dll" "$(TargetDir)dx
     <ClCompile Include="DKJEN\Type\Sphere.cpp" />
     <ClCompile Include="DKJEN\Type\Sprite.cpp" />
     <ClCompile Include="DKJEN\Type\Texture.cpp" />
+    <ClCompile Include="DKJEN\Utilipy\CSVLoad.cpp" />
     <ClCompile Include="DKJEN\Utilipy\Input.cpp" />
-    <ClCompile Include="DKJEN\WorldCoordinate\WorldCoordinate.cpp" />
     <ClCompile Include="DKJEN\WorldTransform\WorldTransform.cpp" />
+    <ClCompile Include="GameProject\Ball\Ball.cpp" />
+    <ClCompile Include="GameProject\Block\Block.cpp" />
     <ClCompile Include="GameProject\Enemy\Enemy.cpp" />
     <ClCompile Include="GameProject\GameManager\GameManager.cpp" />
     <ClCompile Include="GameProject\GameSeen\PlaySeen\PlaySeen.cpp" />
@@ -310,11 +312,13 @@ copy "$(WindowsSdkDir)bin\$(TargetPlatformVersion)\x64\dxil.dll" "$(TargetDir)dx
     <ClInclude Include="DKJEN\Type\Sphere.h" />
     <ClInclude Include="DKJEN\Type\Sprite.h" />
     <ClInclude Include="DKJEN\Type\Texture.h" />
+    <ClInclude Include="DKJEN\Utilipy\CSVLoad.h" />
     <ClInclude Include="DKJEN\Utilipy\Input.h" />
     <ClInclude Include="DKJEN\Utilipy\Pch.h" />
     <ClInclude Include="DKJEN\Utilipy\rektyk.h" />
-    <ClInclude Include="DKJEN\WorldCoordinate\WorldCoordinate.h" />
     <ClInclude Include="DKJEN\WorldTransform\WorldTransform.h" />
+    <ClInclude Include="GameProject\Ball\Ball.h" />
+    <ClInclude Include="GameProject\Block\Block.h" />
     <ClInclude Include="GameProject\Enemy\Enemy.h" />
     <ClInclude Include="GameProject\GameManager\GameManager.h" />
     <ClInclude Include="GameProject\GameSeen\PlaySeen\PlaySeen.h" />

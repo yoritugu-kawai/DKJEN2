@@ -63,11 +63,6 @@ int WINAPI WinMain(HINSTANCE, HINSTANCE, LPSTR, int) {
 		//　ゲーム処理
 		//////
 	
-
-		/*up = 1.5f * up;
-		hit_ = hit_ * up;*/
-
-		//iseen->Update();
 		
 		//////
 		//　ゲーム処理
@@ -77,7 +72,9 @@ int WINAPI WinMain(HINSTANCE, HINSTANCE, LPSTR, int) {
 		//////
 		//　　描画処理
 		//////
-		//iseen->Draw();
+		
+
+
 		//////
 		//　　描画処理
 		//////

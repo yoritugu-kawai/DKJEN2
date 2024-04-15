@@ -54,9 +54,6 @@
     <Filter Include="DKJEN\CameraProjection">
       <UniqueIdentifier>{c70e3590-af8e-4ca0-9a1d-2bd7482326cd}</UniqueIdentifier>
     </Filter>
-    <Filter Include="DKJEN\WorldCoordinate">
-      <UniqueIdentifier>{2973903f-d131-4a66-b279-7fcd5a182c89}</UniqueIdentifier>
-    </Filter>
     <Filter Include="hlsl">
       <UniqueIdentifier>{cccd3f29-95a6-41bb-b9f3-49214d0ab677}</UniqueIdentifier>
     </Filter>
@@ -104,6 +101,12 @@
     </Filter>
     <Filter Include="GameProject\GameSeen\IScene">
       <UniqueIdentifier>{4ec2fd1e-22ed-42d1-b495-58e00011cbd8}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="GameProject\Block">
+      <UniqueIdentifier>{00091886-7b6b-4e45-bbb9-8b919b0f7330}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="GameProject\ball">
+      <UniqueIdentifier>{e2719508-1e10-435f-9d96-1726b5bc63ce}</UniqueIdentifier>
     </Filter>
   </ItemGroup>
   <ItemGroup>
@@ -215,9 +218,6 @@
     <ClCompile Include="DKJEN\CameraProjection\CameraProjection.cpp">
       <Filter>DKJEN\CameraProjection</Filter>
     </ClCompile>
-    <ClCompile Include="DKJEN\WorldCoordinate\WorldCoordinate.cpp">
-      <Filter>DKJEN\WorldCoordinate</Filter>
-    </ClCompile>
     <ClCompile Include="DKJEN\TexInformation\TexManagement.cpp">
       <Filter>DKJEN\TexInformation</Filter>
     </ClCompile>
@@ -262,6 +262,15 @@
     </ClCompile>
     <ClCompile Include="GameProject\GameManager\GameManager.cpp">
       <Filter>GameProject\GameManager</Filter>
+    </ClCompile>
+    <ClCompile Include="GameProject\Block\Block.cpp">
+      <Filter>GameProject\Block</Filter>
+    </ClCompile>
+    <ClCompile Include="DKJEN\Utilipy\CSVLoad.cpp">
+      <Filter>DKJEN\Utilipy</Filter>
+    </ClCompile>
+    <ClCompile Include="GameProject\Ball\Ball.cpp">
+      <Filter>GameProject\ball</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
@@ -367,9 +376,6 @@
     <ClInclude Include="DKJEN\CameraProjection\CameraProjection.h">
       <Filter>DKJEN\CameraProjection</Filter>
     </ClInclude>
-    <ClInclude Include="DKJEN\WorldCoordinate\WorldCoordinate.h">
-      <Filter>DKJEN\WorldCoordinate</Filter>
-    </ClInclude>
     <ClInclude Include="DKJEN\TexInformation\TexManagement.h">
       <Filter>DKJEN\TexInformation</Filter>
     </ClInclude>
@@ -420,6 +426,15 @@
     </ClInclude>
     <ClInclude Include="GameProject\GameManager\GameManager.h">
       <Filter>GameProject\GameManager</Filter>
+    </ClInclude>
+    <ClInclude Include="GameProject\Block\Block.h">
+      <Filter>GameProject\Block</Filter>
+    </ClInclude>
+    <ClInclude Include="DKJEN\Utilipy\CSVLoad.h">
+      <Filter>DKJEN\Utilipy</Filter>
+    </ClInclude>
+    <ClInclude Include="GameProject\Ball\Ball.h">
+      <Filter>GameProject\ball</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>
