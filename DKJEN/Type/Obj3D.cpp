@@ -98,7 +98,7 @@ ModelData Obj3D::LoadObjFile(const std::string& directoryPath, const std::string
 			Vector4 position;
 			s >> position.x >> position.y >> position.z;
 
-			position.z *= -1.0f;
+			position.x *= -1.0f;
 			position.w = 1.0f;
 			positions.push_back(position);
 		}
