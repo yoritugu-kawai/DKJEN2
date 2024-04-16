@@ -1,5 +1,6 @@
 #pragma once
 #include"../../DKJEN/Type/Sprite.h"
+
 class Block
 {
 public:

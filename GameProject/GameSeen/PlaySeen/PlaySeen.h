@@ -21,4 +21,5 @@ private:
 	Ball* ball_;
 	std::list<Block*>blocks_;
 	std::stringstream blockPopCommands;
+	const int kBlockSize = 10;
 };

@@ -9,6 +9,7 @@ void PlaySeen::Initialize()
 	time = 12;
 
 	LoadBlockPopData();
+	UpdateBlockPopCommands();
 }
 
 void PlaySeen::LoadBlockPopData() {
@@ -64,6 +65,7 @@ void PlaySeen::AllCollisions() {
 
 		return false;
 		});
+	// 壁に当たったら反転する
 	speed_ = ball_->GetSpeedY();
 	if (player_->GetPos().x <= ball_->GetPos().x + 40 &&
 		ball_->GetPos().x <= player_->GetPos().x + 40 &&
@@ -73,26 +75,34 @@ void PlaySeen::AllCollisions() {
 		ball_->SetSpeedY(speed_);
 	}
 	for (Block* block_ : blocks_) {
-		if (block_->GetPos().x <= ball_->GetPos().x + 50 &&
-			ball_->GetPos().x <= block_->GetPos().x + 50 &&
-			block_->GetPos().y <= ball_->GetPos().y + 50 &&
-			ball_->GetPos().y <= block_->GetPos().y + 50) {
+		if (block_->GetPos().x <= ball_->GetPos().x + kBlockSize &&
+			ball_->GetPos().x <= block_->GetPos().x + kBlockSize &&
+			block_->GetPos().y <= ball_->GetPos().y + kBlockSize &&
+			ball_->GetPos().y <= block_->GetPos().y + kBlockSize) {
 			speed_ *= -1;
 			ball_->SetSpeedY(speed_);
 			block_->IsErase();
 		}
 	}
 }
+
 void PlaySeen::Update(GameManager* gameManager)
 {
-	UpdateBlockPopCommands();
+
+#pragma region
+
 	player_->Update();
-	time -= 1;
 	ball_->Update();
-	block_->Update();
+	for (Block* block_ : blocks_) {
+		block_->Update();
+	}
+
+#pragma endregion Update
+
+	
 	AllCollisions();
 		
-		
+	// ゲームオーバー
 	if (ball_->GetPos().y >= 720) {
 		gameManager->ChangeState(new StartSeen);
 
