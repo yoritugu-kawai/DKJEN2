@@ -36,9 +36,10 @@ int WINAPI WinMain(HINSTANCE, HINSTANCE, LPSTR, int) {
 	WorldTransform* worldTransform = new WorldTransform;
 
 	worldTransform->Create();
+	Obj3D* obj3d = new Obj3D;
+	obj3d->Initialize("resource","axis.obj");
 
-
-
+	Vector3 cameraPos_ = { 0,0,0 };
 	
 
 	//座標
@@ -53,14 +54,22 @@ int WINAPI WinMain(HINSTANCE, HINSTANCE, LPSTR, int) {
 			DispatchMessage(&msg);
 		}
 		FrameManagement::BeginFrame();
-		
+
 		//最初
 
 		//////
 		//　ゲーム処理
 		//////
-	
-		
+		cameraData->Update();
+		worldTransform->UpdateMatrix(cameraData);
+
+		worldTransform->SetTranslate({ 0,0,0 });
+		worldTransform->SetScale({1, 1, 1,});
+		ImGui::Begin("pos");
+		ImGui::SliderFloat3("camera", &cameraPos_.x, 10, -100);
+		ImGui::End();
+		cameraData->SetTranslate({ 0,0,-20 });
+		cameraData->SetRotate(cameraPos_);
 		//////
 		//　ゲーム処理
 		//////
@@ -70,7 +79,7 @@ int WINAPI WinMain(HINSTANCE, HINSTANCE, LPSTR, int) {
 		//　　描画処理
 		//////
 		
-
+		obj3d->Draw({1,1,1,1}, cameraData, worldTransform);
 
 		//////
 		//　　描画処理
