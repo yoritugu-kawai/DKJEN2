@@ -16,7 +16,7 @@ public:
 private:
 	int speed_;
 	int time;
-	Player* player_;
+	Player* player_ = nullptr;
 	Block* block_;
 	Ball* ball_;
 	std::list<Block*>blocks_;
