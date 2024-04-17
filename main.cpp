@@ -4,7 +4,6 @@
 
 #include"DKJEN/Math/Math.h"
 
-
 #include"DKJEN/Utilipy/rektyk.h"
 
 #include"DKJEN/WorldTransform/WorldTransform.h"
