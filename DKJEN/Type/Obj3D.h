@@ -5,15 +5,17 @@
 #include"../Base/SpritePSO.h"
 #include"../Base/TexturePSO.h"
 #include"../Base/LightPSO.h"
-#include"../Base/ImageLoading.h"
+
+
 #include"../CameraProjection/CameraProjection.h"
 #include"../Camera/CameraData.h"
 #include"../WorldTransform/WorldTransform.h"
+#include"../Utilipy/Pch.h"
+
 #include<assimp/Importer.hpp>
 #include<assimp/scene.h>
 #include<assimp/postprocess.h>
-#include<fstream>
-#include<sstream>
+
 struct MaterialData {
 	std::string textureFilePath;
 };
