@@ -5,9 +5,8 @@
 #include"../Base/ImageLoading.h"
 #include"../Type/Obj3D.h"
 #include"../Base/CreateBufferResource.h"
-#include<fstream>
-#include<sstream>
-#include<random>
+
+#include"../Utilipy/Pch.h"
 class Particle
 {
 public:
