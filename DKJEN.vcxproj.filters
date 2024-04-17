@@ -108,6 +108,12 @@
     <Filter Include="GameProject\ball">
       <UniqueIdentifier>{e2719508-1e10-435f-9d96-1726b5bc63ce}</UniqueIdentifier>
     </Filter>
+    <Filter Include="DKJEN\PostEffect">
+      <UniqueIdentifier>{9aa792d5-5c85-47f8-9ae9-e7b7991a4970}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="DKJEN\PostEffect\OffScreenRendering">
+      <UniqueIdentifier>{23318dbe-fa43-459c-ae30-6e0487e28224}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <None Include=".editorconfig" />
@@ -272,6 +278,9 @@
     <ClCompile Include="GameProject\Ball\Ball.cpp">
       <Filter>GameProject\ball</Filter>
     </ClCompile>
+    <ClCompile Include="DKJEN\PostEffect\OffScreenRendering\RenderTextrure.cpp">
+      <Filter>DKJEN\PostEffect\OffScreenRendering</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="DKJEN\Utilipy\Input.h">
@@ -435,6 +444,9 @@
     </ClInclude>
     <ClInclude Include="GameProject\Ball\Ball.h">
       <Filter>GameProject\ball</Filter>
+    </ClInclude>
+    <ClInclude Include="DKJEN\PostEffect\OffScreenRendering\RenderTextrure.h">
+      <Filter>DKJEN\PostEffect\OffScreenRendering</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>
