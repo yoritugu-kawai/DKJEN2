@@ -9,6 +9,9 @@
 #include"../CameraProjection/CameraProjection.h"
 #include"../Camera/CameraData.h"
 #include"../WorldTransform/WorldTransform.h"
+#include<assimp/Importer.hpp>
+#include<assimp/scene.h>
+#include<assimp/postprocess.h>
 #include<fstream>
 #include<sstream>
 struct MaterialData {
@@ -41,6 +44,8 @@ public:
 
 
 	ModelData LoadObjFile(const std::string& directoryPath, const std::string& filename);
+
+	ModelData NewLoadObjFile(const std::string& directoryPath, const std::string& filename);
 
 	MaterialData LoadMaterialTemplateFile(const std::string& directoryPath, const std::string& filename);
 private:
