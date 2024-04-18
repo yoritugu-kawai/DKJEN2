@@ -6,7 +6,6 @@
 #include"../Base/TexturePSO.h"
 #include"../Base/LightPSO.h"
 
-
 #include"../CameraProjection/CameraProjection.h"
 #include"../Camera/CameraData.h"
 #include"../WorldTransform/WorldTransform.h"
