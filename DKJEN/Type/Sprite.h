@@ -2,7 +2,7 @@
 #include"../Math/Math.h"
 #include"../Base/DxCommon.h"
 #include"../Base/SpritePSO.h"
-#include"../Base/ImageLoading.h"
+#include"../Base/TexManager.h"
 #include"../Base/CreateBufferResource.h"
 #include"../Management/DescriptorManagement.h"
 class  Sprite

@@ -1,5 +1,5 @@
 #pragma once
-#include"../Base/ImageLoading.h"
+#include"../Base/TexManager.h"
 #include"../CameraProjection/CameraProjection.h"
 class CameraData
 {

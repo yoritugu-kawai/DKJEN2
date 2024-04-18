@@ -5,10 +5,6 @@
       <UniqueIdentifier>{4FC737F1-C7A5-4376-A066-2A32D752A2FF}</UniqueIdentifier>
       <Extensions>cpp;c;cc;cxx;c++;cppm;ixx;def;odl;idl;hpj;bat;asm;asmx</Extensions>
     </Filter>
-    <Filter Include="ヘッダー ファイル">
-      <UniqueIdentifier>{93995380-89BD-4b04-88EB-625FBE52EBFB}</UniqueIdentifier>
-      <Extensions>h;hh;hpp;hxx;h++;hm;inl;inc;ipp;xsd</Extensions>
-    </Filter>
     <Filter Include="DKJEN">
       <UniqueIdentifier>{cea1a72f-93b5-40c1-b438-eca232c03331}</UniqueIdentifier>
     </Filter>
@@ -17,9 +13,6 @@
     </Filter>
     <Filter Include="DKJEN\Utilipy">
       <UniqueIdentifier>{be0b49cf-5f9f-4333-a89d-d063df1029c5}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="DKJEN\Imgui">
-      <UniqueIdentifier>{8cc35df4-360f-4e91-bdd2-c342afedceb1}</UniqueIdentifier>
     </Filter>
     <Filter Include="DKJEN\Management">
       <UniqueIdentifier>{f7cf9383-a287-4799-88e7-f05c6b7c8aba}</UniqueIdentifier>
@@ -60,14 +53,8 @@
     <Filter Include="DKJEN\Base\PSO">
       <UniqueIdentifier>{cee9bf10-9630-42ff-af5d-b43297b866de}</UniqueIdentifier>
     </Filter>
-    <Filter Include="DKJEN\TexInformation">
-      <UniqueIdentifier>{81045715-06bb-4a2d-ad08-6b01c387f5a9}</UniqueIdentifier>
-    </Filter>
     <Filter Include="DKJEN\TexDeta">
       <UniqueIdentifier>{ea856ce8-5218-48a7-ae3d-7c7ce67ba277}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="DKJEN\TexDeta\Image">
-      <UniqueIdentifier>{bcfc85f9-e4e5-4f21-91f2-9867bf0efd8d}</UniqueIdentifier>
     </Filter>
     <Filter Include="DKJEN\Camera">
       <UniqueIdentifier>{ac08f034-35f0-42ca-a9ce-6f5aeeeb4fb5}</UniqueIdentifier>
@@ -108,6 +95,21 @@
     <Filter Include="GameProject\ball">
       <UniqueIdentifier>{e2719508-1e10-435f-9d96-1726b5bc63ce}</UniqueIdentifier>
     </Filter>
+    <Filter Include="DKJEN\PostEffect">
+      <UniqueIdentifier>{9aa792d5-5c85-47f8-9ae9-e7b7991a4970}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="DKJEN\PostEffect\OffScreenRendering">
+      <UniqueIdentifier>{23318dbe-fa43-459c-ae30-6e0487e28224}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="DKJEN\TexDeta\Data">
+      <UniqueIdentifier>{bcfc85f9-e4e5-4f21-91f2-9867bf0efd8d}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="DKJEN\TexDeta\Imgui">
+      <UniqueIdentifier>{8cc35df4-360f-4e91-bdd2-c342afedceb1}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="DKJEN\TexDeta\tex">
+      <UniqueIdentifier>{ef0dc833-77c1-4d33-9f8b-702b51ee066e}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <None Include=".editorconfig" />
@@ -126,7 +128,7 @@
       <Filter>DKJEN\Utilipy</Filter>
     </ClCompile>
     <ClCompile Include="DKJEN\Imgui\imguiManager.cpp">
-      <Filter>DKJEN\Imgui</Filter>
+      <Filter>DKJEN\TexDeta\Imgui</Filter>
     </ClCompile>
     <ClCompile Include="DKJEN\Management\PSOCopileManagement.cpp">
       <Filter>DKJEN\Management</Filter>
@@ -191,9 +193,6 @@
     <ClCompile Include="DKJEN\Base\Function.cpp">
       <Filter>DKJEN\Base\Log</Filter>
     </ClCompile>
-    <ClCompile Include="DKJEN\Base\ImageLoading.cpp">
-      <Filter>DKJEN\Base\Log</Filter>
-    </ClCompile>
     <ClCompile Include="DKJEN\Base\Log.cpp">
       <Filter>DKJEN\Base\Log</Filter>
     </ClCompile>
@@ -218,9 +217,6 @@
     <ClCompile Include="DKJEN\CameraProjection\CameraProjection.cpp">
       <Filter>DKJEN\CameraProjection</Filter>
     </ClCompile>
-    <ClCompile Include="DKJEN\TexInformation\TexManagement.cpp">
-      <Filter>DKJEN\TexInformation</Filter>
-    </ClCompile>
     <ClCompile Include="DKJEN\Shader\ParticleCompileShader.cpp">
       <Filter>DKJEN\Shader</Filter>
     </ClCompile>
@@ -240,7 +236,7 @@
       <Filter>DKJEN\WorldTransform</Filter>
     </ClCompile>
     <ClCompile Include="DKJEN\TexDeta\Image\ImageData.cpp">
-      <Filter>DKJEN\TexDeta\Image</Filter>
+      <Filter>DKJEN\TexDeta\Data</Filter>
     </ClCompile>
     <ClCompile Include="DKJEN\Base\CreateBufferResource.cpp">
       <Filter>DKJEN\Base\CreateBufferResource</Filter>
@@ -272,6 +268,12 @@
     <ClCompile Include="GameProject\Ball\Ball.cpp">
       <Filter>GameProject\ball</Filter>
     </ClCompile>
+    <ClCompile Include="DKJEN\PostEffect\OffScreenRendering\RenderTextrure.cpp">
+      <Filter>DKJEN\PostEffect\OffScreenRendering</Filter>
+    </ClCompile>
+    <ClCompile Include="DKJEN\Base\TexManager.cpp">
+      <Filter>DKJEN\TexDeta\tex</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="DKJEN\Utilipy\Input.h">
@@ -284,7 +286,7 @@
       <Filter>DKJEN\Utilipy</Filter>
     </ClInclude>
     <ClInclude Include="DKJEN\Imgui\imguiManager.h">
-      <Filter>DKJEN\Imgui</Filter>
+      <Filter>DKJEN\TexDeta\Imgui</Filter>
     </ClInclude>
     <ClInclude Include="DKJEN\Management\PSOCopileManagement.h">
       <Filter>DKJEN\Management</Filter>
@@ -349,9 +351,6 @@
     <ClInclude Include="DKJEN\Base\Function.h">
       <Filter>DKJEN\Base\Log</Filter>
     </ClInclude>
-    <ClInclude Include="DKJEN\Base\ImageLoading.h">
-      <Filter>DKJEN\Base\Log</Filter>
-    </ClInclude>
     <ClInclude Include="DKJEN\Base\Log.h">
       <Filter>DKJEN\Base\Log</Filter>
     </ClInclude>
@@ -376,9 +375,6 @@
     <ClInclude Include="DKJEN\CameraProjection\CameraProjection.h">
       <Filter>DKJEN\CameraProjection</Filter>
     </ClInclude>
-    <ClInclude Include="DKJEN\TexInformation\TexManagement.h">
-      <Filter>DKJEN\TexInformation</Filter>
-    </ClInclude>
     <ClInclude Include="DKJEN\Shader\ParticleCompileShader.h">
       <Filter>DKJEN\Shader</Filter>
     </ClInclude>
@@ -389,7 +385,7 @@
       <Filter>DKJEN\Management</Filter>
     </ClInclude>
     <ClInclude Include="DKJEN\TexDeta\Image\ImageData.h">
-      <Filter>DKJEN\TexDeta\Image</Filter>
+      <Filter>DKJEN\TexDeta\Data</Filter>
     </ClInclude>
     <ClInclude Include="DKJEN\Camera\CameraData.h">
       <Filter>DKJEN\Camera</Filter>
@@ -435,6 +431,12 @@
     </ClInclude>
     <ClInclude Include="GameProject\Ball\Ball.h">
       <Filter>GameProject\ball</Filter>
+    </ClInclude>
+    <ClInclude Include="DKJEN\PostEffect\OffScreenRendering\RenderTextrure.h">
+      <Filter>DKJEN\PostEffect\OffScreenRendering</Filter>
+    </ClInclude>
+    <ClInclude Include="DKJEN\Base\TexManager.h">
+      <Filter>DKJEN\TexDeta\tex</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>

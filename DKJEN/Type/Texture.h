@@ -1,7 +1,7 @@
 #include"../Math/Math.h"
 #include"../Base/DxCommon.h"
 #include"../Base/TexturePSO.h"
-#include"../Base/ImageLoading.h"
+#include"../Base/TexManager.h"
 class Texture
 {
 public:

@@ -1,6 +1,6 @@
 
 #include"DKJEN/Base/WinApp.h"
-#include"DKJEN/Base/ImageLoading.h"
+#include"DKJEN/Base/TexManager.h"
 
 #include"DKJEN/Math/Math.h"
 
