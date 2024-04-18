@@ -36,7 +36,7 @@ int WINAPI WinMain(HINSTANCE, HINSTANCE, LPSTR, int) {
 
 	worldTransform->Create();
 	Obj3D* obj3d = new Obj3D;
-	obj3d->Initialize("resource","axis.obj");
+	obj3d->Initialize("resource","plane.gltf");
 
 	Vector3 cameraPos_ = { 0,0,0 };
 	

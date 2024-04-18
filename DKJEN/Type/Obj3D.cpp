@@ -42,7 +42,6 @@ void Obj3D::Draw( Vector4 Color,CameraData*cameraData, WorldTransform* worldTran
 	Matrix4x4 ProjectionMatrix = MakePerspectiveFovMatrix(0.45f, float(1280.0f / 720.0f), 0.1f, 100.0f);
 
 	Matrix4x4 CameraMatrix = MakeIdentity4x4();
-
 	
 	*materialData = Color;
 	//lightData->direction = { 0.0f,1.0f,0.0f };
@@ -163,6 +162,9 @@ ModelData Obj3D::NewLoadObjFile(const std::string& directoryPath, const std::str
 	std::string file= directoryPath + "/" + filename;
 	const aiScene* scene= importer.ReadFile(file.c_str(),aiProcess_FlipWindingOrder|aiProcess_FlipUVs);
 	assert(scene->HasMeshes());
+	//Node
+	modelData.rootNode = ReadNode(scene->mRootNode);
+	
 	for (uint32_t meshIndex = 0; meshIndex < scene->mNumMeshes; ++meshIndex) {
 		aiMesh* mesh = scene->mMeshes[meshIndex];
 		assert(mesh->HasNormals());
@@ -223,5 +225,21 @@ MaterialData Obj3D::LoadMaterialTemplateFile(const std::string& directoryPath, c
 	}
 
 	return materialData;
+}
+
+Node Obj3D::ReadNode(aiNode* node)
+{
+	Node result;
+	aiMatrix4x4 aiLocalMatrix = node->mTransformation;
+	aiLocalMatrix.Transpose();
+	result.localMatrix.m[0][0] = aiLocalMatrix[0][0];
+
+	result.name = node->mName.C_Str();
+	result.chidren.resize(node->mNumChildren);
+	for (uint32_t childIndex = 0; childIndex < node->mNumChildren; ++childIndex) {
+		result.chidren[childIndex] = ReadNode(node->mChildren[childIndex]);
+	}
+
+	return result;
 }
 
