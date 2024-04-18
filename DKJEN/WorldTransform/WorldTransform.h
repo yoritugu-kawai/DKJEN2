@@ -2,7 +2,7 @@
 #include"../Imgui/imguiManager.h"
 #include"../Base/CreateBufferResource.h"
 #include"../Math/Math.h"
-#include"../Base/ImageLoading.h"
+#include"../Base/TexManager.h"
 #include"../Camera/CameraData.h"
 class WorldTransform
 {

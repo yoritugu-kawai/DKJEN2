@@ -5,15 +5,16 @@
 #include"../Base/SpritePSO.h"
 #include"../Base/TexturePSO.h"
 #include"../Base/LightPSO.h"
-#include"../Base/ImageLoading.h"
+
 #include"../CameraProjection/CameraProjection.h"
 #include"../Camera/CameraData.h"
 #include"../WorldTransform/WorldTransform.h"
+#include"../Utilipy/Pch.h"
+
 #include<assimp/Importer.hpp>
 #include<assimp/scene.h>
 #include<assimp/postprocess.h>
-#include<fstream>
-#include<sstream>
+
 struct MaterialData {
 	std::string textureFilePath;
 };
@@ -40,9 +41,7 @@ public:
 	/// <param name="Vector3 translate = { 0.0f, 0.0f, 0.0f }"></param>
 	/// <param name="Vector4 color = { 1.0f,1.0f,1.0f,1.0f }"></param>
 	void Draw( Vector4 Color, CameraData* cameraData, WorldTransform* worldTransform);
-	//void Release();
-
-
+	
 	ModelData LoadObjFile(const std::string& directoryPath, const std::string& filename);
 
 	ModelData NewLoadObjFile(const std::string& directoryPath, const std::string& filename);
