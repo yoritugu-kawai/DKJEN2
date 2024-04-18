@@ -15,6 +15,13 @@
 #include<assimp/scene.h>
 #include<assimp/postprocess.h>
 
+struct  Node
+{
+	Matrix4x4 localMatrix;
+	std::string name;
+	std::vector<Node> chidren;
+};
+
 struct MaterialData {
 	std::string textureFilePath;
 };
@@ -23,6 +30,7 @@ struct ModelData
 {
 	std::vector<VertexData>vertices;
 	MaterialData material;
+	Node rootNode;
 };
 
 
@@ -47,6 +55,8 @@ public:
 	ModelData NewLoadObjFile(const std::string& directoryPath, const std::string& filename);
 
 	MaterialData LoadMaterialTemplateFile(const std::string& directoryPath, const std::string& filename);
+
+	Node ReadNode(aiNode* node);
 private:
 	ComPtr<ID3D12Resource> vetexResource;
 	ComPtr<ID3D12Resource> materialResource;
