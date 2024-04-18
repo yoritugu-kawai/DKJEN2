@@ -5,7 +5,7 @@
 
 #include"../Base/SpritePSO.h"
 #include"../Base/LightPSO.h"
-#include"../Base/ImageLoading.h"
+#include"../Base/TexManager.h"
 class Sphere
 {
 public:

@@ -1,4 +1,4 @@
-#include"ImageLoading.h"
+#include"TexManager.h"
 
 static uint32_t LoadCount;
 TexManager* TexManager::GetInstance()

@@ -4,7 +4,7 @@
 #include"../Base/Function.h"
 #include"../externals/DirectXTex/d3dx12.h"
 #include"../externals/DirectXTex/DirectXTex.h"
-#include"../Base/ImageLoading.h"
+#include"../Base/TexManager.h"
 #define DESCRIPTER_MAX 64
 
 class DescriptorManagement
