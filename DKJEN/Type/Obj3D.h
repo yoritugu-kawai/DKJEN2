@@ -6,7 +6,6 @@
 #include"../Base/TexturePSO.h"
 #include"../Base/LightPSO.h"
 
-
 #include"../CameraProjection/CameraProjection.h"
 #include"../Camera/CameraData.h"
 #include"../WorldTransform/WorldTransform.h"
@@ -16,6 +15,13 @@
 #include<assimp/scene.h>
 #include<assimp/postprocess.h>
 
+struct  Node
+{
+	Matrix4x4 localMatrix;
+	std::string name;
+	std::vector<Node> chidren;
+};
+
 struct MaterialData {
 	std::string textureFilePath;
 };
@@ -24,6 +30,7 @@ struct ModelData
 {
 	std::vector<VertexData>vertices;
 	MaterialData material;
+	Node rootNode;
 };
 
 
@@ -42,14 +49,14 @@ public:
 	/// <param name="Vector3 translate = { 0.0f, 0.0f, 0.0f }"></param>
 	/// <param name="Vector4 color = { 1.0f,1.0f,1.0f,1.0f }"></param>
 	void Draw( Vector4 Color, CameraData* cameraData, WorldTransform* worldTransform);
-	//void Release();
-
-
+	
 	ModelData LoadObjFile(const std::string& directoryPath, const std::string& filename);
 
 	ModelData NewLoadObjFile(const std::string& directoryPath, const std::string& filename);
 
 	MaterialData LoadMaterialTemplateFile(const std::string& directoryPath, const std::string& filename);
+
+	Node ReadNode(aiNode* node);
 private:
 	ComPtr<ID3D12Resource> vetexResource;
 	ComPtr<ID3D12Resource> materialResource;
