@@ -1,13 +1,14 @@
 #include "RenderTextrure.h"
 
-void RenderTextrure::Initialize()
+void RenderTextrure::RTV()
 {
     const Vector4 kRenderTargetClearValue{ 1.0f,0.0f,0.0f,1.0f };
     //auto renderTextureResource = CreateRenderTextrureResource();
 }
 
-ComPtr<ID3D12Resource> RenderTextrure::CreateRenderTextrureResource(ComPtr<ID3D12Device> device, uint32_t width, uint32_t height, DXGI_FORMAT format, const Vector4& clearClolor)
+ComPtr<ID3D12Resource> RenderTextrure::CreateRenderTextrureResource(uint32_t width, uint32_t height, DXGI_FORMAT format, const Vector4& clearClolor)
 {
+    ID3D12Device* device = DxCommon::GetInstance()->GetDevice();
     //頂点
     D3D12_RESOURCE_DESC resourceDesc{};
     ComPtr<ID3D12Resource> resource;
