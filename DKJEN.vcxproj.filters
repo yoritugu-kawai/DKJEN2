@@ -110,6 +110,12 @@
     <Filter Include="DKJEN\TexDeta\tex">
       <UniqueIdentifier>{ef0dc833-77c1-4d33-9f8b-702b51ee066e}</UniqueIdentifier>
     </Filter>
+    <Filter Include="DKJEN\Skinning">
+      <UniqueIdentifier>{edc4b4ce-4c8f-4a55-b5c9-07ed632dfc13}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="DKJEN\Skinning\Animation">
+      <UniqueIdentifier>{e62aa1b2-7ef5-4eee-a7dd-4d5cbfa1fe39}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <None Include=".editorconfig" />
@@ -437,6 +443,9 @@
     </ClInclude>
     <ClInclude Include="DKJEN\Base\TexManager.h">
       <Filter>DKJEN\TexDeta\tex</Filter>
+    </ClInclude>
+    <ClInclude Include="DKJEN\Skinning\Animation\Animation.h">
+      <Filter>DKJEN\Skinning\Animation</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>

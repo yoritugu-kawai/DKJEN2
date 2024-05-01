@@ -606,3 +606,289 @@ Vector3 Transform3(const Vector3& vector, const Matrix4x4& matrix) {
 
 	return result;
 }
+Matrix4x4 DirectionToDirection(const Vector3& from, const Vector3& to) {
+
+	Vector3 normalizeFrom = from;
+	Vector3 normalizeTo = to;
+
+
+	Vector3 uvCross = Cross(normalizeFrom, normalizeTo);
+	Vector3 n = Normalize(uvCross);
+
+	if (from.x == -to.x || from.y == -to.y || from.z == -to.z) {
+		if (from.x != 0 || from.y != 0) {
+			n = { from.y,-from.x,0 };
+		}
+		else if (from.x != 0 || from.z != 0)
+		{
+			n = { from.z,0,-from.x };
+		}
+	}
+
+	//内積で求めてね
+	float cos = Dot(normalizeFrom, normalizeTo);
+
+	//外積で求めてね
+	float sin = Length(Cross(normalizeFrom, normalizeTo));
+
+
+	Matrix4x4 resultR = {};
+	resultR.m[0][0] = n.x * n.x * (1 - cos) + cos;
+	resultR.m[0][1] = n.x * n.y * (1 - cos) + n.z * sin;
+	resultR.m[0][2] = n.x * n.z * (1 - cos) - n.y * sin;
+	resultR.m[0][3] = 0.0f;
+
+	resultR.m[1][0] = n.y * n.x * (1 - cos) - n.z * sin;
+	resultR.m[1][1] = n.y * n.y * (1 - cos) + cos;
+	resultR.m[1][2] = n.y * n.z * (1 - cos) + n.x * sin;
+	resultR.m[1][3] = 0.0f;
+
+	resultR.m[2][0] = n.z * n.x * (1 - cos) + n.y * sin;
+	resultR.m[2][1] = n.z * n.y * (1 - cos) - n.x * sin;
+	resultR.m[2][2] = n.z * n.z * (1 - cos) + cos;
+	resultR.m[2][3] = 0.0f;
+
+	resultR.m[3][0] = 0.0f;
+	resultR.m[3][1] = 0.0f;
+	resultR.m[3][2] = 0.0f;
+	resultR.m[3][3] = 1.0f;
+
+	return resultR;
+}
+
+Vector3 DotVector3(const Vector3& v1, const Vector3& v2) {
+	Vector3 result{};
+	result.x = v1.x * v2.x;
+	result.y = v1.y * v2.y;
+	result.z = v1.z * v2.z;
+
+	return result;
+}
+Vector3 Cross(const Vector3 v1, const Vector3 v2) {
+	Vector3 result;
+	result.x = v1.y * v2.z - v1.z * v2.y;
+	result.y = v1.z * v2.x - v1.x * v2.z;
+	result.z = v1.x * v2.y - v1.y * v2.x;
+
+	return result;
+}
+Vector3 TransformRot(const Vector3& vector, const Matrix4x4& matrix) {
+	Vector3 result;
+
+	result.x = (vector.x * matrix.m[0][0]) + (vector.y * matrix.m[1][0])
+		+ (vector.z * matrix.m[2][0]) + (1.0f * matrix.m[3][0]);
+
+	result.y = (vector.x * matrix.m[0][1]) + (vector.y * matrix.m[1][1])
+		+ (vector.z * matrix.m[2][1]) + (1.0f * matrix.m[3][1]);
+
+	result.z = (vector.x * matrix.m[0][2]) + (vector.y * matrix.m[1][2])
+		+ (vector.z * matrix.m[2][2]) + (1.0f * matrix.m[3][2]);
+
+	float w = (vector.x * matrix.m[0][3]) + (vector.y * matrix.m[1][3]) + (vector.z * matrix.m[2][3]) + (1.0f * matrix.m[3][3]);
+
+
+	assert(w != 0.0f);
+	result.x /= w;
+	result.y /= w;
+	result.z /= w;
+
+	return result;
+
+
+}
+Quaternion MultiplyQuaternion(const Quaternion& lhs, const Quaternion& rhs)
+{
+	return Quaternion();
+}
+
+Quaternion IdentityQuaternion() {
+
+
+	Quaternion result = {};
+
+	result.w = 1.0f;
+	result.x = 0.0f;
+	result.y = 0.0f;
+	result.z = 0.0f;
+
+
+
+
+
+	return result;
+}
+Quaternion Conjugate(const Quaternion& quaternion) {
+
+
+	Quaternion result = {};
+	result.x = -quaternion.x;
+	result.y = -quaternion.y;
+	result.z = -quaternion.z;
+	result.w = quaternion.w;
+
+
+	return result;
+}
+
+float Norm(const Quaternion& quaternion) {
+
+	//q=sqrtf(qq)
+	float result = 0.0f;
+	result = sqrtf(
+		quaternion.w * quaternion.w +
+		quaternion.x * quaternion.x +
+		quaternion.y * quaternion.y +
+		quaternion.z * quaternion.z);
+
+	return result;
+}
+Quaternion NormalizeQuaternion(const Quaternion& quaternion) {
+	Quaternion result = {};
+
+
+	float length = sqrtf(
+		quaternion.x * quaternion.x +
+		quaternion.y * quaternion.y +
+		quaternion.z * quaternion.z +
+		quaternion.w * quaternion.w
+	);
+
+
+	Quaternion preResult = {};
+	preResult.x = quaternion.x;
+	preResult.y = quaternion.y;
+	preResult.z = quaternion.z;
+	preResult.w = quaternion.w;
+
+	if (length != 0.0f) {
+		preResult.x = quaternion.x / length;
+		preResult.y = quaternion.y / length;
+		preResult.z = quaternion.z / length;
+		preResult.w = quaternion.w / length;
+
+	}
+
+	result.x = preResult.x;
+	result.y = preResult.y;
+	result.z = preResult.z;
+	result.w = preResult.w;
+
+
+	return result;
+}
+
+Quaternion InverseQuaternion(const Quaternion& quaternion) {
+
+
+
+	Quaternion result = {};
+
+
+	float norm = Norm(quaternion);
+	Quaternion conjugate = Conjugate(quaternion);
+
+	float t = norm * norm;
+
+	result.x = conjugate.x / t;
+	result.y = conjugate.y / t;
+	result.z = conjugate.z / t;
+	result.w = conjugate.w / t;
+
+
+	return result;
+}
+
+Quaternion MakeRotateAxisAngleQuaternion(const Vector3& axis, float angle)
+{
+	Quaternion result;
+	result = IdentityQuaternion();
+
+	float halfAngle = angle / 2;
+
+	result.x = axis.x * sinf(halfAngle);
+	result.y = axis.y * sinf(halfAngle);
+	result.z = axis.z * sinf(halfAngle);
+	result.w = cosf(halfAngle);
+
+	return result;
+}
+
+Vector3 RotateVector(const Vector3& vector, const Quaternion& quaternion)
+{
+	Vector3 result;
+
+	Quaternion fromVector;
+	fromVector.x = vector.x;
+	fromVector.y = vector.y;
+	fromVector.z = vector.z;
+	fromVector.w = 0.0f;
+
+	Quaternion conj = Conjugate(quaternion);
+
+	Quaternion rot;
+	rot = MultiplyQuaternion(quaternion, MultiplyQuaternion(fromVector, conj));
+
+	result.x = rot.x;
+	result.y = rot.y;
+	result.z = rot.z;
+
+	return result;
+}
+Matrix4x4 MakeRotateMatrix(const Quaternion& quaternion)
+{
+	Matrix4x4 result;
+	result.m[0][0] = (quaternion.w * quaternion.w) + (quaternion.x * quaternion.x) - (quaternion.y * quaternion.y) - (quaternion.z * quaternion.z);
+	result.m[0][1] = 2.0f * ((quaternion.x * quaternion.y) + (quaternion.w * quaternion.z));
+	result.m[0][2] = 2.0f * ((quaternion.x * quaternion.z) - (quaternion.w * quaternion.y));
+	result.m[0][3] = 0.0f;
+
+	result.m[1][0] = 2.0f * ((quaternion.x * quaternion.y) - (quaternion.w * quaternion.z));
+	result.m[1][1] = (quaternion.w * quaternion.w) - (quaternion.x * quaternion.x) + (quaternion.y * quaternion.y) - (quaternion.z * quaternion.z);
+	result.m[1][2] = 2.0f * ((quaternion.y * quaternion.z) + (quaternion.w * quaternion.x));
+	result.m[1][3] = 0.0f;
+
+	result.m[2][0] = 2.0f * ((quaternion.x * quaternion.z) + (quaternion.w * quaternion.y));
+	result.m[2][1] = 2.0f * ((quaternion.y * quaternion.z) - (quaternion.w * quaternion.x));
+	result.m[2][2] = (quaternion.w * quaternion.w) - (quaternion.x * quaternion.x) - (quaternion.y * quaternion.y) + (quaternion.z * quaternion.z);
+	result.m[2][3] = 0.0f;
+
+	result.m[3][0] = 0.0f;
+	result.m[3][1] = 0.0f;
+	result.m[3][2] = 0.0f;
+	result.m[3][3] = 1.0f;
+
+	return result;
+}
+Quaternion Slerp(const Quaternion& q1, const Quaternion& q2, float t)
+{
+
+	// クォータニオンの内積を計算
+	float dot = DotQuaternion(q1, q2);
+	Quaternion qn1 = q1;//q1のnew
+	Quaternion qn2 = q2;//q2のnew
+	if (dot < 0.0f)
+	{
+		qn1 = { -qn1.x,-qn1.y,-qn1.z,-qn1.w };
+		dot = -dot;
+	}
+
+	// q1とq2の間の角度を計算
+	float theta = std::acos(dot);
+
+	float sinTheta = std::sin(theta);
+	float scale0 = std::sin((1 - t) * theta) / sinTheta;
+	float scale1 = std::sin(t * theta) / sinTheta;
+
+	// 補間されたクォータニオンを計算して返す
+	return Quaternion(
+		scale0 * qn1.x + scale1 * qn2.x,
+		scale0 * qn1.y + scale1 * qn2.y,
+		scale0 * qn1.z + scale1 * qn2.z,
+		scale0 * qn1.w + scale1 * qn2.w
+	);
+
+}
+float DotQuaternion(const Quaternion& q1, const Quaternion& q2)
+{
+	return float(q1.w * q2.w + q1.x * q2.x + q1.y * q2.y + q1.z * q2.z);
+}
