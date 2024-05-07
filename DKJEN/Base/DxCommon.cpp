@@ -65,7 +65,7 @@ void DxCommon::CommandLoad()
 	commandList->ResourceBarrier(1, &barrier);
 
 	commandList->OMSetRenderTargets(1, &rtvHandles[backBufferIndex], false, nullptr);
-	float clearColor[] = { 0.1f,0.25f,0.5f,1.0f };
+	float clearColor[] = { 0.1f,0.2f,1.0f,1.0f };
 	commandList->ClearRenderTargetView(rtvHandles[backBufferIndex], clearColor, 0, nullptr);
 
 	///
@@ -234,11 +234,7 @@ void DxCommon::CreateDescriptorHeap()
 	rtvDescriptorHeap = CreateDescriptorDesc(device, D3D12_DESCRIPTOR_HEAP_TYPE_RTV, 2, false);
 	srvDescriptorHeap = CreateDescriptorDesc(device, D3D12_DESCRIPTOR_HEAP_TYPE_CBV_SRV_UAV, 128, true);
 
-	/*D3D12_DESCRIPTOR_HEAP_DESC rtvDescriptorHeapDesc{};
-	rtvDescriptorHeapDesc.Type = D3D12_DESCRIPTOR_HEAP_TYPE_RTV;
-	rtvDescriptorHeapDesc.NumDescriptors = 2;
-	HRESULT hr = device->CreateDescriptorHeap(&rtvDescriptorHeapDesc, IID_PPV_ARGS(&rtvDescriptorHeap));
-	assert(SUCCEEDED(hr));*/
+	
 	CreateSwapResce();
 	//DSV
      depthStencilResource = CreateDepthStencilTextureRsource(device, WinApp::GetInstance()->Width(), WinApp::GetInstance()->Height());

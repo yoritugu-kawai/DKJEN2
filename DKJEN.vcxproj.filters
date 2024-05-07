@@ -125,6 +125,15 @@
     <None Include="Paticle.hlsli">
       <Filter>hlsl</Filter>
     </None>
+    <None Include="CopyImage.PS.hlsli">
+      <Filter>hlsl</Filter>
+    </None>
+    <None Include="CopyImage.hlsli">
+      <Filter>hlsl</Filter>
+    </None>
+    <None Include="CopyImage.VS.hlsli">
+      <Filter>hlsl</Filter>
+    </None>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="main.cpp">
