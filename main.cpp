@@ -37,9 +37,11 @@ int WINAPI WinMain(HINSTANCE, HINSTANCE, LPSTR, int) {
 	worldTransform->Create();
 	Obj3D* obj3d = new Obj3D;
 	obj3d->Initialize("resource","plane.gltf");
-
+	uint32_t tex = TexManager::LoadTexture("GameResource/uvChecker.png");
+	Sprite* sprite = new Sprite;
+	sprite->Initialize(tex);
 	Vector3 cameraPos_ = { 0,0,0 };
-	
+	float k = 0;
 
 	//座標
 
@@ -64,6 +66,8 @@ int WINAPI WinMain(HINSTANCE, HINSTANCE, LPSTR, int) {
 
 		worldTransform->SetTranslate({ 0,0,0 });
 		worldTransform->SetScale({1, 1, 1,});
+		k+=0.001f;
+		worldTransform->SetRotate({ 0,10.0f,k });
 		ImGui::Begin("pos");
 		ImGui::SliderFloat3("camera", &cameraPos_.x, 10, -100);
 		ImGui::End();
@@ -78,6 +82,7 @@ int WINAPI WinMain(HINSTANCE, HINSTANCE, LPSTR, int) {
 		//　　描画処理
 		//////
 		
+		//sprite->Draw({200.0f,100.0f,10.0f},{0,0,0},{0,0,0},{1,1,1,1});
 		obj3d->Draw({1,1,1,1}, cameraData, worldTransform);
 
 		//////
