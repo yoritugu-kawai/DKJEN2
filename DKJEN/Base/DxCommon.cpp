@@ -65,7 +65,7 @@ void DxCommon::CommandLoad()
 	commandList->ResourceBarrier(1, &barrier);
 
 	commandList->OMSetRenderTargets(1, &rtvHandles[backBufferIndex], false, nullptr);
-	float clearColor[] = { 0.1f,0.25f,0.5f,1.0f };
+	float clearColor[] = { 0.1f,0.2f,1.0f,1.0f };
 	commandList->ClearRenderTargetView(rtvHandles[backBufferIndex], clearColor, 0, nullptr);
 
 	///
@@ -231,14 +231,10 @@ void DxCommon::CreateDescriptorHeap()
 	ID3D12Device* device = DxCommon::GetInstance()->device;
 	///
 	//ディスクトップヒープ作成
-	rtvDescriptorHeap = CreateDescriptorDesc(device, D3D12_DESCRIPTOR_HEAP_TYPE_RTV, 2, false);
+	rtvDescriptorHeap = CreateDescriptorDesc(device, D3D12_DESCRIPTOR_HEAP_TYPE_RTV, 16, false);
 	srvDescriptorHeap = CreateDescriptorDesc(device, D3D12_DESCRIPTOR_HEAP_TYPE_CBV_SRV_UAV, 128, true);
 
-	/*D3D12_DESCRIPTOR_HEAP_DESC rtvDescriptorHeapDesc{};
-	rtvDescriptorHeapDesc.Type = D3D12_DESCRIPTOR_HEAP_TYPE_RTV;
-	rtvDescriptorHeapDesc.NumDescriptors = 2;
-	HRESULT hr = device->CreateDescriptorHeap(&rtvDescriptorHeapDesc, IID_PPV_ARGS(&rtvDescriptorHeap));
-	assert(SUCCEEDED(hr));*/
+	
 	CreateSwapResce();
 	//DSV
      depthStencilResource = CreateDepthStencilTextureRsource(device, WinApp::GetInstance()->Width(), WinApp::GetInstance()->Height());
@@ -285,7 +281,7 @@ void DxCommon::CreateRTV()
 	swapChainResources[0] = DxCommon::GetInstance()->swapChainResources[0];
 	swapChainResources[1] = DxCommon::GetInstance()->swapChainResources[1];
 	ID3D12Device* device = DxCommon::GetInstance()->device;
-	D3D12_CPU_DESCRIPTOR_HANDLE rtvHandles[2];//
+	D3D12_CPU_DESCRIPTOR_HANDLE rtvHandles[4];//
 	rtvHandles[0] = DxCommon::GetInstance()->rtvHandles[0];
 	rtvHandles[1] = DxCommon::GetInstance()->rtvHandles[1];
 	D3D12_RENDER_TARGET_VIEW_DESC rtvDesc = DxCommon::GetInstance()->rtvDesc;
@@ -303,9 +299,19 @@ void DxCommon::CreateRTV()
 		D3D12_DESCRIPTOR_HEAP_TYPE_RTV);
 
 	device->CreateRenderTargetView(swapChainResources[1], &rtvDesc, rtvHandles[1]);
-	//
-
-
+	//ポストエフェクトレンダリング
+	const Vector4 kRenderTargetClearValue{ 1.0f,0.0f,0.0f,1.0f };
+	ComPtr<ID3D12Resource>renderTextureResource = CreateRenderTextrureResource(WinApp::GetInstance()->Width(), WinApp::GetInstance()->Height(), DXGI_FORMAT_R8G8B8A8_UNORM_SRGB, kRenderTargetClearValue);
+	rtvHandles[2].ptr = rtvHandles[1].ptr + device->GetDescriptorHandleIncrementSize(
+		D3D12_DESCRIPTOR_HEAP_TYPE_RTV);
+	 device->CreateRenderTargetView(renderTextureResource.Get(), &rtvDesc, rtvHandles[2]);
+	//SRV
+	/*D3D12_SHADER_RESOURCE_VIEW_DESC renderTextureSrvDesc{};
+	renderTextureSrvDesc.Format = DXGI_FORMAT_R8G8B8A8_UNORM_SRGB;
+	renderTextureSrvDesc.Shader4ComponentMapping = D3D12_DEFAULT_SHADER_4_COMPONENT_MAPPING;
+	renderTextureSrvDesc.ViewDimension = D3D12_SRV_DIMENSION_TEXTURE2D;
+	renderTextureSrvDesc.Texture2D.MipLevels = 1;
+	device->CreateShaderResourceView(renderTextureResource.Get(), &renderTextureSrvDesc, rtvHandles[3]);*/
 
 	DxCommon::GetInstance()->rtvDesc = rtvDesc;
 	DxCommon::GetInstance()->device = device;
