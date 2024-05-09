@@ -2,6 +2,7 @@
 #include"WinApp.h"
 #include"../Math/Math.h"
 #include"../Utilipy/Pch.h"
+#include"../PostEffect/OffScreenRendering/RenderTextrure.h"
 class DxCommon
 {
 public:

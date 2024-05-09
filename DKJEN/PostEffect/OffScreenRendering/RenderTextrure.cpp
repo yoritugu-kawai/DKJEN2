@@ -1,6 +1,6 @@
 #include "RenderTextrure.h"
 
-void RenderTextrure::RTV()
+void RTV()
 {
     //D3D12_RENDER_TARGET_VIEW_DESC rtvDesc = DxCommon::GetInstance()->rtvDescGet();
     ////RTV
@@ -18,7 +18,7 @@ void RenderTextrure::RTV()
 }
 
 
-ComPtr<ID3D12Resource> RenderTextrure::CreateRenderTextrureResource(uint32_t width, uint32_t height, DXGI_FORMAT format, const Vector4& clearClolor)
+ComPtr<ID3D12Resource> CreateRenderTextrureResource(uint32_t width, uint32_t height, DXGI_FORMAT format, const Vector4& clearClolor)
 {
     ID3D12Device* device = DxCommon::GetInstance()->GetDevice();
     //頂点
@@ -30,7 +30,7 @@ ComPtr<ID3D12Resource> RenderTextrure::CreateRenderTextrureResource(uint32_t wid
     resourceDesc.Height = height;
     resourceDesc.MipLevels = 1;
     resourceDesc.DepthOrArraySize = 1;
-    resourceDesc.Format = DXGI_FORMAT_D32_FLOAT;
+    resourceDesc.Format = DXGI_FORMAT_R8G8B8A8_UNORM_SRGB;
     resourceDesc.SampleDesc.Count = 1;
     resourceDesc.Dimension = D3D12_RESOURCE_DIMENSION_TEXTURE2D;
     
@@ -42,14 +42,14 @@ ComPtr<ID3D12Resource> RenderTextrure::CreateRenderTextrureResource(uint32_t wid
     clearValue.Color[1] = clearClolor.y;
     clearValue.Color[2] = clearClolor.z;
     clearValue.Color[3] = clearClolor.w;
-
-    device->CreateCommittedResource(
+    HRESULT hr;
+    hr=device->CreateCommittedResource(
         &heapProperies,
         D3D12_HEAP_FLAG_NONE,
         &resourceDesc,
         D3D12_RESOURCE_STATE_RENDER_TARGET,
         &clearValue,
         IID_PPV_ARGS(&resource));
-
+    assert(SUCCEEDED(hr));
     return resource;
 }
