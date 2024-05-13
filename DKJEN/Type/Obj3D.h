@@ -10,6 +10,7 @@
 #include"../Camera/CameraData.h"
 #include"../WorldTransform/WorldTransform.h"
 #include"../Utilipy/Pch.h"
+#include"../Skinning/Animation/Animation.h"
 
 #include<assimp/Importer.hpp>
 #include<assimp/scene.h>
@@ -57,6 +58,11 @@ public:
 	MaterialData LoadMaterialTemplateFile(const std::string& directoryPath, const std::string& filename);
 
 	Node ReadNode(aiNode* node);
+
+	//アニメーション
+	Animation LoadAnimationFile(const std::string& directoryPath, const std::string& filename);
+	Vector3 Calculatevalue(const std::vector<KeyframeVector3>&keyframes,float time);
+	Quaternion QCalculatevalue(const std::vector<KeyframeQuaternion>& keyframes, float time);
 private:
 	ComPtr<ID3D12Resource> vetexResource;
 	ComPtr<ID3D12Resource> materialResource;
@@ -74,5 +80,6 @@ private:
 
 	Vector3 pos;
 	uint32_t tex_;
+	float animaionTime = 0.0f;
 };
 

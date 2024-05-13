@@ -2,7 +2,7 @@
 #include"../../Utilipy/Pch.h"
 template<typename tValue>
 struct Keyframe {
-	folat time;
+	float time;
 	tValue value;
 };
 using KeyframeVector3 = Keyframe<Vector3>;
@@ -18,7 +18,7 @@ struct NodeAnimation
 	AnimationCurve<Quaternion> rotate;
 	AnimationCurve<Vector3> scale;
 };
-struct Ainmation
+struct Animation
 {
 	float duration;
 	std::map<std::string, NodeAnimation>nodeAnimations;

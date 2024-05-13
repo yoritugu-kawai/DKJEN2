@@ -42,7 +42,7 @@ void Obj3D::Draw( Vector4 Color,CameraData*cameraData, WorldTransform* worldTran
 	Matrix4x4 ProjectionMatrix = MakePerspectiveFovMatrix(0.45f, float(1280.0f / 720.0f), 0.1f, 100.0f);
 
 	Matrix4x4 CameraMatrix = MakeIdentity4x4();
-	
+
 	*materialData = Color;
 	//lightData->direction = { 0.0f,1.0f,0.0f };
 	lightData->color = { 1.0f,1.0f,1.0f,1.0f };
@@ -51,6 +51,7 @@ void Obj3D::Draw( Vector4 Color,CameraData*cameraData, WorldTransform* worldTran
 	ImGui::SliderFloat3("t", &direction_.x, -1.0f, 1.0f);
 	ImGui::End();
 	lightData->direction = direction_;
+	
 	//
 	ID3D12GraphicsCommandList* commandList = DxCommon::GetInstance()->GetCommandList();
 	PSOProperty pso_ = LightPSO::GetInstance()->GetPSO().Texture;
@@ -243,3 +244,89 @@ Node Obj3D::ReadNode(aiNode* node)
 	return result;
 }
 
+Animation Obj3D::LoadAnimationFile(const std::string& directoryPath, const std::string& filename)
+{
+	Animation animation;
+
+	Assimp::Importer importer;
+	std::string filePath = directoryPath + "/" + filename;
+	const aiScene* scene = importer.ReadFile(filePath.c_str(), 0);
+	assert(scene->mNumAnimations != 0);
+	aiAnimation* animationAssimp = scene->mAnimations[0];
+	animation.duration = float(animationAssimp->mDuration / animationAssimp->mTicksPerSecond);
+	//
+	animaionTime += 1.0f / 60.0f;
+	animaionTime = std::fmod(animaionTime, animation.duration);
+	NodeAnimation& rootNodeAnimation = animation.nodeAnimations[modelData.rootNode.name];
+	Vector3 translate = Calculatevalue(rootNodeAnimation.translate.keyframes, animaionTime);
+	Quaternion rotate= QCalculatevalue(rootNodeAnimation.rotate.keyframes, animaionTime);
+	Vector3 scale = Calculatevalue(rootNodeAnimation.scale.keyframes, animaionTime);
+	Matrix4x4 localMtrix= MakeAffineMatrix(scale, rotate,translate);
+	
+	
+	for (uint32_t channelIndex = 0; channelIndex < animationAssimp->mNumChannels; ++channelIndex) {
+		aiNodeAnim* nodeAimationAssimp = animationAssimp->mChannels[channelIndex];
+		NodeAnimation& nodeAnimation = animation.nodeAnimations[nodeAimationAssimp->mNodeName.C_Str()];
+		
+		for (uint32_t keyIndex = 0; keyIndex < nodeAimationAssimp->mNumPositionKeys;++keyIndex) {
+			aiVectorKey& keyAssimp = nodeAimationAssimp->mPositionKeys[keyIndex];
+			KeyframeVector3 keyframe;
+			keyframe.time = float(keyAssimp.mTime / animationAssimp->mTicksPerSecond);
+			keyframe.value = { -keyAssimp.mValue.x,keyAssimp.mValue.y,keyAssimp.mValue.z };
+			nodeAnimation.translate.keyframes.push_back(keyframe);
+		}
+		for (uint32_t keyIndex = 0; keyIndex < nodeAimationAssimp->mNumRotationKeys; ++keyIndex)
+		{
+			aiQuatKey& keyAssimp = nodeAimationAssimp->mRotationKeys[keyIndex];
+			KeyframeQuaternion keyFlame;
+			keyFlame.time = float(keyAssimp.mTime / animationAssimp->mTicksPerSecond);
+			keyFlame.value = { keyAssimp.mValue.x,-keyAssimp.mValue.y,-keyAssimp.mValue.z,keyAssimp.mValue.w };
+			nodeAnimation.rotate.keyframes.push_back(keyFlame);
+		}
+		
+		for (uint32_t keyIndex = 0; keyIndex < nodeAimationAssimp->mNumScalingKeys; ++keyIndex)
+		{
+			aiVectorKey keyAssimp = nodeAimationAssimp->mScalingKeys[keyIndex];
+			KeyframeVector3 keyFlame;
+			keyFlame.time = float(keyAssimp.mTime / animationAssimp->mTicksPerSecond);
+			keyFlame.value = { keyAssimp.mValue.x,keyAssimp.mValue.y,keyAssimp.mValue.z, };
+			nodeAnimation.scale.keyframes.push_back(keyFlame);
+		}
+
+
+	}
+
+
+	return animation;
+}
+
+Vector3 Obj3D::Calculatevalue(const std::vector<KeyframeVector3>& keyframes, float time)
+{
+	assert(!keyframes.empty());
+	if (keyframes.size() == 1 || time <= keyframes[0].time) {
+		return keyframes[0].value;
+	}
+	for (size_t index = 0; index < keyframes.size() - 1; ++index) {
+		size_t nextIndex = index + 1;
+		if (keyframes[index].time<=time&&time<=keyframes[nextIndex].time) {
+			float t = (time - keyframes[index].time) / (keyframes[nextIndex].value, t);
+			return Lerp(keyframes[index].value, keyframes[nextIndex].value, t);
+		}
+	}
+	return (*keyframes.rbegin()).value;
+}
+Quaternion Obj3D::QCalculatevalue(const std::vector<KeyframeQuaternion>& keyframes, float time)
+{
+	assert(!keyframes.empty());
+	if (keyframes.size() == 1 || time <= keyframes[0].time) {
+		return keyframes[0].value;
+	}
+	for (size_t index = 0; index < keyframes.size() - 1; ++index) {
+		size_t nextIndex = index + 1;
+		if (keyframes[index].time <= time && time <= keyframes[nextIndex].time) {
+			float t = (time - keyframes[index].time) / (keyframes[nextIndex].value, t);
+			return Slerp(keyframes[index].value, keyframes[nextIndex].value, t);
+		}
+	}
+	return (*keyframes.rbegin()).value;
+}
