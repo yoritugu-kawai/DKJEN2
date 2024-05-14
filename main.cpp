@@ -82,7 +82,7 @@ int WINAPI WinMain(HINSTANCE, HINSTANCE, LPSTR, int) {
 		//　　描画処理
 		//////
 		
-		//sprite->Draw({200.0f,100.0f,10.0f},{0,0,0},{0,0,0},{1,1,1,1});
+		sprite->Draw({128.0f,72.0f,10.0f},{0,0,0},{0,0,0},{1,1,1,1});
 		obj3d->Draw({1,1,1,1}, cameraData, worldTransform);
 
 		//////

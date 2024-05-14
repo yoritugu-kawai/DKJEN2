@@ -470,12 +470,6 @@
     <FxCompile Include="..\..\..\2年前期課題\CG\DirectＸ\PolygonOdject3d.PS.hlsl">
       <Filter>hlsl</Filter>
     </FxCompile>
-    <FxCompile Include="..\..\..\2年前期課題\CG\DirectＸ\SpriteObiject2d.PS.hlsl">
-      <Filter>hlsl</Filter>
-    </FxCompile>
-    <FxCompile Include="..\..\..\2年前期課題\CG\DirectＸ\SpriteObiject2d.VS.hlsl">
-      <Filter>hlsl</Filter>
-    </FxCompile>
     <FxCompile Include="..\..\..\2年前期課題\CG\DirectＸ\TextureObiject3d.VS.hlsl">
       <Filter>hlsl</Filter>
     </FxCompile>
@@ -486,6 +480,12 @@
       <Filter>hlsl</Filter>
     </FxCompile>
     <FxCompile Include="Paticle.VS.hlsl">
+      <Filter>hlsl</Filter>
+    </FxCompile>
+    <FxCompile Include="SpriteObiject2d.PS.hlsl">
+      <Filter>hlsl</Filter>
+    </FxCompile>
+    <FxCompile Include="SpriteObiject2d.VS.hlsl">
       <Filter>hlsl</Filter>
     </FxCompile>
   </ItemGroup>
