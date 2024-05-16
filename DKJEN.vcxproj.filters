@@ -456,6 +456,9 @@
     <ClInclude Include="DKJEN\Skinning\Animation\Animation.h">
       <Filter>DKJEN\Skinning\Animation</Filter>
     </ClInclude>
+    <ClInclude Include="LoadObjManagement.h">
+      <Filter>DKJEN\Management</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <FxCompile Include="LightObject.PS.hlsl">

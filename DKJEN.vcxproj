@@ -343,6 +343,7 @@ copy "$(WindowsSdkDir)bin\$(TargetPlatformVersion)\x64\dxil.dll" "$(TargetDir)dx
     <ClInclude Include="GameProject\GameSeen\StateSeen\IScene.h" />
     <ClInclude Include="GameProject\Player\Bullet.h" />
     <ClInclude Include="GameProject\Player\Player.h" />
+    <ClInclude Include="LoadObjManagement.h" />
   </ItemGroup>
   <ItemGroup>
     <FxCompile Include="..\..\..\2年前期課題\CG\DirectＸ\PolygonObiject3d.VS.hlsl">
