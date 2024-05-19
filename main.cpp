@@ -12,9 +12,10 @@
 #include"DKJEN/Management/TypeManagement.h"
 #include "DKJEN/Management/FrameManagement.h"
 #include"DKJEN/Management/PSOCopileManagement.h"
-
+#include"DKJEN/Management/LoadObjManagement.h"
 
 #include"GameProject/GameManager/GameManager.h"
+
 const wchar_t Title[] = { L"ド根性エンジン" };
 
 
@@ -36,7 +37,8 @@ int WINAPI WinMain(HINSTANCE, HINSTANCE, LPSTR, int) {
 
 	worldTransform->Create();
 	Obj3D* obj3d = new Obj3D;
-	obj3d->Initialize("resource","plane.gltf");
+	ModelData modelData_ = LoadObjManagement::NewLoadObjFile("resource", "plane.gltf");
+	obj3d->Initialize( modelData_);
 	uint32_t tex = TexManager::LoadTexture("GameResource/uvChecker.png");
 	Sprite* sprite = new Sprite;
 	sprite->Initialize(tex);
