@@ -150,7 +150,7 @@
       <ConformanceMode>true</ConformanceMode>
       <LanguageStandard>stdcpp20</LanguageStandard>
       <AdditionalOptions>/utf-8 %(AdditionalOptions)</AdditionalOptions>
-      <AdditionalIncludeDirectories>$(ProjectDir)DKJEN\externals\assimp\include;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>$(ProjectDir);$(ProjectDir)DKJEN\externals\assimp\include;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
       <RuntimeLibrary>MultiThreadedDebug</RuntimeLibrary>
     </ClCompile>
     <Link>
@@ -258,6 +258,7 @@ copy "$(WindowsSdkDir)bin\$(TargetPlatformVersion)\x64\dxil.dll" "$(TargetDir)dx
     <ClCompile Include="DKJEN\Imgui\imguiManager.cpp" />
     <ClCompile Include="DKJEN\Management\DescriptorManagement.cpp" />
     <ClCompile Include="DKJEN\Management\FrameManagement.cpp" />
+    <ClCompile Include="DKJEN\Management\LoadObjManagement.cpp" />
     <ClCompile Include="DKJEN\Management\PSOCopileManagement.cpp" />
     <ClCompile Include="DKJEN\Management\TypeManagement.cpp" />
     <ClCompile Include="DKJEN\Math\Math.cpp" />
@@ -314,6 +315,7 @@ copy "$(WindowsSdkDir)bin\$(TargetPlatformVersion)\x64\dxil.dll" "$(TargetDir)dx
     <ClInclude Include="DKJEN\Management\DescriptorManagement.h" />
     <ClInclude Include="DKJEN\Management\PSOCopileManagement.h" />
     <ClInclude Include="DKJEN\Management\TypeManagement.h" />
+    <ClInclude Include="DKJEN\Management\LoadObjManagement.h" />
     <ClInclude Include="DKJEN\Math\Math.h" />
     <ClInclude Include="DKJEN\PostEffect\OffScreenRendering\RenderTextrure.h" />
     <ClInclude Include="DKJEN\Shader\LightCompileShader.h" />
@@ -343,7 +345,6 @@ copy "$(WindowsSdkDir)bin\$(TargetPlatformVersion)\x64\dxil.dll" "$(TargetDir)dx
     <ClInclude Include="GameProject\GameSeen\StateSeen\IScene.h" />
     <ClInclude Include="GameProject\Player\Bullet.h" />
     <ClInclude Include="GameProject\Player\Player.h" />
-    <ClInclude Include="LoadObjManagement.h" />
   </ItemGroup>
   <ItemGroup>
     <FxCompile Include="..\..\..\2年前期課題\CG\DirectＸ\PolygonObiject3d.VS.hlsl">

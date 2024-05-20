@@ -6,7 +6,7 @@ void WorldTransform::Create()
 	buffer_ = CreateBufferResource(sizeof(TransformationMatrix));
 }
 
-void WorldTransform::UpdateMatrix(CameraData* cameraData)
+void WorldTransform::UpdateMatrix(CameraData* cameraData, Matrix4x4 mtrix)
 {
 	matWorld_ = MakeAffineMatrix(scale_, rotate_, translate_);
 	
@@ -15,7 +15,7 @@ void WorldTransform::UpdateMatrix(CameraData* cameraData)
 	matWorld_ = Multiply(matWorld_, vP);
 
 	buffer_.Get()->Map(0, nullptr, reinterpret_cast<void**>(&data_));
-	data_->World = matWorld_;
-	data_->WVP = matWorld_;
+	data_->World = Multiply(mtrix, matWorld_);
+	data_->WVP = Multiply(mtrix, matWorld_);
 
 }
