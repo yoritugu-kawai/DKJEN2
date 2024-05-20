@@ -7,7 +7,7 @@ LoadObjManagement* LoadObjManagement::GetInstance()
 }
 ModelData LoadObjManagement::NewLoadObjFile(const std::string& directoryPath, const std::string& filename)
 {
-	uint32_t tex_=LoadObjManagement::GetInstance()->tex_;
+
 	ModelData modelData = {};
 	Assimp::Importer importer;
 	std::string file = directoryPath + "/" + filename;
@@ -49,9 +49,9 @@ ModelData LoadObjManagement::NewLoadObjFile(const std::string& directoryPath, co
 			}
 		}
 	}
-	tex_ = TexManager::LoadTexture(modelData.material.textureFilePath);
+	modelData.tex= TexManager::LoadTexture(modelData.material.textureFilePath);
 	return modelData;
-	LoadObjManagement::GetInstance()->tex_ = tex_;
+	
 }
 
 MaterialData LoadObjManagement::LoadMaterialTemplateFile(const std::string& directoryPath, const std::string& filename)
@@ -95,92 +95,110 @@ Node LoadObjManagement::ReadNode(aiNode* node)
 	return result;
 }
 
-//Animation LoadObjManagement::LoadAnimationFile(const std::string& directoryPath, const std::string& filename)
-//{
-//	float animaionTime = 0.0f;
-//
-//	ModelData modelData;
-//	Animation animation;
-//
-//	Assimp::Importer importer;
-//	std::string filePath = directoryPath + "/" + filename;
-//	const aiScene* scene = importer.ReadFile(filePath.c_str(), 0);
-//	assert(scene->mNumAnimations != 0);
-//	aiAnimation* animationAssimp = scene->mAnimations[0];
-//	animation.duration = float(animationAssimp->mDuration / animationAssimp->mTicksPerSecond);
-//	//
-//	animaionTime += 1.0f / 60.0f;
-//	animaionTime = std::fmod(animaionTime, animation.duration);
-//	NodeAnimation& rootNodeAnimation = animation.nodeAnimations[modelData.rootNode.name];
-//	Vector3 translate = Calculatevalue(rootNodeAnimation.translate.keyframes, animaionTime);
-//	Quaternion rotate = QCalculatevalue(rootNodeAnimation.rotate.keyframes, animaionTime);
-//	Vector3 scale = Calculatevalue(rootNodeAnimation.scale.keyframes, animaionTime);
-//	Matrix4x4 localMtrix = MakeAffineMatrix(scale, rotate, translate);
-//
-//
-//	for (uint32_t channelIndex = 0; channelIndex < animationAssimp->mNumChannels; ++channelIndex) {
-//		aiNodeAnim* nodeAimationAssimp = animationAssimp->mChannels[channelIndex];
-//		NodeAnimation& nodeAnimation = animation.nodeAnimations[nodeAimationAssimp->mNodeName.C_Str()];
-//
-//		for (uint32_t keyIndex = 0; keyIndex < nodeAimationAssimp->mNumPositionKeys; ++keyIndex) {
-//			aiVectorKey& keyAssimp = nodeAimationAssimp->mPositionKeys[keyIndex];
-//			KeyframeVector3 keyframe;
-//			keyframe.time = float(keyAssimp.mTime / animationAssimp->mTicksPerSecond);
-//			keyframe.value = { -keyAssimp.mValue.x,keyAssimp.mValue.y,keyAssimp.mValue.z };
-//			nodeAnimation.translate.keyframes.push_back(keyframe);
-//		}
-//		for (uint32_t keyIndex = 0; keyIndex < nodeAimationAssimp->mNumRotationKeys; ++keyIndex)
-//		{
-//			aiQuatKey& keyAssimp = nodeAimationAssimp->mRotationKeys[keyIndex];
-//			KeyframeQuaternion keyFlame;
-//			keyFlame.time = float(keyAssimp.mTime / animationAssimp->mTicksPerSecond);
-//			keyFlame.value = { keyAssimp.mValue.x,-keyAssimp.mValue.y,-keyAssimp.mValue.z,keyAssimp.mValue.w };
-//			nodeAnimation.rotate.keyframes.push_back(keyFlame);
-//		}
-//
-//		for (uint32_t keyIndex = 0; keyIndex < nodeAimationAssimp->mNumScalingKeys; ++keyIndex)
-//		{
-//			aiVectorKey keyAssimp = nodeAimationAssimp->mScalingKeys[keyIndex];
-//			KeyframeVector3 keyFlame;
-//			keyFlame.time = float(keyAssimp.mTime / animationAssimp->mTicksPerSecond);
-//			keyFlame.value = { keyAssimp.mValue.x,keyAssimp.mValue.y,keyAssimp.mValue.z, };
-//			nodeAnimation.scale.keyframes.push_back(keyFlame);
-//		}
-//
-//
-//	}
-//
-//
-//	return animation;
-//}
-//
-//Vector3 LoadObjManagement::Calculatevalue(const std::vector<KeyframeVector3>& keyframes, float time)
-//{
-//	assert(!keyframes.empty());
-//	if (keyframes.size() == 1 || time <= keyframes[0].time) {
-//		return keyframes[0].value;
-//	}
-//	for (size_t index = 0; index < keyframes.size() - 1; ++index) {
-//		size_t nextIndex = index + 1;
-//		if (keyframes[index].time <= time && time <= keyframes[nextIndex].time) {
-//			float t = (time - keyframes[index].time) / (keyframes[nextIndex].value, t);
-//			return Lerp(keyframes[index].value, keyframes[nextIndex].value, t);
-//		}
-//	}
-//	return (*keyframes.rbegin()).value;
-//}
-//Quaternion LoadObjManagement::QCalculatevalue(const std::vector<KeyframeQuaternion>& keyframes, float time)
-//{
-//	assert(!keyframes.empty());
-//	if (keyframes.size() == 1 || time <= keyframes[0].time) {
-//		return keyframes[0].value;
-//	}
-//	for (size_t index = 0; index < keyframes.size() - 1; ++index) {
-//		size_t nextIndex = index + 1;
-//		if (keyframes[index].time <= time && time <= keyframes[nextIndex].time) {
-//			float t = (time - keyframes[index].time) / (keyframes[nextIndex].value, t);
-//			return Slerp(keyframes[index].value, keyframes[nextIndex].value, t);
-//		}
-//	}
-//	return (*keyframes.rbegin()).value;
-//}
+Animation LoadObjManagement::LoadAnimationFile(const std::string& directoryPath, const std::string& filename)
+{
+	
+	Animation animation=LoadObjManagement::GetInstance()->animation;
+	Assimp::Importer importer;
+	std::string filePath = directoryPath + "/" + filename;
+	const aiScene* scene = importer.ReadFile(filePath.c_str(), 0);
+	assert(scene->mNumAnimations != 0);
+	aiAnimation* animationAssimp = scene->mAnimations[0];
+	animation.duration = float(animationAssimp->mDuration / animationAssimp->mTicksPerSecond);
+	//
+	
+
+
+	for (uint32_t channelIndex = 0; channelIndex < animationAssimp->mNumChannels; ++channelIndex) {
+		aiNodeAnim* nodeAimationAssimp = animationAssimp->mChannels[channelIndex];
+		NodeAnimation& nodeAnimation = animation.nodeAnimations[nodeAimationAssimp->mNodeName.C_Str()];
+
+		for (uint32_t keyIndex = 0; keyIndex < nodeAimationAssimp->mNumPositionKeys; ++keyIndex) {
+			aiVectorKey& keyAssimp = nodeAimationAssimp->mPositionKeys[keyIndex];
+			KeyframeVector3 keyframe;
+			keyframe.time = float(keyAssimp.mTime / animationAssimp->mTicksPerSecond);
+			keyframe.value = { -keyAssimp.mValue.x,keyAssimp.mValue.y,keyAssimp.mValue.z };
+			nodeAnimation.translate.keyframes.push_back(keyframe);
+		}
+		for (uint32_t keyIndex = 0; keyIndex < nodeAimationAssimp->mNumRotationKeys; ++keyIndex)
+		{
+			aiQuatKey& keyAssimp = nodeAimationAssimp->mRotationKeys[keyIndex];
+			KeyframeQuaternion keyFlame;
+			keyFlame.time = float(keyAssimp.mTime / animationAssimp->mTicksPerSecond);
+			keyFlame.value = { keyAssimp.mValue.x,-keyAssimp.mValue.y,-keyAssimp.mValue.z,keyAssimp.mValue.w };
+			nodeAnimation.rotate.keyframes.push_back(keyFlame);
+		}
+
+		for (uint32_t keyIndex = 0; keyIndex < nodeAimationAssimp->mNumScalingKeys; ++keyIndex)
+		{
+			aiVectorKey keyAssimp = nodeAimationAssimp->mScalingKeys[keyIndex];
+			KeyframeVector3 keyFlame;
+			keyFlame.time = float(keyAssimp.mTime / animationAssimp->mTicksPerSecond);
+			keyFlame.value = { keyAssimp.mValue.x,keyAssimp.mValue.y,keyAssimp.mValue.z, };
+			nodeAnimation.scale.keyframes.push_back(keyFlame);
+		}
+
+
+	}
+	
+	 LoadObjManagement::GetInstance()->animation = animation;
+												
+	return animation;
+}
+
+Vector3 LoadObjManagement::Calculatevalue(const std::vector<KeyframeVector3>& keyframes, float time)
+{
+	assert(!keyframes.empty());
+	if (keyframes.size() == 1 || time <= keyframes[0].time) {
+		return keyframes[0].value;
+	}
+	for (size_t index = 0; index < keyframes.size() - 1; ++index) {
+		size_t nextIndex = index + 1;
+		if (keyframes[index].time <= time && time <= keyframes[nextIndex].time) {
+			float t = (time - keyframes[index].time) / (keyframes[nextIndex].time, keyframes[index].time);
+			return Lerp(keyframes[index].value, keyframes[nextIndex].value, t);
+		}
+	}
+	return (*keyframes.rbegin()).value;
+}
+Quaternion LoadObjManagement::QCalculatevalue(const std::vector<KeyframeQuaternion>& keyframes, float time)
+{
+	assert(!keyframes.empty());
+	if (keyframes.size() == 1 || time <= keyframes[0].time) {
+		return keyframes[0].value;
+	}
+	for (size_t index = 0; index < keyframes.size() - 1; ++index) {
+		size_t nextIndex = index + 1;
+		if (keyframes[index].time <= time && time <= keyframes[nextIndex].time) {
+			float t = (time - keyframes[index].time) / (keyframes[nextIndex].time, keyframes[index].time);
+			return Slerp(keyframes[index].value, keyframes[nextIndex].value, t);
+		}
+	}
+	return (*keyframes.rbegin()).value;
+}
+
+Matrix4x4 LoadObjManagement::AnimationUpdate(ModelData modelData,Animation animation)
+{
+	
+	
+	float animaionTime = LoadObjManagement::GetInstance()->animaionTime;
+	TransformationMatrix* data_=LoadObjManagement::GetInstance()->data_;
+	
+	animaionTime += 1.0f / 60.0f;
+	animaionTime = std::fmod(animaionTime, animation.duration);
+	NodeAnimation& rootNodeAnimation = animation.nodeAnimations[modelData.rootNode.name];
+	Vector3 translate = Calculatevalue(rootNodeAnimation.translate.keyframes, animaionTime);
+	Quaternion rotate = QCalculatevalue(rootNodeAnimation.rotate.keyframes, animaionTime);
+	Vector3 scale = Calculatevalue(rootNodeAnimation.scale.keyframes, animaionTime);
+	Matrix4x4 localMtrix = MakeAffineMatrix(scale, rotate, translate);
+	/*Matrix4x4 vP = Multiply(cameraData->GetView(), cameraData->GetProjection());
+
+	data_->World = Multiply(localMtrix, Multiply(worldTransform->GetMatWorld_(), vP));
+	data_->WVP = Multiply(localMtrix,worldTransform->GetMatWorld_());
+	worldTransform->SetDeta(data_);*/
+	
+	LoadObjManagement::GetInstance()->animaionTime = animaionTime;
+	LoadObjManagement::GetInstance()->data_ = data_;
+	return localMtrix;
+	
+}

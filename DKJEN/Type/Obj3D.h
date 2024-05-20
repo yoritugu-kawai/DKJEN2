@@ -33,6 +33,7 @@ struct ModelData
 	std::vector<VertexData>vertices;
 	MaterialData material;
 	Node rootNode;
+	uint32_t tex;
 };
 
 
@@ -55,11 +56,11 @@ public:
 	/*ModelData LoadObjFile(const std::string& directoryPath, const std::string& filename);
 
 	*/
-
-	ModelData NewLoadObjFile(const std::string& directoryPath, const std::string& filename);
-	Node ReadNode(aiNode* node);
+	ModelData GetModelData() {return modelData_;}
+	//ModelData NewLoadObjFile(const std::string& directoryPath, const std::string& filename);
+	//Node ReadNode(aiNode* node);
 	//アニメーション
-
+	
 private:
 	ComPtr<ID3D12Resource> vetexResource;
 	ComPtr<ID3D12Resource> materialResource;
@@ -69,7 +70,7 @@ private:
 
 
 	D3D12_VERTEX_BUFFER_VIEW vertxBufferView{};
-	uint32_t tex_;
+	
 	ModelData modelData_;
 	Matrix4x4 matrix;
 	//TexProeerty  tex_;
