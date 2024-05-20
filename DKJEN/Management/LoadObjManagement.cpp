@@ -167,13 +167,18 @@ Quaternion LoadObjManagement::QCalculatevalue(const std::vector<KeyframeQuaterni
 	if (keyframes.size() == 1 || time <= keyframes[0].time) {
 		return keyframes[0].value;
 	}
+
 	for (size_t index = 0; index < keyframes.size() - 1; ++index) {
 		size_t nextIndex = index + 1;
+	
 		if (keyframes[index].time <= time && time <= keyframes[nextIndex].time) {
-			float t = (time - keyframes[index].time) / (keyframes[nextIndex].time, keyframes[index].time);
+			
+			float t = (time - keyframes[index].time) / (keyframes[nextIndex].time - keyframes[index].time);
+			
 			return Slerp(keyframes[index].value, keyframes[nextIndex].value, t);
 		}
 	}
+	
 	return (*keyframes.rbegin()).value;
 }
 

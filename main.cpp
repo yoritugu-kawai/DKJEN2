@@ -77,7 +77,7 @@ int WINAPI WinMain(HINSTANCE, HINSTANCE, LPSTR, int) {
 		ImGui::Begin("pos");
 		ImGui::SliderFloat3("camera", &cameraPos_.x, 10, -100);
 		ImGui::End();
-		cameraData->SetTranslate({ 0,0,-20 });
+		cameraData->SetTranslate({ 0,0,-150 });
 		cameraData->SetRotate(cameraPos_);
 		//////
 		//　ゲーム処理
