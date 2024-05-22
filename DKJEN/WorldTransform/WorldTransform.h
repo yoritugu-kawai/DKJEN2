@@ -8,7 +8,7 @@ class WorldTransform
 {
 public:
 	void Create();
-	void UpdateMatrix(CameraData*cameraData, Matrix4x4 mtrix);
+	void UpdateMatrix(CameraData* cameraData, Matrix4x4 mtrix);
 	
 	
 
