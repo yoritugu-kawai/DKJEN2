@@ -892,3 +892,90 @@ float DotQuaternion(const Quaternion& q1, const Quaternion& q2)
 {
 	return float(q1.w * q2.w + q1.x * q2.x + q1.y * q2.y + q1.z * q2.z);
 }
+ Vector3 Lerp(const Vector3& v1, const Vector3& v2, float t) {
+	Vector3 result{};
+	result.x = v1.x + t * (v2.x - v1.x);
+	result.y = v1.y + t * (v2.y - v1.y);
+	result.z = v1.z + t * (v2.z - v1.z);
+	return result;
+}
+ float FLerp(float t, const float& s, const float& e) {
+	 float result;
+	 float es = e - s;
+	 result = s + t * es;
+	 return result;
+ }
+ Quaternion QLerp(float t, const Quaternion& s, const Quaternion& e) {
+	 Quaternion result;
+	 Quaternion es = e - s;
+	 result = s + t * es;
+	 return result;
+ }
+Quaternion Slerp(float t, const Quaternion& s, const Quaternion& e) {
+	Quaternion ns = Normalize(s);
+	Quaternion ne = Normalize(e);
+	float dot = ns.x * ne.x + ns.y * ne.y + ns.z * ne.z + ns.w * ne.w;
+	if (std::abs(dot) > 0.999f) {
+		return QLerp(t, ns, ne);
+	}
+	if (dot < 0.0f) {
+		ns = -1 * ns;
+		dot = -1.0f;
+	}
+
+	float theta = std::acos(dot);
+	float sinTheta = std::sin(theta);
+	float t1 = std::sin((1.0f - t)* theta) / sinTheta;
+	float t2 = std::sin(t * theta) / sinTheta;
+
+	return (t1 * ns + t2 * ne);
+}
+ Quaternion Normalize(const Quaternion& q) {
+	float len = LengthQuaternion(q);
+	Quaternion result;
+	if (len != 0.0f) {
+		result.w = q.w / len;
+		result.x = q.x / len;
+		result.y = q.y / len;
+		result.z = q.z / len;
+		return result;
+	}
+	else {
+		return q;
+	}
+}
+  float LengthQuaternion(const Quaternion& q) {
+	 return std::sqrtf(q.w * q.w + q.x * q.x + q.y * q.y + q.z * q.z);
+ }
+  Matrix4x4 MakeQuatAffineMatrix(const Vector3& scale, const Matrix4x4& rotate, const Vector3& translate) {
+	  Matrix4x4 result;
+
+	  result.m[0][0] = scale.x * rotate.m[0][0];
+	  result.m[0][1] = scale.x * rotate.m[0][1];
+	  result.m[0][2] = scale.x * rotate.m[0][2];
+	  result.m[0][3] = 0;
+	  result.m[1][0] = scale.y * rotate.m[1][0];
+	  result.m[1][1] = scale.y * rotate.m[1][1];
+	  result.m[1][2] = scale.y * rotate.m[1][2];
+	  result.m[1][3] = 0;
+	  result.m[2][0] = scale.z * rotate.m[2][0];
+	  result.m[2][1] = scale.z * rotate.m[2][1];
+	  result.m[2][2] = scale.z * rotate.m[2][2];
+	  result.m[2][3] = 0;
+	  result.m[3][0] = translate.x;
+	  result.m[3][1] = translate.y;
+	  result.m[3][2] = translate.z;
+	  result.m[3][3] = 1;
+	  return result;
+  }
+  Matrix4x4 MakeAffineMatrix(const Vector3& scale, const Quaternion& quaternion, const Vector3& translate) {
+	  Matrix4x4 result{};
+
+	  Matrix4x4 scaleMatrix = MakeScaleMatrix(scale);
+	  Matrix4x4 rotateMatrix = MakeRotateMatrix(quaternion);
+	  Matrix4x4 translateMatrix = MakeTranslateMatrix(translate);
+
+	  result = Multiply(scaleMatrix, Multiply(rotateMatrix, translateMatrix));
+
+	  return result;
+  }

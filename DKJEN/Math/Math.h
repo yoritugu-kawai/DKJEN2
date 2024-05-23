@@ -99,6 +99,19 @@ struct Quaternion {
 	float z;
 	float w;
 };
+
+inline Quaternion operator+(const Quaternion& q1, const Quaternion& q2) {
+	return { q1.w + q2.w,q1.x + q2.x, q1.y + q2.y, q1.z + q2.z };
+}
+
+inline Quaternion operator-(const Quaternion& q1, const Quaternion& q2) {
+	return { q1.w - q2.w,q1.x - q2.x, q1.y - q2.y, q1.z - q2.z };
+}
+
+inline Quaternion operator*(const float t, const Quaternion& q) {
+	return { q.w * t,q.x * t,q.y * t,q.z * t };
+}
+
 /// <summary>
 /// 数学
 /// </summary>
@@ -154,3 +167,11 @@ Vector3 RotateVector(const Vector3& vector, const Quaternion& quaternion);
 Matrix4x4 MakeRotateMatrix(const Quaternion& quaternion);
 Quaternion Slerp(const Quaternion& q1, const Quaternion& q2, float t);
 float DotQuaternion(const Quaternion& q1, const Quaternion& q2);
+Vector3 Lerp(const Vector3& v1, const Vector3& v2, float t);
+Quaternion Slerp(float t, const Quaternion& s, const Quaternion& e);
+inline Quaternion Normalize(const Quaternion& q);
+float LengthQuaternion(const Quaternion& q);
+float FLerp(float t, const float& s, const float& e);
+Quaternion QLerp(float t, const Quaternion& s, const Quaternion& e);
+Matrix4x4 MakeQuatAffineMatrix(const Vector3& scale, const Matrix4x4& rotate, const Vector3& translate);
+Matrix4x4 MakeAffineMatrix(const Vector3& scale, const Quaternion& quaternion, const Vector3& translate);

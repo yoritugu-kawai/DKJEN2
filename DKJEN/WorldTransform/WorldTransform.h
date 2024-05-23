@@ -8,10 +8,8 @@ class WorldTransform
 {
 public:
 	void Create();
-	void UpdateMatrix(CameraData*cameraData);
+	void UpdateMatrix(CameraData* cameraData, Matrix4x4 mtrix);
 	
-	
-
 #pragma region Get
 	Matrix4x4 GetMatWorld_() { return matWorld_; }
 	Vector3 GetScale() { return scale_; }
@@ -26,7 +24,7 @@ public:
 	void SetRotate(Vector3 rotate) { rotate_ = rotate; }
 	void SetTranslate(Vector3 translate) { translate_ = translate; }
 	void SetColor(Vector4 color) { color_ = color; }
-
+	void SetDeta(TransformationMatrix* data) { data_ = data; };
 #pragma endregion
 private:
 	Vector3 scale_ = { 1.0f,1.0f,1.0f };
