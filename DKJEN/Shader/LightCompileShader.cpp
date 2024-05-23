@@ -98,12 +98,12 @@ void LightCompileShader::ShaderCompile()
 
 	shape.vertexBlob =
 		LightCompileShader::CompileShaderFanc(
-			L"LightObject.VS.hlsl",
+			L"resource/hlsl/LightObject.VS.hlsl",
 			L"vs_6_0"
 		);
 	shape.pixelBlob =
 		LightCompileShader::CompileShaderFanc(
-			L"LightObject.PS.hlsl",
+			L"resource/hlsl/LightObject.PS.hlsl",
 			L"ps_6_0"
 		);
 
