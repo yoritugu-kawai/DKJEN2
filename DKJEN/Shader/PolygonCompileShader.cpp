@@ -97,12 +97,12 @@ void PolygonCompileShader::ShaderCompile()
 
 	shape.vertexBlob =
 		PolygonCompileShader::CompileShaderFanc(
-			L"PolygonObiject3d.VS.hlsl",
+			L"resource/hlsl/PolygonObiject3d.VS.hlsl",
 			L"vs_6_0"
 		);
 	shape.pixelBlob =
 		PolygonCompileShader::CompileShaderFanc(
-			L"PolygonOdject3d.PS.hlsl",
+			L"resource/hlsl/PolygonOdject3d.PS.hlsl",
 			L"ps_6_0"
 		);
 

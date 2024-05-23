@@ -98,12 +98,12 @@ void TextureCompileShader::ShaderCompile()
 
 	shape.vertexBlob =
 		TextureCompileShader::CompileShaderFanc(
-			L"TextureObiject3d.VS.hlsl",
+			L"resource/hlsl/TextureObiject3d.VS.hlsl",
 			L"vs_6_0"
 		);
 	shape.pixelBlob =
 		TextureCompileShader::CompileShaderFanc(
-			L"TextureOdject3d.PS.hlsl",
+			L"resource/hlsl/TextureOdject3d.PS.hlsl",
 			L"ps_6_0"
 		);
 

@@ -119,19 +119,19 @@
   </ItemGroup>
   <ItemGroup>
     <None Include=".editorconfig" />
-    <None Include="Object3d.hlsli">
+    <None Include="resource\hlsl\CopyImage.hlsli">
       <Filter>hlsl</Filter>
     </None>
-    <None Include="Paticle.hlsli">
+    <None Include="resource\hlsl\CopyImage.PS.hlsli">
       <Filter>hlsl</Filter>
     </None>
-    <None Include="CopyImage.PS.hlsli">
+    <None Include="resource\hlsl\CopyImage.VS.hlsli">
       <Filter>hlsl</Filter>
     </None>
-    <None Include="CopyImage.hlsli">
+    <None Include="resource\hlsl\Object3d.hlsli">
       <Filter>hlsl</Filter>
     </None>
-    <None Include="CopyImage.VS.hlsli">
+    <None Include="resource\hlsl\Paticle.hlsli">
       <Filter>hlsl</Filter>
     </None>
   </ItemGroup>
@@ -464,40 +464,40 @@
     </ClInclude>
   </ItemGroup>
   <ItemGroup>
-    <FxCompile Include="LightObject.PS.hlsl">
-      <Filter>hlsl</Filter>
-    </FxCompile>
-    <FxCompile Include="LightObject.VS.hlsl">
-      <Filter>hlsl</Filter>
-    </FxCompile>
-    <FxCompile Include="..\..\..\2年前期課題\CG\DirectＸ\PolygonObiject3d.VS.hlsl">
-      <Filter>hlsl</Filter>
-    </FxCompile>
-    <FxCompile Include="..\..\..\2年前期課題\CG\DirectＸ\PolygonOdject3d.PS.hlsl">
-      <Filter>hlsl</Filter>
-    </FxCompile>
-    <FxCompile Include="..\..\..\2年前期課題\CG\DirectＸ\SpriteObiject2d.PS.hlsl">
-      <Filter>hlsl</Filter>
-    </FxCompile>
-    <FxCompile Include="..\..\..\2年前期課題\CG\DirectＸ\SpriteObiject2d.VS.hlsl">
-      <Filter>hlsl</Filter>
-    </FxCompile>
-    <FxCompile Include="..\..\..\2年前期課題\CG\DirectＸ\TextureObiject3d.VS.hlsl">
-      <Filter>hlsl</Filter>
-    </FxCompile>
-    <FxCompile Include="..\..\..\2年前期課題\CG\DirectＸ\TextureOdject3d.PS.hlsl">
-      <Filter>hlsl</Filter>
-    </FxCompile>
-    <FxCompile Include="Paticle.PS.hlsl">
-      <Filter>hlsl</Filter>
-    </FxCompile>
-    <FxCompile Include="Paticle.VS.hlsl">
-      <Filter>hlsl</Filter>
-    </FxCompile>
-  </ItemGroup>
-  <ItemGroup>
     <Text Include="DKJEN\externals\imgui\LICENSE.txt">
       <Filter>ImguiEx</Filter>
     </Text>
+  </ItemGroup>
+  <ItemGroup>
+    <FxCompile Include="resource\hlsl\LightObject.PS.hlsl">
+      <Filter>hlsl</Filter>
+    </FxCompile>
+    <FxCompile Include="resource\hlsl\LightObject.VS.hlsl">
+      <Filter>hlsl</Filter>
+    </FxCompile>
+    <FxCompile Include="resource\hlsl\Paticle.PS.hlsl">
+      <Filter>hlsl</Filter>
+    </FxCompile>
+    <FxCompile Include="resource\hlsl\Paticle.VS.hlsl">
+      <Filter>hlsl</Filter>
+    </FxCompile>
+    <FxCompile Include="resource\hlsl\PolygonObiject3d.VS.hlsl">
+      <Filter>hlsl</Filter>
+    </FxCompile>
+    <FxCompile Include="resource\hlsl\PolygonOdject3d.PS.hlsl">
+      <Filter>hlsl</Filter>
+    </FxCompile>
+    <FxCompile Include="resource\hlsl\SpriteObiject2d.PS.hlsl">
+      <Filter>hlsl</Filter>
+    </FxCompile>
+    <FxCompile Include="resource\hlsl\SpriteObiject2d.VS.hlsl">
+      <Filter>hlsl</Filter>
+    </FxCompile>
+    <FxCompile Include="resource\hlsl\TextureObiject3d.VS.hlsl">
+      <Filter>hlsl</Filter>
+    </FxCompile>
+    <FxCompile Include="resource\hlsl\TextureOdject3d.PS.hlsl">
+      <Filter>hlsl</Filter>
+    </FxCompile>
   </ItemGroup>
 </Project>
