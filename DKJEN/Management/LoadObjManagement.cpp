@@ -91,6 +91,14 @@ Node LoadObjManagement::ReadNode(aiNode* node)
 	for (uint32_t childIndex = 0; childIndex < node->mNumChildren; ++childIndex) {
 		result.chidren[childIndex] = ReadNode(node->mChildren[childIndex]);
 	}
+	aiVector3D scale, tranalte;
+	aiQuaternion rotate;
+	node->mTransformation.Decompose(scale, rotate, tranalte);
+	result.transform.scale = {scale.x,scale .y,scale .z};
+	result.transform.rotate = { rotate.x,-rotate.y,-rotate.z,rotate.w};
+	result.transform.tranalte = { -tranalte.x,tranalte.y,tranalte.z };
+	result.localMatrix = MakeAffineMatrix(result.transform.scale, result.transform.rotate, result.transform.tranalte);
+
 
 	return result;
 }

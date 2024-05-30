@@ -100,6 +100,18 @@ struct Quaternion {
 	float w;
 };
 
+struct EulerTransform
+{
+	Vector3 scale;
+	Vector3 rotate;
+	Vector3 translate;
+};
+struct QuaternionTransform {
+	Vector3 scale;
+	Quaternion rotate;
+	Vector3 tranalte;
+};
+
 inline Quaternion operator+(const Quaternion& q1, const Quaternion& q2) {
 	return { q1.w + q2.w,q1.x + q2.x, q1.y + q2.y, q1.z + q2.z };
 }
