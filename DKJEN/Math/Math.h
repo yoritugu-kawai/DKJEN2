@@ -12,6 +12,7 @@
 #include <cmath>
 #include <numbers>
 
+#include"../Utilipy/Pch.h"
 #include"../Base/Log.h"
 
 #pragma comment(lib,"dxguid.lib")
@@ -111,6 +112,26 @@ struct QuaternionTransform {
 	Quaternion rotate;
 	Vector3 tranalte;
 };
+
+struct Joint {
+	QuaternionTransform transform;
+	Matrix4x4 localMatrix;
+	Matrix4x4 skeletonSpaceMatrix;
+	string name;
+	vector<int32_t> children;
+	int32_t index;
+	optional<int32_t> parent;
+
+};
+
+struct Skeleton
+{
+	int32_t root;
+	map<string, int32_t> jointMap;
+	vector<Joint> joints;
+
+};
+
 
 inline Quaternion operator+(const Quaternion& q1, const Quaternion& q2) {
 	return { q1.w + q2.w,q1.x + q2.x, q1.y + q2.y, q1.z + q2.z };
