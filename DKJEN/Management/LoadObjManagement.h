@@ -4,6 +4,25 @@
 #include"../Utilipy/Pch.h"
 
 
+struct Joint {
+	QuaternionTransform transform;
+	Matrix4x4 localMatrix;
+	Matrix4x4 skeletonSpaceMatrix;
+	std::string name;
+	std::vector<int32_t> children;
+	int32_t index;
+	optional<int32_t> parent;
+
+};
+
+struct Skeleton
+{
+	int32_t root;
+	map<std::string, int32_t> jointMap;
+	std::vector<Joint> joints;
+
+};
+
 
 class LoadObjManagement
 {
@@ -18,7 +37,7 @@ public:
 	static Matrix4x4 AnimationUpdate(ModelData modelData, Animation animation);
 	static Skeleton CreateSkeleton(const Node& rootNode);
 	static int32_t CreateJoint(const Node& node, const optional<int32_t>& parent, vector<Joint>& joints);
-	st
+	//static
 private:
 	float animaionTime = 0.0f;
 	TransformationMatrix* data_;
