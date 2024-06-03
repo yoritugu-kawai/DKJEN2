@@ -91,6 +91,14 @@ Node LoadObjManagement::ReadNode(aiNode* node)
 	for (uint32_t childIndex = 0; childIndex < node->mNumChildren; ++childIndex) {
 		result.chidren[childIndex] = ReadNode(node->mChildren[childIndex]);
 	}
+	aiVector3D scale, tranalte;
+	aiQuaternion rotate;
+	node->mTransformation.Decompose(scale, rotate, tranalte);
+	result.transform.scale = {scale.x,scale .y,scale .z};
+	result.transform.rotate = { rotate.x,-rotate.y,-rotate.z,rotate.w};
+	result.transform.tranalte = { -tranalte.x,tranalte.y,tranalte.z };
+	result.localMatrix = MakeAffineMatrix(result.transform.scale, result.transform.rotate, result.transform.tranalte);
+
 
 	return result;
 }
@@ -206,4 +214,35 @@ Matrix4x4 LoadObjManagement::AnimationUpdate(ModelData modelData,Animation anima
 	LoadObjManagement::GetInstance()->data_ = data_;
 	return localMtrix;
 	
+}
+
+Skeleton LoadObjManagement::CreateSkeleton(const Node& rootNode)
+{
+	Skeleton skeleton;
+	skeleton.root = CreateJoint(rootNode, {}, skeleton.joints);
+
+	for (const Joint& joint : skeleton.joints) {
+		skeleton.jointMap.emplace(joint.name, joint.index);
+	}
+
+	return skeleton;
+}
+
+int32_t LoadObjManagement::CreateJoint(const Node& node, const optional<int32_t>& parent, vector<Joint>& joints)
+{
+	Joint joint;
+
+	joint.name = node.name;
+	joint.localMatrix = node.localMatrix;
+	joint.skeletonSpaceMatrix = MakeIdentity4x4();
+	joint.transform = node.transform;
+	joint.index = int32_t(joints.size());
+	joint.parent = parent;
+	joints.push_back(joint);
+	for (const Node& child : node.chidren) {
+		int32_t childIndex = CreateJoint(child, joint.index, joints);
+		joints[joint.index].children.push_back(childIndex);
+	}
+
+	return joint.index;
 }
