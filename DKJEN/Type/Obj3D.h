@@ -32,6 +32,7 @@ struct MaterialData {
 struct ModelData
 {
 	std::vector<VertexData>vertices;
+	std::vector<uint32_t>indices;
 	MaterialData material;
 	Node rootNode;
 	uint32_t tex;
