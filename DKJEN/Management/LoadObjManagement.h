@@ -37,10 +37,12 @@ public:
 	static Matrix4x4 AnimationUpdate(ModelData modelData, Animation animation);
 	static Skeleton CreateSkeleton(const Node& rootNode);
 	static int32_t CreateJoint(const Node& node, const optional<int32_t>& parent, vector<Joint>& joints);
-	//static
+	static void Update(Skeleton& skeleton);
+	static void ApplyAnimation(Skeleton& skeleton,const Animation& animation,float animatiionTime);
 private:
 	float animaionTime = 0.0f;
 	TransformationMatrix* data_;
 
 	Animation animation;
+	
 };

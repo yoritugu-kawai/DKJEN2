@@ -196,7 +196,7 @@ Matrix4x4 LoadObjManagement::AnimationUpdate(ModelData modelData,Animation anima
 	
 	float animaionTime = LoadObjManagement::GetInstance()->animaionTime;
 	TransformationMatrix* data_=LoadObjManagement::GetInstance()->data_;
-	
+	Skeleton skeleton = CreateSkeleton(modelData.rootNode);
 	animaionTime += 1.0f / 60.0f;
 	animaionTime = std::fmod(animaionTime, animation.duration);
 	NodeAnimation& rootNodeAnimation = animation.nodeAnimations[modelData.rootNode.name];
@@ -209,7 +209,9 @@ Matrix4x4 LoadObjManagement::AnimationUpdate(ModelData modelData,Animation anima
 	data_->World = Multiply(localMtrix, Multiply(worldTransform->GetMatWorld_(), vP));
 	data_->WVP = Multiply(localMtrix,worldTransform->GetMatWorld_());
 	worldTransform->SetDeta(data_);*/
-	
+	ApplyAnimation(skeleton, animation, animaionTime);
+	Update(skeleton);
+
 	LoadObjManagement::GetInstance()->animaionTime = animaionTime;
 	LoadObjManagement::GetInstance()->data_ = data_;
 	return localMtrix;
@@ -245,4 +247,31 @@ int32_t LoadObjManagement::CreateJoint(const Node& node, const optional<int32_t>
 	}
 
 	return joint.index;
+}
+
+void LoadObjManagement::Update(Skeleton& skeleton)
+{
+	for (Joint joint :skeleton.joints) {
+		joint.localMatrix = MakeAffineMatrix(joint.transform.scale, joint.transform.rotate, joint.transform.tranalte);
+		if (joint.parent) {
+			joint.skeletonSpaceMatrix = Multiply( joint.localMatrix ,skeleton.joints[*joint.parent].skeletonSpaceMatrix);
+		}
+		else {
+			joint.skeletonSpaceMatrix = joint.localMatrix;
+		}
+	}
+}
+
+void LoadObjManagement::ApplyAnimation(Skeleton& skeleton, const Animation& animation, float animatiionTime)
+{
+
+	for (Joint& joint : skeleton.joints) {
+		if (auto it = animation.nodeAnimations.find(joint.name);it !=animation.nodeAnimations.end()) {
+			const NodeAnimation& rootNodeAnimation = (*it).second;
+			joint.transform.tranalte=Calculatevalue(rootNodeAnimation.translate.keyframes, animatiionTime);
+			joint.transform.rotate = QCalculatevalue(rootNodeAnimation.rotate.keyframes, animatiionTime);
+			joint.transform.scale = Calculatevalue(rootNodeAnimation.scale.keyframes, animatiionTime);
+		}
+	}
+
 }
