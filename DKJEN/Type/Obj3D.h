@@ -68,11 +68,12 @@ private:
 	ComPtr<ID3D12Resource> materialResource;
 
 	ComPtr<ID3D12Resource> lightResource;
-	
+	ComPtr<ID3D12Resource> indexResource;
 
 
 	D3D12_VERTEX_BUFFER_VIEW vertxBufferView{};
-	
+	D3D12_INDEX_BUFFER_VIEW indexBufferViewSprite;
+
 	ModelData modelData_;
 	Matrix4x4 matrix;
 	//TexProeerty  tex_;

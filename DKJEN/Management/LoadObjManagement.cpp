@@ -20,7 +20,34 @@ ModelData LoadObjManagement::NewLoadObjFile(const std::string& directoryPath, co
 		aiMesh* mesh = scene->mMeshes[meshIndex];
 		assert(mesh->HasNormals());
 		assert(mesh->HasTextureCoords(0));
+		modelData.vertices.resize(mesh->mNumVertices);
 
+		for (uint32_t vertexIndex = 0; vertexIndex < mesh->mNumVertices; vertexIndex++) {
+			aiVector3D& position = mesh->mVertices[vertexIndex];
+			aiVector3D& normal = mesh->mNormals[vertexIndex];
+			aiVector3D& texcoord = mesh->mTextureCoords[0][vertexIndex];
+			//
+			modelData.vertices[vertexIndex].position = { -position.x,position.y,position.z,1.0f };
+			modelData.vertices[vertexIndex].normal = { -normal.x ,normal.y,normal.z };
+			modelData.vertices[vertexIndex].texcoord = { texcoord.x,texcoord.y };
+		}
+		for (uint32_t faceIndex = 0; faceIndex < mesh->mNumFaces; ++faceIndex) {
+			aiFace& face = mesh->mFaces[faceIndex];
+			assert(face.mNumIndices == 3);
+			for (uint32_t element = 0; element < face.mNumIndices; ++element) {
+				uint32_t vertexIndex = face.mIndices[element];
+				modelData.indices.push_back(vertexIndex);
+			}
+		}
+
+		for (uint32_t materialIndex = 0; materialIndex < scene->mNumMaterials; ++materialIndex) {
+			aiMaterial* material = scene->mMaterials[materialIndex];
+			if (material->GetTextureCount(aiTextureType_DIFFUSE) != 0) {
+				aiString textureFilePath;
+				material->GetTexture(aiTextureType_DIFFUSE, 0, &textureFilePath);
+				modelData.material.textureFilePath = directoryPath + "/" + textureFilePath.C_Str();
+			}
+		}
 		for (uint32_t faceIndex = 0; faceIndex < mesh->mNumFaces; ++faceIndex) {
 			aiFace& face = mesh->mFaces[faceIndex];
 			assert(face.mNumIndices == 3);
@@ -49,9 +76,9 @@ ModelData LoadObjManagement::NewLoadObjFile(const std::string& directoryPath, co
 			}
 		}
 	}
-	modelData.tex= TexManager::LoadTexture(modelData.material.textureFilePath);
+	modelData.tex = TexManager::LoadTexture(modelData.material.textureFilePath);
 	return modelData;
-	
+
 }
 
 MaterialData LoadObjManagement::LoadMaterialTemplateFile(const std::string& directoryPath, const std::string& filename)
@@ -94,8 +121,8 @@ Node LoadObjManagement::ReadNode(aiNode* node)
 	aiVector3D scale, tranalte;
 	aiQuaternion rotate;
 	node->mTransformation.Decompose(scale, rotate, tranalte);
-	result.transform.scale = {scale.x,scale .y,scale .z};
-	result.transform.rotate = { rotate.x,-rotate.y,-rotate.z,rotate.w};
+	result.transform.scale = { scale.x,scale.y,scale.z };
+	result.transform.rotate = { rotate.x,-rotate.y,-rotate.z,rotate.w };
 	result.transform.tranalte = { -tranalte.x,tranalte.y,tranalte.z };
 	result.localMatrix = MakeAffineMatrix(result.transform.scale, result.transform.rotate, result.transform.tranalte);
 
@@ -105,8 +132,8 @@ Node LoadObjManagement::ReadNode(aiNode* node)
 
 Animation LoadObjManagement::LoadAnimationFile(const std::string& directoryPath, const std::string& filename)
 {
-	
-	Animation animation=LoadObjManagement::GetInstance()->animation;
+
+	Animation animation = LoadObjManagement::GetInstance()->animation;
 	Assimp::Importer importer;
 	std::string filePath = directoryPath + "/" + filename;
 	const aiScene* scene = importer.ReadFile(filePath.c_str(), 0);
@@ -114,7 +141,7 @@ Animation LoadObjManagement::LoadAnimationFile(const std::string& directoryPath,
 	aiAnimation* animationAssimp = scene->mAnimations[0];
 	animation.duration = float(animationAssimp->mDuration / animationAssimp->mTicksPerSecond);
 	//
-	
+
 
 
 	for (uint32_t channelIndex = 0; channelIndex < animationAssimp->mNumChannels; ++channelIndex) {
@@ -148,9 +175,9 @@ Animation LoadObjManagement::LoadAnimationFile(const std::string& directoryPath,
 
 
 	}
-	
-	 LoadObjManagement::GetInstance()->animation = animation;
-												
+
+	LoadObjManagement::GetInstance()->animation = animation;
+
 	return animation;
 }
 
@@ -178,24 +205,24 @@ Quaternion LoadObjManagement::QCalculatevalue(const std::vector<KeyframeQuaterni
 
 	for (size_t index = 0; index < keyframes.size() - 1; ++index) {
 		size_t nextIndex = index + 1;
-	
+
 		if (keyframes[index].time <= time && time <= keyframes[nextIndex].time) {
-			
+
 			float t = (time - keyframes[index].time) / (keyframes[nextIndex].time - keyframes[index].time);
-			
+
 			return Slerp(keyframes[index].value, keyframes[nextIndex].value, t);
 		}
 	}
-	
+
 	return (*keyframes.rbegin()).value;
 }
 
-Matrix4x4 LoadObjManagement::AnimationUpdate(ModelData modelData,Animation animation)
+Matrix4x4 LoadObjManagement::AnimationUpdate(ModelData modelData, Animation animation)
 {
-	
-	
+
+
 	float animaionTime = LoadObjManagement::GetInstance()->animaionTime;
-	TransformationMatrix* data_=LoadObjManagement::GetInstance()->data_;
+	TransformationMatrix* data_ = LoadObjManagement::GetInstance()->data_;
 	Skeleton skeleton = CreateSkeleton(modelData.rootNode);
 	animaionTime += 1.0f / 60.0f;
 	animaionTime = std::fmod(animaionTime, animation.duration);
@@ -215,7 +242,7 @@ Matrix4x4 LoadObjManagement::AnimationUpdate(ModelData modelData,Animation anima
 	LoadObjManagement::GetInstance()->animaionTime = animaionTime;
 	LoadObjManagement::GetInstance()->data_ = data_;
 	return localMtrix;
-	
+
 }
 
 Skeleton LoadObjManagement::CreateSkeleton(const Node& rootNode)
@@ -251,10 +278,10 @@ int32_t LoadObjManagement::CreateJoint(const Node& node, const optional<int32_t>
 
 void LoadObjManagement::Update(Skeleton& skeleton)
 {
-	for (Joint joint :skeleton.joints) {
+	for (Joint joint : skeleton.joints) {
 		joint.localMatrix = MakeAffineMatrix(joint.transform.scale, joint.transform.rotate, joint.transform.tranalte);
 		if (joint.parent) {
-			joint.skeletonSpaceMatrix = Multiply( joint.localMatrix ,skeleton.joints[*joint.parent].skeletonSpaceMatrix);
+			joint.skeletonSpaceMatrix = Multiply(joint.localMatrix, skeleton.joints[*joint.parent].skeletonSpaceMatrix);
 		}
 		else {
 			joint.skeletonSpaceMatrix = joint.localMatrix;
@@ -266,9 +293,9 @@ void LoadObjManagement::ApplyAnimation(Skeleton& skeleton, const Animation& anim
 {
 
 	for (Joint& joint : skeleton.joints) {
-		if (auto it = animation.nodeAnimations.find(joint.name);it !=animation.nodeAnimations.end()) {
+		if (auto it = animation.nodeAnimations.find(joint.name); it != animation.nodeAnimations.end()) {
 			const NodeAnimation& rootNodeAnimation = (*it).second;
-			joint.transform.tranalte=Calculatevalue(rootNodeAnimation.translate.keyframes, animatiionTime);
+			joint.transform.tranalte = Calculatevalue(rootNodeAnimation.translate.keyframes, animatiionTime);
 			joint.transform.rotate = QCalculatevalue(rootNodeAnimation.rotate.keyframes, animatiionTime);
 			joint.transform.scale = Calculatevalue(rootNodeAnimation.scale.keyframes, animatiionTime);
 		}

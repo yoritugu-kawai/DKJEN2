@@ -9,11 +9,15 @@ void Obj3D::Initialize(ModelData modelData)
 	materialResource = CreateBufferResource(sizeof(Vector4));
 	
 	lightResource = CreateBufferResource(sizeof(DirectionalLight));
-
+	indexResource= CreateBufferResource(sizeof(uint32_t)* modelData_.vertices.size());
 	
 	vertxBufferView.BufferLocation = vetexResource.Get()->GetGPUVirtualAddress();
 	vertxBufferView.SizeInBytes = UINT(sizeof(VertexData) * modelData_.vertices.size());
 	vertxBufferView.StrideInBytes = sizeof(VertexData);
+	//ここ
+	indexBufferViewSprite.BufferLocation = indexResource->GetGPUVirtualAddress();
+	indexBufferViewSprite.SizeInBytes= sizeof(uint32_t)*modelData_.indices.size();
+	indexBufferViewSprite.Format = DXGI_FORMAT_R32_UINT;
     matrix = MakeIdentity4x4();
 
 	pos = { 0.0f,0.0f,5.0f };
@@ -30,13 +34,14 @@ void Obj3D::Draw( Vector4 Color,CameraData*cameraData, WorldTransform* worldTran
 	Vector4* materialData = nullptr;
 	TransformationMatrix* matrixData = nullptr;
 	DirectionalLight* lightData = nullptr;
-
+	uint32_t* indexData = nullptr;
 
 	vetexResource.Get()->Map(0, nullptr, reinterpret_cast<void**>(&vertexData));
 	materialResource.Get()->Map(0, nullptr, reinterpret_cast<void**>(&materialData));	
 	lightResource.Get()->Map(0, nullptr, reinterpret_cast<void**>(&lightData));
-
-	std::memcpy(vertexData, modelData_.vertices.data(), sizeof(VertexData)*modelData_.vertices.size());
+	//ここ
+	indexResource.Get()->Map(0, nullptr, reinterpret_cast<void**>(&indexData));
+	std::memcpy(indexData,modelData_.vertices.data(), sizeof(VertexData)*modelData_.vertices.size());
 	//
 	// 
 	Matrix4x4 ProjectionMatrix = MakePerspectiveFovMatrix(0.45f, float(1280.0f / 720.0f), 0.1f, 100.0f);
@@ -62,14 +67,15 @@ void Obj3D::Draw( Vector4 Color,CameraData*cameraData, WorldTransform* worldTran
 	commandList->IASetVertexBuffers(0, 1, &vertxBufferView);
 
 	commandList->IASetPrimitiveTopology(D3D_PRIMITIVE_TOPOLOGY_TRIANGLELIST);
-
+	commandList->IASetIndexBuffer(&indexBufferViewSprite);
 	commandList->SetGraphicsRootConstantBufferView(0, materialResource.Get()->GetGPUVirtualAddress());
 	commandList->SetGraphicsRootConstantBufferView(1, worldTransform->GetColl()->GetGPUVirtualAddress());
 	commandList->SetGraphicsRootConstantBufferView(3, lightResource.Get()->GetGPUVirtualAddress());
 	commandList->SetGraphicsRootConstantBufferView(4, cameraData->GetColl()->GetGPUVirtualAddress());
 
 	DescriptorManagement::rootParamerterCommand(2, modelData_.tex);
-	commandList->DrawInstanced(UINT(modelData_.vertices.size()), 1, 0, 0);
+	commandList->DrawIndexedInstanced(UINT(modelData_.indices.size()), 1, 0, 0, 0);
+	//commandList->DrawInstanced(UINT(modelData_.vertices.size()), 1, 0, 0);
 }
 
 
