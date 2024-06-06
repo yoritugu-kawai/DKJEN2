@@ -38,8 +38,8 @@ int WINAPI WinMain(HINSTANCE, HINSTANCE, LPSTR, int) {
 
 	worldTransform->Create();
 	Obj3D* obj3d = new Obj3D;
-	ModelData modelData_ =LoadObjManagement::NewLoadObjFile("resource", "AnimatedCube.gltf");
-	Animation animatio = LoadObjManagement::LoadAnimationFile("resource", "AnimatedCube.gltf");
+	ModelData modelData_ =LoadObjManagement::NewLoadObjFile("resource", "simpleSkin.gltf");
+	Animation animatio = LoadObjManagement::LoadAnimationFile("resource", "simpleSkin.gltf");
 	obj3d->Initialize( modelData_);
 	uint32_t tex = TexManager::LoadTexture("GameResource/uvChecker.png");
 	Sprite* sprite = new Sprite;
