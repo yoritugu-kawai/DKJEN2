@@ -50,6 +50,7 @@ int WINAPI WinMain(HINSTANCE, HINSTANCE, LPSTR, int) {
 	//座標
 
 	
+
 	//　メインループ
 	MSG msg{};
 	while (msg.message != WM_QUIT)
