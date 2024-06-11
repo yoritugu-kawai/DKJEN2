@@ -11,13 +11,13 @@ struct PixelShaderOutput {
 	float32_t4 color : SV_TARGET0;
 };
 
-static  float32_t3 kIndex3x3[3][3] =
+static const float32_t3 kIndex3x3[3][3] =
 {
     { { -1.0f, -1.0f }, { 0.0f, -1.0f }, { 1.0f, -1.0f } },
     { { -1.0f, .0f }, { 0.0f, 0.0f }, { 1.0f, 0.0f } },
     { { -1.0f, 1.0f }, { 0.0f, 1.0f }, { 1.0f, -1.0f } },
 };
-static  float32_t3 kKernal3x3[3][3] =
+static const float32_t3 kKernal3x3[3][3] =
 {
     { 1.0f / 9.0f, 1.0f / 9.0f, 1.0f / 9.0f },
     { 1.0f / 9.0f, 1.0f / 9.0f, 1.0f / 9.0f },
