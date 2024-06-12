@@ -48,13 +48,30 @@ PixelShaderOutput main(VertexShaderOutput input)
     {
         for (int32_t y = 0; y < 3; ++y)
         {
-            kerne3x3[x][y] = gauss(kIndex3x3[x][y].x, kIndex3x3[x][y].y, 0.1f);
+            kerne3x3[x][y] = gauss(kIndex3x3[x][y].x, kIndex3x3[x][y].y, 2.0f);
             wight += kerne3x3[x][y];
 
         }
 
     }
-    output.color = textureColor;
+    uint32_t widht, height;
+    gTexture.GetDimensions(widht, height);
+    float32_t2 uvStepSize = float32_t2(rcp(widht), rcp(height));
+    
+    output.color.rgb = float32_t3(0.0f, 0.0f, 0.0f);
+    output.color.a = 1.0f;
+    for (int32_t lx = 0; lx < 3; ++lx)
+    {
+        for (int32_t ly = 0; ly < 3; ++ly)
+        {
+            float32_t2 texcoord = input.texcoord + kIndex3x3[lx][ly] * uvStepSize;
+            float32_t3 fetchColor = gTexture.Sample(gSampler, texcoord).rgb;
+            output.color.rgb += fetchColor * kerne3x3[lx][ly];
+
+        }
+
+    }
+    //output.color = textureColor;
     output.color.rgb *= rcp(wight);
 	//output.color = gMaterial.color;
     return output;
