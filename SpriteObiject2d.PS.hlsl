@@ -19,12 +19,7 @@ static float32_t2 kIndex3x3[3][3] =
     { { -1.0f, .0f }, { 0.0f, 0.0f }, { 1.0f, 0.0f } },
     { { -1.0f, 1.0f }, { 0.0f, 1.0f }, { 1.0f, -1.0f } },
 };
-//static const float32_t3 kKernal3x3[3][3] =
-//{
-//    { 1.0f / 9.0f, 1.0f / 9.0f, 1.0f / 9.0f },
-//    { 1.0f / 9.0f, 1.0f / 9.0f, 1.0f / 9.0f },
-//    { 1.0f / 9.0f, 1.0f / 9.0f, 1.0f / 9.0f },
-//};
+
 
 static const float32_t PI = 3.14159265f;
 float gauss(float x, float y, float sigma)
