@@ -11,13 +11,13 @@ struct PixelShaderOutput {
 	float32_t4 color : SV_TARGET0;
 };
 
-static const float32_t3 kIndex3x3[3][3] =
+static float32_t2 kIndex3x3[3][3] =
 {
     { { -1.0f, -1.0f }, { 0.0f, -1.0f }, { 1.0f, -1.0f } },
     { { -1.0f, .0f }, { 0.0f, 0.0f }, { 1.0f, 0.0f } },
     { { -1.0f, 1.0f }, { 0.0f, 1.0f }, { 1.0f, -1.0f } },
 };
-static const float32_t3 kKernal3x3[3][3] =
+static float32_t kKernal3x3[3][3] =
 {
     { 1.0f / 9.0f, 1.0f / 9.0f, 1.0f / 9.0f },
     { 1.0f / 9.0f, 1.0f / 9.0f, 1.0f / 9.0f },
@@ -43,11 +43,11 @@ PixelShaderOutput main(VertexShaderOutput input)
     //vignette = saturate(pow(vignette, 0.8f));
     //output.color.rgb *= vignette;
     //CG502
-    uimt32_t widht, height;
+    uint32_t widht, height;
     gTexture.GetDimensions(widht, height);
-    float32_t uvStepSize = float32_t(rcp(widht), rcp(height));
+    float32_t2 uvStepSize = float32_t2(rcp(widht), rcp(height));
     
-    output.color.rgb = flost32_t3(0.0f, 0.0f, 0.0f);
+    output.color.rgb = float32_t3(0.0f, 0.0f, 0.0f);
     output.color.a = 1.0f;
     for (int32_t x = 0; x < 3; ++x)
     {
@@ -60,6 +60,6 @@ PixelShaderOutput main(VertexShaderOutput input)
         }
 
     }
-	//output.color = gMaterial.color;
+	//output.color = gMaterial.color * textureColor;
     return output;
 }
