@@ -69,6 +69,7 @@ int WINAPI WinMain(HINSTANCE, HINSTANCE, LPSTR, int) {
 		//////
 		cameraData->Update();
 		animaionTime += 0.1f;
+		worldTransform->UpdateMatrix(cameraData, mtrix);
 	/*	mtrix=LoadObjManagement::AnimationUpdate(obj3d->GetModelData(),animatio);
 		worldTransform->UpdateMatrix(cameraData, mtrix);
 		LoadObjManagement::ApplyAnimation(skeleton, animatio, animaionTime);
