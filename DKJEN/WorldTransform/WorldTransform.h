@@ -8,7 +8,8 @@ class WorldTransform
 {
 public:
 	void Create();
-	void UpdateMatrix(CameraData* cameraData, Matrix4x4 mtrix);
+	void UpdateMatrix(CameraData* cameraData);
+	void AnimationUpdateMatrix(CameraData* cameraData, Matrix4x4 mtrix);
 	
 #pragma region Get
 	Matrix4x4 GetMatWorld_() { return matWorld_; }

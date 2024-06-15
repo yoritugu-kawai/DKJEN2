@@ -39,7 +39,7 @@ int WINAPI WinMain(HINSTANCE, HINSTANCE, LPSTR, int) {
 	worldTransform->Create();
 	Obj3D* obj3d = new Obj3D;
 	ModelData modelData_ =LoadObjManagement::NewLoadObjFile("resource/hu", "sneakWalk.gltf");
-	//Animation animatio = LoadObjManagement::LoadAnimationFile("resource/hu", "walk.gltf");
+	//Animation animatio = LoadObjManagement::LoadAnimationFile("resource/hu", "sneakWalk.gltf");
 	Skeleton skeleton = LoadObjManagement::CreateSkeleton(modelData_.rootNode);
 	obj3d->Initialize( modelData_);
 	uint32_t tex = TexManager::LoadTexture("GameResource/uvChecker.png");
@@ -69,9 +69,9 @@ int WINAPI WinMain(HINSTANCE, HINSTANCE, LPSTR, int) {
 		//////
 		cameraData->Update();
 		animaionTime += 0.1f;
-		worldTransform->UpdateMatrix(cameraData, mtrix);
+		worldTransform->UpdateMatrix(cameraData);
 	/*	mtrix=LoadObjManagement::AnimationUpdate(obj3d->GetModelData(),animatio);
-		worldTransform->UpdateMatrix(cameraData, mtrix);
+		worldTransform->AnimationUpdateMatrix(cameraData, mtrix);
 		LoadObjManagement::ApplyAnimation(skeleton, animatio, animaionTime);
 		LoadObjManagement::Update(skeleton);*/
 		worldTransform->SetTranslate({ 0,0,-100 });

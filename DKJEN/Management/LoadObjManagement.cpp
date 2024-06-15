@@ -253,6 +253,7 @@ Matrix4x4 LoadObjManagement::AnimationUpdate(ModelData modelData,Animation anima
 	Quaternion rotate = QCalculatevalue(rootNodeAnimation.rotate.keyframes, animaionTime);
 	Vector3 scale = Calculatevalue(rootNodeAnimation.scale.keyframes, animaionTime);
 	Matrix4x4 localMtrix = MakeAffineMatrix(scale, rotate, translate);
+
 	/*Matrix4x4 vP = Multiply(cameraData->GetView(), cameraData->GetProjection());
 
 	data_->World = Multiply(localMtrix, Multiply(worldTransform->GetMatWorld_(), vP));
