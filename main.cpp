@@ -38,8 +38,9 @@ int WINAPI WinMain(HINSTANCE, HINSTANCE, LPSTR, int) {
 
 	worldTransform->Create();
 	Obj3D* obj3d = new Obj3D;
-	ModelData modelData_ =LoadObjManagement::NewLoadObjFile("resource", "AnimatedCube.gltf");
-	Animation animatio = LoadObjManagement::LoadAnimationFile("resource", "AnimatedCube.gltf");
+	ModelData modelData_ =LoadObjManagement::NewLoadObjFile("resource/hu", "sneakWalk.gltf");
+	//Animation animatio = LoadObjManagement::LoadAnimationFile("resource/hu", "walk.gltf");
+	Skeleton skeleton = LoadObjManagement::CreateSkeleton(modelData_.rootNode);
 	obj3d->Initialize( modelData_);
 	uint32_t tex = TexManager::LoadTexture("GameResource/uvChecker.png");
 	Sprite* sprite = new Sprite;
@@ -47,6 +48,7 @@ int WINAPI WinMain(HINSTANCE, HINSTANCE, LPSTR, int) {
 	Vector3 cameraPos_ = { 0,0,0 };
 	float k = 0;
 	Matrix4x4 mtrix;
+	float  animaionTime=0;
 	//座標
 
 	
@@ -66,10 +68,11 @@ int WINAPI WinMain(HINSTANCE, HINSTANCE, LPSTR, int) {
 		//　ゲーム処理
 		//////
 		cameraData->Update();
-		
-		mtrix=LoadObjManagement::AnimationUpdate(obj3d->GetModelData(),animatio);
+		animaionTime += 0.1f;
+	/*	mtrix=LoadObjManagement::AnimationUpdate(obj3d->GetModelData(),animatio);
 		worldTransform->UpdateMatrix(cameraData, mtrix);
-
+		LoadObjManagement::ApplyAnimation(skeleton, animatio, animaionTime);
+		LoadObjManagement::Update(skeleton);*/
 		worldTransform->SetTranslate({ 0,0,-100 });
 		worldTransform->SetScale({1, 1, 1,});
 		

@@ -28,9 +28,19 @@ struct  Node
 struct MaterialData {
 	std::string textureFilePath;
 };
+struct VetexWeinghtData {
+	float weight;
+	uint32_t vertexIndex;
+};
+struct JointWeightData
+{
+	Matrix4x4 inversBindPoseMatrix;
+	std::vector<VetexWeinghtData> vertexWeights;
 
+};
 struct ModelData
 {
+	std::map<std::string, JointWeightData> skinClusterData;
 	std::vector<VertexData>vertices;
 	std::vector<uint32_t>indices;
 	MaterialData material;
