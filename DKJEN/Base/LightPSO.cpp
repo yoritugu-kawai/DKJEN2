@@ -67,6 +67,37 @@ void LightPSO::ShapePSO()
 	rootParameters[4].ShaderVisibility = D3D12_SHADER_VISIBILITY_PIXEL;
 	rootParameters[4].Descriptor.ShaderRegister = 2;
 	//
+	//PixelShaderに送る方のカメラ
+	rootParameters[5].ParameterType = D3D12_ROOT_PARAMETER_TYPE_CBV;
+	//PixelShaderで使う
+	rootParameters[5].ShaderVisibility = D3D12_SHADER_VISIBILITY_PIXEL;
+	//レジスタ番号2を使う
+	rootParameters[5].Descriptor.ShaderRegister = 2;
+
+
+	//PointLight
+	rootParameters[6].ParameterType = D3D12_ROOT_PARAMETER_TYPE_CBV;
+	//PixelShaderで使う
+	rootParameters[6].ShaderVisibility = D3D12_SHADER_VISIBILITY_PIXEL;
+	//レジスタ番号2を使う
+	rootParameters[6].Descriptor.ShaderRegister = 3;
+
+
+	//SpotLight
+	rootParameters[7].ParameterType = D3D12_ROOT_PARAMETER_TYPE_CBV;
+	//PixelShaderで使う
+	rootParameters[7].ShaderVisibility = D3D12_SHADER_VISIBILITY_PIXEL;
+	//レジスタ番号2を使う
+	rootParameters[7].Descriptor.ShaderRegister = 4;
+
+	//いらない気がしてきた
+	//Skinningするかどうか
+	rootParameters[8].ParameterType = D3D12_ROOT_PARAMETER_TYPE_CBV;
+	//PixelShaderで使う
+	rootParameters[8].ShaderVisibility = D3D12_SHADER_VISIBILITY_VERTEX;
+	//レジスタ番号2を使う
+	rootParameters[8].Descriptor.ShaderRegister = 2;
+
 	D3D12_STATIC_SAMPLER_DESC staicSamplers[1] = {};
 	staicSamplers[0].Filter = D3D12_FILTER_MIN_MAG_MIP_LINEAR;
 	staicSamplers[0].AddressU = D3D12_TEXTURE_ADDRESS_MODE_WRAP;
@@ -132,16 +163,17 @@ void LightPSO::ShapePSO()
 	inputElementDescs[3].AlignedByteOffset = D3D12_APPEND_ALIGNED_ELEMENT;*/
 	inputElementDescs[3].SemanticName = "WEIGHT";
 	inputElementDescs[3].SemanticIndex = 0;
-	inputElementDescs[3].Format = DXGI_FORMAT_R32G32B32_FLOAT;
-	inputElementDescs[3].InputSlot = 1;
+	inputElementDescs[3].Format = DXGI_FORMAT_R32G32B32A32_FLOAT;	
+	inputElementDescs[3].InputSlot = 1;								
 	inputElementDescs[3].AlignedByteOffset = D3D12_APPEND_ALIGNED_ELEMENT;
-	
-	//
-	inputElementDescs[4].SemanticName = "POSITION";
+
+
+	inputElementDescs[4].SemanticName = "INDEX";
 	inputElementDescs[4].SemanticIndex = 0;
-	inputElementDescs[4].Format = DXGI_FORMAT_R32G32B32_SINT;
-	inputElementDescs[4].InputSlot = 1;
+	inputElementDescs[4].Format = DXGI_FORMAT_R32G32B32A32_SINT;	
+	inputElementDescs[4].InputSlot = 1;								
 	inputElementDescs[4].AlignedByteOffset = D3D12_APPEND_ALIGNED_ELEMENT;
+
 	// WORLDPOSITION
 	D3D12_INPUT_LAYOUT_DESC inputLayoutDesc{};
 	inputLayoutDesc.pInputElementDescs = inputElementDescs;

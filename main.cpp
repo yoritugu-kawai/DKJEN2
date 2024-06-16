@@ -48,7 +48,7 @@ int WINAPI WinMain(HINSTANCE, HINSTANCE, LPSTR, int) {
 	sprite->Initialize(tex);
 	Vector3 cameraPos_ = { 0,0,0 };
 	float k = 0;
-	
+	Vector3 pos_;
 	float  animaionTime=0;
 	//座標
 
@@ -77,9 +77,17 @@ int WINAPI WinMain(HINSTANCE, HINSTANCE, LPSTR, int) {
 		LoadObjManagement::ApplyAnimation(skeleton, animatio, animaionTime);
 		LoadObjManagement::Update(skeleton);
 		LoadObjManagement::SkinUpdate(skinCluster,skeleton );
-		worldTransform->SetTranslate({ 0,0,-100 });
+
 		worldTransform->SetScale({1, 1, 1,});
-		
+		if (Input::GetInstance()->PushKey(DIK_A)) {
+			pos_.x -= 10;
+
+		}
+		if (Input::GetInstance()->PushKey(DIK_D)) {
+			pos_.x += 10;
+		}
+		worldTransform->SetTranslate({ pos_ });
+
 		worldTransform->SetRotate({ 0,10.0f,0 });
 		ImGui::Begin("pos");
 		ImGui::SliderFloat3("camera", &cameraPos_.x, 10, -100);
