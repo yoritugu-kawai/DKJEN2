@@ -48,7 +48,7 @@ int WINAPI WinMain(HINSTANCE, HINSTANCE, LPSTR, int) {
 	sprite->Initialize(tex);
 	Vector3 cameraPos_ = { 0,0,0 };
 	float k = 0;
-	Vector3 pos_;
+	Vector3 pos_ = {0,0,-120};
 	float  animaionTime=0;
 	//座標
 
@@ -69,7 +69,7 @@ int WINAPI WinMain(HINSTANCE, HINSTANCE, LPSTR, int) {
 		//　ゲーム処理
 		//////
 		cameraData->Update();
-		animaionTime += 0.1f;
+		animaionTime += 1.0f / 60.0f;
 		worldTransform->UpdateMatrix(cameraData);
 		/*mtrix=LoadObjManagement::AnimationUpdate(obj3d->GetModelData(),animatio);
 		worldTransform->AnimationUpdateMatrix(cameraData, mtrix);*/
@@ -80,17 +80,17 @@ int WINAPI WinMain(HINSTANCE, HINSTANCE, LPSTR, int) {
 
 		worldTransform->SetScale({1, 1, 1,});
 		if (Input::GetInstance()->PushKey(DIK_A)) {
-			pos_.x -= 10;
+			pos_.x -= 0.1f;
 
 		}
 		if (Input::GetInstance()->PushKey(DIK_D)) {
-			pos_.x += 10;
+			pos_.x += 0.1f;
 		}
-		worldTransform->SetTranslate({ pos_ });
+		worldTransform->SetTranslate( pos_);
 
 		worldTransform->SetRotate({ 0,10.0f,0 });
 		ImGui::Begin("pos");
-		ImGui::SliderFloat3("camera", &cameraPos_.x, 10, -100);
+		ImGui::SliderFloat3("camera", &cameraPos_.x, 10, -50);
 		ImGui::End();
 		cameraData->SetTranslate({ 0,0,-150 });
 		cameraData->SetRotate(cameraPos_);
