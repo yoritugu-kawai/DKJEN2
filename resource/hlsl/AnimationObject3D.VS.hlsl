@@ -7,7 +7,15 @@ struct TransformationMatrix
     float32_t4x4 WVP;
     float32_t4x4 World;
 };
+struct Well
+{
+    float4x4 skeletonSpaceMatrix;
+    float4x4 skeletonSpaceInverseTransposeMatrix;
+    
+};
+
 ConstantBuffer<TransformationMatrix> gTransformationMatrix : register(b0);
+StructuredBuffer<Well> gMatrixPalette : register(t0);
 
 struct VertexShaderInput
 {
