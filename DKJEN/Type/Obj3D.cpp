@@ -24,7 +24,7 @@ void Obj3D::Initialize(ModelData modelData)
 	
 }
 
-void Obj3D::Draw( Vector4 Color,CameraData*cameraData, WorldTransform* worldTransform)
+void Obj3D::Draw( Vector4 Color,CameraData*cameraData, WorldTransform* worldTransform, SkinCluster& skinCluster)
 {
 	
 	
@@ -56,14 +56,20 @@ void Obj3D::Draw( Vector4 Color,CameraData*cameraData, WorldTransform* worldTran
 	ImGui::SliderFloat3("t", &direction_.x, -1.0f, 1.0f);
 	ImGui::End();
 	lightData->direction = direction_;
-	
+	D3D12_VERTEX_BUFFER_VIEW vbvs[2] = {
+
+	vertxBufferView,
+
+
+	skinCluster.influenceBufferView
+	};
 	//
 	ID3D12GraphicsCommandList* commandList = DxCommon::GetInstance()->GetCommandList();
 	PSOProperty pso_ = LightPSO::GetInstance()->GetPSO().Texture;
 	commandList->SetGraphicsRootSignature(pso_.rootSignature);
 	commandList->SetPipelineState(pso_.GraphicsPipelineState);//
 
-
+	commandList->IASetVertexBuffers(0, 2, vbvs);
 	commandList->IASetVertexBuffers(0, 1, &vertxBufferView);
 	commandList->IASetIndexBuffer(&indexBufferViewSprite);
 

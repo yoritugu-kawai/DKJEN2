@@ -41,13 +41,14 @@ int WINAPI WinMain(HINSTANCE, HINSTANCE, LPSTR, int) {
 	ModelData modelData_ =LoadObjManagement::NewLoadObjFile("resource/hu", "sneakWalk.gltf");
 	Animation animatio = LoadObjManagement::LoadAnimationFile("resource/hu", "sneakWalk.gltf");
 	Skeleton skeleton = LoadObjManagement::CreateSkeleton(modelData_.rootNode);
+	SkinCluster  skinCluster = LoadObjManagement::CreateSkinCluster(skeleton, modelData_);
 	obj3d->Initialize( modelData_);
 	uint32_t tex = TexManager::LoadTexture("GameResource/uvChecker.png");
 	Sprite* sprite = new Sprite;
 	sprite->Initialize(tex);
 	Vector3 cameraPos_ = { 0,0,0 };
 	float k = 0;
-	Matrix4x4 mtrix;
+	
 	float  animaionTime=0;
 	//座標
 
@@ -75,6 +76,7 @@ int WINAPI WinMain(HINSTANCE, HINSTANCE, LPSTR, int) {
 
 		LoadObjManagement::ApplyAnimation(skeleton, animatio, animaionTime);
 		LoadObjManagement::Update(skeleton);
+		LoadObjManagement::SkinUpdate(skinCluster,skeleton );
 		worldTransform->SetTranslate({ 0,0,-100 });
 		worldTransform->SetScale({1, 1, 1,});
 		
@@ -94,7 +96,7 @@ int WINAPI WinMain(HINSTANCE, HINSTANCE, LPSTR, int) {
 		//////
 		
 		//sprite->Draw({200.0f,100.0f,10.0f},{0,0,0},{0,0,0},{1,1,1,1});
-		obj3d->Draw({1,1,1,1}, cameraData, worldTransform);
+		obj3d->Draw({1,1,1,1}, cameraData, worldTransform, skinCluster);
 
 		//////
 		//　　描画処理

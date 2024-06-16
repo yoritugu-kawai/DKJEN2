@@ -16,7 +16,7 @@
 #include<chrono>
 #include<random>
 #include<map>
-
+#include <span>
 
 #pragma comment(lib,"winmm.lib")
 
@@ -45,3 +45,5 @@
 using namespace std;
 using namespace std::chrono;
 using Microsoft::WRL::ComPtr;
+
+

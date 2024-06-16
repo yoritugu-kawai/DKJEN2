@@ -65,7 +65,7 @@ public:
 	static ID3D12Resource* CreateTexResource(ID3D12Device* device, const DirectX::TexMetadata& metadata);
 	static void UploadTexData(ID3D12Resource* texture, const DirectX::ScratchImage& mipImages);
 	static void ShaderResourceView();
-
+	static uint32_t GetDescriptorSizeSRV(){return TexManager::GetInstance()->descriptorSizeSRV;}
 	
 private:
 	DxCommon dxcommon_;

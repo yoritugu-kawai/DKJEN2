@@ -96,7 +96,7 @@ void LightCompileShader::ShaderCompile()
 {
 	ShaderMode shape;
 
-	shape.vertexBlob =
+	/*shape.vertexBlob =
 		LightCompileShader::CompileShaderFanc(
 			L"resource/hlsl/LightObject.VS.hlsl",
 			L"vs_6_0"
@@ -105,8 +105,17 @@ void LightCompileShader::ShaderCompile()
 		LightCompileShader::CompileShaderFanc(
 			L"resource/hlsl/LightObject.PS.hlsl",
 			L"ps_6_0"
+		);*/
+	shape.vertexBlob =
+		LightCompileShader::CompileShaderFanc(
+			L"resource/hlsl/AnimationObject3D.VS.hlsl",
+			L"vs_6_0"
 		);
-
+	shape.pixelBlob =
+		LightCompileShader::CompileShaderFanc(
+			L"resource/hlsl/AnimationObject3D.PS.hlsl",
+			L"ps_6_0"
+		);
 
 	LightCompileShader::GetInstance()->shaders_.shape = shape;
 }

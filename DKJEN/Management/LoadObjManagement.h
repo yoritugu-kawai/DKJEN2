@@ -2,8 +2,7 @@
 #include"../Type/Obj3D.h"
 #include"../Skinning/Animation/Animation.h"
 #include"../Utilipy/Pch.h"
-
-
+#include"../Utilipy/jjj.h"
 struct Joint {
 	QuaternionTransform transform;
 	Matrix4x4 localMatrix;
@@ -22,13 +21,12 @@ struct Skeleton
 	std::vector<Joint> joints;
 
 };
-//
-//struct SkinCluster {
-//	std::vector<Matrix4x4> inverseBindPoseMatrices;
-//	Microsoft::WRL::ComPtr<ID3D12Resource> influenceResource;
-//	D3D12_VERTEX_BUFFER_VIEW influenceBufferView;
-//	std::span<VertexInflu>
-//};
+
+
+
+
+
+
 
 class LoadObjManagement
 {
@@ -45,10 +43,25 @@ public:
 	static int32_t CreateJoint(const Node& node, const optional<int32_t>& parent, vector<Joint>& joints);
 	static void Update(Skeleton& skeleton);
 	static void ApplyAnimation(Skeleton& skeleton,const Animation& animation,float animatiionTime);
+	static SkinCluster CreateSkinCluster(const Skeleton& skeleton, const ModelData& modelData);
+	static void SkinUpdate(SkinCluster& skinCluster,const Skeleton& skeleton);
+
 private:
 	float animaionTime = 0.0f;
 	TransformationMatrix* data_;
 
 	Animation animation;
+	std::vector<Matrix4x4> inverseBindPoseMatrices;
+
+	
+	ComPtr<ID3D12Resource> influenceResource_;
+	D3D12_VERTEX_BUFFER_VIEW influenceBufferView_;
+	std::span<VertexInfluence>mappedInfluence_;
+
+	ComPtr<ID3D12Resource>paletteResource_;
+	std::span<WellForGPU> mappedPalette_;
+	std::pair<D3D12_CPU_DESCRIPTOR_HANDLE, D3D12_GPU_DESCRIPTOR_HANDLE> paletteSrvHandle_;
+	uint32_t srvIndex_;
+
 	
 };

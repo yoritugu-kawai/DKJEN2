@@ -134,6 +134,9 @@
     <None Include="resource\hlsl\Paticle.hlsli">
       <Filter>hlsl</Filter>
     </None>
+    <None Include="resource\hlsl\AnimationObject3D.hlsli">
+      <Filter>hlsl</Filter>
+    </None>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="main.cpp">
@@ -462,6 +465,9 @@
     <ClInclude Include="DKJEN\Management\LoadObjManagement.h">
       <Filter>DKJEN\Management</Filter>
     </ClInclude>
+    <ClInclude Include="DKJEN\Utilipy\jjj.h">
+      <Filter>DKJEN\Utilipy</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <Text Include="DKJEN\externals\imgui\LICENSE.txt">
@@ -497,6 +503,12 @@
       <Filter>hlsl</Filter>
     </FxCompile>
     <FxCompile Include="resource\hlsl\TextureOdject3d.PS.hlsl">
+      <Filter>hlsl</Filter>
+    </FxCompile>
+    <FxCompile Include="resource\hlsl\AnimationObject3D.VS.hlsl">
+      <Filter>hlsl</Filter>
+    </FxCompile>
+    <FxCompile Include="resource\hlsl\AnimationObject3D.PS.hlsl">
       <Filter>hlsl</Filter>
     </FxCompile>
   </ItemGroup>
