@@ -33,6 +33,8 @@ private:
 	Vector3 translate_ = {0.0f,0.0f,0.0f};
 	Vector4 color_ = { 1,1,1,1 };
 	Matrix4x4 matWorld_;
+	Matrix4x4 wvp_ = {};
+	Matrix4x4 worldInverseTranspose_ = {};
 	TransformationMatrix *data_ ;
 	ComPtr<ID3D12Resource> buffer_ = nullptr;
 };

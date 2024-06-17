@@ -29,6 +29,7 @@ struct Material {
 struct TransformationMatrix {
 	Matrix4x4 WVP;
 	Matrix4x4 World;
+	Matrix4x4 WorldInverseTranspose;
 	Vector4 color = { 1,1,1,1 };
 	Matrix4x4 uvTransform_ = MakeIdentity4x4();
 };

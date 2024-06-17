@@ -38,18 +38,22 @@ int WINAPI WinMain(HINSTANCE, HINSTANCE, LPSTR, int) {
 
 	worldTransform->Create();
 	Obj3D* obj3d = new Obj3D;
-	ModelData modelData_ =LoadObjManagement::NewLoadObjFile("resource/hu", "sneakWalk.gltf");
-	Animation animatio = LoadObjManagement::LoadAnimationFile("resource/hu", "sneakWalk.gltf");
+	ModelData modelData_ =LoadObjManagement::NewLoadObjFile("resource", "simpleSkin.gltf");
+	Animation animatio = LoadObjManagement::LoadAnimationFile("resource", "simpleSkin.gltf");
 	Skeleton skeleton = LoadObjManagement::CreateSkeleton(modelData_.rootNode);
 	SkinCluster  skinCluster = LoadObjManagement::CreateSkinCluster(skeleton, modelData_);
 	obj3d->Initialize( modelData_);
 	uint32_t tex = TexManager::LoadTexture("GameResource/uvChecker.png");
 	Sprite* sprite = new Sprite;
+	Vector3 cameraPos_ = { 0,0,-150 };
+
+	Vector3 cameraRotate_ = { 0,0,0 };
 	sprite->Initialize(tex);
-	Vector3 cameraPos_ = { 0,0,0 };
+
 	float k = 0;
 	Vector3 pos_ = {0,0,-120};
 	float  animaionTime=0;
+	Matrix4x4 mtrix={};
 	//座標
 
 	
@@ -70,12 +74,15 @@ int WINAPI WinMain(HINSTANCE, HINSTANCE, LPSTR, int) {
 		//////
 		cameraData->Update();
 		animaionTime += 1.0f / 60.0f;
-		worldTransform->UpdateMatrix(cameraData);
+		
 		/*mtrix=LoadObjManagement::AnimationUpdate(obj3d->GetModelData(),animatio);
 		worldTransform->AnimationUpdateMatrix(cameraData, mtrix);*/
 
-		LoadObjManagement::ApplyAnimation(skeleton, animatio, animaionTime);
+		//Animation
+	    LoadObjManagement::ApplyAnimation(skeleton, animatio, animaionTime);
+		//Skeleton
 		LoadObjManagement::Update(skeleton);
+		//SkinCluster
 		LoadObjManagement::SkinUpdate(skinCluster,skeleton );
 
 		worldTransform->SetScale({1, 1, 1,});
@@ -89,11 +96,18 @@ int WINAPI WinMain(HINSTANCE, HINSTANCE, LPSTR, int) {
 		worldTransform->SetTranslate( pos_);
 
 		worldTransform->SetRotate({ 0,10.0f,0 });
+		//更新
+		//worldTransform->AnimationUpdateMatrix(cameraData, mtrix);
+		worldTransform->UpdateMatrix(cameraData);
+
 		ImGui::Begin("pos");
-		ImGui::SliderFloat3("camera", &cameraPos_.x, 10, -50);
+		ImGui::SliderFloat3("camera", &cameraPos_.x, 10, -500);
+		ImGui::SliderFloat3("cameraRotate", &cameraRotate_.x, 3, -3);
+
 		ImGui::End();
-		cameraData->SetTranslate({ 0,0,-150 });
-		cameraData->SetRotate(cameraPos_);
+		cameraData->SetTranslate(cameraPos_);
+		cameraData->SetRotate(cameraRotate_);
+		
 		//////
 		//　ゲーム処理
 		//////

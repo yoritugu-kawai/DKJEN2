@@ -39,7 +39,7 @@ void LightPSO::ShapePSO()
 		D3D12_ROOT_SIGNATURE_FLAG_ALLOW_INPUT_ASSEMBLER_INPUT_LAYOUT;
 
 	//Material設定
-	D3D12_ROOT_PARAMETER rootParameters[5] = {};
+	D3D12_ROOT_PARAMETER rootParameters[6] = {};
 	rootParameters[0].ParameterType = D3D12_ROOT_PARAMETER_TYPE_CBV;
 	rootParameters[0].ShaderVisibility = D3D12_SHADER_VISIBILITY_PIXEL;
 	rootParameters[0].Descriptor.ShaderRegister = 0;
@@ -67,6 +67,19 @@ void LightPSO::ShapePSO()
 	rootParameters[4].ShaderVisibility = D3D12_SHADER_VISIBILITY_PIXEL;
 	rootParameters[4].Descriptor.ShaderRegister = 2;
 	//
+
+	//Skinning
+	D3D12_DESCRIPTOR_RANGE skinningDescriptor[1] = {};
+	skinningDescriptor[0].BaseShaderRegister = 1;
+	skinningDescriptor[0].NumDescriptors = 1;
+	skinningDescriptor[0].RangeType = D3D12_DESCRIPTOR_RANGE_TYPE_SRV;
+	skinningDescriptor[0].OffsetInDescriptorsFromTableStart = D3D12_DESCRIPTOR_RANGE_OFFSET_APPEND;
+	//
+	rootParameters[5].ParameterType = D3D12_ROOT_PARAMETER_TYPE_DESCRIPTOR_TABLE;
+	rootParameters[5].ShaderVisibility = D3D12_SHADER_VISIBILITY_VERTEX;
+	rootParameters[5].DescriptorTable.pDescriptorRanges = skinningDescriptor;
+	rootParameters[5].DescriptorTable.NumDescriptorRanges = _countof(skinningDescriptor);
+
 
 	D3D12_STATIC_SAMPLER_DESC staicSamplers[1] = {};
 	staicSamplers[0].Filter = D3D12_FILTER_MIN_MAG_MIP_LINEAR;

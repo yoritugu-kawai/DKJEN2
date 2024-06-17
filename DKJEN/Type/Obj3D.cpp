@@ -79,6 +79,8 @@ void Obj3D::Draw( Vector4 Color,CameraData*cameraData, WorldTransform* worldTran
 	commandList->SetGraphicsRootConstantBufferView(1, worldTransform->GetColl()->GetGPUVirtualAddress());
 	commandList->SetGraphicsRootConstantBufferView(3, lightResource.Get()->GetGPUVirtualAddress());
 	commandList->SetGraphicsRootConstantBufferView(4, cameraData->GetColl()->GetGPUVirtualAddress());
+	commandList->SetGraphicsRootDescriptorTable(5, skinCluster.paletteSrvHandle.second);
+
 
 	DescriptorManagement::rootParamerterCommand(2, modelData_.tex);
 	commandList->DrawIndexedInstanced(UINT(modelData_.indices.size()), 1, 0, 0, 0);

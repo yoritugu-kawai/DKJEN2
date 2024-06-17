@@ -6,6 +6,7 @@ struct TransformationMatrix
 {
     float32_t4x4 WVP;
     float32_t4x4 World;
+    float32_t4x4 WorldInverseTranspose;
 };
 struct Well
 {
@@ -15,7 +16,7 @@ struct Well
 };
 
 ConstantBuffer<TransformationMatrix> gTransformationMatrix : register(b0);
-StructuredBuffer<Well> gMatrixPalette : register(t0);
+StructuredBuffer<Well> gMatrixPalette : register(t1);
 
 struct VertexShaderInput
 {
@@ -60,9 +61,9 @@ VertexShaderOutput main(VertexShaderInput input)
     Skinned skinned = Skinning(input);
     
     
-    output.position = mul(input.position, gTransformationMatrix.WVP);
+    output.position = mul(skinned.position, gTransformationMatrix.WVP);
     output.texcoord = input.texcoord;
     output.worldPosition = mul(input.position, gTransformationMatrix.World).xyz;
-    output.normal = normalize(mul(input.normal, (float32_t3x3) gTransformationMatrix.World));
+    output.normal = normalize(mul(skinned.normal, (float32_t3x3) gTransformationMatrix.WorldInverseTranspose));
     return output;
 }

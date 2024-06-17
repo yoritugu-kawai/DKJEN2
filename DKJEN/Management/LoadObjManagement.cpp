@@ -99,23 +99,31 @@ MaterialData LoadObjManagement::LoadMaterialTemplateFile(const std::string& dire
 Node LoadObjManagement::ReadNode(aiNode* node)
 {
 	Node result;
-	aiMatrix4x4 aiLocalMatrix = node->mTransformation;
-	aiLocalMatrix.Transpose();
-	result.localMatrix.m[0][0] = aiLocalMatrix[0][0];
+	//aiMatrix4x4 aiLocalMatrix = node->mTransformation;
+	//aiLocalMatrix.Transpose();
+	//result.localMatrix.m[0][0] = aiLocalMatrix[0][0];
 
-	result.name = node->mName.C_Str();
-	result.chidren.resize(node->mNumChildren);
-	for (uint32_t childIndex = 0; childIndex < node->mNumChildren; ++childIndex) {
-		result.chidren[childIndex] = ReadNode(node->mChildren[childIndex]);
-	}
+	
 	aiVector3D scale, tranalte;
 	aiQuaternion rotate;
 	node->mTransformation.Decompose(scale, rotate, tranalte);
 	result.transform.scale = {scale.x,scale .y,scale .z};
 	result.transform.rotate = { rotate.x,-rotate.y,-rotate.z,rotate.w};
 	result.transform.tranalte = { -tranalte.x,tranalte.y,tranalte.z };
-	result.localMatrix = MakeAffineMatrix(result.transform.scale, result.transform.rotate, result.transform.tranalte);
 
+	Matrix4x4 scaleMatrix = MakeTranslateMatrix(result.transform.tranalte);
+	Matrix4x4 rotateMatrix = MakeRotateMatrix(result.transform.rotate);
+	Matrix4x4 translateMatrix = MakeScaleMatrix(result.transform.scale);
+
+
+	result.localMatrix = Multiply(scaleMatrix, Multiply(rotateMatrix, translateMatrix));
+
+
+	result.name = node->mName.C_Str();
+	result.chidren.resize(node->mNumChildren);
+	for (uint32_t childIndex = 0; childIndex < node->mNumChildren; ++childIndex) {
+		result.chidren[childIndex] = ReadNode(node->mChildren[childIndex]);
+	}
 
 	return result;
 }
@@ -269,15 +277,39 @@ int32_t LoadObjManagement::CreateJoint(const Node& node, const optional<int32_t>
 
 void LoadObjManagement::Update(Skeleton& skeleton)
 {
+
+
+	//skeletonSpacematrixに値が入っていない
 	for (Joint joint :skeleton.joints) {
-		joint.localMatrix = MakeAffineMatrix(joint.transform.scale, joint.transform.rotate, joint.transform.tranalte);
+
+		Vector3 scale = joint.transform.scale;
+		Quaternion rotate = joint.transform.rotate;
+		Vector3 translate = joint.transform.tranalte;
+
+		Matrix4x4 scaleMatrix = MakeScaleMatrix(scale);
+		Matrix4x4 rotateMatrix = MakeRotateMatrix(rotate);
+		Matrix4x4 translateMatrix = MakeTranslateMatrix(translate);
+
+		joint.localMatrix = Multiply(scaleMatrix, Multiply(rotateMatrix, translateMatrix));
 		if (joint.parent) {
+			//3週目にjoint.localMatrixの値が入らない。nad。
 			joint.skeletonSpaceMatrix = Multiply( joint.localMatrix ,skeleton.joints[*joint.parent].skeletonSpaceMatrix);
 		}
 		else {
 			joint.skeletonSpaceMatrix = joint.localMatrix;
+			
 		}
 	}
+
+	//1...else
+	//2...parent
+	//3...parent
+	//4...parent
+
+	//3,4番目値が-infだった
+	skeleton.joints;
+
+
 }
 
 void LoadObjManagement::ApplyAnimation(Skeleton& skeleton, const Animation& animation, float animatiionTime)
@@ -285,13 +317,15 @@ void LoadObjManagement::ApplyAnimation(Skeleton& skeleton, const Animation& anim
 
 	for (Joint& joint : skeleton.joints) {
 		if (auto it = animation.nodeAnimations.find(joint.name);it !=animation.nodeAnimations.end()) {
+			animatiionTime = std::fmod(animatiionTime, animation.duration);
 			const NodeAnimation& rootNodeAnimation = (*it).second;
 			joint.transform.tranalte=Calculatevalue(rootNodeAnimation.translate.keyframes, animatiionTime);
 			joint.transform.rotate = QCalculatevalue(rootNodeAnimation.rotate.keyframes, animatiionTime);
 			joint.transform.scale = Calculatevalue(rootNodeAnimation.scale.keyframes, animatiionTime);
+	
 		}
 	}
-
+	
 }
 SkinCluster  LoadObjManagement::CreateSkinCluster(const Skeleton& skeleton, const ModelData& modelData) {
 	SkinCluster skinCluster ;
@@ -364,12 +398,15 @@ SkinCluster  LoadObjManagement::CreateSkinCluster(const Skeleton& skeleton, cons
 
 void LoadObjManagement::SkinUpdate(SkinCluster& skinCluster, const Skeleton& skeleton)
 {
+	//skeletonSpacematrixの値が違う件
 	for (size_t jointIndex = 0; jointIndex < skeleton.joints.size(); ++jointIndex)
 	{
 		assert(jointIndex < skinCluster.inverseBindPoseMatrices.size());
 		skinCluster.mappedPalette[jointIndex].skeletonSpaceMatrix =
 			Multiply(skinCluster.inverseBindPoseMatrices[jointIndex], skeleton.joints[jointIndex].skeletonSpaceMatrix);
+
 		skinCluster.mappedPalette[jointIndex].skeletonSpaceIncerseTransposeMatrix=
 			MakeTransposeMatrix(Inverse(skinCluster.mappedPalette[jointIndex].skeletonSpaceMatrix));
+
 	}
 }
