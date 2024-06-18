@@ -157,7 +157,7 @@ Vector3 TransformRot(const Vector3& vector, const Matrix4x4& matrix);
 
 Vector3 Subract(const Vector3& v1, const Vector3& v2);
 float Dot(const Vector3& v1, const Vector3& v2);
-Vector3 SlerpFanc(const Vector3& v1, const Vector3& v2,float f);
+Vector3 SlerpFanc(const Vector3& v1, const Vector3& v2, float f);
 Matrix4x4 MakeViewportMatrix(
 	float left, float top, float width, float height, float minDepth, float maxDepth);
 Vector3 Transform3(const Vector3& vector, const Matrix4x4& matrix);

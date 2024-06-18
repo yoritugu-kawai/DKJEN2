@@ -22,12 +22,6 @@ struct Skeleton
 
 };
 
-
-
-
-
-
-
 class LoadObjManagement
 {
 public:
@@ -42,9 +36,9 @@ public:
 	static Skeleton CreateSkeleton(const Node& rootNode);
 	static int32_t CreateJoint(const Node& node, const optional<int32_t>& parent, vector<Joint>& joints);
 	static void Update(Skeleton& skeleton);
-	static void ApplyAnimation(Skeleton& skeleton,const Animation& animation,float animatiionTime);
+	static void ApplyAnimation(Skeleton& skeleton, const Animation& animation, float animatiionTime);
 	static SkinCluster CreateSkinCluster(const Skeleton& skeleton, const ModelData& modelData);
-	static void SkinUpdate(SkinCluster& skinCluster,const Skeleton& skeleton);
+	static void SkinUpdate(SkinCluster& skinCluster, const Skeleton& skeleton);
 
 private:
 	float animaionTime = 0.0f;
@@ -53,7 +47,7 @@ private:
 	Animation animation;
 	std::vector<Matrix4x4> inverseBindPoseMatrices;
 
-	
+
 	ComPtr<ID3D12Resource> influenceResource_;
 	D3D12_VERTEX_BUFFER_VIEW influenceBufferView_;
 	std::span<VertexInfluence>mappedInfluence_;
@@ -63,5 +57,5 @@ private:
 	std::pair<D3D12_CPU_DESCRIPTOR_HANDLE, D3D12_GPU_DESCRIPTOR_HANDLE> paletteSrvHandle_;
 	uint32_t srvIndex_;
 
-	
+
 };

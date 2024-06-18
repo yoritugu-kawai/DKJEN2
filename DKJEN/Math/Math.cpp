@@ -859,58 +859,99 @@ Matrix4x4 MakeRotateMatrix(const Quaternion& quaternion)
 
 	return result;
 }
-Quaternion Slerp(const Quaternion& q1, const Quaternion& q2, float t)
+Quaternion Slerp(const Quaternion& q0, const Quaternion& q1, float t)
 {
 
-	// クォータニオンの内積を計算
-	float dot = DotQuaternion(q1, q2);
-	Quaternion qn1 = q1;//q1のnew
-	Quaternion qn2 = q2;//q2のnew
-	if (dot < 0.0f)
-	{
-		qn1 = { -qn1.x,-qn1.y,-qn1.z,-qn1.w };
-		dot = -dot;
+	//// クォータニオンの内積を計算
+	//float dot = DotQuaternion(q1, q2);
+	//Quaternion qn1 = q1;//q1のnew
+	//Quaternion qn2 = q2;//q2のnew
+	//if (dot < 0.0f)
+	//{
+	//	qn1 = { -qn1.x,-qn1.y,-qn1.z,-qn1.w };
+	//	dot = -dot;
+	//}
+	//
+	//// q1とq2の間の角度を計算
+	//float theta = std::acos(dot);
+	//
+	//float sinTheta = std::sin(theta);
+	//float scale0 = std::sin((1 - t) * theta) / sinTheta;
+	//float scale1 = std::sin(t * theta) / sinTheta;
+	//
+	//// 補間されたクォータニオンを計算して返す
+	//return Quaternion(
+	//	scale0 * qn1.x + scale1 * qn2.x,
+	//	scale0 * qn1.y + scale1 * qn2.y,
+	//	scale0 * qn1.z + scale1 * qn2.z,
+	//	scale0 * qn1.w + scale1 * qn2.w
+	//);
+
+
+
+
+	//q0・q1=||q0||・||q1||*cosθ
+	//今は単位Quaternionを求めたいのでノルムは1なので
+	//q0・q1 = cosθでOK!!
+	float dot =
+		q0.x * q1.x +
+		q0.y * q1.y +
+		q0.z * q1.z +
+		q0.w * q1.w;
+
+	//dotが限りなく1に近い場合
+	const float EPSILON = 0.0005f;
+	if (dot > 1.0f - EPSILON) {
+		// 直線補間を行う
+		Quaternion result = {};
+		result.x = (1.0f - t) * q0.x + t * q1.x;
+		result.y = (1.0f - t) * q0.y + t * q1.y;
+		result.z = (1.0f - t) * q0.z + t * q1.z;
+		result.w = (1.0f - t) * q0.w + t * q1.w;
+		return result;
 	}
 
-	// q1とq2の間の角度を計算
-	float theta = std::acos(dot);
+	//最短が良いよね
+	//角度を求める
+	float theta = std::acosf(dot);
 
-	float sinTheta = std::sin(theta);
-	float scale0 = std::sin((1 - t) * theta) / sinTheta;
-	float scale1 = std::sin(t * theta) / sinTheta;
+	//Quaternionの前にある係数
+	//scale...係数
+	float scale0 = float(std::sin((1 - t) * theta) / std::sin(theta));
+	float scale1 = float(std::sin(t * theta) / std::sin(theta));
 
-	// 補間されたクォータニオンを計算して返す
-	return Quaternion(
-		scale0 * qn1.x + scale1 * qn2.x,
-		scale0 * qn1.y + scale1 * qn2.y,
-		scale0 * qn1.z + scale1 * qn2.z,
-		scale0 * qn1.w + scale1 * qn2.w
-	);
+	Quaternion result = {};
+	result.x = scale0 * q0.x + scale1 * q1.x;
+	result.y = scale0 * q0.y + scale1 * q1.y;
+	result.z = scale0 * q0.z + scale1 * q1.z;
+	result.w = scale0 * q0.w + scale1 * q1.w;
+
+	return result;
 
 }
 float DotQuaternion(const Quaternion& q1, const Quaternion& q2)
 {
 	return float(q1.w * q2.w + q1.x * q2.x + q1.y * q2.y + q1.z * q2.z);
 }
- Vector3 Lerp(const Vector3& v1, const Vector3& v2, float t) {
+Vector3 Lerp(const Vector3& v1, const Vector3& v2, float t) {
 	Vector3 result{};
 	result.x = v1.x + t * (v2.x - v1.x);
 	result.y = v1.y + t * (v2.y - v1.y);
 	result.z = v1.z + t * (v2.z - v1.z);
 	return result;
 }
- float FLerp(float t, const float& s, const float& e) {
-	 float result;
-	 float es = e - s;
-	 result = s + t * es;
-	 return result;
- }
- Quaternion QLerp(float t, const Quaternion& s, const Quaternion& e) {
-	 Quaternion result;
-	 Quaternion es = e - s;
-	 result = s + t * es;
-	 return result;
- }
+float FLerp(float t, const float& s, const float& e) {
+	float result;
+	float es = e - s;
+	result = s + t * es;
+	return result;
+}
+Quaternion QLerp(float t, const Quaternion& s, const Quaternion& e) {
+	Quaternion result;
+	Quaternion es = e - s;
+	result = s + t * es;
+	return result;
+}
 Quaternion Slerp(float t, const Quaternion& s, const Quaternion& e) {
 	Quaternion ns = Normalize(s);
 	Quaternion ne = Normalize(e);
@@ -925,12 +966,12 @@ Quaternion Slerp(float t, const Quaternion& s, const Quaternion& e) {
 
 	float theta = std::acos(dot);
 	float sinTheta = std::sin(theta);
-	float t1 = std::sin((1.0f - t)* theta) / sinTheta;
+	float t1 = std::sin((1.0f - t) * theta) / sinTheta;
 	float t2 = std::sin(t * theta) / sinTheta;
 
 	return (t1 * ns + t2 * ne);
 }
- Quaternion Normalize(const Quaternion& q) {
+Quaternion Normalize(const Quaternion& q) {
 	float len = LengthQuaternion(q);
 	Quaternion result;
 	if (len != 0.0f) {
@@ -944,64 +985,64 @@ Quaternion Slerp(float t, const Quaternion& s, const Quaternion& e) {
 		return q;
 	}
 }
-  float LengthQuaternion(const Quaternion& q) {
-	 return std::sqrtf(q.w * q.w + q.x * q.x + q.y * q.y + q.z * q.z);
- }
-  Matrix4x4 MakeQuatAffineMatrix(const Vector3& scale, const Matrix4x4& rotate, const Vector3& translate) {
-	  Matrix4x4 result;
+float LengthQuaternion(const Quaternion& q) {
+	return std::sqrtf(q.w * q.w + q.x * q.x + q.y * q.y + q.z * q.z);
+}
+Matrix4x4 MakeQuatAffineMatrix(const Vector3& scale, const Matrix4x4& rotate, const Vector3& translate) {
+	Matrix4x4 result;
 
-	  result.m[0][0] = scale.x * rotate.m[0][0];
-	  result.m[0][1] = scale.x * rotate.m[0][1];
-	  result.m[0][2] = scale.x * rotate.m[0][2];
-	  result.m[0][3] = 0;
-	  result.m[1][0] = scale.y * rotate.m[1][0];
-	  result.m[1][1] = scale.y * rotate.m[1][1];
-	  result.m[1][2] = scale.y * rotate.m[1][2];
-	  result.m[1][3] = 0;
-	  result.m[2][0] = scale.z * rotate.m[2][0];
-	  result.m[2][1] = scale.z * rotate.m[2][1];
-	  result.m[2][2] = scale.z * rotate.m[2][2];
-	  result.m[2][3] = 0;
-	  result.m[3][0] = translate.x;
-	  result.m[3][1] = translate.y;
-	  result.m[3][2] = translate.z;
-	  result.m[3][3] = 1;
-	  return result;
-  }
-  Matrix4x4 MakeAffineMatrix(const Vector3& scale, const Quaternion& quaternion, const Vector3& translate) {
-	  Matrix4x4 result{};
+	result.m[0][0] = scale.x * rotate.m[0][0];
+	result.m[0][1] = scale.x * rotate.m[0][1];
+	result.m[0][2] = scale.x * rotate.m[0][2];
+	result.m[0][3] = 0;
+	result.m[1][0] = scale.y * rotate.m[1][0];
+	result.m[1][1] = scale.y * rotate.m[1][1];
+	result.m[1][2] = scale.y * rotate.m[1][2];
+	result.m[1][3] = 0;
+	result.m[2][0] = scale.z * rotate.m[2][0];
+	result.m[2][1] = scale.z * rotate.m[2][1];
+	result.m[2][2] = scale.z * rotate.m[2][2];
+	result.m[2][3] = 0;
+	result.m[3][0] = translate.x;
+	result.m[3][1] = translate.y;
+	result.m[3][2] = translate.z;
+	result.m[3][3] = 1;
+	return result;
+}
+Matrix4x4 MakeAffineMatrix(const Vector3& scale, const Quaternion& quaternion, const Vector3& translate) {
+	Matrix4x4 result{};
 
-	  Matrix4x4 scaleMatrix = MakeScaleMatrix(scale);
-	  Matrix4x4 rotateMatrix = MakeRotateMatrix(quaternion);
-	  Matrix4x4 translateMatrix = MakeTranslateMatrix(translate);
+	Matrix4x4 scaleMatrix = MakeScaleMatrix(scale);
+	Matrix4x4 rotateMatrix = MakeRotateMatrix(quaternion);
+	Matrix4x4 translateMatrix = MakeTranslateMatrix(translate);
 
-	  result = Multiply(scaleMatrix, Multiply(rotateMatrix, translateMatrix));
+	result = Multiply(scaleMatrix, Multiply(rotateMatrix, translateMatrix));
 
-	  return result;
-  }
-  Matrix4x4 MakeTransposeMatrix(const Matrix4x4 m) {
-	  Matrix4x4 result = {};
+	return result;
+}
+Matrix4x4 MakeTransposeMatrix(const Matrix4x4 m) {
+	Matrix4x4 result = {};
 
-	  result.m[0][0] = m.m[0][0];
-	  result.m[0][1] = m.m[1][0];
-	  result.m[0][2] = m.m[2][0];
-	  result.m[0][3] = m.m[3][0];
+	result.m[0][0] = m.m[0][0];
+	result.m[0][1] = m.m[1][0];
+	result.m[0][2] = m.m[2][0];
+	result.m[0][3] = m.m[3][0];
 
-	  result.m[1][0] = m.m[0][1];
-	  result.m[1][1] = m.m[1][1];
-	  result.m[1][2] = m.m[2][1];
-	  result.m[1][3] = m.m[3][1];
+	result.m[1][0] = m.m[0][1];
+	result.m[1][1] = m.m[1][1];
+	result.m[1][2] = m.m[2][1];
+	result.m[1][3] = m.m[3][1];
 
-	  result.m[2][0] = m.m[0][2];
-	  result.m[2][1] = m.m[1][2];
-	  result.m[2][2] = m.m[2][2];
-	  result.m[2][3] = m.m[3][2];
+	result.m[2][0] = m.m[0][2];
+	result.m[2][1] = m.m[1][2];
+	result.m[2][2] = m.m[2][2];
+	result.m[2][3] = m.m[3][2];
 
-	  result.m[3][0] = m.m[0][3];
-	  result.m[3][1] = m.m[1][3];
-	  result.m[3][2] = m.m[2][3];
-	  result.m[3][3] = m.m[3][3];
+	result.m[3][0] = m.m[0][3];
+	result.m[3][1] = m.m[1][3];
+	result.m[3][2] = m.m[2][3];
+	result.m[3][3] = m.m[3][3];
 
 
-	  return result;
-  }
+	return result;
+}

@@ -1,4 +1,3 @@
-
 #include"DKJEN/Base/WinApp.h"
 #include"DKJEN/Base/TexManager.h"
 
@@ -27,10 +26,10 @@ int WINAPI WinMain(HINSTANCE, HINSTANCE, LPSTR, int) {
 	DxCommon::Initialize();
 	ImguiManager::Initialize();
 	Input::Initialize();
-	
+
 	PSOCopileManagement::Set();
 
-	
+
 	TexManager::Initiluze();
 	CameraData* cameraData = new CameraData;
 	cameraData->Create();
@@ -38,25 +37,27 @@ int WINAPI WinMain(HINSTANCE, HINSTANCE, LPSTR, int) {
 
 	worldTransform->Create();
 	Obj3D* obj3d = new Obj3D;
-	ModelData modelData_ =LoadObjManagement::NewLoadObjFile("resource", "simpleSkin.gltf");
-	Animation animatio = LoadObjManagement::LoadAnimationFile("resource", "simpleSkin.gltf");
+	ModelData modelData_ = LoadObjManagement::NewLoadObjFile("resource/hu", "walk.gltf");
+	Animation animatio = LoadObjManagement::LoadAnimationFile("resource/hu", "walk.gltf");
+
+	Node node = modelData_.rootNode;
 	Skeleton skeleton = LoadObjManagement::CreateSkeleton(modelData_.rootNode);
 	SkinCluster  skinCluster = LoadObjManagement::CreateSkinCluster(skeleton, modelData_);
-	obj3d->Initialize( modelData_);
+	obj3d->Initialize(modelData_);
 	uint32_t tex = TexManager::LoadTexture("GameResource/uvChecker.png");
 	Sprite* sprite = new Sprite;
-	Vector3 cameraPos_ = { 0,0,-150 };
+	Vector3 cameraPos_ = { 0,0,-10 };
 
 	Vector3 cameraRotate_ = { 0,0,0 };
 	sprite->Initialize(tex);
 
 	float k = 0;
-	Vector3 pos_ = {0,0,-120};
-	float  animaionTime=0;
-	Matrix4x4 mtrix={};
+	Vector3 pos_ = { 0,0,0 };
+	float  animaionTime = 0;
+	Matrix4x4 mtrix = {};
 	//座標
 
-	
+
 	//　メインループ
 	MSG msg{};
 	while (msg.message != WM_QUIT)
@@ -74,18 +75,18 @@ int WINAPI WinMain(HINSTANCE, HINSTANCE, LPSTR, int) {
 		//////
 		cameraData->Update();
 		animaionTime += 1.0f / 60.0f;
-		
+
 		/*mtrix=LoadObjManagement::AnimationUpdate(obj3d->GetModelData(),animatio);
 		worldTransform->AnimationUpdateMatrix(cameraData, mtrix);*/
 
 		//Animation
-	    LoadObjManagement::ApplyAnimation(skeleton, animatio, animaionTime);
+		LoadObjManagement::ApplyAnimation(skeleton, animatio, animaionTime);
 		//Skeleton
 		LoadObjManagement::Update(skeleton);
 		//SkinCluster
-		LoadObjManagement::SkinUpdate(skinCluster,skeleton );
+		LoadObjManagement::SkinUpdate(skinCluster, skeleton);
 
-		worldTransform->SetScale({1, 1, 1,});
+		worldTransform->SetScale({ 1, 1, 1, });
 		if (Input::GetInstance()->PushKey(DIK_A)) {
 			pos_.x -= 0.1f;
 
@@ -93,7 +94,7 @@ int WINAPI WinMain(HINSTANCE, HINSTANCE, LPSTR, int) {
 		if (Input::GetInstance()->PushKey(DIK_D)) {
 			pos_.x += 0.1f;
 		}
-		worldTransform->SetTranslate( pos_);
+		worldTransform->SetTranslate(pos_);
 
 		worldTransform->SetRotate({ 0,10.0f,0 });
 		//更新
@@ -107,24 +108,24 @@ int WINAPI WinMain(HINSTANCE, HINSTANCE, LPSTR, int) {
 		ImGui::End();
 		cameraData->SetTranslate(cameraPos_);
 		cameraData->SetRotate(cameraRotate_);
-		
+
 		//////
 		//　ゲーム処理
 		//////
-		
-	
-		//////
-		//　　描画処理
-		//////
-		
-		//sprite->Draw({200.0f,100.0f,10.0f},{0,0,0},{0,0,0},{1,1,1,1});
-		obj3d->Draw({1,1,1,1}, cameraData, worldTransform, skinCluster);
+
 
 		//////
 		//　　描画処理
 		//////
-		
-		
+
+		//sprite->Draw({200.0f,100.0f,10.0f},{0,0,0},{0,0,0},{1,1,1,1});
+		obj3d->Draw({ 1,1,1,1 }, cameraData, worldTransform, skinCluster);
+
+		//////
+		//　　描画処理
+		//////
+
+
 		//終わり
 		FrameManagement::EndFrame();
 	}
@@ -134,9 +135,9 @@ int WINAPI WinMain(HINSTANCE, HINSTANCE, LPSTR, int) {
 	*********   解放  *******
 	*************************
 	*/
-	
-	
-	
+
+
+
 	PSOCopileManagement::Release();
 
 	ImguiManager::Release();

@@ -25,7 +25,7 @@ ModelData LoadObjManagement::NewLoadObjFile(const std::string& directoryPath, co
 			aiVector3D& normal = mesh->mNormals[vertexIndex];
 			aiVector3D& texcoord = mesh->mTextureCoords[0][vertexIndex];
 			//
-			modelData.vertices[vertexIndex].position={ -position.x,position.y,position.z,1.0f };
+			modelData.vertices[vertexIndex].position = { -position.x,position.y,position.z,1.0f };
 			modelData.vertices[vertexIndex].normal = { -normal.x ,normal.y,normal.z };
 			modelData.vertices[vertexIndex].texcoord = { texcoord.x,texcoord.y };
 		}
@@ -47,7 +47,7 @@ ModelData LoadObjManagement::NewLoadObjFile(const std::string& directoryPath, co
 			}
 		}
 
-		for (uint32_t boneIndex = 0; boneIndex < mesh->mNumBones;++boneIndex) {
+		for (uint32_t boneIndex = 0; boneIndex < mesh->mNumBones; ++boneIndex) {
 			aiBone* bone = mesh->mBones[boneIndex];
 			std::string jointName = bone->mName.C_Str();
 			JointWeightData& jointWeightData = modelData.skinClusterData[jointName];
@@ -56,19 +56,25 @@ ModelData LoadObjManagement::NewLoadObjFile(const std::string& directoryPath, co
 			aiVector3D scale, translate;
 			aiQuaternion rotate;
 			bindPosMatrixAssimp.Decompose(scale, rotate, translate);
-			Matrix4x4 bindPoseMatrix = MakeAffineMatrix({ scale.x,scale.y,scale.z }, { rotate.x,-rotate.y,rotate.z,rotate.w }, { -translate.x,translate.y,translate.z });
+
+			Matrix4x4 scaleMatrix = MakeScaleMatrix({ scale.x,scale.y,scale.z });
+			Matrix4x4 rotateMatrix = MakeRotateMatrix({ rotate.x,-rotate.y,-rotate.z,rotate.w });
+			Matrix4x4 translateMatrix = MakeTranslateMatrix({ -translate.x, translate.y, translate.z });
+
+
+			Matrix4x4 bindPoseMatrix = Multiply(scaleMatrix, Multiply(rotateMatrix, translateMatrix));
 			jointWeightData.inversBindPoseMatrix = Inverse(bindPoseMatrix);
 
 			for (uint32_t weightIndex = 0; weightIndex < bone->mNumWeights; ++weightIndex) {
-				jointWeightData.vertexWeights.push_back({bone->mWeights[weightIndex].mWeight, bone->mWeights[weightIndex].mVertexId});
+				jointWeightData.vertexWeights.push_back({ bone->mWeights[weightIndex].mWeight, bone->mWeights[weightIndex].mVertexId });
 			}
 
 		}
 	}
-	
-	modelData.tex= TexManager::LoadTexture(modelData.material.textureFilePath);
+
+	modelData.tex = TexManager::LoadTexture(modelData.material.textureFilePath);
 	return modelData;
-	
+
 }
 
 MaterialData LoadObjManagement::LoadMaterialTemplateFile(const std::string& directoryPath, const std::string& filename)
@@ -103,17 +109,17 @@ Node LoadObjManagement::ReadNode(aiNode* node)
 	//aiLocalMatrix.Transpose();
 	//result.localMatrix.m[0][0] = aiLocalMatrix[0][0];
 
-	
+
 	aiVector3D scale, tranalte;
 	aiQuaternion rotate;
 	node->mTransformation.Decompose(scale, rotate, tranalte);
-	result.transform.scale = {scale.x,scale .y,scale .z};
-	result.transform.rotate = { rotate.x,-rotate.y,-rotate.z,rotate.w};
+	result.transform.scale = { scale.x,scale.y,scale.z };
+	result.transform.rotate = { rotate.x,-rotate.y,-rotate.z,rotate.w };
 	result.transform.tranalte = { -tranalte.x,tranalte.y,tranalte.z };
 
-	Matrix4x4 scaleMatrix = MakeTranslateMatrix(result.transform.tranalte);
+	Matrix4x4  translateMatrix = MakeTranslateMatrix(result.transform.tranalte);
 	Matrix4x4 rotateMatrix = MakeRotateMatrix(result.transform.rotate);
-	Matrix4x4 translateMatrix = MakeScaleMatrix(result.transform.scale);
+	Matrix4x4 scaleMatrix = MakeScaleMatrix(result.transform.scale);
 
 
 	result.localMatrix = Multiply(scaleMatrix, Multiply(rotateMatrix, translateMatrix));
@@ -130,8 +136,8 @@ Node LoadObjManagement::ReadNode(aiNode* node)
 
 Animation LoadObjManagement::LoadAnimationFile(const std::string& directoryPath, const std::string& filename)
 {
-	
-	Animation animation=LoadObjManagement::GetInstance()->animation;
+
+	Animation animation = LoadObjManagement::GetInstance()->animation;
 	Assimp::Importer importer;
 	std::string filePath = directoryPath + "/" + filename;
 	const aiScene* scene = importer.ReadFile(filePath.c_str(), 0);
@@ -139,7 +145,7 @@ Animation LoadObjManagement::LoadAnimationFile(const std::string& directoryPath,
 	aiAnimation* animationAssimp = scene->mAnimations[0];
 	animation.duration = float(animationAssimp->mDuration / animationAssimp->mTicksPerSecond);
 	//
-	
+
 
 
 	for (uint32_t channelIndex = 0; channelIndex < animationAssimp->mNumChannels; ++channelIndex) {
@@ -173,9 +179,9 @@ Animation LoadObjManagement::LoadAnimationFile(const std::string& directoryPath,
 
 
 	}
-	
-	 LoadObjManagement::GetInstance()->animation = animation;
-												
+
+	LoadObjManagement::GetInstance()->animation = animation;
+
 	return animation;
 }
 
@@ -188,7 +194,7 @@ Vector3 LoadObjManagement::Calculatevalue(const std::vector<KeyframeVector3>& ke
 	for (size_t index = 0; index < keyframes.size() - 1; ++index) {
 		size_t nextIndex = index + 1;
 		if (keyframes[index].time <= time && time <= keyframes[nextIndex].time) {
-			float t = (time - keyframes[index].time) / (keyframes[nextIndex].time, keyframes[index].time);
+			float t = (time - keyframes[index].time) / (keyframes[nextIndex].time - keyframes[index].time);
 			return Lerp(keyframes[index].value, keyframes[nextIndex].value, t);
 		}
 	}
@@ -203,24 +209,26 @@ Quaternion LoadObjManagement::QCalculatevalue(const std::vector<KeyframeQuaterni
 
 	for (size_t index = 0; index < keyframes.size() - 1; ++index) {
 		size_t nextIndex = index + 1;
-	
+
 		if (keyframes[index].time <= time && time <= keyframes[nextIndex].time) {
-			
+
 			float t = (time - keyframes[index].time) / (keyframes[nextIndex].time - keyframes[index].time);
-			
+
+			Quaternion result = Slerp(keyframes[index].value, keyframes[nextIndex].value, t);
+
 			return Slerp(keyframes[index].value, keyframes[nextIndex].value, t);
 		}
 	}
-	
+
 	return (*keyframes.rbegin()).value;
 }
 
-Matrix4x4 LoadObjManagement::AnimationUpdate(ModelData modelData,Animation animation)
+Matrix4x4 LoadObjManagement::AnimationUpdate(ModelData modelData, Animation animation)
 {
-	
-	
+
+
 	float animaionTime = LoadObjManagement::GetInstance()->animaionTime;
-	TransformationMatrix* data_=LoadObjManagement::GetInstance()->data_;
+	TransformationMatrix* data_ = LoadObjManagement::GetInstance()->data_;
 	Skeleton skeleton = CreateSkeleton(modelData.rootNode);
 	animaionTime += 1.0f / 60.0f;
 	animaionTime = std::fmod(animaionTime, animation.duration);
@@ -241,7 +249,7 @@ Matrix4x4 LoadObjManagement::AnimationUpdate(ModelData modelData,Animation anima
 	LoadObjManagement::GetInstance()->animaionTime = animaionTime;
 	LoadObjManagement::GetInstance()->data_ = data_;
 	return localMtrix;
-	
+
 }
 
 Skeleton LoadObjManagement::CreateSkeleton(const Node& rootNode)
@@ -277,10 +285,16 @@ int32_t LoadObjManagement::CreateJoint(const Node& node, const optional<int32_t>
 
 void LoadObjManagement::Update(Skeleton& skeleton)
 {
+	skeleton.joints;
+
+
 
 
 	//skeletonSpacematrixに値が入っていない
-	for (Joint joint :skeleton.joints) {
+	//単位行列になっている
+	//[2]番目
+
+	for (Joint& joint : skeleton.joints) {
 
 		Vector3 scale = joint.transform.scale;
 		Quaternion rotate = joint.transform.rotate;
@@ -292,22 +306,36 @@ void LoadObjManagement::Update(Skeleton& skeleton)
 
 		joint.localMatrix = Multiply(scaleMatrix, Multiply(rotateMatrix, translateMatrix));
 		if (joint.parent) {
-			//3週目にjoint.localMatrixの値が入らない。nad。
-			joint.skeletonSpaceMatrix = Multiply( joint.localMatrix ,skeleton.joints[*joint.parent].skeletonSpaceMatrix);
+
+			Matrix4x4 localMatrix = joint.localMatrix;
+			Matrix4x4 spaceMatrix = skeleton.joints[*joint.parent].skeletonSpaceMatrix;
+			joint.skeletonSpaceMatrix = Multiply(joint.localMatrix, skeleton.joints[*joint.parent].skeletonSpaceMatrix);
 		}
 		else {
 			joint.skeletonSpaceMatrix = joint.localMatrix;
-			
+
 		}
+
+		Matrix4x4 skeletonSpace1 = skeleton.joints[0].skeletonSpaceMatrix;
+		Matrix4x4 skeletonSpace2 = skeleton.joints[1].skeletonSpaceMatrix;
+		Matrix4x4 skeletonSpace3 = skeleton.joints[2].skeletonSpaceMatrix;
+		Matrix4x4 skeletonSpace4 = skeleton.joints[3].skeletonSpaceMatrix;
+
+
+
+
+
 	}
 
-	//1...else
-	//2...parent
-	//3...parent
-	//4...parent
 
-	//3,4番目値が-infだった
+
+
+
+
+
+
 	skeleton.joints;
+
 
 
 }
@@ -315,29 +343,33 @@ void LoadObjManagement::Update(Skeleton& skeleton)
 void LoadObjManagement::ApplyAnimation(Skeleton& skeleton, const Animation& animation, float animatiionTime)
 {
 
+
+	skeleton;
+	animation;
+
 	for (Joint& joint : skeleton.joints) {
-		if (auto it = animation.nodeAnimations.find(joint.name);it !=animation.nodeAnimations.end()) {
+		if (auto it = animation.nodeAnimations.find(joint.name); it != animation.nodeAnimations.end()) {
 			animatiionTime = std::fmod(animatiionTime, animation.duration);
 			const NodeAnimation& rootNodeAnimation = (*it).second;
-			joint.transform.tranalte=Calculatevalue(rootNodeAnimation.translate.keyframes, animatiionTime);
+			joint.transform.tranalte = Calculatevalue(rootNodeAnimation.translate.keyframes, animatiionTime);
 			joint.transform.rotate = QCalculatevalue(rootNodeAnimation.rotate.keyframes, animatiionTime);
 			joint.transform.scale = Calculatevalue(rootNodeAnimation.scale.keyframes, animatiionTime);
-	
+
 		}
 	}
-	
+
 }
 SkinCluster  LoadObjManagement::CreateSkinCluster(const Skeleton& skeleton, const ModelData& modelData) {
-	SkinCluster skinCluster ;
+	SkinCluster skinCluster;
 	ID3D12Device* device = DxCommon::GetInstance()->GetDevice();
 	ID3D12DescriptorHeap* srvDescriptorHeap = DxCommon::GetInstance()->GetsrvDescriptorHeap();
 	uint32_t descriptorSizeSRV = TexManager::GetInstance()->GetDescriptorSizeSRV();
 
-	skinCluster.paletteResource= CreateBufferResource(sizeof(WellForGPU) * skeleton.joints.size());
+	skinCluster.paletteResource = CreateBufferResource(sizeof(WellForGPU) * skeleton.joints.size());
 	WellForGPU* mappedPalette = nullptr;
 	skinCluster.paletteResource->Map(0, nullptr, reinterpret_cast<void**>(&mappedPalette));
-	skinCluster.mappedPalette= { mappedPalette,skeleton.joints.size() };
-	skinCluster.paletteSrvHandle.first = GetCPUDescriptorHandle(srvDescriptorHeap, descriptorSizeSRV, DescriptorManagement:: GetIndex());
+	skinCluster.mappedPalette = { mappedPalette,skeleton.joints.size() };
+	skinCluster.paletteSrvHandle.first = GetCPUDescriptorHandle(srvDescriptorHeap, descriptorSizeSRV, DescriptorManagement::GetIndex());
 	skinCluster.paletteSrvHandle.second = GetGPUDescriptorHandle(srvDescriptorHeap, descriptorSizeSRV, DescriptorManagement::GetIndex());
 
 	D3D12_SHADER_RESOURCE_VIEW_DESC paletteSrvDesc{};
@@ -348,8 +380,8 @@ SkinCluster  LoadObjManagement::CreateSkinCluster(const Skeleton& skeleton, cons
 	paletteSrvDesc.Buffer.Flags = D3D12_BUFFER_SRV_FLAG_NONE;
 	paletteSrvDesc.Buffer.NumElements = UINT(skeleton.joints.size());
 	paletteSrvDesc.Buffer.StructureByteStride = sizeof(WellForGPU);
-	device->CreateShaderResourceView(skinCluster.paletteResource.Get(),&paletteSrvDesc, skinCluster.paletteSrvHandle.first);
-	
+	device->CreateShaderResourceView(skinCluster.paletteResource.Get(), &paletteSrvDesc, skinCluster.paletteSrvHandle.first);
+
 	skinCluster.influenceResource = CreateBufferResource(sizeof(VertexInfluence) * modelData.vertices.size());
 	VertexInfluence* mappedInfluence = nullptr;
 	skinCluster.influenceResource->Map(0, nullptr, reinterpret_cast<void**>(&mappedInfluence));
@@ -365,21 +397,21 @@ SkinCluster  LoadObjManagement::CreateSkinCluster(const Skeleton& skeleton, cons
 
 
 	for (const auto& jointWeight : modelData.skinClusterData) {
-		
+
 		auto it = skeleton.jointMap.find(jointWeight.first);
 		if (it == skeleton.jointMap.end()) {
-			
+
 			continue;
 		}
-		
+
 		skinCluster.inverseBindPoseMatrices[(*it).second] = jointWeight.second.inversBindPoseMatrix;
 		for (const auto& vertexWeight : jointWeight.second.vertexWeights) {
-			
+
 			auto& currentInfluence = skinCluster.mappedInfluence[vertexWeight.vertexIndex];
 
-			
+
 			for (uint32_t index = 0; index < NUM_MAX_INFLUENCE; ++index) {
-				
+
 				if (currentInfluence.weights[index] == 0.0f) {
 					currentInfluence.weights[index] = vertexWeight.weight;
 					currentInfluence.jointIndices[index] = (*it).second;
@@ -398,15 +430,32 @@ SkinCluster  LoadObjManagement::CreateSkinCluster(const Skeleton& skeleton, cons
 
 void LoadObjManagement::SkinUpdate(SkinCluster& skinCluster, const Skeleton& skeleton)
 {
+
+	//0...両方単位
+	//1...同じく単位
+	//2...同じく単位
+	//3...複雑な値
+
 	//skeletonSpacematrixの値が違う件
 	for (size_t jointIndex = 0; jointIndex < skeleton.joints.size(); ++jointIndex)
 	{
 		assert(jointIndex < skinCluster.inverseBindPoseMatrices.size());
-		skinCluster.mappedPalette[jointIndex].skeletonSpaceMatrix =
-			Multiply(skinCluster.inverseBindPoseMatrices[jointIndex], skeleton.joints[jointIndex].skeletonSpaceMatrix);
 
-		skinCluster.mappedPalette[jointIndex].skeletonSpaceIncerseTransposeMatrix=
+		Matrix4x4 inverseBindMatrix = skinCluster.inverseBindPoseMatrices[jointIndex];
+
+		//2番目のSaceMatrixの値が変
+		Matrix4x4 skeletonSpaceMatrix = skeleton.joints[jointIndex].skeletonSpaceMatrix;
+
+
+		skinCluster.mappedPalette[jointIndex].skeletonSpaceMatrix =
+			Multiply(skinCluster.inverseBindPoseMatrices[jointIndex],
+				skeleton.joints[jointIndex].skeletonSpaceMatrix);
+
+		skinCluster.mappedPalette[jointIndex].skeletonSpaceIncerseTransposeMatrix =
 			MakeTransposeMatrix(Inverse(skinCluster.mappedPalette[jointIndex].skeletonSpaceMatrix));
 
 	}
+
+
+
 }
