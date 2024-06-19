@@ -52,7 +52,8 @@ int WINAPI WinMain(HINSTANCE, HINSTANCE, LPSTR, int) {
 	sprite->Initialize(tex);
 
 	float k = 0;
-	Vector3 pos_ = { 0,0,0 };
+	Vector3 pos_ = { 0,-2,0 };
+	Vector3 rotate = { 0,11,0 };
 	float  animaionTime = 0;
 	Matrix4x4 mtrix = {};
 	//座標
@@ -88,15 +89,17 @@ int WINAPI WinMain(HINSTANCE, HINSTANCE, LPSTR, int) {
 
 		worldTransform->SetScale({ 1, 1, 1, });
 		if (Input::GetInstance()->PushKey(DIK_A)) {
-			pos_.x -= 0.1f;
+			pos_.x -= 0.01f;
+			rotate.y = 11;
 
 		}
 		if (Input::GetInstance()->PushKey(DIK_D)) {
-			pos_.x += 0.1f;
+			pos_.x += 0.01f;
+			rotate.y = -11;
 		}
 		worldTransform->SetTranslate(pos_);
 
-		worldTransform->SetRotate({ 0,10.0f,0 });
+		worldTransform->SetRotate(rotate);
 		//更新
 		//worldTransform->AnimationUpdateMatrix(cameraData, mtrix);
 		worldTransform->UpdateMatrix(cameraData);
