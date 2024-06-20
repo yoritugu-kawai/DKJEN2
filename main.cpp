@@ -12,9 +12,9 @@
 #include "DKJEN/Management/FrameManagement.h"
 #include"DKJEN/Management/PSOCopileManagement.h"
 #include"DKJEN/Management/LoadObjManagement.h"
-
 #include"GameProject/GameManager/GameManager.h"
 
+#include"DKJEN/Skinning/Animation/Skinning.h"
 
 const wchar_t Title[] = { L"ド根性エンジン" };
 
@@ -34,13 +34,15 @@ int WINAPI WinMain(HINSTANCE, HINSTANCE, LPSTR, int) {
 	CameraData* cameraData = new CameraData;
 	cameraData->Create();
 	//walkの取り込み
+	Skinning* skin = new Skinning;
 	WorldTransform* worldTransform = new WorldTransform;
 	worldTransform->Create();
 	Obj3D* walk3d = new Obj3D;
 	ModelData modelData_ = LoadObjManagement::NewLoadObjFile("resource/hu", "walk.gltf");
 	Animation animatio = LoadObjManagement::LoadAnimationFile("resource/hu", "walk.gltf");
 	Skeleton skeleton = LoadObjManagement::CreateSkeleton(modelData_.rootNode);
-	SkinCluster  skinCluster = LoadObjManagement::CreateSkinCluster(skeleton, modelData_);
+	SkinCluster  skinCluster = skin->CreateSkinCluster(skeleton, modelData_);
+	//SkinCluster  skinCluster = LoadObjManagement::CreateSkinCluster(skeleton, modelData_);
 	walk3d->Initialize(modelData_);
 	uint32_t tex = TexManager::LoadTexture("GameResource/uvChecker.png");
 	//AnimatedCube
@@ -96,8 +98,8 @@ int WINAPI WinMain(HINSTANCE, HINSTANCE, LPSTR, int) {
 
 		LoadObjManagement::Update(skeleton);
 		//SkinCluster
-		LoadObjManagement::SkinUpdate(skinCluster, skeleton);
-
+		//LoadObjManagement::SkinUpdate(skinCluster, skeleton);
+		skin->SkinUpdate(skinCluster, skeleton);
 		////Animation
 		//LoadObjManagement::ApplyAnimation(skeletonCubemodel, animatioCubemodel, animaionTime);
 		////Skeleton
