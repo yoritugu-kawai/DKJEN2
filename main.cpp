@@ -33,18 +33,28 @@ int WINAPI WinMain(HINSTANCE, HINSTANCE, LPSTR, int) {
 	TexManager::Initiluze();
 	CameraData* cameraData = new CameraData;
 	cameraData->Create();
+	//walkの取り込み
 	WorldTransform* worldTransform = new WorldTransform;
-
 	worldTransform->Create();
-	Obj3D* obj3d = new Obj3D;
+	Obj3D* walk3d = new Obj3D;
 	ModelData modelData_ = LoadObjManagement::NewLoadObjFile("resource/hu", "walk.gltf");
 	Animation animatio = LoadObjManagement::LoadAnimationFile("resource/hu", "walk.gltf");
-
-	Node node = modelData_.rootNode;
 	Skeleton skeleton = LoadObjManagement::CreateSkeleton(modelData_.rootNode);
 	SkinCluster  skinCluster = LoadObjManagement::CreateSkinCluster(skeleton, modelData_);
-	obj3d->Initialize(modelData_);
+	walk3d->Initialize(modelData_);
 	uint32_t tex = TexManager::LoadTexture("GameResource/uvChecker.png");
+	//AnimatedCube
+	WorldTransform* worldTransformCubemodel = new WorldTransform;
+	worldTransformCubemodel->Create();
+	Obj3D* animatedCube3d = new Obj3D;
+	ModelData animatedCubemodelData_ = LoadObjManagement::NewLoadObjFile("resource", "AnimatedCube.gltf");
+	/*Animation animatioCubemodel = LoadObjManagement::LoadAnimationFile("resource", "AnimatedCube.gltf");
+
+	Skeleton skeletonCubemodel = LoadObjManagement::CreateSkeleton(animatedCubemodelData_.rootNode);*/
+	//SkinCluster  skinClusterCubemodel = LoadObjManagement::CreateSkinCluster(skeletonCubemodel, animatedCubemodelData_);
+
+	animatedCube3d->Initialize(animatedCubemodelData_);
+	//
 	Sprite* sprite = new Sprite;
 	Vector3 cameraPos_ = { 0,0,-10 };
 
@@ -83,9 +93,17 @@ int WINAPI WinMain(HINSTANCE, HINSTANCE, LPSTR, int) {
 		//Animation
 		LoadObjManagement::ApplyAnimation(skeleton, animatio, animaionTime);
 		//Skeleton
+
 		LoadObjManagement::Update(skeleton);
 		//SkinCluster
 		LoadObjManagement::SkinUpdate(skinCluster, skeleton);
+
+		////Animation
+		//LoadObjManagement::ApplyAnimation(skeletonCubemodel, animatioCubemodel, animaionTime);
+		////Skeleton
+		//LoadObjManagement::Update(skeletonCubemodel);
+		////SkinCluster
+		//LoadObjManagement::SkinUpdate(skinClusterCubemodel, skeletonCubemodel);
 
 		worldTransform->SetScale({ 1, 1, 1, });
 		if (Input::GetInstance()->PushKey(DIK_A)) {
@@ -98,12 +116,15 @@ int WINAPI WinMain(HINSTANCE, HINSTANCE, LPSTR, int) {
 			rotate.y = -11;
 		}
 		worldTransform->SetTranslate(pos_);
-
+		worldTransformCubemodel->SetTranslate({2,0,0});
 		worldTransform->SetRotate(rotate);
 		//更新
 		//worldTransform->AnimationUpdateMatrix(cameraData, mtrix);
 		worldTransform->UpdateMatrix(cameraData);
+		worldTransformCubemodel->UpdateMatrix(cameraData);
 
+		/*skeleton.joints[1].skeletonSpaceMatrix;
+		worldTransformCubemodel->UpdateMatrix*/
 		ImGui::Begin("pos");
 		ImGui::SliderFloat3("camera", &cameraPos_.x, 10, -500);
 		ImGui::SliderFloat3("cameraRotate", &cameraRotate_.x, 3, -3);
@@ -122,8 +143,8 @@ int WINAPI WinMain(HINSTANCE, HINSTANCE, LPSTR, int) {
 		//////
 
 		//sprite->Draw({200.0f,100.0f,10.0f},{0,0,0},{0,0,0},{1,1,1,1});
-		obj3d->Draw({ 1,1,1,1 }, cameraData, worldTransform, skinCluster);
-
+		walk3d->Draw({ 1,1,1,1 }, cameraData, worldTransform, skinCluster);
+		animatedCube3d->Draw({ 1,1,1,1 }, cameraData, worldTransformCubemodel, skinCluster);
 		//////
 		//　　描画処理
 		//////

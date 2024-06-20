@@ -468,6 +468,9 @@
     <ClInclude Include="DKJEN\Utilipy\jjj.h">
       <Filter>DKJEN\Utilipy</Filter>
     </ClInclude>
+    <ClInclude Include="DKJEN\Skinning\Animation\sss.h">
+      <Filter>DKJEN\Skinning\Animation</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <Text Include="DKJEN\externals\imgui\LICENSE.txt">
