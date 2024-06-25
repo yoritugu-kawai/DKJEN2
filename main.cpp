@@ -15,7 +15,7 @@
 #include"GameProject/GameManager/GameManager.h"
 
 #include"DKJEN/Skinning/Animation/Skinning.h"
-
+#include"DKJEN/Skinning/Animation/Bone.h"
 const wchar_t Title[] = { L"ド根性エンジン" };
 
 
@@ -35,25 +35,27 @@ int WINAPI WinMain(HINSTANCE, HINSTANCE, LPSTR, int) {
 	cameraData->Create();
 	//walkの取り込み
 	Skinning* skin = new Skinning;
+	Bone* bone = new Bone;
 	WorldTransform* worldTransform = new WorldTransform;
 	worldTransform->Create();
 	Obj3D* walk3d = new Obj3D;
 	ModelData modelData_ = LoadObjManagement::NewLoadObjFile("resource/hu", "walk.gltf");
 	Animation animatio = LoadObjManagement::LoadAnimationFile("resource/hu", "walk.gltf");
-	Skeleton skeleton = LoadObjManagement::CreateSkeleton(modelData_.rootNode);
+	Skeleton skeleton = bone->CreateSkeleton(modelData_.rootNode);
 	SkinCluster  skinCluster = skin->CreateSkinCluster(skeleton, modelData_);
-	//SkinCluster  skinCluster = LoadObjManagement::CreateSkinCluster(skeleton, modelData_);
 	walk3d->Initialize(modelData_);
 	uint32_t tex = TexManager::LoadTexture("GameResource/uvChecker.png");
 	//AnimatedCube
+	Skinning* skinCubemodel = new Skinning;
+	Bone* boneCubemodel = new Bone;
 	WorldTransform* worldTransformCubemodel = new WorldTransform;
 	worldTransformCubemodel->Create();
 	Obj3D* animatedCube3d = new Obj3D;
-	ModelData animatedCubemodelData_ = LoadObjManagement::NewLoadObjFile("resource", "AnimatedCube.gltf");
-	Animation animatioCubemodel = LoadObjManagement::LoadAnimationFile("resource", "AnimatedCube.gltf");
-
-	//Skeleton skeletonCubemodel = LoadObjManagement::CreateSkeleton(animatedCubemodelData_.rootNode);
-	//SkinCluster  skinClusterCubemodel = LoadObjManagement::CreateSkinCluster(skeletonCubemodel, animatedCubemodelData_);
+	ModelData animatedCubemodelData_ = LoadObjManagement::NewLoadObjFile("resource", "simpleSkin.gltf");
+	Animation animatioCubemodel = LoadObjManagement::LoadAnimationFile("resource", "simpleSkin.gltf");
+	Skeleton skeletonCubemodel = boneCubemodel->CreateSkeleton(animatedCubemodelData_.rootNode);
+	SkinCluster  skinCluster2 = skinCubemodel->CreateSkinCluster(skeletonCubemodel, animatedCubemodelData_);
+	
 
 	animatedCube3d->Initialize(animatedCubemodelData_);
 	//
@@ -65,6 +67,7 @@ int WINAPI WinMain(HINSTANCE, HINSTANCE, LPSTR, int) {
 
 	float k = 0;
 	Vector3 pos_ = { 0,-2,0 };
+	Vector3 pos2_ = { 3,-2,0 };
 	Vector3 rotate = { 0,11,0 };
 	float  animaionTime = 0;
 	Matrix4x4 mtrix = {};
@@ -93,14 +96,23 @@ int WINAPI WinMain(HINSTANCE, HINSTANCE, LPSTR, int) {
 		worldTransform->AnimationUpdateMatrix(cameraData, mtrix);*/
 
 		//Animation
-		LoadObjManagement::ApplyAnimation(skeleton, animatio, animaionTime);
+		bone->ApplyAnimation(skeleton, animatio, animaionTime);
 		//Skeleton
 
-		LoadObjManagement::Update(skeleton);
+		bone->Update(skeleton);
 		//SkinCluster
-		//LoadObjManagement::SkinUpdate(skinCluster, skeleton);
+
 		skin->SkinUpdate(skinCluster, skeleton);
-		
+
+		///
+		boneCubemodel->ApplyAnimation(skeletonCubemodel, animatioCubemodel, animaionTime);
+		//Skeleton
+
+		boneCubemodel->Update(skeletonCubemodel);
+		//SkinCluster
+
+		skinCubemodel->SkinUpdate(skinCluster2, skeletonCubemodel);
+
 
 		worldTransform->SetScale({ 1, 1, 1, });
 		if (Input::GetInstance()->PushKey(DIK_A)) {
@@ -113,8 +125,9 @@ int WINAPI WinMain(HINSTANCE, HINSTANCE, LPSTR, int) {
 			rotate.y = -11;
 		}
 		worldTransform->SetTranslate(pos_);
-		worldTransformCubemodel->SetTranslate({2,0,0});
+		worldTransformCubemodel->SetTranslate(pos2_ );
 		worldTransform->SetRotate(rotate);
+		worldTransformCubemodel->SetRotate({0,2.5,0});
 		//更新
 		//worldTransform->AnimationUpdateMatrix(cameraData, mtrix);
 		worldTransform->UpdateMatrix(cameraData);
@@ -141,7 +154,7 @@ int WINAPI WinMain(HINSTANCE, HINSTANCE, LPSTR, int) {
 
 		//sprite->Draw({200.0f,100.0f,10.0f},{0,0,0},{0,0,0},{1,1,1,1});
 		walk3d->Draw({ 1,1,1,1 }, cameraData, worldTransform, skinCluster);
-		animatedCube3d->Draw({ 1,1,1,1 }, cameraData, worldTransformCubemodel, skinCluster);
+		animatedCube3d->Draw({ 1,1,1,1 }, cameraData, worldTransformCubemodel, skinCluster2);
 		//////
 		//　　描画処理
 		//////

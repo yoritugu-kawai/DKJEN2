@@ -222,35 +222,35 @@ Quaternion LoadObjManagement::QCalculatevalue(const std::vector<KeyframeQuaterni
 
 	return (*keyframes.rbegin()).value;
 }
-
-Matrix4x4 LoadObjManagement::AnimationUpdate(ModelData modelData, Animation animation)
-{
-
-
-	float animaionTime = LoadObjManagement::GetInstance()->animaionTime;
-	TransformationMatrix* data_ = LoadObjManagement::GetInstance()->data_;
-	Skeleton skeleton = CreateSkeleton(modelData.rootNode);
-	animaionTime += 1.0f / 60.0f;
-	animaionTime = std::fmod(animaionTime, animation.duration);
-	NodeAnimation& rootNodeAnimation = animation.nodeAnimations[modelData.rootNode.name];
-	Vector3 translate = Calculatevalue(rootNodeAnimation.translate.keyframes, animaionTime);
-	Quaternion rotate = QCalculatevalue(rootNodeAnimation.rotate.keyframes, animaionTime);
-	Vector3 scale = Calculatevalue(rootNodeAnimation.scale.keyframes, animaionTime);
-	Matrix4x4 localMtrix = MakeAffineMatrix(scale, rotate, translate);
-
-	/*Matrix4x4 vP = Multiply(cameraData->GetView(), cameraData->GetProjection());
-
-	data_->World = Multiply(localMtrix, Multiply(worldTransform->GetMatWorld_(), vP));
-	data_->WVP = Multiply(localMtrix,worldTransform->GetMatWorld_());
-	worldTransform->SetDeta(data_);*/
-	/*ApplyAnimation(skeleton, animation, animaionTime);
-	Update(skeleton);*/
-
-	LoadObjManagement::GetInstance()->animaionTime = animaionTime;
-	LoadObjManagement::GetInstance()->data_ = data_;
-	return localMtrix;
-
-}
+//
+//Matrix4x4 LoadObjManagement::AnimationUpdate(ModelData modelData, Animation animation)
+//{
+//
+//
+//	float animaionTime = LoadObjManagement::GetInstance()->animaionTime;
+//	TransformationMatrix* data_ = LoadObjManagement::GetInstance()->data_;
+//	Skeleton skeleton = CreateSkeleton(modelData.rootNode);
+//	animaionTime += 1.0f / 60.0f;
+//	animaionTime = std::fmod(animaionTime, animation.duration);
+//	NodeAnimation& rootNodeAnimation = animation.nodeAnimations[modelData.rootNode.name];
+//	Vector3 translate = Calculatevalue(rootNodeAnimation.translate.keyframes, animaionTime);
+//	Quaternion rotate = QCalculatevalue(rootNodeAnimation.rotate.keyframes, animaionTime);
+//	Vector3 scale = Calculatevalue(rootNodeAnimation.scale.keyframes, animaionTime);
+//	Matrix4x4 localMtrix = MakeAffineMatrix(scale, rotate, translate);
+//
+//	/*Matrix4x4 vP = Multiply(cameraData->GetView(), cameraData->GetProjection());
+//
+//	data_->World = Multiply(localMtrix, Multiply(worldTransform->GetMatWorld_(), vP));
+//	data_->WVP = Multiply(localMtrix,worldTransform->GetMatWorld_());
+//	worldTransform->SetDeta(data_);*/
+//	/*ApplyAnimation(skeleton, animation, animaionTime);
+//	Update(skeleton);*/
+//
+//	LoadObjManagement::GetInstance()->animaionTime = animaionTime;
+//	LoadObjManagement::GetInstance()->data_ = data_;
+//	return localMtrix;
+//
+//}
 //
 //Skeleton LoadObjManagement::CreateSkeleton(const Node& rootNode)
 //{
@@ -340,25 +340,25 @@ Matrix4x4 LoadObjManagement::AnimationUpdate(ModelData modelData, Animation anim
 //
 //}
 
-void LoadObjManagement::ApplyAnimation(Skeleton& skeleton, const Animation& animation, float animatiionTime)
-{
-
-
-	skeleton;
-	animation;
-
-	for (Joint& joint : skeleton.joints) {
-		if (auto it = animation.nodeAnimations.find(joint.name); it != animation.nodeAnimations.end()) {
-			animatiionTime = std::fmod(animatiionTime, animation.duration);
-			const NodeAnimation& rootNodeAnimation = (*it).second;
-			joint.transform.tranalte = Calculatevalue(rootNodeAnimation.translate.keyframes, animatiionTime);
-			joint.transform.rotate = QCalculatevalue(rootNodeAnimation.rotate.keyframes, animatiionTime);
-			joint.transform.scale = Calculatevalue(rootNodeAnimation.scale.keyframes, animatiionTime);
-
-		}
-	}
-
-}
+//void LoadObjManagement::ApplyAnimation(Skeleton& skeleton, const Animation& animation, float animatiionTime)
+//{
+//
+//
+//	skeleton;
+//	animation;
+//
+//	for (Joint& joint : skeleton.joints) {
+//		if (auto it = animation.nodeAnimations.find(joint.name); it != animation.nodeAnimations.end()) {
+//			animatiionTime = std::fmod(animatiionTime, animation.duration);
+//			const NodeAnimation& rootNodeAnimation = (*it).second;
+//			joint.transform.tranalte = Calculatevalue(rootNodeAnimation.translate.keyframes, animatiionTime);
+//			joint.transform.rotate = QCalculatevalue(rootNodeAnimation.rotate.keyframes, animatiionTime);
+//			joint.transform.scale = Calculatevalue(rootNodeAnimation.scale.keyframes, animatiionTime);
+//
+//		}
+//	}
+//
+//}
 //SkinCluster  LoadObjManagement::CreateSkinCluster(const Skeleton& skeleton, const ModelData& modelData) {
 //	SkinCluster skinCluster;
 //	ID3D12Device* device = DxCommon::GetInstance()->GetDevice();
