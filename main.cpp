@@ -50,9 +50,9 @@ int WINAPI WinMain(HINSTANCE, HINSTANCE, LPSTR, int) {
 	worldTransformCubemodel->Create();
 	Obj3D* animatedCube3d = new Obj3D;
 	ModelData animatedCubemodelData_ = LoadObjManagement::NewLoadObjFile("resource", "AnimatedCube.gltf");
-	/*Animation animatioCubemodel = LoadObjManagement::LoadAnimationFile("resource", "AnimatedCube.gltf");
+	Animation animatioCubemodel = LoadObjManagement::LoadAnimationFile("resource", "AnimatedCube.gltf");
 
-	Skeleton skeletonCubemodel = LoadObjManagement::CreateSkeleton(animatedCubemodelData_.rootNode);*/
+	//Skeleton skeletonCubemodel = LoadObjManagement::CreateSkeleton(animatedCubemodelData_.rootNode);
 	//SkinCluster  skinClusterCubemodel = LoadObjManagement::CreateSkinCluster(skeletonCubemodel, animatedCubemodelData_);
 
 	animatedCube3d->Initialize(animatedCubemodelData_);
@@ -100,12 +100,7 @@ int WINAPI WinMain(HINSTANCE, HINSTANCE, LPSTR, int) {
 		//SkinCluster
 		//LoadObjManagement::SkinUpdate(skinCluster, skeleton);
 		skin->SkinUpdate(skinCluster, skeleton);
-		////Animation
-		//LoadObjManagement::ApplyAnimation(skeletonCubemodel, animatioCubemodel, animaionTime);
-		////Skeleton
-		//LoadObjManagement::Update(skeletonCubemodel);
-		////SkinCluster
-		//LoadObjManagement::SkinUpdate(skinClusterCubemodel, skeletonCubemodel);
+		
 
 		worldTransform->SetScale({ 1, 1, 1, });
 		if (Input::GetInstance()->PushKey(DIK_A)) {

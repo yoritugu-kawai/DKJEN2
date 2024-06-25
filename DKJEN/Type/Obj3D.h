@@ -12,7 +12,7 @@
 #include"../WorldTransform/WorldTransform.h"
 #include"../Utilipy/Pch.h"
 //#include"../Skinning/Animation/Animation.h"
-#include"../Utilipy/jjj.h"
+#include"../Utilipy/Sc.h"
 #include<assimp/Importer.hpp>
 #include<assimp/scene.h>
 #include<assimp/postprocess.h>

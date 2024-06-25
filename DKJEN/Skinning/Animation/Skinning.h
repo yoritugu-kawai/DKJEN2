@@ -1,6 +1,6 @@
 #pragma once
 #include"Animation.h"
-#include"DKJEN/Utilipy/jjj.h"
+#include"DKJEN/Utilipy/Sc.h"
 #include"../../Utilipy/Pch.h"
 #include"../../Management/LoadObjManagement.h"
 

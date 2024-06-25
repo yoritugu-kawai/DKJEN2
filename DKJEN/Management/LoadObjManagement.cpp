@@ -251,94 +251,94 @@ Matrix4x4 LoadObjManagement::AnimationUpdate(ModelData modelData, Animation anim
 	return localMtrix;
 
 }
+//
+//Skeleton LoadObjManagement::CreateSkeleton(const Node& rootNode)
+//{
+//	Skeleton skeleton;
+//	skeleton.root = CreateJoint(rootNode, {}, skeleton.joints);
+//
+//	for (const Joint& joint : skeleton.joints) {
+//		skeleton.jointMap.emplace(joint.name, joint.index);
+//	}
+//
+//	return skeleton;
+//}
+//
+//int32_t LoadObjManagement::CreateJoint(const Node& node, const optional<int32_t>& parent, vector<Joint>& joints)
+//{
+//	Joint joint;
+//
+//	joint.name = node.name;
+//	joint.localMatrix = node.localMatrix;
+//	joint.skeletonSpaceMatrix = MakeIdentity4x4();
+//	joint.transform = node.transform;
+//	joint.index = int32_t(joints.size());
+//	joint.parent = parent;
+//	joints.push_back(joint);
+//	for (const Node& child : node.chidren) {
+//		int32_t childIndex = CreateJoint(child, joint.index, joints);
+//		joints[joint.index].children.push_back(childIndex);
+//	}
+//
+//	return joint.index;
+//}
 
-Skeleton LoadObjManagement::CreateSkeleton(const Node& rootNode)
-{
-	Skeleton skeleton;
-	skeleton.root = CreateJoint(rootNode, {}, skeleton.joints);
-
-	for (const Joint& joint : skeleton.joints) {
-		skeleton.jointMap.emplace(joint.name, joint.index);
-	}
-
-	return skeleton;
-}
-
-int32_t LoadObjManagement::CreateJoint(const Node& node, const optional<int32_t>& parent, vector<Joint>& joints)
-{
-	Joint joint;
-
-	joint.name = node.name;
-	joint.localMatrix = node.localMatrix;
-	joint.skeletonSpaceMatrix = MakeIdentity4x4();
-	joint.transform = node.transform;
-	joint.index = int32_t(joints.size());
-	joint.parent = parent;
-	joints.push_back(joint);
-	for (const Node& child : node.chidren) {
-		int32_t childIndex = CreateJoint(child, joint.index, joints);
-		joints[joint.index].children.push_back(childIndex);
-	}
-
-	return joint.index;
-}
-
-void LoadObjManagement::Update(Skeleton& skeleton)
-{
-	skeleton.joints;
-
-
-
-
-	//skeletonSpacematrixに値が入っていない
-	//単位行列になっている
-	//[2]番目
-
-	for (Joint& joint : skeleton.joints) {
-
-		Vector3 scale = joint.transform.scale;
-		Quaternion rotate = joint.transform.rotate;
-		Vector3 translate = joint.transform.tranalte;
-
-		Matrix4x4 scaleMatrix = MakeScaleMatrix(scale);
-		Matrix4x4 rotateMatrix = MakeRotateMatrix(rotate);
-		Matrix4x4 translateMatrix = MakeTranslateMatrix(translate);
-
-		joint.localMatrix = Multiply(scaleMatrix, Multiply(rotateMatrix, translateMatrix));
-		if (joint.parent) {
-
-			Matrix4x4 localMatrix = joint.localMatrix;
-			Matrix4x4 spaceMatrix = skeleton.joints[*joint.parent].skeletonSpaceMatrix;
-			joint.skeletonSpaceMatrix = Multiply(joint.localMatrix, skeleton.joints[*joint.parent].skeletonSpaceMatrix);
-		}
-		else {
-			joint.skeletonSpaceMatrix = joint.localMatrix;
-
-		}
-
-		Matrix4x4 skeletonSpace1 = skeleton.joints[0].skeletonSpaceMatrix;
-		Matrix4x4 skeletonSpace2 = skeleton.joints[1].skeletonSpaceMatrix;
-		Matrix4x4 skeletonSpace3 = skeleton.joints[2].skeletonSpaceMatrix;
-		Matrix4x4 skeletonSpace4 = skeleton.joints[3].skeletonSpaceMatrix;
-
-
-
-
-
-	}
-
-
-
-
-
-
-
-
-	skeleton.joints;
-
-
-
-}
+//void LoadObjManagement::Update(Skeleton& skeleton)
+//{
+//	skeleton.joints;
+//
+//
+//
+//
+//	//skeletonSpacematrixに値が入っていない
+//	//単位行列になっている
+//	//[2]番目
+//
+//	for (Joint& joint : skeleton.joints) {
+//
+//		Vector3 scale = joint.transform.scale;
+//		Quaternion rotate = joint.transform.rotate;
+//		Vector3 translate = joint.transform.tranalte;
+//
+//		Matrix4x4 scaleMatrix = MakeScaleMatrix(scale);
+//		Matrix4x4 rotateMatrix = MakeRotateMatrix(rotate);
+//		Matrix4x4 translateMatrix = MakeTranslateMatrix(translate);
+//
+//		joint.localMatrix = Multiply(scaleMatrix, Multiply(rotateMatrix, translateMatrix));
+//		if (joint.parent) {
+//
+//			Matrix4x4 localMatrix = joint.localMatrix;
+//			Matrix4x4 spaceMatrix = skeleton.joints[*joint.parent].skeletonSpaceMatrix;
+//			joint.skeletonSpaceMatrix = Multiply(joint.localMatrix, skeleton.joints[*joint.parent].skeletonSpaceMatrix);
+//		}
+//		else {
+//			joint.skeletonSpaceMatrix = joint.localMatrix;
+//
+//		}
+//
+//		Matrix4x4 skeletonSpace1 = skeleton.joints[0].skeletonSpaceMatrix;
+//		Matrix4x4 skeletonSpace2 = skeleton.joints[1].skeletonSpaceMatrix;
+//		Matrix4x4 skeletonSpace3 = skeleton.joints[2].skeletonSpaceMatrix;
+//		Matrix4x4 skeletonSpace4 = skeleton.joints[3].skeletonSpaceMatrix;
+//
+//
+//
+//
+//
+//	}
+//
+//
+//
+//
+//
+//
+//
+//
+//	skeleton.joints;
+//
+//
+//
+//}
 
 void LoadObjManagement::ApplyAnimation(Skeleton& skeleton, const Animation& animation, float animatiionTime)
 {
@@ -359,103 +359,103 @@ void LoadObjManagement::ApplyAnimation(Skeleton& skeleton, const Animation& anim
 	}
 
 }
-SkinCluster  LoadObjManagement::CreateSkinCluster(const Skeleton& skeleton, const ModelData& modelData) {
-	SkinCluster skinCluster;
-	ID3D12Device* device = DxCommon::GetInstance()->GetDevice();
-	ID3D12DescriptorHeap* srvDescriptorHeap = DxCommon::GetInstance()->GetsrvDescriptorHeap();
-	uint32_t descriptorSizeSRV = TexManager::GetInstance()->GetDescriptorSizeSRV();
-
-	skinCluster.paletteResource = CreateBufferResource(sizeof(WellForGPU) * skeleton.joints.size());
-	WellForGPU* mappedPalette = nullptr;
-	skinCluster.paletteResource->Map(0, nullptr, reinterpret_cast<void**>(&mappedPalette));
-	skinCluster.mappedPalette = { mappedPalette,skeleton.joints.size() };
-	skinCluster.paletteSrvHandle.first = GetCPUDescriptorHandle(srvDescriptorHeap, descriptorSizeSRV, DescriptorManagement::GetIndex());
-	skinCluster.paletteSrvHandle.second = GetGPUDescriptorHandle(srvDescriptorHeap, descriptorSizeSRV, DescriptorManagement::GetIndex());
-
-	D3D12_SHADER_RESOURCE_VIEW_DESC paletteSrvDesc{};
-	paletteSrvDesc.Format = DXGI_FORMAT_UNKNOWN;
-	paletteSrvDesc.Shader4ComponentMapping = D3D12_DEFAULT_SHADER_4_COMPONENT_MAPPING;
-	paletteSrvDesc.ViewDimension = D3D12_SRV_DIMENSION_BUFFER;
-	paletteSrvDesc.Buffer.FirstElement = 0;
-	paletteSrvDesc.Buffer.Flags = D3D12_BUFFER_SRV_FLAG_NONE;
-	paletteSrvDesc.Buffer.NumElements = UINT(skeleton.joints.size());
-	paletteSrvDesc.Buffer.StructureByteStride = sizeof(WellForGPU);
-	device->CreateShaderResourceView(skinCluster.paletteResource.Get(), &paletteSrvDesc, skinCluster.paletteSrvHandle.first);
-
-	skinCluster.influenceResource = CreateBufferResource(sizeof(VertexInfluence) * modelData.vertices.size());
-	VertexInfluence* mappedInfluence = nullptr;
-	skinCluster.influenceResource->Map(0, nullptr, reinterpret_cast<void**>(&mappedInfluence));
-	std::memset(mappedInfluence, 0, sizeof(VertexInfluence) * modelData.vertices.size());
-	skinCluster.mappedInfluence = { mappedInfluence,modelData.vertices.size() };
-
-	skinCluster.influenceBufferView.BufferLocation = skinCluster.influenceResource->GetGPUVirtualAddress();
-	skinCluster.influenceBufferView.SizeInBytes = UINT(sizeof(VertexInfluence) * modelData.vertices.size());
-	skinCluster.influenceBufferView.StrideInBytes = sizeof(VertexInfluence);
-
-	skinCluster.inverseBindPoseMatrices.resize(skeleton.joints.size());
-	std::generate(skinCluster.inverseBindPoseMatrices.begin(), skinCluster.inverseBindPoseMatrices.end(), MakeIdentity4x4);
-
-
-	for (const auto& jointWeight : modelData.skinClusterData) {
-
-		auto it = skeleton.jointMap.find(jointWeight.first);
-		if (it == skeleton.jointMap.end()) {
-
-			continue;
-		}
-
-		skinCluster.inverseBindPoseMatrices[(*it).second] = jointWeight.second.inversBindPoseMatrix;
-		for (const auto& vertexWeight : jointWeight.second.vertexWeights) {
-
-			auto& currentInfluence = skinCluster.mappedInfluence[vertexWeight.vertexIndex];
-
-
-			for (uint32_t index = 0; index < NUM_MAX_INFLUENCE; ++index) {
-
-				if (currentInfluence.weights[index] == 0.0f) {
-					currentInfluence.weights[index] = vertexWeight.weight;
-					currentInfluence.jointIndices[index] = (*it).second;
-					break;
-				}
-
-			}
-		}
-
-
-	}
-
-
-	return skinCluster;
-}
-
-void LoadObjManagement::SkinUpdate(SkinCluster& skinCluster, const Skeleton& skeleton)
-{
-
-	//0...両方単位
-	//1...同じく単位
-	//2...同じく単位
-	//3...複雑な値
-
-	//skeletonSpacematrixの値が違う件
-	for (size_t jointIndex = 0; jointIndex < skeleton.joints.size(); ++jointIndex)
-	{
-		assert(jointIndex < skinCluster.inverseBindPoseMatrices.size());
-
-		Matrix4x4 inverseBindMatrix = skinCluster.inverseBindPoseMatrices[jointIndex];
-
-		//2番目のSaceMatrixの値が変
-		Matrix4x4 skeletonSpaceMatrix = skeleton.joints[jointIndex].skeletonSpaceMatrix;
-
-
-		skinCluster.mappedPalette[jointIndex].skeletonSpaceMatrix =
-			Multiply(skinCluster.inverseBindPoseMatrices[jointIndex],
-				skeleton.joints[jointIndex].skeletonSpaceMatrix);
-
-		skinCluster.mappedPalette[jointIndex].skeletonSpaceIncerseTransposeMatrix =
-			MakeTransposeMatrix(Inverse(skinCluster.mappedPalette[jointIndex].skeletonSpaceMatrix));
-
-	}
-
-
-
-}
+//SkinCluster  LoadObjManagement::CreateSkinCluster(const Skeleton& skeleton, const ModelData& modelData) {
+//	SkinCluster skinCluster;
+//	ID3D12Device* device = DxCommon::GetInstance()->GetDevice();
+//	ID3D12DescriptorHeap* srvDescriptorHeap = DxCommon::GetInstance()->GetsrvDescriptorHeap();
+//	uint32_t descriptorSizeSRV = TexManager::GetInstance()->GetDescriptorSizeSRV();
+//
+//	skinCluster.paletteResource = CreateBufferResource(sizeof(WellForGPU) * skeleton.joints.size());
+//	WellForGPU* mappedPalette = nullptr;
+//	skinCluster.paletteResource->Map(0, nullptr, reinterpret_cast<void**>(&mappedPalette));
+//	skinCluster.mappedPalette = { mappedPalette,skeleton.joints.size() };
+//	skinCluster.paletteSrvHandle.first = GetCPUDescriptorHandle(srvDescriptorHeap, descriptorSizeSRV, DescriptorManagement::GetIndex());
+//	skinCluster.paletteSrvHandle.second = GetGPUDescriptorHandle(srvDescriptorHeap, descriptorSizeSRV, DescriptorManagement::GetIndex());
+//
+//	D3D12_SHADER_RESOURCE_VIEW_DESC paletteSrvDesc{};
+//	paletteSrvDesc.Format = DXGI_FORMAT_UNKNOWN;
+//	paletteSrvDesc.Shader4ComponentMapping = D3D12_DEFAULT_SHADER_4_COMPONENT_MAPPING;
+//	paletteSrvDesc.ViewDimension = D3D12_SRV_DIMENSION_BUFFER;
+//	paletteSrvDesc.Buffer.FirstElement = 0;
+//	paletteSrvDesc.Buffer.Flags = D3D12_BUFFER_SRV_FLAG_NONE;
+//	paletteSrvDesc.Buffer.NumElements = UINT(skeleton.joints.size());
+//	paletteSrvDesc.Buffer.StructureByteStride = sizeof(WellForGPU);
+//	device->CreateShaderResourceView(skinCluster.paletteResource.Get(), &paletteSrvDesc, skinCluster.paletteSrvHandle.first);
+//
+//	skinCluster.influenceResource = CreateBufferResource(sizeof(VertexInfluence) * modelData.vertices.size());
+//	VertexInfluence* mappedInfluence = nullptr;
+//	skinCluster.influenceResource->Map(0, nullptr, reinterpret_cast<void**>(&mappedInfluence));
+//	std::memset(mappedInfluence, 0, sizeof(VertexInfluence) * modelData.vertices.size());
+//	skinCluster.mappedInfluence = { mappedInfluence,modelData.vertices.size() };
+//
+//	skinCluster.influenceBufferView.BufferLocation = skinCluster.influenceResource->GetGPUVirtualAddress();
+//	skinCluster.influenceBufferView.SizeInBytes = UINT(sizeof(VertexInfluence) * modelData.vertices.size());
+//	skinCluster.influenceBufferView.StrideInBytes = sizeof(VertexInfluence);
+//
+//	skinCluster.inverseBindPoseMatrices.resize(skeleton.joints.size());
+//	std::generate(skinCluster.inverseBindPoseMatrices.begin(), skinCluster.inverseBindPoseMatrices.end(), MakeIdentity4x4);
+//
+//
+//	for (const auto& jointWeight : modelData.skinClusterData) {
+//
+//		auto it = skeleton.jointMap.find(jointWeight.first);
+//		if (it == skeleton.jointMap.end()) {
+//
+//			continue;
+//		}
+//
+//		skinCluster.inverseBindPoseMatrices[(*it).second] = jointWeight.second.inversBindPoseMatrix;
+//		for (const auto& vertexWeight : jointWeight.second.vertexWeights) {
+//
+//			auto& currentInfluence = skinCluster.mappedInfluence[vertexWeight.vertexIndex];
+//
+//
+//			for (uint32_t index = 0; index < NUM_MAX_INFLUENCE; ++index) {
+//
+//				if (currentInfluence.weights[index] == 0.0f) {
+//					currentInfluence.weights[index] = vertexWeight.weight;
+//					currentInfluence.jointIndices[index] = (*it).second;
+//					break;
+//				}
+//
+//			}
+//		}
+//
+//
+//	}
+//
+//
+//	return skinCluster;
+//}
+//
+//void LoadObjManagement::SkinUpdate(SkinCluster& skinCluster, const Skeleton& skeleton)
+//{
+//
+//	//0...両方単位
+//	//1...同じく単位
+//	//2...同じく単位
+//	//3...複雑な値
+//
+//	//skeletonSpacematrixの値が違う件
+//	for (size_t jointIndex = 0; jointIndex < skeleton.joints.size(); ++jointIndex)
+//	{
+//		assert(jointIndex < skinCluster.inverseBindPoseMatrices.size());
+//
+//		Matrix4x4 inverseBindMatrix = skinCluster.inverseBindPoseMatrices[jointIndex];
+//
+//		//2番目のSaceMatrixの値が変
+//		Matrix4x4 skeletonSpaceMatrix = skeleton.joints[jointIndex].skeletonSpaceMatrix;
+//
+//
+//		skinCluster.mappedPalette[jointIndex].skeletonSpaceMatrix =
+//			Multiply(skinCluster.inverseBindPoseMatrices[jointIndex],
+//				skeleton.joints[jointIndex].skeletonSpaceMatrix);
+//
+//		skinCluster.mappedPalette[jointIndex].skeletonSpaceIncerseTransposeMatrix =
+//			MakeTransposeMatrix(Inverse(skinCluster.mappedPalette[jointIndex].skeletonSpaceMatrix));
+//
+//	}
+//
+//
+//
+//}

@@ -298,6 +298,9 @@
     <ClCompile Include="DKJEN\Skinning\Animation\Skinning.cpp">
       <Filter>DKJEN\Skinning\Animation</Filter>
     </ClCompile>
+    <ClCompile Include="DKJEN\Skinning\Animation\Bone.cpp">
+      <Filter>DKJEN\Skinning\Animation</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="DKJEN\Utilipy\Input.h">
@@ -468,10 +471,13 @@
     <ClInclude Include="DKJEN\Management\LoadObjManagement.h">
       <Filter>DKJEN\Management</Filter>
     </ClInclude>
-    <ClInclude Include="DKJEN\Utilipy\jjj.h">
+    <ClInclude Include="DKJEN\Utilipy\Sc.h">
       <Filter>DKJEN\Utilipy</Filter>
     </ClInclude>
     <ClInclude Include="DKJEN\Skinning\Animation\Skinning.h">
+      <Filter>DKJEN\Skinning\Animation</Filter>
+    </ClInclude>
+    <ClInclude Include="DKJEN\Skinning\Animation\Bone.h">
       <Filter>DKJEN\Skinning\Animation</Filter>
     </ClInclude>
   </ItemGroup>

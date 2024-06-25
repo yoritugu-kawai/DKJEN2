@@ -283,6 +283,7 @@ copy "$(WindowsSdkDir)bin\$(TargetPlatformVersion)\x64\dxil.dll" "$(TargetDir)dx
     <ClCompile Include="DKJEN\Shader\PolygonCompileShader.cpp" />
     <ClCompile Include="DKJEN\Shader\SpriteCompileShader.cpp" />
     <ClCompile Include="DKJEN\Shader\TextureCompileShader.cpp" />
+    <ClCompile Include="DKJEN\Skinning\Animation\Bone.cpp" />
     <ClCompile Include="DKJEN\Skinning\Animation\Skinning.cpp" />
     <ClCompile Include="DKJEN\TexDeta\Image\ImageData.cpp" />
     <ClCompile Include="DKJEN\Type\Obj3D.cpp" />
@@ -340,6 +341,7 @@ copy "$(WindowsSdkDir)bin\$(TargetPlatformVersion)\x64\dxil.dll" "$(TargetDir)dx
     <ClInclude Include="DKJEN\Shader\SpriteCompileShader.h" />
     <ClInclude Include="DKJEN\Shader\TextureCompileShader.h" />
     <ClInclude Include="DKJEN\Skinning\Animation\Animation.h" />
+    <ClInclude Include="DKJEN\Skinning\Animation\Bone.h" />
     <ClInclude Include="DKJEN\Skinning\Animation\Skinning.h" />
     <ClInclude Include="DKJEN\TexDeta\Image\ImageData.h" />
     <ClInclude Include="DKJEN\Type\Obj3D.h" />
@@ -350,7 +352,7 @@ copy "$(WindowsSdkDir)bin\$(TargetPlatformVersion)\x64\dxil.dll" "$(TargetDir)dx
     <ClInclude Include="DKJEN\Type\Texture.h" />
     <ClInclude Include="DKJEN\Utilipy\CSVLoad.h" />
     <ClInclude Include="DKJEN\Utilipy\Input.h" />
-    <ClInclude Include="DKJEN\Utilipy\jjj.h" />
+    <ClInclude Include="DKJEN\Utilipy\Sc.h" />
     <ClInclude Include="DKJEN\Utilipy\Pch.h" />
     <ClInclude Include="DKJEN\Utilipy\rektyk.h" />
     <ClInclude Include="DKJEN\WorldTransform\WorldTransform.h" />

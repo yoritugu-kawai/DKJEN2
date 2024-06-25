@@ -2,7 +2,7 @@
 #include"../Type/Obj3D.h"
 #include"../Skinning/Animation/Animation.h"
 #include"../Utilipy/Pch.h"
-#include"../Utilipy/jjj.h"
+#include"../Utilipy/Sc.h"
 struct Joint {
 	QuaternionTransform transform;
 	Matrix4x4 localMatrix;
