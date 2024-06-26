@@ -86,6 +86,7 @@ void Obj3D::AnimationDraw( Vector4 Color,CameraData*cameraData, WorldTransform* 
 	commandList->DrawIndexedInstanced(UINT(modelData_.indices.size()), 1, 0, 0, 0);
 	//commandList->DrawInstanced(UINT(modelData_.vertices.size()), 1, 0, 0);
 }
+
 void Obj3D::Draw(Vector4 Color, CameraData* cameraData, WorldTransform* worldTransform)
 {
 
