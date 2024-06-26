@@ -154,8 +154,8 @@ int WINAPI WinMain(HINSTANCE, HINSTANCE, LPSTR, int) {
 		//////
 
 		//sprite->Draw({200.0f,100.0f,10.0f},{0,0,0},{0,0,0},{1,1,1,1});
-		walk3d->Draw({ 1,1,1,1 }, cameraData, worldTransform, skinCluster);
-		animatedSimple3d->Draw({ 1,1,1,1 }, cameraData, worldTransformSimple, skinClusterSimple);
+		walk3d->AnimationDraw({ 1,1,1,1 }, cameraData, worldTransform, skinCluster);
+		animatedSimple3d->AnimationDraw({ 1,1,1,1 }, cameraData, worldTransformSimple, skinClusterSimple);
 		box_->Draw({ 1,1,1,1 }, cameraData, worldTransformSimple, skinClusterSimple);
 		//////
 		//　　描画処理
