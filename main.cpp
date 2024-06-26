@@ -60,6 +60,10 @@ int WINAPI WinMain(HINSTANCE, HINSTANCE, LPSTR, int) {
 	Obj3D* box_ = new Obj3D;
 	ModelData boxData_ = LoadObjManagement::NewLoadObjFile("resource", "AnimatedCube.gltf");
 	box_->Initialize(boxData_);
+	WorldTransform* boxWorldTransform_ = new WorldTransform;
+	boxWorldTransform_->Create();
+
+	//
 	Sprite* sprite = new Sprite;
 	Vector3 cameraPos_ = { 0,0,-10 };
 
@@ -129,11 +133,13 @@ int WINAPI WinMain(HINSTANCE, HINSTANCE, LPSTR, int) {
 		worldTransformSimple->SetTranslate(pos2_ );
 		worldTransform->SetRotate(rotate);
 		worldTransformSimple->SetRotate({0,2.5,0});
+
+		boxWorldTransform_->SetTranslate({-2,0,0});
 		//更新
 		//worldTransform->AnimationUpdateMatrix(cameraData, mtrix);
 		worldTransform->UpdateMatrix(cameraData);
 		worldTransformSimple->UpdateMatrix(cameraData);
-
+		boxWorldTransform_->UpdateMatrix(cameraData);
 		/*skeleton.joints[1].skeletonSpaceMatrix;
 		worldTransformCubemodel->UpdateMatrix*/
 		ImGui::Begin("pos");
@@ -154,9 +160,9 @@ int WINAPI WinMain(HINSTANCE, HINSTANCE, LPSTR, int) {
 		//////
 
 		//sprite->Draw({200.0f,100.0f,10.0f},{0,0,0},{0,0,0},{1,1,1,1});
+		box_->Draw({ 1,1,1,1 }, cameraData, boxWorldTransform_);
 		walk3d->AnimationDraw({ 1,1,1,1 }, cameraData, worldTransform, skinCluster);
 		animatedSimple3d->AnimationDraw({ 1,1,1,1 }, cameraData, worldTransformSimple, skinClusterSimple);
-		box_->Draw({ 1,1,1,1 }, cameraData, worldTransformSimple, skinClusterSimple);
 		//////
 		//　　描画処理
 		//////
