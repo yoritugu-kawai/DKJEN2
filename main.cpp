@@ -46,19 +46,20 @@ int WINAPI WinMain(HINSTANCE, HINSTANCE, LPSTR, int) {
 	walk3d->Initialize(modelData_);
 	uint32_t tex = TexManager::LoadTexture("GameResource/uvChecker.png");
 	//AnimatedCube
-	Skinning* skinCubemodel = new Skinning;
-	Bone* boneCubemodel = new Bone;
-	WorldTransform* worldTransformCubemodel = new WorldTransform;
-	worldTransformCubemodel->Create();
-	Obj3D* animatedCube3d = new Obj3D;
-	ModelData animatedCubemodelData_ = LoadObjManagement::NewLoadObjFile("resource", "simpleSkin.gltf");
-	Animation animatioCubemodel = LoadObjManagement::LoadAnimationFile("resource", "simpleSkin.gltf");
-	Skeleton skeletonCubemodel = boneCubemodel->CreateSkeleton(animatedCubemodelData_.rootNode);
-	SkinCluster  skinCluster2 = skinCubemodel->CreateSkinCluster(skeletonCubemodel, animatedCubemodelData_);
-	
-
-	animatedCube3d->Initialize(animatedCubemodelData_);
+	Skinning* skinSimple = new Skinning;
+	Bone* boneSimple = new Bone;
+	WorldTransform* worldTransformSimple = new WorldTransform;
+	worldTransformSimple->Create();
+	Obj3D* animatedSimple3d = new Obj3D;
+	ModelData animatedSimpleData_ = LoadObjManagement::NewLoadObjFile("resource", "simpleSkin.gltf");
+	Animation animatioSimple = LoadObjManagement::LoadAnimationFile("resource", "simpleSkin.gltf");
+	Skeleton skeletonSimple = boneSimple->CreateSkeleton(animatedSimpleData_.rootNode);
+	SkinCluster  skinClusterSimple = skinSimple->CreateSkinCluster(skeletonSimple, animatedSimpleData_);
+	animatedSimple3d->Initialize(animatedSimpleData_);
 	//
+	Obj3D* box_ = new Obj3D;
+	ModelData boxData_ = LoadObjManagement::NewLoadObjFile("resource", "AnimatedCube.gltf");
+	box_->Initialize(boxData_);
 	Sprite* sprite = new Sprite;
 	Vector3 cameraPos_ = { 0,0,-10 };
 
@@ -105,13 +106,13 @@ int WINAPI WinMain(HINSTANCE, HINSTANCE, LPSTR, int) {
 		skin->SkinUpdate(skinCluster, skeleton);
 
 		///
-		boneCubemodel->ApplyAnimation(skeletonCubemodel, animatioCubemodel, animaionTime);
+		boneSimple->ApplyAnimation(skeletonSimple, animatioSimple, animaionTime);
 		//Skeleton
 
-		boneCubemodel->Update(skeletonCubemodel);
+		boneSimple->Update(skeletonSimple);
 		//SkinCluster
 
-		skinCubemodel->SkinUpdate(skinCluster2, skeletonCubemodel);
+		skinSimple->SkinUpdate(skinClusterSimple, skeletonSimple);
 
 
 		worldTransform->SetScale({ 1, 1, 1, });
@@ -125,13 +126,13 @@ int WINAPI WinMain(HINSTANCE, HINSTANCE, LPSTR, int) {
 			rotate.y = -11;
 		}
 		worldTransform->SetTranslate(pos_);
-		worldTransformCubemodel->SetTranslate(pos2_ );
+		worldTransformSimple->SetTranslate(pos2_ );
 		worldTransform->SetRotate(rotate);
-		worldTransformCubemodel->SetRotate({0,2.5,0});
+		worldTransformSimple->SetRotate({0,2.5,0});
 		//更新
 		//worldTransform->AnimationUpdateMatrix(cameraData, mtrix);
 		worldTransform->UpdateMatrix(cameraData);
-		worldTransformCubemodel->UpdateMatrix(cameraData);
+		worldTransformSimple->UpdateMatrix(cameraData);
 
 		/*skeleton.joints[1].skeletonSpaceMatrix;
 		worldTransformCubemodel->UpdateMatrix*/
@@ -154,7 +155,8 @@ int WINAPI WinMain(HINSTANCE, HINSTANCE, LPSTR, int) {
 
 		//sprite->Draw({200.0f,100.0f,10.0f},{0,0,0},{0,0,0},{1,1,1,1});
 		walk3d->Draw({ 1,1,1,1 }, cameraData, worldTransform, skinCluster);
-		animatedCube3d->Draw({ 1,1,1,1 }, cameraData, worldTransformCubemodel, skinCluster2);
+		animatedSimple3d->Draw({ 1,1,1,1 }, cameraData, worldTransformSimple, skinClusterSimple);
+		box_->Draw({ 1,1,1,1 }, cameraData, worldTransformSimple, skinClusterSimple);
 		//////
 		//　　描画処理
 		//////

@@ -24,7 +24,7 @@ void Obj3D::Initialize(ModelData modelData)
 	
 }
 
-void Obj3D::Draw( Vector4 Color,CameraData*cameraData, WorldTransform* worldTransform, SkinCluster& skinCluster)
+void Obj3D::AnimationDraw( Vector4 Color,CameraData*cameraData, WorldTransform* worldTransform, SkinCluster& skinCluster)
 {
 	
 	

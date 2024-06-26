@@ -68,7 +68,7 @@ public:
 	/*ModelData LoadObjFile(const std::string& directoryPath, const std::string& filename);
 
 	*/
-	ModelData GetModelData() {return modelData_;}
+	
 	//ModelData NewLoadObjFile(const std::string& directoryPath, const std::string& filename);
 	//Node ReadNode(aiNode* node);
 	//アニメーション
