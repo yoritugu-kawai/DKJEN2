@@ -5,7 +5,7 @@
 #include"../Base/DxCommon.h"
 //#include"../Base/SpritePSO.h"
 //#include"../Base/TexturePSO.h"
-#include"../Base/LightPSO.h"
+#include"../Base/Animation3DPSO.h"
 
 #include"../CameraProjection/CameraProjection.h"
 #include"../Camera/CameraData.h"
@@ -49,7 +49,7 @@ struct ModelData
 };
 
 
-class Obj3D {
+class Animation3D {
 public:
 	/// <summary>
 	/// 
@@ -64,7 +64,7 @@ public:
 	/// <param name="Vector3 translate = { 0.0f, 0.0f, 0.0f }"></param>
 	/// <param name="Vector4 color = { 1.0f,1.0f,1.0f,1.0f }"></param>
 	void AnimationDraw( Vector4 Color, CameraData* cameraData, WorldTransform* worldTransform, SkinCluster& skinCluster);
-	void Draw(Vector4 Color, CameraData* cameraData, WorldTransform* worldTransform);
+	//void Draw(Vector4 Color, CameraData* cameraData, WorldTransform* worldTransform);
 	/*ModelData LoadObjFile(const std::string& directoryPath, const std::string& filename);
 
 	*/

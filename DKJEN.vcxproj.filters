@@ -154,7 +154,7 @@
     <ClCompile Include="DKJEN\Math\Math.cpp">
       <Filter>DKJEN\Math</Filter>
     </ClCompile>
-    <ClCompile Include="DKJEN\Shader\LightCompileShader.cpp">
+    <ClCompile Include="DKJEN\Shader\Animation3DCompileShader.cpp">
       <Filter>DKJEN\Shader</Filter>
     </ClCompile>
     <ClCompile Include="DKJEN\Shader\PolygonCompileShader.cpp">
@@ -205,7 +205,7 @@
     <ClCompile Include="DKJEN\Base\WinApp.cpp">
       <Filter>DKJEN\Base\Win</Filter>
     </ClCompile>
-    <ClCompile Include="DKJEN\Base\LightPSO.cpp">
+    <ClCompile Include="DKJEN\Base\Animation3DPSO.cpp">
       <Filter>DKJEN\Base\PSO</Filter>
     </ClCompile>
     <ClCompile Include="DKJEN\Base\Function.cpp">
@@ -318,7 +318,7 @@
     <ClInclude Include="DKJEN\Management\PSOCopileManagement.h">
       <Filter>DKJEN\Management</Filter>
     </ClInclude>
-    <ClInclude Include="DKJEN\Shader\LightCompileShader.h">
+    <ClInclude Include="DKJEN\Shader\Animation3DCompileShader.h">
       <Filter>DKJEN\Shader</Filter>
     </ClInclude>
     <ClInclude Include="DKJEN\Shader\PolygonCompileShader.h">
@@ -372,7 +372,7 @@
     <ClInclude Include="DKJEN\Base\WinApp.h">
       <Filter>DKJEN\Base\Win</Filter>
     </ClInclude>
-    <ClInclude Include="DKJEN\Base\LightPSO.h">
+    <ClInclude Include="DKJEN\Base\Animation3DPSO.h">
       <Filter>DKJEN\Base\PSO</Filter>
     </ClInclude>
     <ClInclude Include="DKJEN\Base\Function.h">

@@ -1,28 +1,28 @@
-#include"LightPSO.h"
+#include"Animation3DPSO.h"
 
-LightPSO* LightPSO::GetInstance()
+Animation3DPSO* Animation3DPSO::GetInstance()
 {
-	static LightPSO instance;
+	static Animation3DPSO instance;
 
 	return &instance;
 }
-void LightPSO::CreatePSO()
+void Animation3DPSO::CreatePSO()
 {
 	ShapePSO();
 }
 
-void LightPSO::Release()
+void Animation3DPSO::Release()
 {
-	if (LightPSO::GetInstance()->pso_.Texture.errorBlob)
+	if (Animation3DPSO::GetInstance()->pso_.Texture.errorBlob)
 	{
-		LightPSO::GetInstance()->pso_.Texture.errorBlob->Release();
+		Animation3DPSO::GetInstance()->pso_.Texture.errorBlob->Release();
 	}
-	LightPSO::GetInstance()->pso_.Texture.GraphicsPipelineState->Release();
-	LightPSO::GetInstance()->pso_.Texture.rootSignature->Release();
-	LightPSO::GetInstance()->pso_.Texture.signatureBlob->Release();
+	Animation3DPSO::GetInstance()->pso_.Texture.GraphicsPipelineState->Release();
+	Animation3DPSO::GetInstance()->pso_.Texture.rootSignature->Release();
+	Animation3DPSO::GetInstance()->pso_.Texture.signatureBlob->Release();
 }
 
-void LightPSO::ShapePSO()
+void Animation3DPSO::ShapePSO()
 {
 
 	ID3D12Device* device = DxCommon::GetInstance()->GetDevice();
@@ -30,7 +30,7 @@ void LightPSO::ShapePSO()
 
 	PSOProperty ShapePSO;
 
-	ShaderMode shader = LightCompileShader::GetInstance()->GetShaders().shape;
+	ShaderMode shader = Animation3DCompileShader::GetInstance()->GetShaders().shape;
 
 	//RootSignature作成
 	D3D12_ROOT_SIGNATURE_DESC descriptionRootSignature{};
@@ -236,7 +236,7 @@ void LightPSO::ShapePSO()
 		IID_PPV_ARGS(&ShapePSO.GraphicsPipelineState));
 	assert(SUCCEEDED(hr));
 
-	LightPSO::GetInstance()->pso_.Texture = ShapePSO;
+	Animation3DPSO::GetInstance()->pso_.Texture = ShapePSO;
 
 
 }

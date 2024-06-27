@@ -18,19 +18,19 @@ void PSOCopileManagement::Set()
 	TextureCompileShader::DXC();
 	PolygonCompileShader::DXC();
 	SpriteCompileShader::DXC();
-	LightCompileShader::DXC();
+	Animation3DCompileShader::DXC();
 	ParticleCompileShader::DXC();
 
 	TextureCompileShader::ShaderCompile();
 	PolygonCompileShader::ShaderCompile();
 	SpriteCompileShader::ShaderCompile();
-	LightCompileShader::ShaderCompile();
+	Animation3DCompileShader::ShaderCompile();
 	ParticleCompileShader::ShaderCompile();
 
 	TexturePSO::CreatePSO();
 	PolygonPSO::CreatePSO();
 	SpritePSO::CreatePSO();
-	LightPSO::CreatePSO();
+	Animation3DPSO::CreatePSO();
 	ParticlePSO::CreatePSO();
 
 
@@ -41,13 +41,13 @@ void PSOCopileManagement::Release()
 	TextureCompileShader::Release();
 	PolygonCompileShader::Release();
 	SpriteCompileShader::Release();
-	LightCompileShader::Release();
+	Animation3DCompileShader::Release();
 	ParticleCompileShader::Release();
 
 	TexturePSO::Release();
 	PolygonPSO::Release();
 	SpritePSO::Release();
-	LightPSO::Release();
+	Animation3DPSO::Release();
 	ParticlePSO::Release();
 
 }

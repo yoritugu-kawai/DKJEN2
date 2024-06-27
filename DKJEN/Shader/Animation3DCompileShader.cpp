@@ -1,19 +1,19 @@
-#include"LightCompileShader.h"
+#include"Animation3DCompileShader.h"
 
-LightCompileShader* LightCompileShader::GetInstance()
+Animation3DCompileShader* Animation3DCompileShader::GetInstance()
 {
-	static LightCompileShader instance;
+	static Animation3DCompileShader instance;
 
 	return &instance;
 }
 
-IDxcBlob* LightCompileShader::CompileShaderFanc(
+IDxcBlob* Animation3DCompileShader::CompileShaderFanc(
 	const std::wstring& filePath,
 	const wchar_t* profile)
 {
-	IDxcUtils* dxcUtils = LightCompileShader::GetInstance()->dxcUtils;
-	IDxcCompiler3* dxcCompiler = LightCompileShader::GetInstance()->dxcCompiler;
-	IDxcIncludeHandler* includeHandler = LightCompileShader::GetInstance()->includeHandler;
+	IDxcUtils* dxcUtils = Animation3DCompileShader::GetInstance()->dxcUtils;
+	IDxcCompiler3* dxcCompiler = Animation3DCompileShader::GetInstance()->dxcCompiler;
+	IDxcIncludeHandler* includeHandler = Animation3DCompileShader::GetInstance()->includeHandler;
 
 	//1.hlslファイルを読む
 	Log(ConvertString(std::format(L"Begin CompileShader,path:{},profile:{}\n", filePath, profile)));
@@ -72,7 +72,7 @@ IDxcBlob* LightCompileShader::CompileShaderFanc(
 }
 
 
-void LightCompileShader::DXC()
+void Animation3DCompileShader::DXC()
 {
 	IDxcUtils* dxcUtils;
 	IDxcCompiler3* dxcCompiler;
@@ -87,12 +87,12 @@ void LightCompileShader::DXC()
 	// 現時点でincludeはしないが、includeに対応するための設定を行っておく
 	hr = dxcUtils->CreateDefaultIncludeHandler(&includeHandler);
 	assert(SUCCEEDED(hr));
-	LightCompileShader::GetInstance()->dxcUtils = dxcUtils;
-	LightCompileShader::GetInstance()->dxcCompiler = dxcCompiler;
-	LightCompileShader::GetInstance()->includeHandler = includeHandler;
+	Animation3DCompileShader::GetInstance()->dxcUtils = dxcUtils;
+	Animation3DCompileShader::GetInstance()->dxcCompiler = dxcCompiler;
+	Animation3DCompileShader::GetInstance()->includeHandler = includeHandler;
 }
 
-void LightCompileShader::ShaderCompile()
+void Animation3DCompileShader::ShaderCompile()
 {
 	ShaderMode shape;
 
@@ -107,22 +107,22 @@ void LightCompileShader::ShaderCompile()
 			L"ps_6_0"
 		);*/
 	shape.vertexBlob =
-		LightCompileShader::CompileShaderFanc(
+		Animation3DCompileShader::CompileShaderFanc(
 			L"resource/hlsl/AnimationObject3D.VS.hlsl",
 			L"vs_6_0"
 		);
 	shape.pixelBlob =
-		LightCompileShader::CompileShaderFanc(
+		Animation3DCompileShader::CompileShaderFanc(
 			L"resource/hlsl/AnimationObject3D.PS.hlsl",
 			L"ps_6_0"
 		);
 
-	LightCompileShader::GetInstance()->shaders_.shape = shape;
+	Animation3DCompileShader::GetInstance()->shaders_.shape = shape;
 }
 
-void LightCompileShader::Release()
+void Animation3DCompileShader::Release()
 {
-	LightCompileShader::GetInstance()->shaders_.shape.pixelBlob->Release();
-	LightCompileShader::GetInstance()->shaders_.shape.vertexBlob->Release();
+	Animation3DCompileShader::GetInstance()->shaders_.shape.pixelBlob->Release();
+	Animation3DCompileShader::GetInstance()->shaders_.shape.vertexBlob->Release();
 }
 

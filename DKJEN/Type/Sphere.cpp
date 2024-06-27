@@ -173,7 +173,7 @@ void Sphere::Release()
 void Sphere::CommandCall()
 {
 	ID3D12GraphicsCommandList* commandList = DxCommon::GetInstance()->GetCommandList();
-	PSOProperty pso_ = LightPSO::GetInstance()->GetPSO().Texture;
+	PSOProperty pso_ = Animation3DPSO::GetInstance()->GetPSO().Texture;
 
 
 	commandList->SetGraphicsRootSignature(pso_.rootSignature);

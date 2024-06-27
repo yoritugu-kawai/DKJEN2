@@ -2,15 +2,15 @@
 #pragma once
 #include"../Base/DxCommon.h"
 
-class LightCompileShader
+class Animation3DCompileShader
 {
 public:
-	static LightCompileShader* GetInstance();
+	static Animation3DCompileShader* GetInstance();
 	static void DXC();
 	static void ShaderCompile();
 	static void Release();
 	//
-	static Shaders GetShaders() { return LightCompileShader::GetInstance()->shaders_; }
+	static Shaders GetShaders() { return Animation3DCompileShader::GetInstance()->shaders_; }
 private:
 	static IDxcBlob* CompileShaderFanc(
 		const std::wstring& filePath,

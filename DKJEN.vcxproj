@@ -254,7 +254,7 @@ copy "$(WindowsSdkDir)bin\$(TargetPlatformVersion)\x64\dxil.dll" "$(TargetDir)dx
     <ClCompile Include="DKJEN\Base\DxCommon.cpp" />
     <ClCompile Include="DKJEN\Base\Function.cpp" />
     <ClCompile Include="DKJEN\Base\TexManager.cpp" />
-    <ClCompile Include="DKJEN\Base\LightPSO.cpp" />
+    <ClCompile Include="DKJEN\Base\Animation3DPSO.cpp" />
     <ClCompile Include="DKJEN\Base\Log.cpp" />
     <ClCompile Include="DKJEN\Base\ParyiclePSO.cpp" />
     <ClCompile Include="DKJEN\Base\PolygonPSO.cpp" />
@@ -278,7 +278,7 @@ copy "$(WindowsSdkDir)bin\$(TargetPlatformVersion)\x64\dxil.dll" "$(TargetDir)dx
     <ClCompile Include="DKJEN\Management\TypeManagement.cpp" />
     <ClCompile Include="DKJEN\Math\Math.cpp" />
     <ClCompile Include="DKJEN\PostEffect\OffScreenRendering\RenderTextrure.cpp" />
-    <ClCompile Include="DKJEN\Shader\LightCompileShader.cpp" />
+    <ClCompile Include="DKJEN\Shader\Animation3DCompileShader.cpp" />
     <ClCompile Include="DKJEN\Shader\ParticleCompileShader.cpp" />
     <ClCompile Include="DKJEN\Shader\PolygonCompileShader.cpp" />
     <ClCompile Include="DKJEN\Shader\SpriteCompileShader.cpp" />
@@ -310,7 +310,7 @@ copy "$(WindowsSdkDir)bin\$(TargetPlatformVersion)\x64\dxil.dll" "$(TargetDir)dx
     <ClInclude Include="DKJEN\Base\DxCommon.h" />
     <ClInclude Include="DKJEN\Base\Function.h" />
     <ClInclude Include="DKJEN\Base\TexManager.h" />
-    <ClInclude Include="DKJEN\Base\LightPSO.h" />
+    <ClInclude Include="DKJEN\Base\Animation3DPSO.h" />
     <ClInclude Include="DKJEN\Base\Log.h" />
     <ClInclude Include="DKJEN\Base\ParyiclePSO.h" />
     <ClInclude Include="DKJEN\Base\PolygonPSO.h" />
@@ -335,7 +335,7 @@ copy "$(WindowsSdkDir)bin\$(TargetPlatformVersion)\x64\dxil.dll" "$(TargetDir)dx
     <ClInclude Include="DKJEN\Management\LoadObjManagement.h" />
     <ClInclude Include="DKJEN\Math\Math.h" />
     <ClInclude Include="DKJEN\PostEffect\OffScreenRendering\RenderTextrure.h" />
-    <ClInclude Include="DKJEN\Shader\LightCompileShader.h" />
+    <ClInclude Include="DKJEN\Shader\Animation3DCompileShader.h" />
     <ClInclude Include="DKJEN\Shader\ParticleCompileShader.h" />
     <ClInclude Include="DKJEN\Shader\PolygonCompileShader.h" />
     <ClInclude Include="DKJEN\Shader\SpriteCompileShader.h" />
