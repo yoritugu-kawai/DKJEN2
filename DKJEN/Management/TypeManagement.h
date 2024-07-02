@@ -1,5 +1,5 @@
 #pragma once
-#include"../Type/Obj3D.h"
+#include"../Type/Animation3D.h"
 #include"../Type/Polygon.h"
 #include"../Type/Sphere.h"
 #include"../Type/Sprite.h"

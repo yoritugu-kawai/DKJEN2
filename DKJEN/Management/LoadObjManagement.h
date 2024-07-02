@@ -1,5 +1,5 @@
 #pragma once
-#include"../Type/Obj3D.h"
+//#include"../Type/Obj3D.h"
 #include"../Skinning/Animation/Animation.h"
 #include"../Utilipy/Pch.h"
 #include"../Utilipy/Sc.h"

@@ -223,9 +223,6 @@
     <ClCompile Include="DKJEN\Type\Texture.cpp">
       <Filter>DKJEN\Type\2D</Filter>
     </ClCompile>
-    <ClCompile Include="DKJEN\Type\Obj3D.cpp">
-      <Filter>DKJEN\Type\3D</Filter>
-    </ClCompile>
     <ClCompile Include="DKJEN\Type\Sphere.cpp">
       <Filter>DKJEN\Type\3D</Filter>
     </ClCompile>
@@ -300,6 +297,9 @@
     </ClCompile>
     <ClCompile Include="DKJEN\Skinning\Animation\Bone.cpp">
       <Filter>DKJEN\Skinning\Animation</Filter>
+    </ClCompile>
+    <ClCompile Include="DKJEN\Type\Animation3D.cpp">
+      <Filter>DKJEN\Type\3D</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
@@ -390,9 +390,6 @@
     <ClInclude Include="DKJEN\Type\Texture.h">
       <Filter>DKJEN\Type\2D</Filter>
     </ClInclude>
-    <ClInclude Include="DKJEN\Type\Obj3D.h">
-      <Filter>DKJEN\Type\3D</Filter>
-    </ClInclude>
     <ClInclude Include="DKJEN\Type\Sphere.h">
       <Filter>DKJEN\Type\3D</Filter>
     </ClInclude>
@@ -479,6 +476,9 @@
     </ClInclude>
     <ClInclude Include="DKJEN\Skinning\Animation\Bone.h">
       <Filter>DKJEN\Skinning\Animation</Filter>
+    </ClInclude>
+    <ClInclude Include="DKJEN\Type\Animation3D.h">
+      <Filter>DKJEN\Type\3D</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>
