@@ -38,12 +38,12 @@ int WINAPI WinMain(HINSTANCE, HINSTANCE, LPSTR, int) {
 	Bone* bone = new Bone;
 	WorldTransform* worldTransform = new WorldTransform;
 	worldTransform->Create();
-	Animation3D* walk3d = new Animation3D;
+	//Animation3D* walk3d = new Animation3D;
 	ModelData modelData_ = LoadObjManagement::NewLoadObjFile("resource/hu", "walk.gltf");
-	Animation animatio = LoadObjManagement::LoadAnimationFile("resource/hu", "walk.gltf");
-	Skeleton skeleton = bone->CreateSkeleton(modelData_.rootNode);
+	//Animation animatio = LoadObjManagement::LoadAnimationFile("resource/hu", "walk.gltf");
+	/*Skeleton skeleton = bone->CreateSkeleton(modelData_.rootNode);
 	SkinCluster  skinCluster = skin->CreateSkinCluster(skeleton, modelData_);
-	walk3d->Initialize(modelData_);
+	walk3d->Initialize(modelData_);*/
 	
 
 	//skinSimple
@@ -121,13 +121,13 @@ int WINAPI WinMain(HINSTANCE, HINSTANCE, LPSTR, int) {
 		worldTransform->AnimationUpdateMatrix(cameraData, mtrix);*/
 
 		//Animation
-		bone->ApplyAnimation(skeleton, animatio, animaionTime);
-		//Skeleton
+		//bone->ApplyAnimation(skeleton, animatio, animaionTime);
+		////Skeleton
 
-		bone->Update(skeleton);
-		//SkinCluster
+		//bone->Update(skeleton);
+		////SkinCluster
 
-		skin->SkinUpdate(skinCluster, skeleton);
+		//skin->SkinUpdate(skinCluster, skeleton);
 
 		/////Simple
 		boneSimple->ApplyAnimation(skeletonSimple, animatioSimple, animaionTime2);
@@ -160,10 +160,11 @@ int WINAPI WinMain(HINSTANCE, HINSTANCE, LPSTR, int) {
 			rotate.y = -11;
 		}
 		worldTransform->SetTranslate(pos_);
+		worldTransformSneak->SetTranslate({1,0,0});
 		//worldTransformSimple->SetTranslate(pos2_ );
 		worldTransform->SetRotate(rotate);
 		worldTransformSimple->SetRotate({0,2.5,0});
-
+		worldTransformSneak->SetRotate({ 0,2.5,0 });
 		boxWorldTransform_->SetTranslate({-2,0,0});
 		//更新
 		//worldTransform->AnimationUpdateMatrix(cameraData, mtrix);
@@ -191,7 +192,7 @@ int WINAPI WinMain(HINSTANCE, HINSTANCE, LPSTR, int) {
 		//////
 
 		//sprite->Draw({200.0f,100.0f,10.0f},{0,0,0},{0,0,0},{1,1,1,1});
-		walk3d->Draw({ 1,1,1,1 }, cameraData, worldTransform, skinCluster);
+		//walk3d->Draw({ 1,1,1,1 }, cameraData, worldTransform, skinCluster);
 		animatedSimple3d->Draw({ 1,1,1,1 }, cameraData, worldTransformSimple, skinClusterSimple);
 		box_->Draw({ 1,1,1,1 }, cameraData, boxWorldTransform_);
 		walkSneak3d->Draw({ 1,1,1,1 }, cameraData, worldTransformSneak, skinClusterSneak);
