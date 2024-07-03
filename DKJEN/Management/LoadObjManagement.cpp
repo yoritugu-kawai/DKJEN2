@@ -63,7 +63,7 @@ ModelData LoadObjManagement::NewLoadObjFile(const std::string& directoryPath, co
 
 
 			Matrix4x4 bindPoseMatrix = Multiply(scaleMatrix, Multiply(rotateMatrix, translateMatrix));
-			jointWeightData.inversBindPoseMatrix = Inverse(bindPoseMatrix);
+			jointWeightData.inverseBindPoseMatrix= Inverse(bindPoseMatrix);
 
 			for (uint32_t weightIndex = 0; weightIndex < bone->mNumWeights; ++weightIndex) {
 				jointWeightData.vertexWeights.push_back({ bone->mWeights[weightIndex].mWeight, bone->mWeights[weightIndex].mVertexId });

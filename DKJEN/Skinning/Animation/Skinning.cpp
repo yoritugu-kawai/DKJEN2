@@ -7,12 +7,19 @@ SkinCluster Skinning::CreateSkinCluster(const Skeleton& skeleton, const ModelDat
 	ID3D12DescriptorHeap* srvDescriptorHeap = DxCommon::GetInstance()->GetsrvDescriptorHeap();
 	uint32_t descriptorSizeSRV = TexManager::GetInstance()->GetDescriptorSizeSRV();
 
+	DescriptorManagement::GetInstance();
+	DescriptorManagement::IndexIncrement();
+	
+
 	skinCluster.paletteResource = CreateBufferResource(sizeof(WellForGPU) * skeleton.joints.size());
 	WellForGPU* mappedPalette = nullptr;
 	skinCluster.paletteResource->Map(0, nullptr, reinterpret_cast<void**>(&mappedPalette));
 	skinCluster.mappedPalette = { mappedPalette,skeleton.joints.size() };
-	skinCluster.paletteSrvHandle.first = GetCPUDescriptorHandle(srvDescriptorHeap, descriptorSizeSRV, DescriptorManagement::GetIndex());
-	skinCluster.paletteSrvHandle.second = GetGPUDescriptorHandle(srvDescriptorHeap, descriptorSizeSRV, DescriptorManagement::GetIndex());
+	skinCluster.paletteSrvHandle.first = GetCPUDescriptorHandle(srvDescriptorHeap, descriptorSizeSRV, DescriptorManagement::GetIndex()-1);
+	skinCluster.paletteSrvHandle.second = GetGPUDescriptorHandle(srvDescriptorHeap, descriptorSizeSRV, DescriptorManagement::GetIndex()-1);
+	DescriptorManagement::SetSRVHCPU(skinCluster.paletteSrvHandle.first, DescriptorManagement::GetIndex());
+	DescriptorManagement::SetSRVHGPU(skinCluster.paletteSrvHandle.second, DescriptorManagement::GetIndex());
+
 
 	D3D12_SHADER_RESOURCE_VIEW_DESC paletteSrvDesc{};
 	paletteSrvDesc.Format = DXGI_FORMAT_UNKNOWN;
@@ -22,7 +29,8 @@ SkinCluster Skinning::CreateSkinCluster(const Skeleton& skeleton, const ModelDat
 	paletteSrvDesc.Buffer.Flags = D3D12_BUFFER_SRV_FLAG_NONE;
 	paletteSrvDesc.Buffer.NumElements = UINT(skeleton.joints.size());
 	paletteSrvDesc.Buffer.StructureByteStride = sizeof(WellForGPU);
-	device->CreateShaderResourceView(skinCluster.paletteResource.Get(), &paletteSrvDesc, skinCluster.paletteSrvHandle.first);
+
+	device->CreateShaderResourceView(skinCluster.paletteResource.Get(), &paletteSrvDesc, DescriptorManagement::GetSRVHCPU(DescriptorManagement::GetIndex()));
 
 	skinCluster.influenceResource = CreateBufferResource(sizeof(VertexInfluence) * modelData.vertices.size());
 	VertexInfluence* mappedInfluence = nullptr;
@@ -46,7 +54,7 @@ SkinCluster Skinning::CreateSkinCluster(const Skeleton& skeleton, const ModelDat
 			continue;
 		}
 
-		skinCluster.inverseBindPoseMatrices[(*it).second] = jointWeight.second.inversBindPoseMatrix;
+		skinCluster.inverseBindPoseMatrices[(*it).second] = jointWeight.second.inverseBindPoseMatrix;
 		for (const auto& vertexWeight : jointWeight.second.vertexWeights) {
 
 			auto& currentInfluence = skinCluster.mappedInfluence[vertexWeight.vertexIndex];

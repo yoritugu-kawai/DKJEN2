@@ -4,12 +4,14 @@
 #include"../Shader/SpriteCompileShader.h"
 #include"../Shader/TextureCompileShader.h"
 #include"../Shader/ParticleCompileShader.h"
+#include"../Shader/LightCompileShader.h"
 
 #include"../Base/Animation3DPSO.h"
 #include"../Base/PolygonPSO.h"
 #include"../Base/SpritePSO.h"
 #include"../Base/TexturePSO.h"
 #include"../Base/ParyiclePSO.h"
+#include"../Base/LightPSO.h"
 
 class PSOCopileManagement
 {

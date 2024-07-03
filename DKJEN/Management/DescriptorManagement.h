@@ -17,6 +17,16 @@ public:
 	static void rootParamerterCommand(UINT rootPatramerterIndex, uint32_t texhandle);
 	static void IndexIncrement() { DescriptorManagement::GetInstance()->index++; }
 	static uint32_t GetIndex() { return DescriptorManagement::GetInstance()->index; }
+#pragma region Get
+	static D3D12_CPU_DESCRIPTOR_HANDLE GetSRVHCPU(int index) { return DescriptorManagement::GetInstance()->SrvHandleCPU[index]; }
+	static D3D12_GPU_DESCRIPTOR_HANDLE GetSRVHGPU(int index) { return DescriptorManagement::GetInstance()->SrvHandleGPU[index]; }
+
+#pragma endregion
+
+#pragma region Set
+	static void SetSRVHCPU(D3D12_CPU_DESCRIPTOR_HANDLE SrvHCPU, int index) { DescriptorManagement::GetInstance()->SrvHandleCPU[index] = SrvHCPU; }
+	static void SetSRVHGPU(D3D12_GPU_DESCRIPTOR_HANDLE SrvHGPU, int index) { DescriptorManagement::GetInstance()->SrvHandleGPU[index] = SrvHGPU; }
+#pragma endregion
 private:
 	D3D12_CPU_DESCRIPTOR_HANDLE SrvHandleCPU[DESCRIPTER_MAX]{};
 	D3D12_GPU_DESCRIPTOR_HANDLE SrvHandleGPU[DESCRIPTER_MAX]{};

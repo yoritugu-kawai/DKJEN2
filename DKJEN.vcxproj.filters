@@ -301,6 +301,15 @@
     <ClCompile Include="DKJEN\Type\Animation3D.cpp">
       <Filter>DKJEN\Type\3D</Filter>
     </ClCompile>
+    <ClCompile Include="DKJEN\Type\Obj3D.cpp">
+      <Filter>DKJEN\Type\3D</Filter>
+    </ClCompile>
+    <ClCompile Include="DKJEN\Shader\LightCompileShader.cpp">
+      <Filter>DKJEN\Shader</Filter>
+    </ClCompile>
+    <ClCompile Include="DKJEN\Base\LightPSO.cpp">
+      <Filter>DKJEN\Base\PSO</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="DKJEN\Utilipy\Input.h">
@@ -479,6 +488,15 @@
     </ClInclude>
     <ClInclude Include="DKJEN\Type\Animation3D.h">
       <Filter>DKJEN\Type\3D</Filter>
+    </ClInclude>
+    <ClInclude Include="DKJEN\Type\Obj3D.h">
+      <Filter>DKJEN\Type\3D</Filter>
+    </ClInclude>
+    <ClInclude Include="DKJEN\Shader\LightCompileShader.h">
+      <Filter>DKJEN\Shader</Filter>
+    </ClInclude>
+    <ClInclude Include="DKJEN\Base\LightPSO.h">
+      <Filter>DKJEN\Base\PSO</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>

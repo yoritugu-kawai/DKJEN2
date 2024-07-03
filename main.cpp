@@ -44,8 +44,9 @@ int WINAPI WinMain(HINSTANCE, HINSTANCE, LPSTR, int) {
 	Skeleton skeleton = bone->CreateSkeleton(modelData_.rootNode);
 	SkinCluster  skinCluster = skin->CreateSkinCluster(skeleton, modelData_);
 	walk3d->Initialize(modelData_);
-	uint32_t tex = TexManager::LoadTexture("GameResource/uvChecker.png");
-	//AnimatedCube
+	
+
+	//skinSimple
 	Skinning* skinSimple = new Skinning;
 	Bone* boneSimple = new Bone;
 	WorldTransform* worldTransformSimple = new WorldTransform;
@@ -57,25 +58,43 @@ int WINAPI WinMain(HINSTANCE, HINSTANCE, LPSTR, int) {
 	SkinCluster  skinClusterSimple = skinSimple->CreateSkinCluster(skeletonSimple, animatedSimpleData_);
 	animatedSimple3d->Initialize(animatedSimpleData_);
 	//
-	/*Obj3D* box_ = new Obj3D;
+	Obj3D* box_ = new Obj3D;
 	ModelData boxData_ = LoadObjManagement::NewLoadObjFile("resource", "axis.obj");
 	
 	box_->Initialize(boxData_);
 	WorldTransform* boxWorldTransform_ = new WorldTransform;
-	boxWorldTransform_->Create();*/
+	boxWorldTransform_->Create();
 
 	//
-	Sprite* sprite = new Sprite;
+	// 
+	// 
+	
+	Skinning* sneak = new Skinning;
+	Bone* boneSneak = new Bone;
+	WorldTransform* worldTransformSneak = new WorldTransform;
+	worldTransformSneak->Create();
+	Animation3D* walkSneak3d = new Animation3D;
+	ModelData modelDataSneak_ = LoadObjManagement::NewLoadObjFile("resource/hu", "sneakWalk.gltf");
+	Animation animatioSneak = LoadObjManagement::LoadAnimationFile("resource/hu", "sneakWalk.gltf");
+	Skeleton skeletonSneak = boneSneak->CreateSkeleton(modelDataSneak_.rootNode);
+	SkinCluster  skinClusterSneak = sneak->CreateSkinCluster(skeletonSneak, modelDataSneak_);
+	walkSneak3d->Initialize(modelDataSneak_);
+
+
+
+	//uint32_t tex = TexManager::LoadTexture("GameResource/uvChecker.png");
+	/*Sprite* sprite = new Sprite;
+	sprite->Initialize(tex);*/
+	DescriptorManagement::GetInstance();
 	Vector3 cameraPos_ = { 0,0,-10 };
-
+	//細かい値
 	Vector3 cameraRotate_ = { 0,0,0 };
-	sprite->Initialize(tex);
-
 	float k = 0;
 	Vector3 pos_ = { 0,-2,0 };
 	Vector3 pos2_ = { 3,-2,0 };
 	Vector3 rotate = { 0,11,0 };
 	float  animaionTime = 0;
+	float  animaionTime2 = 0;
 	Matrix4x4 mtrix = {};
 	//座標
 
@@ -97,7 +116,7 @@ int WINAPI WinMain(HINSTANCE, HINSTANCE, LPSTR, int) {
 		//////
 		cameraData->Update();
 		animaionTime += 1.0f / 60.0f;
-
+		animaionTime2 += 3.0f / 60.0f;
 		/*mtrix=LoadObjManagement::AnimationUpdate(obj3d->GetModelData(),animatio);
 		worldTransform->AnimationUpdateMatrix(cameraData, mtrix);*/
 
@@ -110,15 +129,25 @@ int WINAPI WinMain(HINSTANCE, HINSTANCE, LPSTR, int) {
 
 		skin->SkinUpdate(skinCluster, skeleton);
 
-		///
-		boneSimple->ApplyAnimation(skeletonSimple, animatioSimple, animaionTime);
-		//Skeleton
+		/////Simple
+		boneSimple->ApplyAnimation(skeletonSimple, animatioSimple, animaionTime2);
+		////Skeleton
 
 		boneSimple->Update(skeletonSimple);
-		//SkinCluster
+		////SkinCluster
 
 		skinSimple->SkinUpdate(skinClusterSimple, skeletonSimple);
 
+
+
+		/////Sneak
+		boneSneak->ApplyAnimation(skeletonSneak, animatioSneak, animaionTime);
+		////Skeleton
+
+		boneSneak->Update(skeletonSneak);
+		////SkinCluster
+
+		sneak->SkinUpdate(skinClusterSneak, skeletonSneak);
 
 		worldTransform->SetScale({ 1, 1, 1, });
 		if (Input::GetInstance()->PushKey(DIK_A)) {
@@ -131,16 +160,17 @@ int WINAPI WinMain(HINSTANCE, HINSTANCE, LPSTR, int) {
 			rotate.y = -11;
 		}
 		worldTransform->SetTranslate(pos_);
-		worldTransformSimple->SetTranslate(pos2_ );
+		//worldTransformSimple->SetTranslate(pos2_ );
 		worldTransform->SetRotate(rotate);
 		worldTransformSimple->SetRotate({0,2.5,0});
 
-		///boxWorldTransform_->SetTranslate({-2,0,0});
+		boxWorldTransform_->SetTranslate({-2,0,0});
 		//更新
 		//worldTransform->AnimationUpdateMatrix(cameraData, mtrix);
 		worldTransform->UpdateMatrix(cameraData);
 		worldTransformSimple->UpdateMatrix(cameraData);
-		//boxWorldTransform_->UpdateMatrix(cameraData);
+		boxWorldTransform_->UpdateMatrix(cameraData);
+		worldTransformSneak->UpdateMatrix(cameraData);
 		/*skeleton.joints[1].skeletonSpaceMatrix;
 		worldTransformCubemodel->UpdateMatrix*/
 		ImGui::Begin("pos");
@@ -161,9 +191,10 @@ int WINAPI WinMain(HINSTANCE, HINSTANCE, LPSTR, int) {
 		//////
 
 		//sprite->Draw({200.0f,100.0f,10.0f},{0,0,0},{0,0,0},{1,1,1,1});
-		walk3d->AnimationDraw({ 1,1,1,1 }, cameraData, worldTransform, skinCluster);
-		animatedSimple3d->AnimationDraw({ 1,1,1,1 }, cameraData, worldTransformSimple, skinClusterSimple);
-		//box_->Draw({ 1,1,1,1 }, cameraData, boxWorldTransform_);
+		walk3d->Draw({ 1,1,1,1 }, cameraData, worldTransform, skinCluster);
+		animatedSimple3d->Draw({ 1,1,1,1 }, cameraData, worldTransformSimple, skinClusterSimple);
+		box_->Draw({ 1,1,1,1 }, cameraData, boxWorldTransform_);
+		walkSneak3d->Draw({ 1,1,1,1 }, cameraData, worldTransformSneak, skinClusterSneak);
 		//////
 		//　　描画処理
 		//////
