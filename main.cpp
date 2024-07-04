@@ -38,12 +38,13 @@ int WINAPI WinMain(HINSTANCE, HINSTANCE, LPSTR, int) {
 	Bone* bone = new Bone;
 	WorldTransform* worldTransform = new WorldTransform;
 	worldTransform->Create();
-	//Animation3D* walk3d = new Animation3D;
+	Animation3D* walk3d = new Animation3D;
 	ModelData modelData_ = LoadObjManagement::NewLoadObjFile("resource/hu", "walk.gltf");
+	
 	//Animation animatio = LoadObjManagement::LoadAnimationFile("resource/hu", "walk.gltf");
-	/*Skeleton skeleton = bone->CreateSkeleton(modelData_.rootNode);
+	Skeleton skeleton = bone->CreateSkeleton(modelData_.rootNode);
 	SkinCluster  skinCluster = skin->CreateSkinCluster(skeleton, modelData_);
-	walk3d->Initialize(modelData_);*/
+	walk3d->Initialize(modelData_);
 	
 
 	//skinSimple
