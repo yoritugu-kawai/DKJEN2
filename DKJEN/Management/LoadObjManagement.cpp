@@ -137,7 +137,8 @@ Node LoadObjManagement::ReadNode(aiNode* node)
 Animation LoadObjManagement::LoadAnimationFile(const std::string& directoryPath, const std::string& filename)
 {
 
-	Animation animation = LoadObjManagement::GetInstance()->animation;
+	///Animation animation =LoadObjManagement::GetInstance()->animation;
+	Animation animation;
 	Assimp::Importer importer;
 	std::string filePath = directoryPath + "/" + filename;
 	const aiScene* scene = importer.ReadFile(filePath.c_str(), 0);
@@ -180,7 +181,7 @@ Animation LoadObjManagement::LoadAnimationFile(const std::string& directoryPath,
 
 	}
 
-	LoadObjManagement::GetInstance()->animation = animation;
+	//LoadObjManagement::GetInstance()->animation = animation;
 
 	return animation;
 }

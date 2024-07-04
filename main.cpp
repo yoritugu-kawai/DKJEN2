@@ -36,12 +36,13 @@ int WINAPI WinMain(HINSTANCE, HINSTANCE, LPSTR, int) {
 	//walkの取り込み
 	Skinning* skin = new Skinning;
 	Bone* bone = new Bone;
+	LoadObjManagement* lod = new LoadObjManagement;
 	WorldTransform* worldTransform = new WorldTransform;
 	worldTransform->Create();
 	Animation3D* walk3d = new Animation3D;
 	ModelData modelData_ = LoadObjManagement::NewLoadObjFile("resource/hu", "walk.gltf");
 	
-	Animation animatio = LoadObjManagement::LoadAnimationFile("resource/hu", "walk.gltf");
+	Animation animatio = lod->LoadAnimationFile("resource/hu", "walk.gltf");
 	Skeleton skeleton = bone->CreateSkeleton(modelData_.rootNode);
 	SkinCluster  skinCluster = skin->CreateSkinCluster(skeleton, modelData_);
 	walk3d->Initialize(modelData_);
@@ -50,11 +51,13 @@ int WINAPI WinMain(HINSTANCE, HINSTANCE, LPSTR, int) {
 	//skinSimple
 	Skinning* skinSimple = new Skinning;
 	Bone* boneSimple = new Bone;
+	LoadObjManagement* lod2 = new LoadObjManagement;
+
 	WorldTransform* worldTransformSimple = new WorldTransform;
 	worldTransformSimple->Create();
 	Animation3D* animatedSimple3d = new Animation3D;
 	ModelData animatedSimpleData_ = LoadObjManagement::NewLoadObjFile("resource", "simpleSkin.gltf");
-	Animation animatioSimple = LoadObjManagement::LoadAnimationFile("resource", "simpleSkin.gltf");
+	Animation animatioSimple = lod2->LoadAnimationFile("resource", "simpleSkin.gltf");
 	Skeleton skeletonSimple = boneSimple->CreateSkeleton(animatedSimpleData_.rootNode);
 	SkinCluster  skinClusterSimple = skinSimple->CreateSkinCluster(skeletonSimple, animatedSimpleData_);
 	animatedSimple3d->Initialize(animatedSimpleData_);
@@ -72,11 +75,13 @@ int WINAPI WinMain(HINSTANCE, HINSTANCE, LPSTR, int) {
 	
 	Skinning* sneak = new Skinning;
 	Bone* boneSneak = new Bone;
+	LoadObjManagement* lod3 = new LoadObjManagement;
+
 	WorldTransform* worldTransformSneak = new WorldTransform;
 	worldTransformSneak->Create();
 	Animation3D* walkSneak3d = new Animation3D;
 	ModelData modelDataSneak_ = LoadObjManagement::NewLoadObjFile("resource/hu", "sneakWalk.gltf");
-	Animation animatioSneak = LoadObjManagement::LoadAnimationFile("resource/hu", "sneakWalk.gltf");
+	Animation animatioSneak = lod3->LoadAnimationFile("resource/hu", "sneakWalk.gltf");
 	Skeleton skeletonSneak = boneSneak->CreateSkeleton(modelDataSneak_.rootNode);
 	SkinCluster  skinClusterSneak = sneak->CreateSkinCluster(skeletonSneak, modelDataSneak_);
 	walkSneak3d->Initialize(modelDataSneak_);
@@ -122,13 +127,13 @@ int WINAPI WinMain(HINSTANCE, HINSTANCE, LPSTR, int) {
 		worldTransform->AnimationUpdateMatrix(cameraData, mtrix);*/
 
 		//Animation
-		//bone->ApplyAnimation(skeleton, animatio, animaionTime);
-		////Skeleton
+		bone->ApplyAnimation(skeleton, animatio, animaionTime);
+		//Skeleton
 
-		//bone->Update(skeleton);
-		////SkinCluster
+		bone->Update(skeleton);
+		//SkinCluster
 
-		//skin->SkinUpdate(skinCluster, skeleton);
+		skin->SkinUpdate(skinCluster, skeleton);
 
 		/////Simple
 		boneSimple->ApplyAnimation(skeletonSimple, animatioSimple, animaionTime2);
@@ -193,7 +198,7 @@ int WINAPI WinMain(HINSTANCE, HINSTANCE, LPSTR, int) {
 		//////
 
 		//sprite->Draw({200.0f,100.0f,10.0f},{0,0,0},{0,0,0},{1,1,1,1});
-		//walk3d->Draw({ 1,1,1,1 }, cameraData, worldTransform, skinCluster);
+		walk3d->Draw({ 1,1,1,1 }, cameraData, worldTransform, skinCluster);
 		animatedSimple3d->Draw({ 1,1,1,1 }, cameraData, worldTransformSimple, skinClusterSimple);
 		box_->Draw({ 1,1,1,1 }, cameraData, boxWorldTransform_);
 		walkSneak3d->Draw({ 1,1,1,1 }, cameraData, worldTransformSneak, skinClusterSneak);

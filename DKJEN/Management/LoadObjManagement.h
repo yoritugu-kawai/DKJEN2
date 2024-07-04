@@ -29,7 +29,7 @@ public:
 	static ModelData NewLoadObjFile(const std::string& directoryPath, const std::string& filename);
 	static MaterialData LoadMaterialTemplateFile(const std::string& directoryPath, const std::string& filename);
 	static Node ReadNode(aiNode* node);
-	static Animation LoadAnimationFile(const std::string& directoryPath, const std::string& filename);
+	Animation LoadAnimationFile(const std::string& directoryPath, const std::string& filename);
 	static Vector3 Calculatevalue(const std::vector<KeyframeVector3>& keyframes, float time);
 	static Quaternion QCalculatevalue(const std::vector<KeyframeQuaternion>& keyframes, float time);
 	
@@ -38,7 +38,7 @@ private:
 	float animaionTime = 0.0f;
 	TransformationMatrix* data_;
 
-	Animation animation;
+	//Animation animation;
 	std::vector<Matrix4x4> inverseBindPoseMatrices;
 
 
