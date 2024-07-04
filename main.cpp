@@ -41,7 +41,7 @@ int WINAPI WinMain(HINSTANCE, HINSTANCE, LPSTR, int) {
 	Animation3D* walk3d = new Animation3D;
 	ModelData modelData_ = LoadObjManagement::NewLoadObjFile("resource/hu", "walk.gltf");
 	
-	//Animation animatio = LoadObjManagement::LoadAnimationFile("resource/hu", "walk.gltf");
+	Animation animatio = LoadObjManagement::LoadAnimationFile("resource/hu", "walk.gltf");
 	Skeleton skeleton = bone->CreateSkeleton(modelData_.rootNode);
 	SkinCluster  skinCluster = skin->CreateSkinCluster(skeleton, modelData_);
 	walk3d->Initialize(modelData_);
