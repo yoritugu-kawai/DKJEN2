@@ -28,6 +28,7 @@ int WINAPI WinMain(HINSTANCE, HINSTANCE, LPSTR, int) {
 	
 	PSOCopileManagement::Set();
 
+
 	
 	TexManager::Initiluze();
 	CameraData* cameraData = new CameraData;
