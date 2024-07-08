@@ -2,19 +2,19 @@
 
 void RTV()
 {
-    //D3D12_RENDER_TARGET_VIEW_DESC rtvDesc = DxCommon::GetInstance()->rtvDescGet();
-    ////RTV
-    //ID3D12Device* device = DxCommon::GetInstance()->GetDevice();
-    //const Vector4 kRenderTargetClearValue{ 1.0f,0.0f,0.0f,1.0f };
-    //auto renderTextureResource = CreateRenderTextrureResource(WinApp::GetInstance()->Width(), WinApp::GetInstance()->Height(),DXGI_FORMAT_R8G8B8A8_UNORM_SRGB,);
-    //device->CreateRenderTargetView(renderTextureResource.Get(),&rtvDesc,);
-    ////SRV
-    //D3D12_SHADER_RESOURCE_VIEW_DESC renderTextureSrvDesc{};
-    //renderTextureSrvDesc.Format = DXGI_FORMAT_R8G8B8A8_UNORM_SRGB;
-    //renderTextureSrvDesc.Shader4ComponentMapping = D3D12_DEFAULT_SHADER_4_COMPONENT_MAPPING;
-    //renderTextureSrvDesc.ViewDimension = D3D12_SRV_DIMENSION_TEXTURE2D;
-    //renderTextureSrvDesc.Texture2D.MipLevels = 1;
-    //device->CreateShaderResourceView(renderTextureResource.Get(), &renderTextureSrvDesc, );
+//    D3D12_RENDER_TARGET_VIEW_DESC rtvDesc = DxCommon::GetInstance()->rtvDescGet();
+//    //RTV
+//    ID3D12Device* device = DxCommon::GetInstance()->GetDevice();
+//    const Vector4 kRenderTargetClearValue{ 1.0f,0.0f,0.0f,1.0f };
+//    auto renderTextureResource = CreateRenderTextrureResource(WinApp::GetInstance()->Width(), WinApp::GetInstance()->Height(),DXGI_FORMAT_R8G8B8A8_UNORM_SRGB,);
+//    device->CreateRenderTargetView(renderTextureResource.Get(),&rtvDesc,);
+//    SRV
+//    D3D12_SHADER_RESOURCE_VIEW_DESC renderTextureSrvDesc{};
+//    renderTextureSrvDesc.Format = DXGI_FORMAT_R8G8B8A8_UNORM_SRGB;
+//    renderTextureSrvDesc.Shader4ComponentMapping = D3D12_DEFAULT_SHADER_4_COMPONENT_MAPPING;
+//    renderTextureSrvDesc.ViewDimension = D3D12_SRV_DIMENSION_TEXTURE2D;
+//    renderTextureSrvDesc.Texture2D.MipLevels = 1;
+//    device->CreateShaderResourceView(renderTextureResource.Get(), &renderTextureSrvDesc, );
 }
 
 

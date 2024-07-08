@@ -115,7 +115,7 @@ private:
 	/// <summary>
 	/// 
 	/// </summary>
-	D3D12_CPU_DESCRIPTOR_HANDLE rtvHandles[2];//
+	D3D12_CPU_DESCRIPTOR_HANDLE rtvHandles[4];//
 	/// <summary>
 	/// コマンド
 	/// </summary>

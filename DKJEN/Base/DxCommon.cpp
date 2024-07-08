@@ -48,9 +48,10 @@ void DxCommon::CommandLoad()
 	swapChainResources[0] = DxCommon::GetInstance()->swapChainResources[0];
 	swapChainResources[1] = DxCommon::GetInstance()->swapChainResources[1];
 	ID3D12DescriptorHeap* rtvDescriptorHeap = DxCommon::GetInstance()->rtvDescriptorHeap;//
-	D3D12_CPU_DESCRIPTOR_HANDLE rtvHandles[2];//
+	D3D12_CPU_DESCRIPTOR_HANDLE rtvHandles[3];//
 	rtvHandles[0] = DxCommon::GetInstance()->rtvHandles[0];
 	rtvHandles[1] = DxCommon::GetInstance()->rtvHandles[1];
+	rtvHandles[2] = DxCommon::GetInstance()->rtvHandles[2];
 	ID3D12GraphicsCommandList* commandList = DxCommon::GetInstance()->commandList;//
 	ID3D12DescriptorHeap* dsvDescriptorHeap = DxCommon::GetInstance()->dsvDescriptorHeap;
 
@@ -82,6 +83,7 @@ void DxCommon::CommandLoad()
 	DxCommon::GetInstance()->rtvDescriptorHeap = rtvDescriptorHeap;
 	DxCommon::GetInstance()->rtvHandles[0] = rtvHandles[0];
 	DxCommon::GetInstance()->rtvHandles[1] = rtvHandles[1];
+	DxCommon::GetInstance()->rtvHandles[2] = rtvHandles[2];
 	DxCommon::GetInstance()->commandList = commandList;
 }
 
@@ -305,13 +307,13 @@ void DxCommon::CreateRTV()
 	rtvHandles[2].ptr = rtvHandles[1].ptr + device->GetDescriptorHandleIncrementSize(
 		D3D12_DESCRIPTOR_HEAP_TYPE_RTV);
 	 device->CreateRenderTargetView(renderTextureResource.Get(), &rtvDesc, rtvHandles[2]);
-	//SRV
-	/*D3D12_SHADER_RESOURCE_VIEW_DESC renderTextureSrvDesc{};
-	renderTextureSrvDesc.Format = DXGI_FORMAT_R8G8B8A8_UNORM_SRGB;
-	renderTextureSrvDesc.Shader4ComponentMapping = D3D12_DEFAULT_SHADER_4_COMPONENT_MAPPING;
-	renderTextureSrvDesc.ViewDimension = D3D12_SRV_DIMENSION_TEXTURE2D;
-	renderTextureSrvDesc.Texture2D.MipLevels = 1;
-	device->CreateShaderResourceView(renderTextureResource.Get(), &renderTextureSrvDesc, rtvHandles[3]);*/
+	////SRV
+	//D3D12_SHADER_RESOURCE_VIEW_DESC renderTextureSrvDesc{};
+	//renderTextureSrvDesc.Format = DXGI_FORMAT_R8G8B8A8_UNORM_SRGB;
+	//renderTextureSrvDesc.Shader4ComponentMapping = D3D12_DEFAULT_SHADER_4_COMPONENT_MAPPING;
+	//renderTextureSrvDesc.ViewDimension = D3D12_SRV_DIMENSION_TEXTURE2D;
+	//renderTextureSrvDesc.Texture2D.MipLevels = 1;
+	//device->CreateShaderResourceView(renderTextureResource.Get(), &renderTextureSrvDesc, rtvHandles[3]);
 
 	DxCommon::GetInstance()->rtvDesc = rtvDesc;
 	DxCommon::GetInstance()->device = device;
@@ -320,6 +322,7 @@ void DxCommon::CreateRTV()
 	DxCommon::GetInstance()->swapChainResources[1] = swapChainResources[1];
 	DxCommon::GetInstance()->rtvHandles[0] = rtvHandles[0];
 	DxCommon::GetInstance()->rtvHandles[1] = rtvHandles[1];
+	DxCommon::GetInstance()->rtvHandles[2] = rtvHandles[2];
 
 }
 /************************************************/
