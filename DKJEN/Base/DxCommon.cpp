@@ -44,11 +44,12 @@ void DxCommon::CommandLoad()
 {
 	IDXGISwapChain4* swapChain = DxCommon::GetInstance()->swapChain;
 	D3D12_RESOURCE_BARRIER barrier{};//
-	ID3D12Resource* swapChainResources[2];//
+	ID3D12Resource* swapChainResources[2]{};//
 	swapChainResources[0] = DxCommon::GetInstance()->swapChainResources[0];
 	swapChainResources[1] = DxCommon::GetInstance()->swapChainResources[1];
+	ID3D12Resource* renderTextureResource = DxCommon::GetInstance()->renderTextureResource_.Get();
 	ID3D12DescriptorHeap* rtvDescriptorHeap = DxCommon::GetInstance()->rtvDescriptorHeap;//
-	D3D12_CPU_DESCRIPTOR_HANDLE rtvHandles[3];//
+	D3D12_CPU_DESCRIPTOR_HANDLE rtvHandles[3]{};//
 	rtvHandles[0] = DxCommon::GetInstance()->rtvHandles[0];
 	rtvHandles[1] = DxCommon::GetInstance()->rtvHandles[1];
 	rtvHandles[2] = DxCommon::GetInstance()->rtvHandles[2];
@@ -60,18 +61,23 @@ void DxCommon::CommandLoad()
 
 	barrier.Type = D3D12_RESOURCE_BARRIER_TYPE_TRANSITION;
 	barrier.Flags = D3D12_RESOURCE_BARRIER_FLAG_NONE;
-	barrier.Transition.pResource = swapChainResources[backBufferIndex];
+	//barrier.Transition.pResource = swapChainResources[backBufferIndex];
+	barrier.Transition.pResource = renderTextureResource;
 	barrier.Transition.StateBefore = D3D12_RESOURCE_STATE_PRESENT;
 	barrier.Transition.StateAfter = D3D12_RESOURCE_STATE_RENDER_TARGET;
 	commandList->ResourceBarrier(1, &barrier);
 
-	commandList->OMSetRenderTargets(1, &rtvHandles[backBufferIndex], false, nullptr);
+	/*commandList->OMSetRenderTargets(1, &rtvHandles[backBufferIndex], false, nullptr);
 	float clearColor[] = { 0.1f,0.2f,1.0f,1.0f };
-	commandList->ClearRenderTargetView(rtvHandles[backBufferIndex], clearColor, 0, nullptr);
+	commandList->ClearRenderTargetView(rtvHandles[backBufferIndex], clearColor, 0, nullptr);*/
+	commandList->OMSetRenderTargets(1, &rtvHandles[2], false, nullptr);
+	float clearColor[] = { 0.1f,0.2f,1.0f,1.0f };
+	commandList->ClearRenderTargetView(rtvHandles[2], clearColor, 0, nullptr);
 
 	///
 	D3D12_CPU_DESCRIPTOR_HANDLE dsvHandle = dsvDescriptorHeap->GetCPUDescriptorHandleForHeapStart();
-	commandList->OMSetRenderTargets(1, &rtvHandles[backBufferIndex], false, &dsvHandle);
+	//commandList->OMSetRenderTargets(1, &rtvHandles[backBufferIndex], false, &dsvHandle);
+	commandList->OMSetRenderTargets(1, &rtvHandles[2], false, &dsvHandle);
 
 	commandList->ClearDepthStencilView(dsvHandle, D3D12_CLEAR_FLAG_DEPTH, 1.0f, 0, 0, nullptr);
 	//
@@ -174,6 +180,256 @@ void DxCommon::EndFrame()
 
 }
 
+// PostEffectに対して
+void DxCommon::BeginFrameForPostEffect()
+{
+	IDXGISwapChain4* swapChain = DxCommon::GetInstance()->swapChain;
+	D3D12_RESOURCE_BARRIER barrier{};//
+	ID3D12Resource* swapChainResources[2]{};//
+	swapChainResources[0] = DxCommon::GetInstance()->swapChainResources[0];
+	swapChainResources[1] = DxCommon::GetInstance()->swapChainResources[1];
+	ID3D12Resource* renderTextureResource = DxCommon::GetInstance()->renderTextureResource_.Get();
+	ID3D12DescriptorHeap* rtvDescriptorHeap = DxCommon::GetInstance()->rtvDescriptorHeap;//
+	D3D12_CPU_DESCRIPTOR_HANDLE rtvHandles[3]{};//
+	rtvHandles[0] = DxCommon::GetInstance()->rtvHandles[0];
+	rtvHandles[1] = DxCommon::GetInstance()->rtvHandles[1];
+	rtvHandles[2] = DxCommon::GetInstance()->rtvHandles[2];
+	ID3D12GraphicsCommandList* commandList = DxCommon::GetInstance()->commandList;//
+	ID3D12DescriptorHeap* dsvDescriptorHeap = DxCommon::GetInstance()->dsvDescriptorHeap;
+
+	///
+	UINT backBufferIndex = swapChain->GetCurrentBackBufferIndex();
+
+	//barrier.Type = D3D12_RESOURCE_BARRIER_TYPE_TRANSITION;
+	//barrier.Flags = D3D12_RESOURCE_BARRIER_FLAG_NONE;
+	////barrier.Transition.pResource = swapChainResources[backBufferIndex];
+	//barrier.Transition.pResource = renderTextureResource;
+	//barrier.Transition.StateBefore = D3D12_RESOURCE_STATE_PRESENT;
+	//barrier.Transition.StateAfter = D3D12_RESOURCE_STATE_RENDER_TARGET;
+	//commandList->ResourceBarrier(1, &barrier);
+	// 今回のバリアはTransition
+	barrier.Type = D3D12_RESOURCE_BARRIER_TYPE_TRANSITION;
+	// Noneにしておく
+	barrier.Flags = D3D12_RESOURCE_BARRIER_FLAG_NONE;
+	// バリアを張る対象のリソース。現在のバックバッファに対して行う
+	barrier.Transition.pResource = renderTextureResource;
+	// 遷移前(現在)のResourceState
+	barrier.Transition.StateBefore = D3D12_RESOURCE_STATE_PIXEL_SHADER_RESOURCE;
+	// 遷移後のResourceState
+	barrier.Transition.StateAfter = D3D12_RESOURCE_STATE_RENDER_TARGET;
+	// TransitionBarrierを張る
+	commandList->ResourceBarrier(1, &barrier);
+
+	/*commandList->OMSetRenderTargets(1, &rtvHandles[backBufferIndex], false, nullptr);
+	float clearColor[] = { 0.1f,0.2f,1.0f,1.0f };
+	commandList->ClearRenderTargetView(rtvHandles[backBufferIndex], clearColor, 0, nullptr);*/
+	//commandList->OMSetRenderTargets(1, &rtvHandles[2], false, nullptr);
+
+	///
+	D3D12_CPU_DESCRIPTOR_HANDLE dsvHandle = dsvDescriptorHeap->GetCPUDescriptorHandleForHeapStart();
+	commandList->OMSetRenderTargets(1, &rtvHandles[2], false, &dsvHandle);
+
+	float clearColor[] = { 1.0f, 0.0f, 0.0f, 1.0f };
+	commandList->ClearRenderTargetView(rtvHandles[2], clearColor, 0, nullptr);
+
+	commandList->ClearDepthStencilView(dsvHandle, D3D12_CLEAR_FLAG_DEPTH, 1.0f, 0, 0, nullptr);
+
+	//クライアント領域のサイズを一緒にして画面全体に表示
+	D3D12_VIEWPORT viewport{};
+	viewport.Width = float(WinApp::GetInstance()->Width());
+	viewport.Height = float(WinApp::GetInstance()->Height());
+	viewport.TopLeftX = 0;
+	viewport.TopLeftY = 0;
+	viewport.MinDepth = 0.0f;
+	viewport.MaxDepth = 1.0f;
+
+	//シザー矩形
+	D3D12_RECT scissorRect{};
+	scissorRect.left = 0;
+	scissorRect.right = WinApp::GetInstance()->Width();
+	scissorRect.top = 0;
+	scissorRect.bottom = WinApp::GetInstance()->Height();
+
+	//コマンドを積む
+	commandList->RSSetViewports(1, &viewport);
+	commandList->RSSetScissorRects(1, &scissorRect);
+
+	//
+	DxCommon::GetInstance()->dsvDescriptorHeap = dsvDescriptorHeap;
+	DxCommon::GetInstance()->swapChain = swapChain;
+	DxCommon::GetInstance()->barrier = barrier;
+	DxCommon::GetInstance()->swapChainResources[0] = swapChainResources[0];
+	DxCommon::GetInstance()->swapChainResources[1] = swapChainResources[1];
+	DxCommon::GetInstance()->rtvDescriptorHeap = rtvDescriptorHeap;
+	DxCommon::GetInstance()->rtvHandles[0] = rtvHandles[0];
+	DxCommon::GetInstance()->rtvHandles[1] = rtvHandles[1];
+	DxCommon::GetInstance()->rtvHandles[2] = rtvHandles[2];
+	DxCommon::GetInstance()->commandList = commandList;
+}
+void DxCommon::EndFrameForPostEffect()
+{
+	D3D12_RESOURCE_BARRIER barrier = DxCommon::GetInstance()->barrier;
+	ID3D12GraphicsCommandList* commandList = DxCommon::GetInstance()->commandList;//
+	ID3D12Resource* renderTextureResource = DxCommon::GetInstance()->renderTextureResource_.Get();
+
+	// Barrierを設定する
+	//// 今回のバリアはTransition
+	//barrier.Type = D3D12_RESOURCE_BARRIER_TYPE_TRANSITION;
+	//// Noneにしておく
+	//barrier.Flags = D3D12_RESOURCE_BARRIER_FLAG_NONE;
+	//// バリアを張る対象のリソース。現在のバックバッファに対して行う
+	//barrier.Transition.pResource = renderTextureResource;
+	//// 遷移前(現在)のResourceState
+	//barrier.Transition.StateBefore = D3D12_RESOURCE_STATE_RENDER_TARGET;
+	//// 遷移後のResourceState
+	//barrier.Transition.StateAfter = D3D12_RESOURCE_STATE_PIXEL_SHADER_RESOURCE;
+	//// TransitionBarrierを張る
+	//commandList->ResourceBarrier(1, &barrier);
+
+	barrier.Type = D3D12_RESOURCE_BARRIER_TYPE_TRANSITION;
+	// Noneにしておく
+	barrier.Flags = D3D12_RESOURCE_BARRIER_FLAG_NONE;
+	// バリアを張る対象のリソース。現在のバックバッファに対して行う
+	barrier.Transition.pResource = renderTextureResource;
+	// 遷移前(現在)のResourceState
+	barrier.Transition.StateBefore = D3D12_RESOURCE_STATE_RENDER_TARGET;
+	// 遷移後のResourceState
+	barrier.Transition.StateAfter = D3D12_RESOURCE_STATE_PIXEL_SHADER_RESOURCE;
+	// TransitionBarrierを張る
+	commandList->ResourceBarrier(1, &barrier);
+}
+
+// SwapChainに対して
+void DxCommon::BeginFrameForSwapChain()
+{
+	IDXGISwapChain4* swapChain = DxCommon::GetInstance()->swapChain;
+	D3D12_RESOURCE_BARRIER barrier{};//
+	ID3D12Resource* swapChainResources[2]{};//
+	swapChainResources[0] = DxCommon::GetInstance()->swapChainResources[0];
+	swapChainResources[1] = DxCommon::GetInstance()->swapChainResources[1];
+	ID3D12DescriptorHeap* rtvDescriptorHeap = DxCommon::GetInstance()->rtvDescriptorHeap;//
+	D3D12_CPU_DESCRIPTOR_HANDLE rtvHandles[2]{};//
+	rtvHandles[0] = DxCommon::GetInstance()->rtvHandles[0];
+	rtvHandles[1] = DxCommon::GetInstance()->rtvHandles[1];
+	ID3D12GraphicsCommandList* commandList = DxCommon::GetInstance()->commandList;//
+	ID3D12DescriptorHeap* dsvDescriptorHeap = DxCommon::GetInstance()->dsvDescriptorHeap;
+
+
+	///
+	UINT backBufferIndex = swapChain->GetCurrentBackBufferIndex();
+
+	/*barrier.Type = D3D12_RESOURCE_BARRIER_TYPE_TRANSITION;
+	barrier.Flags = D3D12_RESOURCE_BARRIER_FLAG_NONE;
+	barrier.Transition.pResource = swapChainResources[backBufferIndex];
+	barrier.Transition.StateBefore = D3D12_RESOURCE_STATE_PRESENT;
+	barrier.Transition.StateAfter = D3D12_RESOURCE_STATE_RENDER_TARGET;
+	commandList->ResourceBarrier(1, &barrier);*/
+	barrier.Type = D3D12_RESOURCE_BARRIER_TYPE_TRANSITION;
+	// Noneにしておく
+	barrier.Flags = D3D12_RESOURCE_BARRIER_FLAG_NONE;
+	// バリアを張る対象のリソース。現在のバックバッファに対して行う
+	barrier.Transition.pResource = swapChainResources[backBufferIndex];
+	// 遷移前(現在)のResourceState
+	barrier.Transition.StateBefore = D3D12_RESOURCE_STATE_PRESENT;
+	// 遷移後のResourceState
+	barrier.Transition.StateAfter = D3D12_RESOURCE_STATE_RENDER_TARGET;
+	// TransitionBarrierを張る
+	commandList->ResourceBarrier(1, &barrier);
+
+
+	commandList->OMSetRenderTargets(1, &rtvHandles[backBufferIndex], false, nullptr);
+	float clearColor[] = { 0.1f,0.2f,1.0f,1.0f };
+	commandList->ClearRenderTargetView(rtvHandles[backBufferIndex], clearColor, 0, nullptr);
+
+
+
+	//クライアント領域のサイズを一緒にして画面全体に表示
+	D3D12_VIEWPORT viewport{};
+	viewport.Width = float(WinApp::GetInstance()->Width());
+	viewport.Height = float(WinApp::GetInstance()->Height());
+	viewport.TopLeftX = 0;
+	viewport.TopLeftY = 0;
+	viewport.MinDepth = 0.0f;
+	viewport.MaxDepth = 1.0f;
+
+	//シザー矩形
+	D3D12_RECT scissorRect{};
+	scissorRect.left = 0;
+	scissorRect.right = WinApp::GetInstance()->Width();
+	scissorRect.top = 0;
+	scissorRect.bottom = WinApp::GetInstance()->Height();
+
+	//コマンドを積む
+	commandList->RSSetViewports(1, &viewport);
+	commandList->RSSetScissorRects(1, &scissorRect);
+
+
+
+	//
+	DxCommon::GetInstance()->dsvDescriptorHeap = dsvDescriptorHeap;
+	DxCommon::GetInstance()->swapChain = swapChain;
+	DxCommon::GetInstance()->barrier = barrier;
+	DxCommon::GetInstance()->swapChainResources[0] = swapChainResources[0];
+	DxCommon::GetInstance()->swapChainResources[1] = swapChainResources[1];
+	DxCommon::GetInstance()->rtvDescriptorHeap = rtvDescriptorHeap;
+	DxCommon::GetInstance()->rtvHandles[0] = rtvHandles[0];
+	DxCommon::GetInstance()->rtvHandles[1] = rtvHandles[1];
+	DxCommon::GetInstance()->commandList = commandList;
+}
+void DxCommon::EndFrameForSwapChain()
+{
+	IDXGISwapChain4* swapChain = DxCommon::GetInstance()->swapChain;
+	D3D12_RESOURCE_BARRIER barrier = DxCommon::GetInstance()->barrier;
+	ID3D12GraphicsCommandList* commandList = DxCommon::GetInstance()->commandList;//
+	ID3D12CommandQueue* commandQueue = DxCommon::GetInstance()->commandQueue;//
+	ID3D12CommandAllocator* commandAllocator = DxCommon::GetInstance()->commandAllocator;//
+	ID3D12Fence* fence = DxCommon::GetInstance()->fence;//
+	uint64_t fenceValue = DxCommon::GetInstance()->fenceValue;//
+	HANDLE fenceEvent = DxCommon::GetInstance()->fenceEvent;//
+	HRESULT hr;//
+	////
+	/*barrier.Transition.StateBefore = D3D12_RESOURCE_STATE_RENDER_TARGET;
+	barrier.Transition.StateAfter = D3D12_RESOURCE_STATE_PRESENT;
+	commandList->ResourceBarrier(1, &barrier);*/
+	// 状態を遷移
+	// 画面に描く処理はすべて終わり、画面に映すので、状態を遷移
+	// 今回はRenderTargetからPresentにする
+	barrier.Transition.StateBefore = D3D12_RESOURCE_STATE_RENDER_TARGET;
+	barrier.Transition.StateAfter = D3D12_RESOURCE_STATE_PRESENT;
+	commandList->ResourceBarrier(1, &barrier);
+
+	//
+	hr = commandList->Close();
+	assert(SUCCEEDED(hr));
+	//コマンドキック
+	ID3D12CommandList* commandLists[] = { commandList };
+	commandQueue->ExecuteCommandLists(1, commandLists);
+	swapChain->Present(0, 1);
+	//シグナル
+	fenceValue++;
+	commandQueue->Signal(fence, fenceValue);
+	if (fence->GetCompletedValue() < fenceValue) {
+		fence->SetEventOnCompletion(fenceValue, fenceEvent);
+		WaitForSingleObject(fenceEvent, INFINITE);
+	}
+	swapChain->Present(1, 0);
+
+	///
+	hr = commandAllocator->Reset();
+	assert(SUCCEEDED(hr));
+	hr = commandList->Reset(commandAllocator, nullptr);
+	assert(SUCCEEDED(hr));
+
+	DxCommon::GetInstance()->swapChain = swapChain;
+	DxCommon::GetInstance()->barrier = barrier;
+	DxCommon::GetInstance()->commandList = commandList;//
+	DxCommon::GetInstance()->commandQueue = commandQueue;//
+	DxCommon::GetInstance()->commandAllocator = commandAllocator;//
+	DxCommon::GetInstance()->fence = fence;//
+	DxCommon::GetInstance()->fenceValue = fenceValue;//
+	DxCommon::GetInstance()->fenceEvent = fenceEvent;//
+}
+
 /************************************************/
 /*************   スワップチェーン　**************/
 /************************************************/
@@ -206,7 +462,7 @@ void DxCommon::CreateSwapChain()
 void DxCommon::CreateSwapResce()
 {
 	IDXGISwapChain4* swapChain = DxCommon::GetInstance()->swapChain;
-	ID3D12Resource* swapChainResources[2];//
+	ID3D12Resource* swapChainResources[2]{};//
 	swapChainResources[0] = DxCommon::GetInstance()->swapChainResources[0];
 	swapChainResources[1] = DxCommon::GetInstance()->swapChainResources[1];
 	///
@@ -236,10 +492,10 @@ void DxCommon::CreateDescriptorHeap()
 	rtvDescriptorHeap = CreateDescriptorDesc(device, D3D12_DESCRIPTOR_HEAP_TYPE_RTV, 16, false);
 	srvDescriptorHeap = CreateDescriptorDesc(device, D3D12_DESCRIPTOR_HEAP_TYPE_CBV_SRV_UAV, 128, true);
 
-	
+
 	CreateSwapResce();
 	//DSV
-     depthStencilResource = CreateDepthStencilTextureRsource(device, WinApp::GetInstance()->Width(), WinApp::GetInstance()->Height());
+	depthStencilResource = CreateDepthStencilTextureRsource(device, WinApp::GetInstance()->Width(), WinApp::GetInstance()->Height());
 	dsvDescriptorHeap = CreateDescriptorDesc(device, D3D12_DESCRIPTOR_HEAP_TYPE_DSV, 1, false);
 	D3D12_DEPTH_STENCIL_VIEW_DESC dsvDesc{};
 	dsvDesc.Format = DXGI_FORMAT_D24_UNORM_S8_UINT;
@@ -279,11 +535,11 @@ ID3D12DescriptorHeap* DxCommon::CreateDescriptorDesc(ID3D12Device* device, D3D12
 void DxCommon::CreateRTV()
 {
 	ID3D12DescriptorHeap* rtvDescriptorHeap = DxCommon::GetInstance()->rtvDescriptorHeap;
-	ID3D12Resource* swapChainResources[2];//
+	ID3D12Resource* swapChainResources[2]{};//
 	swapChainResources[0] = DxCommon::GetInstance()->swapChainResources[0];
 	swapChainResources[1] = DxCommon::GetInstance()->swapChainResources[1];
 	ID3D12Device* device = DxCommon::GetInstance()->device;
-	D3D12_CPU_DESCRIPTOR_HANDLE rtvHandles[4];//
+	D3D12_CPU_DESCRIPTOR_HANDLE rtvHandles[4]{};//
 	rtvHandles[0] = DxCommon::GetInstance()->rtvHandles[0];
 	rtvHandles[1] = DxCommon::GetInstance()->rtvHandles[1];
 	D3D12_RENDER_TARGET_VIEW_DESC rtvDesc = DxCommon::GetInstance()->rtvDesc;
@@ -306,24 +562,24 @@ void DxCommon::CreateRTV()
 	ComPtr<ID3D12Resource>renderTextureResource = CreateRenderTextrureResource(WinApp::GetInstance()->Width(), WinApp::GetInstance()->Height(), DXGI_FORMAT_R8G8B8A8_UNORM_SRGB, kRenderTargetClearValue);
 	rtvHandles[2].ptr = rtvHandles[1].ptr + device->GetDescriptorHandleIncrementSize(
 		D3D12_DESCRIPTOR_HEAP_TYPE_RTV);
-	 device->CreateRenderTargetView(renderTextureResource.Get(), &rtvDesc, rtvHandles[2]);
-	////SRV
-	//D3D12_SHADER_RESOURCE_VIEW_DESC renderTextureSrvDesc{};
-	//renderTextureSrvDesc.Format = DXGI_FORMAT_R8G8B8A8_UNORM_SRGB;
-	//renderTextureSrvDesc.Shader4ComponentMapping = D3D12_DEFAULT_SHADER_4_COMPONENT_MAPPING;
-	//renderTextureSrvDesc.ViewDimension = D3D12_SRV_DIMENSION_TEXTURE2D;
-	//renderTextureSrvDesc.Texture2D.MipLevels = 1;
-	//device->CreateShaderResourceView(renderTextureResource.Get(), &renderTextureSrvDesc, rtvHandles[3]);
+	device->CreateRenderTargetView(renderTextureResource.Get(), &rtvDesc, rtvHandles[2]);
+	//SRV
+	/*D3D12_SHADER_RESOURCE_VIEW_DESC renderTextureSrvDesc{};
+	renderTextureSrvDesc.Format = DXGI_FORMAT_R8G8B8A8_UNORM_SRGB;
+	renderTextureSrvDesc.Shader4ComponentMapping = D3D12_DEFAULT_SHADER_4_COMPONENT_MAPPING;
+	renderTextureSrvDesc.ViewDimension = D3D12_SRV_DIMENSION_TEXTURE2D;
+	renderTextureSrvDesc.Texture2D.MipLevels = 1;
+	device->CreateShaderResourceView(renderTextureResource.Get(), &renderTextureSrvDesc, rtvHandles[3]);*/
 
 	DxCommon::GetInstance()->rtvDesc = rtvDesc;
 	DxCommon::GetInstance()->device = device;
 	DxCommon::GetInstance()->rtvDescriptorHeap = rtvDescriptorHeap;
 	DxCommon::GetInstance()->swapChainResources[0] = swapChainResources[0];
 	DxCommon::GetInstance()->swapChainResources[1] = swapChainResources[1];
+	DxCommon::GetInstance()->renderTextureResource_ = renderTextureResource.Get();
 	DxCommon::GetInstance()->rtvHandles[0] = rtvHandles[0];
 	DxCommon::GetInstance()->rtvHandles[1] = rtvHandles[1];
 	DxCommon::GetInstance()->rtvHandles[2] = rtvHandles[2];
-
 }
 /************************************************/
 /****************   　エラー　   ****************/
@@ -445,7 +701,7 @@ void DxCommon::CreateDevice()
 /***************************************/
 ID3D12Resource* DxCommon::CreateDepthStencilTextureRsource(ID3D12Device* device, int32_t width, int32_t height)
 {
-	
+
 
 
 	D3D12_RESOURCE_DESC resourceDesc{};
@@ -478,7 +734,7 @@ ID3D12Resource* DxCommon::CreateDepthStencilTextureRsource(ID3D12Device* device,
 		IID_PPV_ARGS(&resource)); // 作成するResourceポインタへのポインタ
 
 	assert(SUCCEEDED(hr));
-	
+
 	return resource;
 }
 /************************************************/
@@ -540,5 +796,5 @@ void DxCommon::Release() {
 
 	//リソースリークチェック
 
-	
+
 }

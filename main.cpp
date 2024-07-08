@@ -14,6 +14,21 @@
 #include"DKJEN/Management/PSOCopileManagement.h"
 
 
+#include"DKJEN/Base/WinApp.h"
+#include"DKJEN/Base/TexManager.h"
+
+#include"DKJEN/Math/Math.h"
+
+#include"DKJEN/Utilipy/rektyk.h"
+
+#include"DKJEN/WorldTransform/WorldTransform.h"
+#include"DKJEN/CameraProjection/CameraProjection.h"
+
+#include"DKJEN/Management/TypeManagement.h"
+#include "DKJEN/Management/FrameManagement.h"
+#include"DKJEN/Management/PSOCopileManagement.h"
+
+
 #include"GameProject/GameManager/GameManager.h"
 const wchar_t Title[] = { L"ド根性エンジン" };
 
@@ -25,10 +40,10 @@ int WINAPI WinMain(HINSTANCE, HINSTANCE, LPSTR, int) {
 	DxCommon::Initialize();
 	ImguiManager::Initialize();
 	Input::Initialize();
-	
+
 	PSOCopileManagement::Set();
 
-	
+
 	TexManager::Initiluze();
 	CameraData* cameraData = new CameraData;
 	cameraData->Create();
@@ -36,7 +51,7 @@ int WINAPI WinMain(HINSTANCE, HINSTANCE, LPSTR, int) {
 
 	worldTransform->Create();
 	Obj3D* obj3d = new Obj3D;
-	obj3d->Initialize("resource","plane.gltf");
+	obj3d->Initialize("resource", "plane.gltf");
 	uint32_t tex = TexManager::LoadTexture("GameResource/uvChecker.png");
 	Sprite* sprite = new Sprite;
 	sprite->Initialize(tex);
@@ -45,7 +60,7 @@ int WINAPI WinMain(HINSTANCE, HINSTANCE, LPSTR, int) {
 
 	//座標
 
-	
+
 	//　メインループ
 	MSG msg{};
 	while (msg.message != WM_QUIT)
@@ -54,6 +69,7 @@ int WINAPI WinMain(HINSTANCE, HINSTANCE, LPSTR, int) {
 			TranslateMessage(&msg);
 			DispatchMessage(&msg);
 		}
+		DxCommon::BeginFrameForPostEffect();
 		FrameManagement::BeginFrame();
 
 		//最初
@@ -65,8 +81,8 @@ int WINAPI WinMain(HINSTANCE, HINSTANCE, LPSTR, int) {
 		worldTransform->UpdateMatrix(cameraData);
 
 		worldTransform->SetTranslate({ 0,0,0 });
-		worldTransform->SetScale({1, 1, 1,});
-		k+=0.001f;
+		worldTransform->SetScale({ 1, 1, 1, });
+		k += 0.001f;
 		worldTransform->SetRotate({ 0,10.0f,k });
 		ImGui::Begin("pos");
 		ImGui::SliderFloat3("camera", &cameraPos_.x, 10, -100);
@@ -76,22 +92,26 @@ int WINAPI WinMain(HINSTANCE, HINSTANCE, LPSTR, int) {
 		//////
 		//　ゲーム処理
 		//////
-		
-	
-		//////
-		//　　描画処理
-		//////
-		
-		sprite->Draw({128.0f,72.0f,10.0f},{0,0,0},{0,0,0},{1,1,1,1});
-		obj3d->Draw({1,1,1,1}, cameraData, worldTransform);
+
 
 		//////
 		//　　描画処理
 		//////
-		
-		
+
+		sprite->Draw({ 128.0f,72.0f,10.0f }, { 0,0,0 }, { 0,0,0 }, { 1,1,1,1 });
+		obj3d->Draw({ 1,1,1,1 }, cameraData, worldTransform);
+
+		//////
+		//　　描画処理
+		//////
+
+		DxCommon::EndFrameForPostEffect();
+
+		DxCommon::BeginFrameForSwapChain();
+
 		//終わり
 		FrameManagement::EndFrame();
+		DxCommon::EndFrameForSwapChain();
 	}
 
 	/*
@@ -99,9 +119,9 @@ int WINAPI WinMain(HINSTANCE, HINSTANCE, LPSTR, int) {
 	*********   解放  *******
 	*************************
 	*/
-	
-	
-	
+
+
+
 	PSOCopileManagement::Release();
 
 	ImguiManager::Release();

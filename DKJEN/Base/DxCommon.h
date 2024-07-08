@@ -8,7 +8,7 @@ class DxCommon
 public:
 	static DxCommon* GetInstance();
 
-	
+
 	/// <summary>
 	/// コマンド系
 	/// </summary>
@@ -19,6 +19,11 @@ public:
 	//ループ
 	static void BeginFrame();
 	static void EndFrame();
+	static void BeginFrameForPostEffect();
+	static void EndFrameForPostEffect();
+	static void BeginFrameForSwapChain();
+	static void EndFrameForSwapChain();
+
 
 	/// <summary>
 	/// スワップチェーン
@@ -61,8 +66,8 @@ public:
 	/// <summary>
 	/// 完璧でゲッター
 	/// </summary>
-	static ID3D12Device* GetDevice() {return DxCommon::GetInstance()->device;}
-	static ID3D12GraphicsCommandList* GetCommandList() {return DxCommon::GetInstance()->commandList;}
+	static ID3D12Device* GetDevice() { return DxCommon::GetInstance()->device; }
+	static ID3D12GraphicsCommandList* GetCommandList() { return DxCommon::GetInstance()->commandList; }
 	static ID3D12DescriptorHeap* GetsrvDescriptorHeap() { return DxCommon::GetInstance()->srvDescriptorHeap; }
 	//ここから新しく追加
 	static DXGI_SWAP_CHAIN_DESC1 GetswapChainDesc() { return DxCommon::GetInstance()->swapChainDesc; }
@@ -70,12 +75,12 @@ public:
 private:
 	//WinApp* winApp_ = nullptr;
 
-	ComPtr<IDXGIFactory7>m_pDxgiFactory_=nullptr;
+	ComPtr<IDXGIFactory7>m_pDxgiFactory_ = nullptr;
 	/////
 	/// <summary>
 	/// ファクトリーの作成
 	/// </summary>
-	
+
 	HRESULT hr;//
 	/// <summary>
 	/// アダプターの作成
@@ -115,7 +120,7 @@ private:
 	/// <summary>
 	/// 
 	/// </summary>
-	D3D12_CPU_DESCRIPTOR_HANDLE rtvHandles[4];//
+	D3D12_CPU_DESCRIPTOR_HANDLE rtvHandles[3];//
 	/// <summary>
 	/// コマンド
 	/// </summary>
@@ -142,4 +147,6 @@ private:
 
 	//
 	ID3D12Resource* depthStencilResource;
+
+	Microsoft::WRL::ComPtr<ID3D12Resource> renderTextureResource_;
 };

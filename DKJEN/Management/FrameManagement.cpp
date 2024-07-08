@@ -9,7 +9,7 @@ FrameManagement* FrameManagement::GetInstance()
 
 void FrameManagement::BeginFrame()
 {
-	DxCommon::BeginFrame();
+	//DxCommon::BeginFrame();
 	ImguiManager::BeginFrame();
 	Input::BeginFlame();
 }
@@ -17,5 +17,5 @@ void FrameManagement::BeginFrame()
 void FrameManagement::EndFrame()
 {
 	ImguiManager::EndFrame();
-	DxCommon::EndFrame();
+	//DxCommon::EndFrame();
 }
