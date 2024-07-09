@@ -289,6 +289,12 @@
     <ClCompile Include="DKJEN\Base\TexManager.cpp">
       <Filter>DKJEN\TexDeta\tex</Filter>
     </ClCompile>
+    <ClCompile Include="DKJEN\Shader\RenderTextrureCompileShader.cpp">
+      <Filter>DKJEN\Shader</Filter>
+    </ClCompile>
+    <ClCompile Include="DKJEN\Base\RenderTextrurePSO.cpp">
+      <Filter>DKJEN\Base\PSO</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="DKJEN\Utilipy\Input.h">
@@ -455,6 +461,12 @@
     </ClInclude>
     <ClInclude Include="DKJEN\Skinning\Animation\Animation.h">
       <Filter>DKJEN\Skinning\Animation</Filter>
+    </ClInclude>
+    <ClInclude Include="DKJEN\Shader\RenderTextrureCompileShader.h">
+      <Filter>DKJEN\Shader</Filter>
+    </ClInclude>
+    <ClInclude Include="DKJEN\Base\RenderTextrurePSO.h">
+      <Filter>DKJEN\Base\PSO</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>

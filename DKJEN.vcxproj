@@ -238,6 +238,7 @@ copy "$(WindowsSdkDir)bin\$(TargetPlatformVersion)\x64\dxil.dll" "$(TargetDir)dx
     <ClCompile Include="DKJEN\Base\CreateBufferResource.cpp" />
     <ClCompile Include="DKJEN\Base\DxCommon.cpp" />
     <ClCompile Include="DKJEN\Base\Function.cpp" />
+    <ClCompile Include="DKJEN\Base\RenderTextrurePSO.cpp" />
     <ClCompile Include="DKJEN\Base\TexManager.cpp" />
     <ClCompile Include="DKJEN\Base\LightPSO.cpp" />
     <ClCompile Include="DKJEN\Base\Log.cpp" />
@@ -265,6 +266,7 @@ copy "$(WindowsSdkDir)bin\$(TargetPlatformVersion)\x64\dxil.dll" "$(TargetDir)dx
     <ClCompile Include="DKJEN\Shader\LightCompileShader.cpp" />
     <ClCompile Include="DKJEN\Shader\ParticleCompileShader.cpp" />
     <ClCompile Include="DKJEN\Shader\PolygonCompileShader.cpp" />
+    <ClCompile Include="DKJEN\Shader\RenderTextrureCompileShader.cpp" />
     <ClCompile Include="DKJEN\Shader\SpriteCompileShader.cpp" />
     <ClCompile Include="DKJEN\Shader\TextureCompileShader.cpp" />
     <ClCompile Include="DKJEN\TexDeta\Image\ImageData.cpp" />
@@ -299,6 +301,7 @@ copy "$(WindowsSdkDir)bin\$(TargetPlatformVersion)\x64\dxil.dll" "$(TargetDir)dx
     <ClInclude Include="DKJEN\Base\SpritePSO.h" />
     <ClInclude Include="DKJEN\Base\TexturePSO.h" />
     <ClInclude Include="DKJEN\Base\WinApp.h" />
+    <ClInclude Include="DKJEN\Base\RenderTextrurePSO.h" />
     <ClInclude Include="DKJEN\CameraProjection\CameraProjection.h" />
     <ClInclude Include="DKJEN\Camera\CameraData.h" />
     <ClInclude Include="DKJEN\externals\imgui\imconfig.h" />
@@ -321,6 +324,7 @@ copy "$(WindowsSdkDir)bin\$(TargetPlatformVersion)\x64\dxil.dll" "$(TargetDir)dx
     <ClInclude Include="DKJEN\Shader\PolygonCompileShader.h" />
     <ClInclude Include="DKJEN\Shader\SpriteCompileShader.h" />
     <ClInclude Include="DKJEN\Shader\TextureCompileShader.h" />
+    <ClInclude Include="DKJEN\Shader\RenderTextrureCompileShader.h" />
     <ClInclude Include="DKJEN\Skinning\Animation\Animation.h" />
     <ClInclude Include="DKJEN\TexDeta\Image\ImageData.h" />
     <ClInclude Include="DKJEN\Type\Obj3D.h" />
