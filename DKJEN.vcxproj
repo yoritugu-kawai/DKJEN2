@@ -263,6 +263,7 @@ copy "$(WindowsSdkDir)bin\$(TargetPlatformVersion)\x64\dxil.dll" "$(TargetDir)dx
     <ClCompile Include="DKJEN\Management\TypeManagement.cpp" />
     <ClCompile Include="DKJEN\Math\Math.cpp" />
     <ClCompile Include="DKJEN\PostEffect\OffScreenRendering\RenderTextrure.cpp" />
+    <ClCompile Include="DKJEN\PostEffect\PostEffect.cpp" />
     <ClCompile Include="DKJEN\Shader\LightCompileShader.cpp" />
     <ClCompile Include="DKJEN\Shader\ParticleCompileShader.cpp" />
     <ClCompile Include="DKJEN\Shader\PolygonCompileShader.cpp" />
@@ -319,6 +320,7 @@ copy "$(WindowsSdkDir)bin\$(TargetPlatformVersion)\x64\dxil.dll" "$(TargetDir)dx
     <ClInclude Include="DKJEN\Management\TypeManagement.h" />
     <ClInclude Include="DKJEN\Math\Math.h" />
     <ClInclude Include="DKJEN\PostEffect\OffScreenRendering\RenderTextrure.h" />
+    <ClInclude Include="DKJEN\PostEffect\PostEffect.h" />
     <ClInclude Include="DKJEN\Shader\LightCompileShader.h" />
     <ClInclude Include="DKJEN\Shader\ParticleCompileShader.h" />
     <ClInclude Include="DKJEN\Shader\PolygonCompileShader.h" />

@@ -295,6 +295,9 @@
     <ClCompile Include="DKJEN\Base\RenderTextrurePSO.cpp">
       <Filter>DKJEN\Base\PSO</Filter>
     </ClCompile>
+    <ClCompile Include="DKJEN\PostEffect\PostEffect.cpp">
+      <Filter>DKJEN\PostEffect</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="DKJEN\Utilipy\Input.h">
@@ -467,6 +470,9 @@
     </ClInclude>
     <ClInclude Include="DKJEN\Base\RenderTextrurePSO.h">
       <Filter>DKJEN\Base\PSO</Filter>
+    </ClInclude>
+    <ClInclude Include="DKJEN\PostEffect\PostEffect.h">
+      <Filter>DKJEN\PostEffect</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>
