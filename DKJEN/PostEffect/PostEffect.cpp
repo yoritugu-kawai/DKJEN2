@@ -2,6 +2,7 @@
 
 void PostEffect::Initialize()
 {
+	Create();
 }
 
 void PostEffect::Call()
@@ -11,6 +12,6 @@ void PostEffect::Call()
 
 	commandList->SetGraphicsRootSignature(pso_.rootSignature);
 	commandList->SetPipelineState(pso_.GraphicsPipelineState);//
-	DescriptorManagement::rootParamerterCommand(2, tex_);
+	DescriptorManagement::rootParamerterCommand(2, srv_);
 	commandList->DrawInstanced(3, 1, 0, 0);
 }
