@@ -11,6 +11,10 @@
 #include <cassert>
 #include <cmath>
 #include <numbers>
+#include<limits>
+#include<iostream>
+#include<cstdint>
+
 
 #include"../Utilipy/Pch.h"
 #include"../Base/Log.h"

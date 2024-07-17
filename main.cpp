@@ -142,7 +142,7 @@ int WINAPI WinMain(HINSTANCE, HINSTANCE, LPSTR, int) {
 		if (worldTransform->GetTranslate().x>=3) {
 
 			speed = 0;
-			animaionTime = 0;
+			//animaionTime = 0;
 	    }
 		//cameraPos_.x += 0.01f;
 		cameraBox_.x += speed;

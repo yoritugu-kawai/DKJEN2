@@ -862,52 +862,27 @@ Matrix4x4 MakeRotateMatrix(const Quaternion& quaternion)
 Quaternion Slerp(const Quaternion& q0, const Quaternion& q1, float t)
 {
 
-	//// クォータニオンの内積を計算
-	//float dot = DotQuaternion(q1, q2);
-	//Quaternion qn1 = q1;//q1のnew
-	//Quaternion qn2 = q2;//q2のnew
-	//if (dot < 0.0f)
-	//{
-	//	qn1 = { -qn1.x,-qn1.y,-qn1.z,-qn1.w };
-	//	dot = -dot;
-	//}
-	//
-	//// q1とq2の間の角度を計算
-	//float theta = std::acos(dot);
-	//
-	//float sinTheta = std::sin(theta);
-	//float scale0 = std::sin((1 - t) * theta) / sinTheta;
-	//float scale1 = std::sin(t * theta) / sinTheta;
-	//
-	//// 補間されたクォータニオンを計算して返す
-	//return Quaternion(
-	//	scale0 * qn1.x + scale1 * qn2.x,
-	//	scale0 * qn1.y + scale1 * qn2.y,
-	//	scale0 * qn1.z + scale1 * qn2.z,
-	//	scale0 * qn1.w + scale1 * qn2.w
-	//);
-
-
-
-
-	//q0・q1=||q0||・||q1||*cosθ
-	//今は単位Quaternionを求めたいのでノルムは1なので
-	//q0・q1 = cosθでOK!!
 	float dot =
 		q0.x * q1.x +
 		q0.y * q1.y +
 		q0.z * q1.z +
 		q0.w * q1.w;
+	Quaternion qn0 = q0;
+	Quaternion qn1 = q1;
+	if (dot < 0.0f) {
+		qn0 = { -qn0.x,-qn0.y, -qn0.z, -qn0.w };
+		dot = -dot;
+	}
 
 	//dotが限りなく1に近い場合
 	const float EPSILON = 0.0005f;
 	if (dot > 1.0f - EPSILON) {
 		// 直線補間を行う
 		Quaternion result = {};
-		result.x = (1.0f - t) * q0.x + t * q1.x;
-		result.y = (1.0f - t) * q0.y + t * q1.y;
-		result.z = (1.0f - t) * q0.z + t * q1.z;
-		result.w = (1.0f - t) * q0.w + t * q1.w;
+		result.x = (1.0f - t) * qn0.x + t * qn0.x;
+		result.y = (1.0f - t) * qn0.y + t * qn0.y;
+		result.z = (1.0f - t) * qn0.z + t * qn0.z;
+		result.w = (1.0f - t) * qn0.w + t * qn0.w;
 		return result;
 	}
 
@@ -917,14 +892,15 @@ Quaternion Slerp(const Quaternion& q0, const Quaternion& q1, float t)
 
 	//Quaternionの前にある係数
 	//scale...係数
-	float scale0 = float(std::sin((1 - t) * theta) / std::sin(theta));
-	float scale1 = float(std::sin(t * theta) / std::sin(theta));
+	float sinTheta = std::sin(theta);
+	float scale0 = float(std::sin((1 - t) * theta) / sinTheta);
+	float scale1 = float(std::sin(t * theta) / sinTheta);
 
 	Quaternion result = {};
-	result.x = scale0 * q0.x + scale1 * q1.x;
-	result.y = scale0 * q0.y + scale1 * q1.y;
-	result.z = scale0 * q0.z + scale1 * q1.z;
-	result.w = scale0 * q0.w + scale1 * q1.w;
+	result.x = scale0 * qn0.x + scale1 * qn1.x;
+	result.y = scale0 * qn0.y + scale1 * qn1.y;
+	result.z = scale0 * qn0.z + scale1 * qn1.z;
+	result.w = scale0 * qn0.w + scale1 * qn1.w;
 
 	return result;
 
