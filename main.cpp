@@ -16,6 +16,7 @@
 
 #include"DKJEN/Skinning/Animation/Skinning.h"
 #include"DKJEN/Skinning/Animation/Bone.h"
+#include<json.hpp>
 const wchar_t Title[] = { L"ド根性エンジン" };
 
 
@@ -41,19 +42,19 @@ int WINAPI WinMain(HINSTANCE, HINSTANCE, LPSTR, int) {
 	worldTransform->Create();
 	Animation3D* walk3d = new Animation3D;
 	ModelData modelData_ = LoadObjManagement::NewLoadObjFile("resource/hu", "walk.gltf");
-	
+
 	Animation animatio = lod->LoadAnimationFile("resource/hu", "walk.gltf");
 	Skeleton skeleton = bone->CreateSkeleton(modelData_.rootNode);
 	SkinCluster  skinCluster = skin->CreateSkinCluster(skeleton, modelData_);
 	walk3d->Initialize(modelData_);
-	
+
 
 
 	CameraData* cameraBox = new CameraData;
 	cameraBox->Create();
 	Obj3D* box_ = new Obj3D;
 	ModelData boxData_ = LoadObjManagement::NewLoadObjFile("resource", "axis.obj");
-	
+
 	box_->Initialize(boxData_);
 	WorldTransform* boxWorldTransform_ = new WorldTransform;
 	boxWorldTransform_->Create();
@@ -63,7 +64,7 @@ int WINAPI WinMain(HINSTANCE, HINSTANCE, LPSTR, int) {
 	sprite->Initialize(tex);*/
 	DescriptorManagement::GetInstance();
 	Vector3 cameraPos_ = { 0,0,-10 };
-	Vector3 cameraBox_= { 0,0,-10 };
+	Vector3 cameraBox_ = { 0,0,-10 };
 	//細かい値
 	Vector3 cameraRotate_ = { 0,0,0 };
 	float k = 0;
@@ -76,6 +77,70 @@ int WINAPI WinMain(HINSTANCE, HINSTANCE, LPSTR, int) {
 	float speed = 0.01f;
 	Matrix4x4 mtrix = {};
 	//座標
+
+	////////////////////////////////////////////////////////
+	struct LevelData {
+		struct ObjectData {
+			std::string fileName;
+			Vector3 translation;
+			Vector3 rotation;
+			Vector3 scaling;
+
+		};
+		std::vector<ObjectData>objects;
+	};
+	const std::string fullpath = std::string("resource/json/") + "test.json";
+
+	std::ifstream file;
+
+	file.open(fullpath);
+	if (file.fail()) {
+		assert(0);
+	}
+
+	nlohmann::json deserialized;
+
+	file >> deserialized;
+
+	assert(deserialized.is_object());
+	assert(deserialized.contains("name"));
+	assert(deserialized["name"].is_string());
+
+	std::string name = deserialized["name"].get<std::string>();
+	assert(name.compare("scene") == 0);
+	LevelData* levelData = new LevelData;
+
+	for (nlohmann::json& object : deserialized["objects"]) {
+		assert(object.contains("type"));
+
+		std::string type = object["type"].get<std::string>();
+
+		if (type.compare("MESH") == 0) {
+			levelData->objects.push_back(LevelData::ObjectData{});
+			LevelData::ObjectData& objectData = levelData->objects.back();
+			if (object.contains("file_name")) {
+				objectData.fileName = object["file_name"];
+			}
+			nlohmann::json& transform = object["transform"];
+			//トランスフォームのパラメータ
+			objectData.translation.x = (float)transform["translation"][1];
+			objectData.translation.y = (float)transform["translation"][2];
+			objectData.translation.z = (float)-transform["translation"][0];
+
+			///
+			objectData.rotation.x = (float)-transform["rotation"][1];
+			objectData.rotation.y = (float)-transform["rotation"][2];
+			objectData.rotation.z = (float) transform["rotation"][0];
+
+			//
+			objectData.scaling.x = (float)transform["scaling"][1];
+			objectData.scaling.y = (float)transform["scaling"][2];
+			objectData.scaling.z = (float)transform["scaling"][0];
+
+		}
+
+	}
+	///////////////////////////////////////////////////////////
 
 
 	//　メインループ
@@ -130,20 +195,20 @@ int WINAPI WinMain(HINSTANCE, HINSTANCE, LPSTR, int) {
 		}
 		pos_.x += speed;
 		worldTransform->SetTranslate(pos_);
-		
+
 		worldTransform->SetRotate(rotate);
-	
+
 		boxWorldTransform_->SetTranslate({ -2,0,0 });
 		//更新
-	
+
 		worldTransform->UpdateMatrix(cameraData);
 		boxWorldTransform_->UpdateMatrix(cameraBox);
-		
-		if (worldTransform->GetTranslate().x>=3) {
+
+		if (worldTransform->GetTranslate().x >= 3) {
 
 			speed = 0;
 			//animaionTime = 0;
-	    }
+		}
 		//cameraPos_.x += 0.01f;
 		cameraBox_.x += speed;
 		cameraData->SetTranslate(cameraPos_);
@@ -151,7 +216,7 @@ int WINAPI WinMain(HINSTANCE, HINSTANCE, LPSTR, int) {
 		cameraData->SetRotate(cameraRotate_);
 		X = worldTransform->GetTranslate().x;
 		ImGui::Begin("pos");
-		ImGui::SliderFloat3("camera",&X, 10, -500);
+		ImGui::SliderFloat3("camera", &X, 10, -500);
 		ImGui::SliderFloat3("cameraRotate", &cameraRotate_.x, 3, -3);
 
 		ImGui::End();
@@ -167,7 +232,7 @@ int WINAPI WinMain(HINSTANCE, HINSTANCE, LPSTR, int) {
 		//sprite->Draw({200.0f,100.0f,10.0f},{0,0,0},{0,0,0},{1,1,1,1});
 		walk3d->Draw({ 1,1,1,1 }, cameraData, worldTransform, skinCluster);
 		box_->Draw({ 1,1,1,1 }, cameraBox, boxWorldTransform_);
-	
+
 
 		//////
 		//　　描画処理

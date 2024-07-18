@@ -116,6 +116,9 @@
     <Filter Include="DKJEN\Skinning\Animation">
       <UniqueIdentifier>{e62aa1b2-7ef5-4eee-a7dd-4d5cbfa1fe39}</UniqueIdentifier>
     </Filter>
+    <Filter Include="DKJEN\JsonLoad">
+      <UniqueIdentifier>{2276947b-0523-4f49-9bf1-0677c5d01f9d}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <None Include=".editorconfig" />
@@ -310,6 +313,9 @@
     <ClCompile Include="DKJEN\Base\LightPSO.cpp">
       <Filter>DKJEN\Base\PSO</Filter>
     </ClCompile>
+    <ClCompile Include="DKJEN\JsonLoad\JsonLoad.cpp">
+      <Filter>DKJEN\JsonLoad</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="DKJEN\Utilipy\Input.h">
@@ -497,6 +503,9 @@
     </ClInclude>
     <ClInclude Include="DKJEN\Base\LightPSO.h">
       <Filter>DKJEN\Base\PSO</Filter>
+    </ClInclude>
+    <ClInclude Include="DKJEN\JsonLoad\JsonLoad.h">
+      <Filter>DKJEN\JsonLoad</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>
