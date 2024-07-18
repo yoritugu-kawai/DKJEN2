@@ -1,8 +1,8 @@
 #include "JsonLoad.h"
 
-void JsonLoad::Load()
+void JsonLoad::Load(const std::string& directoryPath, const std::string& fileName)
 {
-	const std::string fullpath = std::string("resource/json/") + "test.json";
+	const std::string fullpath = directoryPath + fileName;
 
 	std::ifstream file;
 
@@ -81,4 +81,78 @@ void JsonLoad::RecursiveJson(nlohmann::json& objects)
 		
 	}
 
+}
+
+void JsonLoad::Initialize(const std::string& directoryPath)
+{
+
+	for (auto& objectData : levelData->objects) {
+		
+		decltype(models_)::iterator it = models_.find(objectData.fileName);
+
+	
+		if (it == models_.end()) {
+			ModelData* model = nullptr;
+			uint32_t modelHandle = ModelManager::GetInstance()->LoadModelFileForLevelData(directoryPath, objectData.fileName);
+			model = Model::Create(modelHandle);
+			models_[objectData.fileName] = model;
+		}
+
+		
+		WorldTransform* worldTransform = new WorldTransform();
+
+		worldTransform->Create();
+		worldTransform->SetTranslate(objectData.translation);
+		worldTransform->SetRotate(objectData.rotation);
+		worldTransform->SetScale( objectData.scaling);
+
+
+
+		worldTransforms_.push_back(worldTransform);
+	}
+}
+
+
+void JsonLoad::Update() {
+	//ワールドトランスフォームの更新
+	for (WorldTransform* object : worldTransforms_) {
+		object->Update();
+	}
+
+}
+
+void JsonLoad::Draw(Camera& camera) {
+	uint32_t count = 0;
+	for (auto& objectData : levelData->objects) {
+		//ファイル名から登録済みモデルを検索
+		Model* model = nullptr;
+		decltype(models_)::iterator it = models_.find(objectData.fileName);
+		//見つかったらmodelに入れる
+		if (it != models_.end()) {
+			model = it->second;
+		}
+
+		model->Draw(*worldTransforms_[count], camera);
+
+		//数を増やしていく
+		count++;
+	}
+
+}
+
+
+
+JsonLoad::~JsonLoad() {
+
+	for (auto& pair : models_) {
+		delete pair.second;
+	}
+	models_.clear();
+
+	for (WorldTransform* object : worldTransforms_) {
+		delete object;
+	}
+	worldTransforms_.clear();
+
+	delete levelData;
 }
