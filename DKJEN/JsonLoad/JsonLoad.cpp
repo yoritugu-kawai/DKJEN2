@@ -21,7 +21,7 @@ void JsonLoad::Load(const std::string& directoryPath, const std::string& fileNam
 
 	std::string name = deserialized["name"].get<std::string>();
 	assert(name.compare("scene") == 0);
-	levelData = new LevelData;
+
 	RecursiveJson(deserialized["objects"]);
 }
 
@@ -43,8 +43,8 @@ void JsonLoad::RecursiveJson(nlohmann::json& objects)
 		if (type.compare("MESH") == 0) {
 			if (object.contains("file_name")) {
 				objectData.fileName = object["file_name"];
-				ModelData boxData_ = LoadObjManagement::NewLoadObjFile("resource" + objectData.fileName, "axis.obj");
-				obj3d_->Initialize(boxData_);
+				ModelData boxData_ = LoadObjManagement::NewLoadObjFile("resource/",objectData.fileName);
+				objectData.object_->Initialize(boxData_);
 			}
 			nlohmann::json& transform = object["transform"];
 			//トランスフォームのパラメータ

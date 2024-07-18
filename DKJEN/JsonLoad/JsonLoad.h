@@ -45,7 +45,6 @@ private:
 	std::map<std::string,ObjectData> models_;
 	std::vector<WorldTransform*> worldTransforms_;
 	
-	LevelData* levelData;
-	Obj3D* obj3d_;
+
 };
 
