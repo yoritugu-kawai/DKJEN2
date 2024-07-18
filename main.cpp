@@ -16,7 +16,7 @@
 
 #include"DKJEN/Skinning/Animation/Skinning.h"
 #include"DKJEN/Skinning/Animation/Bone.h"
-#include<json.hpp>
+
 const wchar_t Title[] = { L"ド根性エンジン" };
 
 
@@ -79,67 +79,7 @@ int WINAPI WinMain(HINSTANCE, HINSTANCE, LPSTR, int) {
 	//座標
 
 	////////////////////////////////////////////////////////
-	struct LevelData {
-		struct ObjectData {
-			std::string fileName;
-			Vector3 translation;
-			Vector3 rotation;
-			Vector3 scaling;
 
-		};
-		std::vector<ObjectData>objects;
-	};
-	const std::string fullpath = std::string("resource/json/") + "test.json";
-
-	std::ifstream file;
-
-	file.open(fullpath);
-	if (file.fail()) {
-		assert(0);
-	}
-
-	nlohmann::json deserialized;
-
-	file >> deserialized;
-
-	assert(deserialized.is_object());
-	assert(deserialized.contains("name"));
-	assert(deserialized["name"].is_string());
-
-	std::string name = deserialized["name"].get<std::string>();
-	assert(name.compare("scene") == 0);
-	LevelData* levelData = new LevelData;
-
-	for (nlohmann::json& object : deserialized["objects"]) {
-		assert(object.contains("type"));
-
-		std::string type = object["type"].get<std::string>();
-
-		if (type.compare("MESH") == 0) {
-			levelData->objects.push_back(LevelData::ObjectData{});
-			LevelData::ObjectData& objectData = levelData->objects.back();
-			if (object.contains("file_name")) {
-				objectData.fileName = object["file_name"];
-			}
-			nlohmann::json& transform = object["transform"];
-			//トランスフォームのパラメータ
-			objectData.translation.x = (float)transform["translation"][1];
-			objectData.translation.y = (float)transform["translation"][2];
-			objectData.translation.z = (float)-transform["translation"][0];
-
-			///
-			objectData.rotation.x = (float)-transform["rotation"][1];
-			objectData.rotation.y = (float)-transform["rotation"][2];
-			objectData.rotation.z = (float) transform["rotation"][0];
-
-			//
-			objectData.scaling.x = (float)transform["scaling"][1];
-			objectData.scaling.y = (float)transform["scaling"][2];
-			objectData.scaling.z = (float)transform["scaling"][0];
-
-		}
-
-	}
 	///////////////////////////////////////////////////////////
 
 

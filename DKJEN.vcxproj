@@ -281,6 +281,7 @@ copy "$(WindowsSdkDir)bin\$(TargetPlatformVersion)\x64\dxil.dll" "$(TargetDir)dx
     <ClCompile Include="DKJEN\externals\imgui\imgui_tables.cpp" />
     <ClCompile Include="DKJEN\externals\imgui\imgui_widgets.cpp" />
     <ClCompile Include="DKJEN\Imgui\imguiManager.cpp" />
+    <ClCompile Include="DKJEN\JsonLoad\JsonLoad.cpp" />
     <ClCompile Include="DKJEN\Management\DescriptorManagement.cpp" />
     <ClCompile Include="DKJEN\Management\FrameManagement.cpp" />
     <ClCompile Include="DKJEN\Management\LoadObjManagement.cpp" />
@@ -341,6 +342,7 @@ copy "$(WindowsSdkDir)bin\$(TargetPlatformVersion)\x64\dxil.dll" "$(TargetDir)dx
     <ClInclude Include="DKJEN\externals\imgui\imstb_textedit.h" />
     <ClInclude Include="DKJEN\externals\imgui\imstb_truetype.h" />
     <ClInclude Include="DKJEN\Imgui\imguiManager.h" />
+    <ClInclude Include="DKJEN\JsonLoad\JsonLoad.h" />
     <ClInclude Include="DKJEN\Management\FrameManagement.h" />
     <ClInclude Include="DKJEN\Management\DescriptorManagement.h" />
     <ClInclude Include="DKJEN\Management\PSOCopileManagement.h" />
