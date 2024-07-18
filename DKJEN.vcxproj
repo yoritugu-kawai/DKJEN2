@@ -317,6 +317,7 @@ copy "$(WindowsSdkDir)bin\$(TargetPlatformVersion)\x64\dxil.dll" "$(TargetDir)dx
     <ClCompile Include="GameProject\Player\Bullet.cpp" />
     <ClCompile Include="GameProject\Player\Player.cpp" />
     <ClCompile Include="main.cpp" />
+    <ClCompile Include="Project\ProjectManager.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="DKJEN\Base\CreateBufferResource.h" />
@@ -382,6 +383,7 @@ copy "$(WindowsSdkDir)bin\$(TargetPlatformVersion)\x64\dxil.dll" "$(TargetDir)dx
     <ClInclude Include="GameProject\GameSeen\StateSeen\IScene.h" />
     <ClInclude Include="GameProject\Player\Bullet.h" />
     <ClInclude Include="GameProject\Player\Player.h" />
+    <ClInclude Include="Project\ProjectManager.h" />
   </ItemGroup>
   <ItemGroup>
     <Text Include="DKJEN\externals\imgui\LICENSE.txt" />

@@ -27,58 +27,54 @@ void JsonLoad::Load(const std::string& directoryPath, const std::string& fileNam
 
 void JsonLoad::RecursiveJson(nlohmann::json& objects)
 {
-
-
-	
-	
-
 	for (nlohmann::json& object : objects) {
 		assert(object.contains("type"));
 
+		std::string objectName = object["name"].get<std::string>();
 		std::string type = object["type"].get<std::string>();
+		ObjectData objectData;
+
+
+		objectData.object_ = make_shared<Obj3D>();
+		objectData.worldTransform_ = make_shared<WorldTransform>();
+
+		objectData.worldTransform_->Create();
 
 		if (type.compare("MESH") == 0) {
-			levelData->objects.push_back(LevelData::ObjectData{});
-			LevelData::ObjectData& objectData = levelData->objects.back();
 			if (object.contains("file_name")) {
 				objectData.fileName = object["file_name"];
+				ModelData boxData_ = LoadObjManagement::NewLoadObjFile("resource" + objectData.fileName, "axis.obj");
+				obj3d_->Initialize(boxData_);
 			}
 			nlohmann::json& transform = object["transform"];
 			//トランスフォームのパラメータ
-			objectData.translation.x = (float)transform["translation"][1];
-			objectData.translation.y = (float)transform["translation"][2];
-			objectData.translation.z = (float)transform["translation"][0];
+			Transform transformEular;
+			//tを入れる
+			transformEular.translate.x = (float)transform["translation"][1];
+			transformEular.translate.y = (float)transform["translation"][2];
+			transformEular.translate.z = (float)transform["translation"][0];
 
-			///
+			//rを入れる
 			const float DEREES_TO_RADIUS_ = (float)std::numbers::pi / 180.0f;
-			objectData.rotation.x = -(float)transform["rotation"][1]*DEREES_TO_RADIUS_;
-			objectData.rotation.y = -(float)transform["rotation"][2]*DEREES_TO_RADIUS_;
-			objectData.rotation.z = -(float)transform["rotation"][0] * DEREES_TO_RADIUS_;
+			transformEular.rotate.x = -(float)transform["rotation"][1] * DEREES_TO_RADIUS_;
+			transformEular.rotate.y = -(float)transform["rotation"][2] * DEREES_TO_RADIUS_;
+			transformEular.rotate.z = -(float)transform["rotation"][0] * DEREES_TO_RADIUS_;
 
-			//
-			objectData.scaling.x = (float)transform["scaling"][1];
-			objectData.scaling.y = (float)transform["scaling"][2];
-			objectData.scaling.z = (float)transform["scaling"][0];
+			//sを入れる
+			transformEular.scale.x = (float)transform["scaling"][1];
+			transformEular.scale.y = (float)transform["scaling"][2];
+			transformEular.scale.z = (float)transform["scaling"][0];
 
-			//コライダー
-			nlohmann::json& collider = object["collider"];
+			//srtを入れる
+			objectData.worldTransform_->SetScale(transformEular.scale);
+			objectData.worldTransform_->SetRotate(transformEular.rotate);
+			objectData.worldTransform_->SetTranslate(transformEular.translate);
 
-			objectData.colliderType = object["type"];
-			//
-			objectData.center.x = (float)collider["center"][1];
-			objectData.center.y = (float)collider["center"][2];
-			objectData.center.z = -(float)collider["center"][0];
-			//
-			objectData.size.x = (float)collider["size"][1];
-			objectData.size.y = (float)collider["size"][2];
-			objectData.size.z = (float)collider["size"][0];
+			models_[objectName] = move(objectData);
 
-			if (object.contains("children")) {
-				RecursiveJson(object["children"]);
-			}
 
 		}
-		
+
 	}
 
 }
@@ -86,73 +82,39 @@ void JsonLoad::RecursiveJson(nlohmann::json& objects)
 void JsonLoad::Initialize(const std::string& directoryPath)
 {
 
-	for (auto& objectData : levelData->objects) {
-		
-		decltype(models_)::iterator it = models_.find(objectData.fileName);
-
-	
-		if (it == models_.end()) {
-			ModelData* model = nullptr;
-			uint32_t modelHandle = ModelManager::GetInstance()->LoadModelFileForLevelData(directoryPath, objectData.fileName);
-			model = Model::Create(modelHandle);
-			models_[objectData.fileName] = model;
-		}
-
-		
-		WorldTransform* worldTransform = new WorldTransform();
-
-		worldTransform->Create();
-		worldTransform->SetTranslate(objectData.translation);
-		worldTransform->SetRotate(objectData.rotation);
-		worldTransform->SetScale( objectData.scaling);
-
-
-
-		worldTransforms_.push_back(worldTransform);
-	}
 }
 
 
-void JsonLoad::Update() {
+void JsonLoad::Update(CameraData* cameraData) {
 	//ワールドトランスフォームの更新
-	for (WorldTransform* object : worldTransforms_) {
-		object->Update();
+	for (auto& object : models_) {
+		auto& it = object.second;
+		it.worldTransform_->UpdateMatrix(cameraData);
 	}
 
 }
 
-void JsonLoad::Draw(Camera& camera) {
-	uint32_t count = 0;
-	for (auto& objectData : levelData->objects) {
-		//ファイル名から登録済みモデルを検索
-		Model* model = nullptr;
-		decltype(models_)::iterator it = models_.find(objectData.fileName);
-		//見つかったらmodelに入れる
-		if (it != models_.end()) {
-			model = it->second;
-		}
-
-		model->Draw(*worldTransforms_[count], camera);
-
-		//数を増やしていく
-		count++;
+void JsonLoad::Draw(CameraData* cameraData) {
+	for (auto& object : models_) {
+		auto& it = object.second;
+		it.object_->Draw({1,1,1,1}, cameraData, it.worldTransform_.get());
 	}
 
 }
 
 
 
-JsonLoad::~JsonLoad() {
-
-	for (auto& pair : models_) {
-		delete pair.second;
-	}
-	models_.clear();
-
-	for (WorldTransform* object : worldTransforms_) {
-		delete object;
-	}
-	worldTransforms_.clear();
-
-	delete levelData;
-}
+//JsonLoad::~JsonLoad() {
+//
+//	for (auto& pair : models_) {
+//		delete pair.second;
+//	}
+//	models_.clear();
+//
+//	for (WorldTransform* object : worldTransforms_) {
+//		delete object;
+//	}
+//	worldTransforms_.clear();
+//
+//	delete levelData;
+//}

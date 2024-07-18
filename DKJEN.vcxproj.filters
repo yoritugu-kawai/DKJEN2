@@ -119,6 +119,9 @@
     <Filter Include="DKJEN\JsonLoad">
       <UniqueIdentifier>{2276947b-0523-4f49-9bf1-0677c5d01f9d}</UniqueIdentifier>
     </Filter>
+    <Filter Include="Project">
+      <UniqueIdentifier>{252dfcb2-4e23-49dc-82e4-c72182a216b2}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <None Include=".editorconfig" />
@@ -316,6 +319,9 @@
     <ClCompile Include="DKJEN\JsonLoad\JsonLoad.cpp">
       <Filter>DKJEN\JsonLoad</Filter>
     </ClCompile>
+    <ClCompile Include="Project\ProjectManager.cpp">
+      <Filter>Project</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="DKJEN\Utilipy\Input.h">
@@ -506,6 +512,9 @@
     </ClInclude>
     <ClInclude Include="DKJEN\JsonLoad\JsonLoad.h">
       <Filter>DKJEN\JsonLoad</Filter>
+    </ClInclude>
+    <ClInclude Include="Project\ProjectManager.h">
+      <Filter>Project</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>
