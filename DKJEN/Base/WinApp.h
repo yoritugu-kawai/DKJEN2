@@ -11,7 +11,7 @@ public :
 	static WinApp* GetInstance();
 
 	static LRESULT CALLBACK WindowProc(HWND hwnd, UINT msg, WPARAM wparam, LPARAM lparam);
-	
+	bool WinMsg();
 	static void Initialize(const wchar_t* title);
 	//void Release();
 	static const int32_t Width() { return WinApp::GetInstance()-> kClientWidth_; }
@@ -20,6 +20,7 @@ public :
 	static WNDCLASS GetWc() { return WinApp::GetInstance()->wc_; }
 
 private:
+	MSG msg{};
 	WNDCLASS wc_{};
 	HWND hwnd_;
 	const wchar_t* title_;

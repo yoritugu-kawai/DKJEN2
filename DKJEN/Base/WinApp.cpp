@@ -27,6 +27,20 @@ LRESULT CALLBACK  WinApp::WindowProc(HWND hwnd, UINT msg, WPARAM wparam, LPARAM 
 
 }
 
+bool WinApp::WinMsg()
+{
+	if (PeekMessage(&msg, NULL, 0, 0, PM_REMOVE)) {
+		TranslateMessage(&msg);
+		DispatchMessage(&msg);
+	}
+
+	if (msg.message != WM_QUIT) {
+		return true;
+	}
+
+	return false;
+}
+
 
 void  WinApp::Initialize(const wchar_t* title) {
 	WNDCLASS wc{};
