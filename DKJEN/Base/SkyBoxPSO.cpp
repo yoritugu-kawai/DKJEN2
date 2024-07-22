@@ -32,71 +32,61 @@ void SkyBoxPSO::ShapePSO()
 
 	ShaderMode shader = CompileShaderManager::GetInstance()->GetShaders().shape.SkyBox;
 
-	//RootSignature作成
+	
+
 	D3D12_ROOT_SIGNATURE_DESC descriptionRootSignature{};
 
 	descriptionRootSignature.Flags =
 		D3D12_ROOT_SIGNATURE_FLAG_ALLOW_INPUT_ASSEMBLER_INPUT_LAYOUT;
 
-	//Material設定
 	D3D12_ROOT_PARAMETER rootParameters[6] = {};
 	rootParameters[0].ParameterType = D3D12_ROOT_PARAMETER_TYPE_CBV;
-	rootParameters[0].ShaderVisibility = D3D12_SHADER_VISIBILITY_PIXEL;
+	rootParameters[0].ShaderVisibility = D3D12_SHADER_VISIBILITY_VERTEX;
 	rootParameters[0].Descriptor.ShaderRegister = 0;
-	//VertexのTransform
+
+
+	
 	rootParameters[1].ParameterType = D3D12_ROOT_PARAMETER_TYPE_CBV;
 	rootParameters[1].ShaderVisibility = D3D12_SHADER_VISIBILITY_VERTEX;
-	rootParameters[1].Descriptor.ShaderRegister = 0;
-	////
+	rootParameters[1].Descriptor.ShaderRegister = 1;
+
+	descriptionRootSignature.pParameters = rootParameters;
+	descriptionRootSignature.NumParameters = _countof(rootParameters);
+
+
 	D3D12_DESCRIPTOR_RANGE descriptorRange[1] = {};
 	descriptorRange[0].BaseShaderRegister = 0;
 	descriptorRange[0].NumDescriptors = 1;
 	descriptorRange[0].RangeType = D3D12_DESCRIPTOR_RANGE_TYPE_SRV;
 	descriptorRange[0].OffsetInDescriptorsFromTableStart = D3D12_DESCRIPTOR_RANGE_OFFSET_APPEND;
-	//
+
+
+
 	rootParameters[2].ParameterType = D3D12_ROOT_PARAMETER_TYPE_DESCRIPTOR_TABLE;
 	rootParameters[2].ShaderVisibility = D3D12_SHADER_VISIBILITY_PIXEL;
 	rootParameters[2].DescriptorTable.pDescriptorRanges = descriptorRange;
 	rootParameters[2].DescriptorTable.NumDescriptorRanges = _countof(descriptorRange);
-	//
+
+
+
+	D3D12_STATIC_SAMPLER_DESC staticSamplers[1] = {};
+	staticSamplers[0].Filter = D3D12_FILTER_MIN_MAG_MIP_LINEAR;
+	staticSamplers[0].AddressU = D3D12_TEXTURE_ADDRESS_MODE_WRAP;
+	staticSamplers[0].AddressV = D3D12_TEXTURE_ADDRESS_MODE_WRAP;
+	staticSamplers[0].AddressW = D3D12_TEXTURE_ADDRESS_MODE_WRAP;
+	staticSamplers[0].ComparisonFunc = D3D12_COMPARISON_FUNC_NEVER;
+	staticSamplers[0].MaxLOD = D3D12_FLOAT32_MAX;
+	staticSamplers[0].ShaderRegister = 0;
+	staticSamplers[0].ShaderVisibility = D3D12_SHADER_VISIBILITY_PIXEL;
+	descriptionRootSignature.pStaticSamplers = staticSamplers;
+	descriptionRootSignature.NumStaticSamplers = _countof(staticSamplers);
+
+
+
+
 	rootParameters[3].ParameterType = D3D12_ROOT_PARAMETER_TYPE_CBV;
 	rootParameters[3].ShaderVisibility = D3D12_SHADER_VISIBILITY_PIXEL;
-	rootParameters[3].Descriptor.ShaderRegister = 1;
-	//4
-	rootParameters[4].ParameterType = D3D12_ROOT_PARAMETER_TYPE_CBV;
-	rootParameters[4].ShaderVisibility = D3D12_SHADER_VISIBILITY_PIXEL;
-	rootParameters[4].Descriptor.ShaderRegister = 2;
-	//
-
-	//Skinning
-	D3D12_DESCRIPTOR_RANGE skinningDescriptor[1] = {};
-	skinningDescriptor[0].BaseShaderRegister = 1;
-	skinningDescriptor[0].NumDescriptors = 1;
-	skinningDescriptor[0].RangeType = D3D12_DESCRIPTOR_RANGE_TYPE_SRV;
-	skinningDescriptor[0].OffsetInDescriptorsFromTableStart = D3D12_DESCRIPTOR_RANGE_OFFSET_APPEND;
-	//
-	rootParameters[5].ParameterType = D3D12_ROOT_PARAMETER_TYPE_DESCRIPTOR_TABLE;
-	rootParameters[5].ShaderVisibility = D3D12_SHADER_VISIBILITY_VERTEX;
-	rootParameters[5].DescriptorTable.pDescriptorRanges = skinningDescriptor;
-	rootParameters[5].DescriptorTable.NumDescriptorRanges = _countof(skinningDescriptor);
-
-
-	D3D12_STATIC_SAMPLER_DESC staicSamplers[1] = {};
-	staicSamplers[0].Filter = D3D12_FILTER_MIN_MAG_MIP_LINEAR;
-	staicSamplers[0].AddressU = D3D12_TEXTURE_ADDRESS_MODE_WRAP;
-	staicSamplers[0].AddressV = D3D12_TEXTURE_ADDRESS_MODE_WRAP;
-	staicSamplers[0].AddressW = D3D12_TEXTURE_ADDRESS_MODE_WRAP;
-	staicSamplers[0].ComparisonFunc = D3D12_COMPARISON_FUNC_NEVER;
-	staicSamplers[0].MaxLOD = D3D12_FLOAT32_MAX;
-	staicSamplers[0].ShaderRegister = 0;
-	staicSamplers[0].ShaderVisibility = D3D12_SHADER_VISIBILITY_PIXEL;
-	//
-	descriptionRootSignature.pStaticSamplers = staicSamplers;
-	descriptionRootSignature.NumStaticSamplers = _countof(staicSamplers);
-	////
-	descriptionRootSignature.pParameters = rootParameters;
-	descriptionRootSignature.NumParameters = _countof(rootParameters);
-
+	rootParameters[3].Descriptor.ShaderRegister = 0;
 
 
 	//シリアライズしてバイナリにする
@@ -123,39 +113,17 @@ void SkyBoxPSO::ShapePSO()
 
 
 	//InputLayoutの設定
-	D3D12_INPUT_ELEMENT_DESC inputElementDescs[5] = {};
+
+	D3D12_INPUT_ELEMENT_DESC inputElementDescs[2] = {};
 	inputElementDescs[0].SemanticName = "POSITION";
 	inputElementDescs[0].SemanticIndex = 0;
 	inputElementDescs[0].Format = DXGI_FORMAT_R32G32B32A32_FLOAT;
 	inputElementDescs[0].AlignedByteOffset = D3D12_APPEND_ALIGNED_ELEMENT;
 
-	//
 	inputElementDescs[1].SemanticName = "TEXCOORD";
 	inputElementDescs[1].SemanticIndex = 0;
-	inputElementDescs[1].Format = DXGI_FORMAT_R32G32_FLOAT;
+	inputElementDescs[1].Format = DXGI_FORMAT_R32G32B32_FLOAT;
 	inputElementDescs[1].AlignedByteOffset = D3D12_APPEND_ALIGNED_ELEMENT;
-	//
-	inputElementDescs[2].SemanticName = "NORMAL";
-	inputElementDescs[2].SemanticIndex = 0;
-	inputElementDescs[2].Format = DXGI_FORMAT_R32G32B32_FLOAT;
-	inputElementDescs[2].AlignedByteOffset= D3D12_APPEND_ALIGNED_ELEMENT;
-	//
-	/*inputElementDescs[3].SemanticName = "WORLDPOSITION";
-	inputElementDescs[3].SemanticIndex = 0;
-	inputElementDescs[3].Format = DXGI_FORMAT_R32G32B32_FLOAT;
-	inputElementDescs[3].AlignedByteOffset = D3D12_APPEND_ALIGNED_ELEMENT;*/
-	inputElementDescs[3].SemanticName = "WEIGHT";
-	inputElementDescs[3].SemanticIndex = 0;
-	inputElementDescs[3].Format = DXGI_FORMAT_R32G32B32A32_FLOAT;	
-	inputElementDescs[3].InputSlot = 1;								
-	inputElementDescs[3].AlignedByteOffset = D3D12_APPEND_ALIGNED_ELEMENT;
-
-
-	inputElementDescs[4].SemanticName = "INDEX";
-	inputElementDescs[4].SemanticIndex = 0;
-	inputElementDescs[4].Format = DXGI_FORMAT_R32G32B32A32_SINT;	
-	inputElementDescs[4].InputSlot = 1;								
-	inputElementDescs[4].AlignedByteOffset = D3D12_APPEND_ALIGNED_ELEMENT;
 
 	// WORLDPOSITION
 	D3D12_INPUT_LAYOUT_DESC inputLayoutDesc{};

@@ -10,6 +10,10 @@ void GameScene::Initialize()
 
 	cameraData->SetTranslate(Vector3(0.0f, 2.0f, -32.0f));
 	cameraData->Update();
+
+	sky = make_unique < SkyBox>();
+	uint32_t skyBoxHandle_ = ImageLoading::LoadTexture("rostock_laage_airport_4k.dds");
+	sky->Initialize();
 }
 
 void GameScene::Update()

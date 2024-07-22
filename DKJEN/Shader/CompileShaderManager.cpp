@@ -129,7 +129,7 @@ void CompileShaderManager::ShaderCompile()
 			L"ps_6_0"
 		);
 	///スカイボックス
-	/*shape.SkyBox.vertexBlob =
+	shape.SkyBox.vertexBlob =
 		CompileShaderManager::CompileShaderFanc(
 			L"resource/hlsl/SkyBox.VS.hlsl",
 			L"vs_6_0"
@@ -138,7 +138,7 @@ void CompileShaderManager::ShaderCompile()
 		CompileShaderManager::CompileShaderFanc(
 			L"resource/hlsl/SkyBox.PS.hlsl",
 			L"ps_6_0"
-		);*/
+		);
 	///スプライト
 	shape.Sprite.vertexBlob =
 		CompileShaderManager::CompileShaderFanc(
@@ -177,8 +177,8 @@ void CompileShaderManager::Release()
 	CompileShaderManager::GetInstance()->shaders_.shape.Particle.pixelBlob->Release();
 	CompileShaderManager::GetInstance()->shaders_.shape.Particle.vertexBlob->Release();
 	//
-	//CompileShaderManager::GetInstance()->shaders_.shape.SkyBox.pixelBlob->Release();
-	//CompileShaderManager::GetInstance()->shaders_.shape.SkyBox.vertexBlob->Release();
+	CompileShaderManager::GetInstance()->shaders_.shape.SkyBox.pixelBlob->Release();
+	CompileShaderManager::GetInstance()->shaders_.shape.SkyBox.vertexBlob->Release();
 	//
 	CompileShaderManager::GetInstance()->shaders_.shape.Sprite.pixelBlob->Release();
 	CompileShaderManager::GetInstance()->shaders_.shape.Sprite.vertexBlob->Release();

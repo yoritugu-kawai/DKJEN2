@@ -5,3 +5,4 @@
 #include"../Type/Sprite.h"
 #include"../Type/Texture.h"
 #include"../Type/Particle.h"
+#include"../Type/SkyBox.h"
