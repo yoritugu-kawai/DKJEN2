@@ -153,7 +153,80 @@ uint32_t TexManager::LoadTexture(const std::string& filePath)
 	return TexManager::GetInstance()->imageDatas[filePath]->GetImageIndex();
 }
 
+DirectX::ScratchImage TexManager::DDSLoadTextureData(const std::string& filePath) {
 
+	HRESULT hr = {};
+
+	//テクスチャファイルを読んでプログラムで扱えるようにする
+	DirectX::ScratchImage image{};
+	std::wstring filePathW = ConvertString(filePath);
+	//dssファイルの場合
+	if (filePathW.ends_with(L".dds")) {
+		hr = DirectX::LoadFromDDSFile(filePathW.c_str(), DirectX::DDS_FLAGS_NONE, nullptr, image);
+		assert(SUCCEEDED(hr));
+	}
+	//その他のpngやjpegなど
+	else {
+		hr = DirectX::LoadFromWICFile(filePathW.c_str(), DirectX::WIC_FLAGS_FORCE_SRGB, nullptr, image);
+		assert(SUCCEEDED(hr));
+
+	}
+
+	
+	//ミップマップ...元画像より小さなテクスチャ群
+	DirectX::ScratchImage mipImages{};
+	//圧縮フォーマットかどうかを調べる
+	if (DirectX::IsCompressed(image.GetMetadata().format)) {
+		//圧縮フォーマットならそのまま使う
+		mipImages = std::move(image);
+	}
+	else {
+		hr = DirectX::GenerateMipMaps(image.GetImages(), image.GetImageCount(), image.GetMetadata(), DirectX::TEX_FILTER_SRGB, 4, mipImages);
+		assert(SUCCEEDED(hr));
+
+	}
+
+
+	//ミップマップ月のデータを返す
+	return mipImages;
+}
+
+
+uint32_t TexManager::DDSLoadTexture(const std::string& filePath) {
+
+	if (CheckImageData(filePath)) {
+		SImageData texData;
+		DescriptorManagement::IndexIncrement();
+		texData.index = DescriptorManagement::GetIndex();
+		uint32_t descriptorSizeSRV = TexManager::GetInstance()->descriptorSizeSRV;
+		ID3D12Device* device = DxCommon::GetInstance()->GetDevice();
+		ID3D12DescriptorHeap* srvDescriptorHeap = DxCommon::GetInstance()->GetsrvDescriptorHeap();
+
+		//Textureを読んで転送する
+		DirectX::ScratchImage mipImages = DDSLoadTextureData(filePath);
+		const DirectX::TexMetadata& metadata = mipImages.GetMetadata();
+		texData.size.x = static_cast<float>(metadata.width);
+		texData.size.y = static_cast<float>(metadata.height);
+		texData.resource = CreateTexResource(device, metadata);
+		UploadTexData(texData.resource.Get(), mipImages);
+
+		//テキストのシェダ－
+		D3D12_SHADER_RESOURCE_VIEW_DESC srvDesc{};
+		srvDesc.Format = metadata.format;
+		srvDesc.Shader4ComponentMapping = D3D12_DEFAULT_SHADER_4_COMPONENT_MAPPING;
+		srvDesc.ViewDimension = D3D12_SRV_DIMENSION_TEXTURE2D;
+		srvDesc.Texture2D.MipLevels = UINT(metadata.mipLevels);
+
+		DescriptorManagement::CPUDescriptorHandle(descriptorSizeSRV, srvDesc, texData.resource);
+
+		DescriptorManagement::GPUDescriptorHandle(descriptorSizeSRV);
+		TexManager::GetInstance()->descriptorSizeSRV = descriptorSizeSRV;
+
+		TexManager::GetInstance()->imageDatas[filePath] =
+			std::make_unique<ImageData>(filePath, texData);
+	}
+	return TexManager::GetInstance()->imageDatas[filePath]->GetImageIndex();
+}
 
 void TexManager::End()
 {

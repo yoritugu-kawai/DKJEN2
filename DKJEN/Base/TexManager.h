@@ -60,15 +60,18 @@ public:
 
 	static void Initiluze();
 	static uint32_t LoadTexture(const std::string& filePath);
+	static uint32_t DDSLoadTexture(const std::string& filePath);
 	//void Draw();
 	static void End();
 	static DirectX::ScratchImage LoadTextureData(const std::string& filePath);
+	static DirectX::ScratchImage DDSLoadTextureData(const std::string& filePath);
 	static ID3D12Resource* CreateTexResource(ID3D12Device* device, const DirectX::TexMetadata& metadata);
 	static void UploadTexData(ID3D12Resource* texture, const DirectX::ScratchImage& mipImages);
 	static void ShaderResourceView();
 	static uint32_t GetDescriptorSizeSRV(){return TexManager::GetInstance()->descriptorSizeSRV;}
 	
 private:
+
 	DxCommon dxcommon_;
 
 	uint32_t descriptorSizeSRV;
@@ -77,4 +80,7 @@ private:
 	
 	std::map<string, std::unique_ptr<ImageData>>imageDatas;
 	static bool CheckImageData(string filePath);
+
+	///
+	
 };
