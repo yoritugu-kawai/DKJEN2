@@ -14,6 +14,8 @@ void GameScene::Initialize()
 	sky = make_unique < SkyBox>();
 	uint32_t skyBoxHandle_ = TexManager::LoadTexture("rostock_laage_airport_4k.dds");
 	sky->Initialize(skyBoxHandle_);
+	worldTransform = new WorldTransform;
+	worldTransform->Create();
 }
 
 void GameScene::Update()
@@ -23,13 +25,13 @@ void GameScene::Update()
 
 	//////
 	//　　描画処理
-
+	worldTransform->UpdateMatrix(cameraData);
 
 }
 
 void GameScene::Draw()
 {
-	sky->Draw(cameraData,);
+	sky->Draw(cameraData, worldTransform);
 	//////
 	LevelData->Draw(cameraData);
 }

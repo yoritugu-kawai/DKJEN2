@@ -18,5 +18,6 @@ private:
 	CameraData* cameraData;
 	unique_ptr<JsonLoad>LevelData;
 	unique_ptr<SkyBox> sky;
+	WorldTransform* worldTransform;
 };
 
