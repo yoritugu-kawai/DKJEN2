@@ -10,16 +10,12 @@
 #include"DKJEN/CameraProjection/CameraProjection.h"
 
 #include"DKJEN/Management/TypeManagement.h"
+#pragma once
 #include "DKJEN/Management/FrameManagement.h"
 #include"DKJEN/Management/PSOCopileManagement.h"
 #include"DKJEN/Management/LoadObjManagement.h"
-#include"GameProject/GameManager/GameManager.h"
-
-#include"DKJEN/Skinning/Animation/Skinning.h"
-#include"DKJEN/Skinning/Animation/Bone.h"
-#include"DKJEN/JsonLoad/JsonLoad.h"
 const wchar_t Title[] = { L"ド根性エンジン" };
-
+#include"Project/GameScene/GameScene.h"
 class ProjectManager
 {
 public:
@@ -27,6 +23,5 @@ public:
 	void Gear();
 
 private:
-	CameraData* cameraData;
-	unique_ptr<JsonLoad>LevelData;
+	GameScene* game;
 };

@@ -122,6 +122,9 @@
     <Filter Include="Project">
       <UniqueIdentifier>{252dfcb2-4e23-49dc-82e4-c72182a216b2}</UniqueIdentifier>
     </Filter>
+    <Filter Include="Project\GameScene">
+      <UniqueIdentifier>{fde56c3e-5949-4daf-bc06-6b5718261d22}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <None Include=".editorconfig" />
@@ -141,6 +144,9 @@
       <Filter>hlsl</Filter>
     </None>
     <None Include="resource\hlsl\AnimationObject3D.hlsli">
+      <Filter>hlsl</Filter>
+    </None>
+    <None Include="resource\hlsl\SkyBox.hlsli">
       <Filter>hlsl</Filter>
     </None>
   </ItemGroup>
@@ -321,6 +327,12 @@
     </ClCompile>
     <ClCompile Include="Project\ProjectManager.cpp">
       <Filter>Project</Filter>
+    </ClCompile>
+    <ClCompile Include="Project\GameScene\GameScene.cpp">
+      <Filter>Project\GameScene</Filter>
+    </ClCompile>
+    <ClCompile Include="DKJEN\Type\SkyBox.cpp">
+      <Filter>DKJEN\Type\3D</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
@@ -516,6 +528,12 @@
     <ClInclude Include="Project\ProjectManager.h">
       <Filter>Project</Filter>
     </ClInclude>
+    <ClInclude Include="Project\GameScene\GameScene.h">
+      <Filter>Project\GameScene</Filter>
+    </ClInclude>
+    <ClInclude Include="DKJEN\Type\SkyBox.h">
+      <Filter>DKJEN\Type\3D</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <Text Include="DKJEN\externals\imgui\LICENSE.txt">
@@ -557,6 +575,12 @@
       <Filter>hlsl</Filter>
     </FxCompile>
     <FxCompile Include="resource\hlsl\AnimationObject3D.PS.hlsl">
+      <Filter>hlsl</Filter>
+    </FxCompile>
+    <FxCompile Include="resource\hlsl\SkyBox.PS.hlsl">
+      <Filter>hlsl</Filter>
+    </FxCompile>
+    <FxCompile Include="resource\hlsl\SkyBox.VS.hlsl">
       <Filter>hlsl</Filter>
     </FxCompile>
   </ItemGroup>
