@@ -166,16 +166,7 @@
     <ClCompile Include="DKJEN\Math\Math.cpp">
       <Filter>DKJEN\Math</Filter>
     </ClCompile>
-    <ClCompile Include="DKJEN\Shader\Animation3DCompileShader.cpp">
-      <Filter>DKJEN\Shader</Filter>
-    </ClCompile>
     <ClCompile Include="DKJEN\Shader\PolygonCompileShader.cpp">
-      <Filter>DKJEN\Shader</Filter>
-    </ClCompile>
-    <ClCompile Include="DKJEN\Shader\SpriteCompileShader.cpp">
-      <Filter>DKJEN\Shader</Filter>
-    </ClCompile>
-    <ClCompile Include="DKJEN\Shader\TextureCompileShader.cpp">
       <Filter>DKJEN\Shader</Filter>
     </ClCompile>
     <ClCompile Include="DKJEN\externals\imgui\imgui.cpp">
@@ -243,9 +234,6 @@
     </ClCompile>
     <ClCompile Include="DKJEN\CameraProjection\CameraProjection.cpp">
       <Filter>DKJEN\CameraProjection</Filter>
-    </ClCompile>
-    <ClCompile Include="DKJEN\Shader\ParticleCompileShader.cpp">
-      <Filter>DKJEN\Shader</Filter>
     </ClCompile>
     <ClCompile Include="DKJEN\Base\ParyiclePSO.cpp">
       <Filter>DKJEN\Base\PSO</Filter>
@@ -316,9 +304,6 @@
     <ClCompile Include="DKJEN\Type\Obj3D.cpp">
       <Filter>DKJEN\Type\3D</Filter>
     </ClCompile>
-    <ClCompile Include="DKJEN\Shader\LightCompileShader.cpp">
-      <Filter>DKJEN\Shader</Filter>
-    </ClCompile>
     <ClCompile Include="DKJEN\Base\LightPSO.cpp">
       <Filter>DKJEN\Base\PSO</Filter>
     </ClCompile>
@@ -337,7 +322,7 @@
     <ClCompile Include="DKJEN\Base\SkyBoxPSO.cpp">
       <Filter>DKJEN\Base\PSO</Filter>
     </ClCompile>
-    <ClCompile Include="DKJEN\Shader\SkyBoxCompileShader.cpp">
+    <ClCompile Include="DKJEN\Shader\CompileShaderManager.cpp">
       <Filter>DKJEN\Shader</Filter>
     </ClCompile>
   </ItemGroup>
@@ -357,16 +342,7 @@
     <ClInclude Include="DKJEN\Management\PSOCopileManagement.h">
       <Filter>DKJEN\Management</Filter>
     </ClInclude>
-    <ClInclude Include="DKJEN\Shader\Animation3DCompileShader.h">
-      <Filter>DKJEN\Shader</Filter>
-    </ClInclude>
     <ClInclude Include="DKJEN\Shader\PolygonCompileShader.h">
-      <Filter>DKJEN\Shader</Filter>
-    </ClInclude>
-    <ClInclude Include="DKJEN\Shader\SpriteCompileShader.h">
-      <Filter>DKJEN\Shader</Filter>
-    </ClInclude>
-    <ClInclude Include="DKJEN\Shader\TextureCompileShader.h">
       <Filter>DKJEN\Shader</Filter>
     </ClInclude>
     <ClInclude Include="DKJEN\externals\imgui\imconfig.h">
@@ -437,9 +413,6 @@
     </ClInclude>
     <ClInclude Include="DKJEN\CameraProjection\CameraProjection.h">
       <Filter>DKJEN\CameraProjection</Filter>
-    </ClInclude>
-    <ClInclude Include="DKJEN\Shader\ParticleCompileShader.h">
-      <Filter>DKJEN\Shader</Filter>
     </ClInclude>
     <ClInclude Include="DKJEN\Base\ParyiclePSO.h">
       <Filter>DKJEN\Base\PSO</Filter>
@@ -522,9 +495,6 @@
     <ClInclude Include="DKJEN\Type\Obj3D.h">
       <Filter>DKJEN\Type\3D</Filter>
     </ClInclude>
-    <ClInclude Include="DKJEN\Shader\LightCompileShader.h">
-      <Filter>DKJEN\Shader</Filter>
-    </ClInclude>
     <ClInclude Include="DKJEN\Base\LightPSO.h">
       <Filter>DKJEN\Base\PSO</Filter>
     </ClInclude>
@@ -543,7 +513,7 @@
     <ClInclude Include="DKJEN\Base\SkyBoxPSO.h">
       <Filter>DKJEN\Base\PSO</Filter>
     </ClInclude>
-    <ClInclude Include="DKJEN\Shader\SkyBoxCompileShader.h">
+    <ClInclude Include="DKJEN\Shader\CompileShaderManager.h">
       <Filter>DKJEN\Shader</Filter>
     </ClInclude>
   </ItemGroup>

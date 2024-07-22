@@ -32,7 +32,7 @@ void ParticlePSO::ShapePSO()
 
 	PSOProperty ShapePSO;
 
-	ShaderMode shader = ParticleCompileShader::GetInstance()->GetShaders().shape;
+	ShaderMode shader = CompileShaderManager::GetInstance()->GetShaders().shape.Particle;
 
 	//RootSignature作成
 	D3D12_ROOT_SIGNATURE_DESC descriptionRootSignature{};

@@ -30,7 +30,7 @@ void Animation3DPSO::ShapePSO()
 
 	PSOProperty ShapePSO;
 
-	ShaderMode shader = Animation3DCompileShader::GetInstance()->GetShaders().shape;
+	ShaderMode shader = CompileShaderManager::GetInstance()->GetShaders().shape.Animation;
 
 	//RootSignature作成
 	D3D12_ROOT_SIGNATURE_DESC descriptionRootSignature{};

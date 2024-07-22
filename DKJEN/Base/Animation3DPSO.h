@@ -1,6 +1,6 @@
 #pragma once
 #include"DxCommon.h"
-#include"../Shader/Animation3DCompileShader.h"
+#include"../Shader/CompileShaderManager.h"
 
 class Animation3DPSO
 {

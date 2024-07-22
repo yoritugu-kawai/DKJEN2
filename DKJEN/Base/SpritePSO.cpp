@@ -31,7 +31,7 @@ void SpritePSO::ShapePSO()
 
 	PSOProperty ShapePSO;
 
-	ShaderMode shader = SpriteCompileShader::GetInstance()->GetShaders().shape;
+	ShaderMode shader = CompileShaderManager::GetInstance()->GetShaders().shape.Sprite;
 
 	//RootSignature作成
 	D3D12_ROOT_SIGNATURE_DESC descriptionRootSignature{};

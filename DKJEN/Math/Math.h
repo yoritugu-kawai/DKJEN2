@@ -43,8 +43,19 @@ struct  ShaderMode
 	IDxcBlob* vertexBlob;
 	IDxcBlob* pixelBlob;
 };
+struct RootSader
+{
+	ShaderMode Animation;
+	ShaderMode Obj3D;
+	ShaderMode Texture;
+	ShaderMode Particle;
+	ShaderMode SkyBox;
+	ShaderMode Sprite;
+};
+
+
 struct Shaders {
-	ShaderMode shape;
+	RootSader shape;
 };
 
 struct Vector2 {

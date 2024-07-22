@@ -30,7 +30,7 @@ void SkyBoxPSO::ShapePSO()
 
 	PSOProperty ShapePSO;
 
-	ShaderMode shader = SkyBoxCompileShader::GetInstance()->GetShaders().shape;
+	ShaderMode shader = CompileShaderManager::GetInstance()->GetShaders().shape.SkyBox;
 
 	//RootSignature作成
 	D3D12_ROOT_SIGNATURE_DESC descriptionRootSignature{};

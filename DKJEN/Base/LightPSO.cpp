@@ -30,7 +30,7 @@ void LightPSO::ShapePSO()
 
 	PSOProperty ShapePSO;
 
-	ShaderMode shader = LightCompileShader::GetInstance()->GetShaders().shape;
+	ShaderMode shader = CompileShaderManager::GetInstance()->GetShaders().shape.Obj3D;
 
 	//RootSignature作成
 	D3D12_ROOT_SIGNATURE_DESC descriptionRootSignature{};

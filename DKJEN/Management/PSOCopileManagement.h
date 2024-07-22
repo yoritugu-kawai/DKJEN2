@@ -1,13 +1,9 @@
 #pragma once
-#include"../Shader/Animation3DCompileShader.h"
-#include"../Shader/PolygonCompileShader.h"
-#include"../Shader/SpriteCompileShader.h"
-#include"../Shader/TextureCompileShader.h"
-#include"../Shader/ParticleCompileShader.h"
-#include"../Shader/LightCompileShader.h"
+#include"../Shader/CompileShaderManager.h"
+
 
 #include"../Base/Animation3DPSO.h"
-#include"../Base/PolygonPSO.h"
+//#include"../Base/PolygonPSO.h"
 #include"../Base/SpritePSO.h"
 #include"../Base/TexturePSO.h"
 #include"../Base/ParyiclePSO.h"
