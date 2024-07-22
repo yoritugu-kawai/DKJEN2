@@ -268,6 +268,7 @@ copy "$(WindowsSdkDir)bin\$(TargetPlatformVersion)\x64\dxil.dll" "$(TargetDir)dx
     <ClCompile Include="DKJEN\Base\DxCommon.cpp" />
     <ClCompile Include="DKJEN\Base\Function.cpp" />
     <ClCompile Include="DKJEN\Base\LightPSO.cpp" />
+    <ClCompile Include="DKJEN\Base\SkyBoxPSO.cpp" />
     <ClCompile Include="DKJEN\Base\TexManager.cpp" />
     <ClCompile Include="DKJEN\Base\Animation3DPSO.cpp" />
     <ClCompile Include="DKJEN\Base\Log.cpp" />
@@ -298,6 +299,7 @@ copy "$(WindowsSdkDir)bin\$(TargetPlatformVersion)\x64\dxil.dll" "$(TargetDir)dx
     <ClCompile Include="DKJEN\Shader\LightCompileShader.cpp" />
     <ClCompile Include="DKJEN\Shader\ParticleCompileShader.cpp" />
     <ClCompile Include="DKJEN\Shader\PolygonCompileShader.cpp" />
+    <ClCompile Include="DKJEN\Shader\SkyBoxCompileShader.cpp" />
     <ClCompile Include="DKJEN\Shader\SpriteCompileShader.cpp" />
     <ClCompile Include="DKJEN\Shader\TextureCompileShader.cpp" />
     <ClCompile Include="DKJEN\Skinning\Animation\Bone.cpp" />
@@ -331,6 +333,7 @@ copy "$(WindowsSdkDir)bin\$(TargetPlatformVersion)\x64\dxil.dll" "$(TargetDir)dx
     <ClInclude Include="DKJEN\Base\DxCommon.h" />
     <ClInclude Include="DKJEN\Base\Function.h" />
     <ClInclude Include="DKJEN\Base\LightPSO.h" />
+    <ClInclude Include="DKJEN\Base\SkyBoxPSO.h" />
     <ClInclude Include="DKJEN\Base\TexManager.h" />
     <ClInclude Include="DKJEN\Base\Animation3DPSO.h" />
     <ClInclude Include="DKJEN\Base\Log.h" />
@@ -362,6 +365,7 @@ copy "$(WindowsSdkDir)bin\$(TargetPlatformVersion)\x64\dxil.dll" "$(TargetDir)dx
     <ClInclude Include="DKJEN\Shader\LightCompileShader.h" />
     <ClInclude Include="DKJEN\Shader\ParticleCompileShader.h" />
     <ClInclude Include="DKJEN\Shader\PolygonCompileShader.h" />
+    <ClInclude Include="DKJEN\Shader\SkyBoxCompileShader.h" />
     <ClInclude Include="DKJEN\Shader\SpriteCompileShader.h" />
     <ClInclude Include="DKJEN\Shader\TextureCompileShader.h" />
     <ClInclude Include="DKJEN\Skinning\Animation\Animation.h" />

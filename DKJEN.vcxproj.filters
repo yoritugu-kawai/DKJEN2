@@ -334,6 +334,12 @@
     <ClCompile Include="DKJEN\Type\SkyBox.cpp">
       <Filter>DKJEN\Type\3D</Filter>
     </ClCompile>
+    <ClCompile Include="DKJEN\Base\SkyBoxPSO.cpp">
+      <Filter>DKJEN\Base\PSO</Filter>
+    </ClCompile>
+    <ClCompile Include="DKJEN\Shader\SkyBoxCompileShader.cpp">
+      <Filter>DKJEN\Shader</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="DKJEN\Utilipy\Input.h">
@@ -533,6 +539,12 @@
     </ClInclude>
     <ClInclude Include="DKJEN\Type\SkyBox.h">
       <Filter>DKJEN\Type\3D</Filter>
+    </ClInclude>
+    <ClInclude Include="DKJEN\Base\SkyBoxPSO.h">
+      <Filter>DKJEN\Base\PSO</Filter>
+    </ClInclude>
+    <ClInclude Include="DKJEN\Shader\SkyBoxCompileShader.h">
+      <Filter>DKJEN\Shader</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>
