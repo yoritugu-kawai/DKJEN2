@@ -8,6 +8,7 @@
 #include"../Base/TexturePSO.h"
 #include"../Base/ParyiclePSO.h"
 #include"../Base/LightPSO.h"
+#include"../Base/SkyBoxPSO.h"
 
 class PSOCopileManagement
 {

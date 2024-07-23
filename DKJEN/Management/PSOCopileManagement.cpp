@@ -22,7 +22,7 @@ void PSOCopileManagement::Set()
 	Animation3DPSO::CreatePSO();
 	ParticlePSO::CreatePSO();
 	LightPSO::CreatePSO();
-
+	SkyBoxPSO::CreatePSO();
 
 
 }
@@ -38,5 +38,6 @@ void PSOCopileManagement::Release()
 	Animation3DPSO::Release();
 	ParticlePSO::Release();
 	LightPSO::Release();
+	SkyBoxPSO::Release();
 
 }

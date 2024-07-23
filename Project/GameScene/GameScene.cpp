@@ -20,7 +20,7 @@ void GameScene::Initialize()
 
 void GameScene::Update()
 {
-	//LevelData->Update(cameraData);
+	LevelData->Update(cameraData);
 	cameraData->Update();
 
 	//////
@@ -33,5 +33,5 @@ void GameScene::Draw()
 {
 	sky->Draw(cameraData, worldTransform);
 	//////
-	//LevelData->Draw(cameraData);
+	LevelData->Draw(cameraData);
 }
