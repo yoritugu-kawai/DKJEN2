@@ -8,9 +8,11 @@ void GameScene::Initialize()
 	LevelData = make_unique<JsonLoad>();
 	LevelData->Load("resource/json/", "wood.json");
 
-	
-	cameraData->Update();
+	player = make_unique<Obj3D>();
 
+	player->Initialize();
+	///
+	cameraData->Update();
 	cameraData->SetRotate({ 0,0,0 });
 	cameraData->SetTranslate({ 0,0,-200 });
 	worldTransform = new WorldTransform;
