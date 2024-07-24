@@ -14,7 +14,14 @@ public:
 	void Draw();
 
 private:
+	unique_ptr<Skinning> skin;
+	unique_ptr<Bone> bone;
+	unique_ptr<LoadObjManagement> lod ;
 
+	unique_ptr<Animation3D> walk3d ;
+	Animation animatio;
+	Skeleton skeleton;
+	SkinCluster  skinCluster;
 	CameraData* cameraData;
 	unique_ptr<JsonLoad>LevelData;
 	unique_ptr<SkyBox> sky;
@@ -22,5 +29,6 @@ private:
 	WorldTransform* worldTransform;
 	Vector3 cRot;
 	Vector3 cPos;
+	int animaionTime;
 };
 
