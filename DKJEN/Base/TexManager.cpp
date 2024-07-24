@@ -146,7 +146,7 @@ uint32_t TexManager::LoadTexture(const std::string& filePath)
 		DescriptorManagement::IndexIncrement();
 		texData.index = DescriptorManagement::GetIndex();
 		uint32_t descriptorSizeSRV = TexManager::GetInstance()->descriptorSizeSRV;
-		ID3D12Device* device = DxCommon::GetInstance()->GetDevice();
+		
 		ID3D12DescriptorHeap* srvDescriptorHeap = DxCommon::GetInstance()->GetsrvDescriptorHeap();
 
 		//Textureを読んで転送する
@@ -154,7 +154,7 @@ uint32_t TexManager::LoadTexture(const std::string& filePath)
 		const DirectX::TexMetadata& metadata = mipImages.GetMetadata();
 		texData.size.x = static_cast<float>(metadata.width);
 		texData.size.y = static_cast<float>(metadata.height);
-		texData.resource = CreateTexResource(device, metadata);
+		texData.resource = CreateTexResource(metadata);
 		UploadTexData(texData.resource.Get(), mipImages);
 
 		//テキストのシェダ－
