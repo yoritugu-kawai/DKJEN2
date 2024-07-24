@@ -24,7 +24,7 @@ public:
 #pragma endregion
 
 
-	ID3D12Resource* CreateBufferResource(size_t sizeInbyte);
+	
 
 private:
 	Matrix4x4 view_;
@@ -32,7 +32,7 @@ private:
 	Vector3 rotate_;
 	Vector3 translate_;
 	ComPtr<ID3D12Resource> buffer_ = nullptr;
-	CameraCBuffer* data_ = nullptr;
+	CameraMatrixData* data_ = nullptr;
 	float aspectRiot_ = 1280.0f / 720.0f;
 	float fov_ = 0.45f;
 

@@ -19,5 +19,7 @@ private:
 	unique_ptr<JsonLoad>LevelData;
 	unique_ptr<SkyBox> sky;
 	WorldTransform* worldTransform;
+	Vector3 cRot;
+	Vector3 cPos;
 };
 

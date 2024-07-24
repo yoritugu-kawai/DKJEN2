@@ -23,6 +23,8 @@ void SkyBox::Initialize(uint32_t textureHandle)
 	vertexData_[1].position = { 1.0f,1.0f,-1.0f,1.0f };
 	vertexData_[2].position = { 1.0f,-1.0f,1.0f,1.0f };
 
+
+
 	vertexData_[3].position = { 1.0f,-1.0f,1.0f,1.0f };
 	vertexData_[4].position = { 1.0f,1.0f,-1.0f,1.0f };
 	vertexData_[5].position = { 1.0f,-1.0f,-1.0f,1.0f };
@@ -94,13 +96,7 @@ void SkyBox::Initialize(uint32_t textureHandle)
 
 	vertexResource_->Unmap(0, nullptr);
 
-
-
 	materialResource_ = CreateBufferResource(sizeof(SkyBoxMaterial));
-
-
-
-
 
 	textureHandle_ = textureHandle;
 }

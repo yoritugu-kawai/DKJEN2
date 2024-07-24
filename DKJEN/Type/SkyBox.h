@@ -18,20 +18,7 @@
 #include"Animation3D.h"
 
 
-struct SkyBoxMaterial {
-	Vector4 color;
-	Matrix4x4 uvTransform;
-};
 
-enum VERTEX_POSITION {
-	TOP_RIGHT_BACK,
-
-	TOP_RIGHT_FRONT,
-
-	BOTTOM_RIGHT_BACK,
-	
-	BOTTOM_RIGHT_FRONT,
-};
 class SkyBox
 {
 public:
@@ -39,6 +26,12 @@ public:
 	void Draw(CameraData* cameraData, WorldTransform* worldTransform);
 
 private:
+	struct SkyBoxMaterial {
+		Vector4 color;
+		Matrix4x4 uvTransform;
+	};
+
+	
 	D3D12_VERTEX_BUFFER_VIEW vertexBufferViewSphere_;
 
 	ComPtr<ID3D12Resource> vertexResource_ = nullptr;
