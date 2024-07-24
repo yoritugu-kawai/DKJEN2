@@ -75,8 +75,33 @@ ID3D12Resource* TexManager::CreateTexResource( const DirectX::TexMetadata& metad
 	return resource;
 }
 
+void TexManager::UploadTexData(ID3D12Resource* texture, const DirectX::ScratchImage& mipImages)
+{
+	//Meta情報を取得
+	const DirectX::TexMetadata& metadata = mipImages.GetMetadata();
+
+	//全MipMapについて
+	for (size_t mipLevel = 0; mipLevel < metadata.mipLevels; ++mipLevel)
+	{
+		//MipMapLevelを指定して各Imagesを取得
+		const DirectX::Image* img = mipImages.GetImage(mipLevel, 0, 0);
+
+		//Textureに転送
+		HRESULT hr = texture->WriteToSubresource(
+			UINT(mipLevel),
+			nullptr, //全領域へコピー
+			img->pixels, //元データアドレス
+			UINT(img->rowPitch), //1ラインサイズ
+			UINT(img->slicePitch) //1枚サイズ
+		);
+
+		assert(SUCCEEDED(hr));
+	}
+
+}
+
 [[nodiscard]]
-ID3D12Resource* TexManager::UploadTexData(ID3D12Resource* texture, const DirectX::ScratchImage& mipImages)
+ID3D12Resource* TexManager::DDSUploadTexData(ID3D12Resource* texture, const DirectX::ScratchImage& mipImages)
 {
 	ID3D12GraphicsCommandList* commandList = DxCommon::GetInstance()->GetCommandList();
 	ID3D12Device* device = DxCommon::GetInstance()->GetDevice();
@@ -205,7 +230,7 @@ uint32_t TexManager::DDSLoadTexture(const std::string& filePath) {
 		texData.size.x = static_cast<float>(metadata.width);
 		texData.size.y = static_cast<float>(metadata.height);
 		texData.resource = CreateTexResource(metadata);
-		UploadTexData(texData.resource.Get(), mipImages);
+		DDSUploadTexData(texData.resource.Get(), mipImages);
 
 		//テキストのシェダ－
 		D3D12_SHADER_RESOURCE_VIEW_DESC srvDesc{};

@@ -77,7 +77,8 @@ public:
 	static DirectX::ScratchImage DDSLoadTextureData(const std::string& filePath);
 	static ID3D12Resource* CreateTexResource(const DirectX::TexMetadata& metadata);
 	[[nodiscard]]
-	static ID3D12Resource* UploadTexData(ID3D12Resource* texture, const DirectX::ScratchImage& mipImages);
+	static void UploadTexData(ID3D12Resource* texture, const DirectX::ScratchImage& mipImages);
+	static ID3D12Resource* DDSUploadTexData(ID3D12Resource* texture, const DirectX::ScratchImage& mipImages);
 	static void ShaderResourceView();
 	static uint32_t GetDescriptorSizeSRV(){return TexManager::GetInstance()->descriptorSizeSRV;}
 	
