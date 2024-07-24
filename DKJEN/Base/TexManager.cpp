@@ -44,7 +44,44 @@ DirectX::ScratchImage TexManager::LoadTextureData(const std::string& filePath)
 
 }
 
-ID3D12Resource* TexManager::CreateTexResource( const DirectX::TexMetadata& metadata)
+
+ID3D12Resource* TexManager::CreateTexResource(const DirectX::TexMetadata& metadata)
+{
+	ID3D12Device* device = DxCommon::GetInstance()->GetDevice();
+	
+	//1.metadataを基にResourceの設定
+	D3D12_RESOURCE_DESC resourceDesc{};
+	resourceDesc.Width = UINT(metadata.width);
+	resourceDesc.Height = UINT(metadata.height);
+	resourceDesc.MipLevels = UINT16(metadata.mipLevels);
+	resourceDesc.DepthOrArraySize = UINT16(metadata.arraySize);
+	resourceDesc.Format = metadata.format;
+	resourceDesc.SampleDesc.Count = 1;
+	resourceDesc.Dimension = D3D12_RESOURCE_DIMENSION(metadata.dimension);
+
+	//2.利用するHeapの設定。非常に特殊な運用。02_04exで一般的なケース版がある
+	D3D12_HEAP_PROPERTIES heapProperties{};
+	heapProperties.Type = D3D12_HEAP_TYPE_CUSTOM;
+	heapProperties.CPUPageProperty = D3D12_CPU_PAGE_PROPERTY_WRITE_BACK;
+	heapProperties.MemoryPoolPreference = D3D12_MEMORY_POOL_L0;
+
+
+	//3.Resourceを生成する
+	ID3D12Resource* resource = nullptr;
+	HRESULT hr = device->CreateCommittedResource(
+		&heapProperties,
+		D3D12_HEAP_FLAG_NONE,
+		&resourceDesc,
+		D3D12_RESOURCE_STATE_GENERIC_READ,
+		nullptr,
+		IID_PPV_ARGS(&resource));
+
+	assert(SUCCEEDED(hr));
+	return resource;
+}
+
+
+ID3D12Resource* TexManager::DDSCreateTexResource( const DirectX::TexMetadata& metadata)
 {
 	ID3D12Device* device = DxCommon::GetInstance()->GetDevice();
 	//1.metadataを基にResourceの設定
@@ -74,6 +111,9 @@ ID3D12Resource* TexManager::CreateTexResource( const DirectX::TexMetadata& metad
 	assert(SUCCEEDED(hr));
 	return resource;
 }
+
+
+
 
 void TexManager::UploadTexData(ID3D12Resource* texture, const DirectX::ScratchImage& mipImages)
 {
@@ -229,7 +269,7 @@ uint32_t TexManager::DDSLoadTexture(const std::string& filePath) {
 		const DirectX::TexMetadata& metadata = mipImages.GetMetadata();
 		texData.size.x = static_cast<float>(metadata.width);
 		texData.size.y = static_cast<float>(metadata.height);
-		texData.resource = CreateTexResource(metadata);
+		texData.resource = DDSCreateTexResource(metadata);
 		DDSUploadTexData(texData.resource.Get(), mipImages);
 
 		//テキストのシェダ－
