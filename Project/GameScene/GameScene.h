@@ -14,9 +14,9 @@ public:
 	void Draw();
 
 private:
-	unique_ptr<Skinning> skin;
-	unique_ptr<Bone> bone;
-	unique_ptr<LoadObjManagement> lod ;
+	Skinning*skin;
+	Bone*bone;
+	LoadObjManagement* lod ;
 
 	unique_ptr<Animation3D> walk3d ;
 	Animation animatio;
