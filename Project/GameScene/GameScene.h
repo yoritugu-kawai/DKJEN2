@@ -18,6 +18,7 @@ private:
 	CameraData* cameraData;
 	unique_ptr<JsonLoad>LevelData;
 	unique_ptr<SkyBox> sky;
+	unique_ptr<Obj3D>player;
 	WorldTransform* worldTransform;
 	Vector3 cRot;
 	Vector3 cPos;

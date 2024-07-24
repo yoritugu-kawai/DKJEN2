@@ -102,19 +102,3 @@ void JsonLoad::Draw(CameraData* cameraData) {
 
 }
 
-
-
-//JsonLoad::~JsonLoad() {
-//
-//	for (auto& pair : models_) {
-//		delete pair.second;
-//	}
-//	models_.clear();
-//
-//	for (WorldTransform* object : worldTransforms_) {
-//		delete object;
-//	}
-//	worldTransforms_.clear();
-//
-//	delete levelData;
-//}

@@ -6,17 +6,16 @@ void GameScene::Initialize()
 	cameraData->Create();
 
 	LevelData = make_unique<JsonLoad>();
-	LevelData->Load("resource/json/", "test.json");
+	LevelData->Load("resource/json/", "wood.json");
 
-	cameraData->SetTranslate(Vector3(0.0f, 2.0f, -32.0f));
+	
 	cameraData->Update();
 
-	sky = make_unique<SkyBox>();
-	uint32_t skyBoxHandle_ = TexManager::DDSLoadTexture("rostock_laage_airport_4k.dds");
-	sky->Initialize(skyBoxHandle_);
+	cameraData->SetRotate({ 0,0,0 });
+	cameraData->SetTranslate({ 0,0,-200 });
 	worldTransform = new WorldTransform;
 	worldTransform->Create();
-	worldTransform->SetScale({ 32.0f,32.0f,32.0f });
+
 
 }
 
@@ -41,8 +40,7 @@ void GameScene::Update()
 
 void GameScene::Draw()
 {
-	sky->Draw(cameraData, worldTransform);
-	//sky->Draw({10,10,10},{0,0,0},{0,0,0},{1,1,1,});
+
 	//////
 	LevelData->Draw(cameraData);
 }
