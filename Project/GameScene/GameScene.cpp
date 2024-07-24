@@ -20,9 +20,9 @@ void GameScene::Initialize()
 	walk3d = unique_ptr<Animation3D>();
 	ModelData modelData_ = LoadObjManagement::NewLoadObjFile("resource/hu", "walk.gltf");
 
-	/*animatio = lod->LoadAnimationFile("resource/hu", "walk.gltf");
+	animatio = lod->LoadAnimationFile("resource/hu", "walk.gltf");
 	skeleton = bone->CreateSkeleton(modelData_.rootNode);
-	skinCluster = skin->CreateSkinCluster(skeleton, modelData_);*/
+	skinCluster = skin->CreateSkinCluster(skeleton, modelData_);
 	walk3d->Initialize(modelData_);
 	
 	///
