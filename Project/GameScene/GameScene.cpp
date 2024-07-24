@@ -15,9 +15,9 @@ void GameScene::Initialize()
 	walk3d = unique_ptr<Animation3D>();
 	ModelData modelData_ = LoadObjManagement::NewLoadObjFile("resource/hu", "walk.gltf");
 
-	 animatio = lod->LoadAnimationFile("resource/hu", "walk.gltf");
-	 skeleton = bone->CreateSkeleton(modelData_.rootNode);
-	  skinCluster = skin->CreateSkinCluster(skeleton, modelData_);
+	animatio = lod->LoadAnimationFile("resource/hu", "walk.gltf");
+	skeleton = bone->CreateSkeleton(modelData_.rootNode);
+	skinCluster = skin->CreateSkinCluster(skeleton, modelData_);
 	walk3d->Initialize(modelData_);
 	
 	///
@@ -43,6 +43,7 @@ void GameScene::Update()
 	ImGui::End();
 	cameraData->SetTranslate(cPos);
 	cameraData->SetRotate(cRot);
+	worldTransform->UpdateMatrix(cameraData);
 	//Animation
 	bone->ApplyAnimation(skeleton, animatio, animaionTime);
 	//Skeleton
@@ -53,13 +54,12 @@ void GameScene::Update()
 	skin->SkinUpdate(skinCluster, skeleton);
 	//////
 	//　　描画処理
-	worldTransform->UpdateMatrix(cameraData);
 
 }
 
 void GameScene::Draw()
 {
-	walk3d->Draw();
+	walk3d->Draw({ 1,1,1,1 }, cameraData, worldTransform, skinCluster);
 	//////
 	LevelData->Draw(cameraData);
 }
