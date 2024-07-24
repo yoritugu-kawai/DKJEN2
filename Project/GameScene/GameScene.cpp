@@ -59,7 +59,7 @@ void GameScene::Update()
 
 void GameScene::Draw()
 {
-
+	walk3d->Draw();
 	//////
 	LevelData->Draw(cameraData);
 }
