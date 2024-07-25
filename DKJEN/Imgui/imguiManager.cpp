@@ -14,6 +14,7 @@ void  ImguiManager::Initialize() {
 	DXGI_SWAP_CHAIN_DESC1 swapChainDesc = DxCommon::GetInstance()->GetswapChainDesc();
 	HWND hwnd = WinApp::GetInstance()->GetHwnd();
 	D3D12_RENDER_TARGET_VIEW_DESC rtvDesc = DxCommon::GetInstance()->rtvDescGet();
+	uint32_t index= DescriptorManagement::Allocate();
 	IMGUI_CHECKVERSION();
 	ImGui::CreateContext();
 	ImGui::StyleColorsDark();
@@ -22,8 +23,8 @@ void  ImguiManager::Initialize() {
 		swapChainDesc.BufferCount,
 		rtvDesc.Format,
 		srvDescriptorHeap,
-		srvDescriptorHeap->GetCPUDescriptorHandleForHeapStart(),
-		srvDescriptorHeap->GetGPUDescriptorHandleForHeapStart());
+		DescriptorManagement::CPUDescriptorHandle(index),
+		DescriptorManagement::GPUDescriptorHandle(index));
 }
 
 void ImguiManager::BeginFrame()

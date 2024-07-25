@@ -31,9 +31,9 @@ void GameScene::Initialize()
 	cameraAnime->SetTranslate({ 0,0,-20 });*/
 	
 	///
-	/*player = make_unique<Obj3D>();
+	player = make_unique<Obj3D>();
 	ModelData modelDat_ = LoadObjManagement::NewLoadObjFile("resource", "wood.obj");
-	player->Initialize(modelDat_);*/
+	player->Initialize(modelDat_);
 
 
 }
@@ -66,8 +66,8 @@ void GameScene::Update()
 
 void GameScene::Draw()
 {
-	//player->Draw({ 1,1,1,1 }, cameraData, worldTransform);
+	LevelData->Draw(cameraData);
+	player->Draw({ 1,1,1,1 }, cameraData, worldTransform);
 	walk3d->Draw({ 1,1,1,1 }, cameraData, worldTransform, skinCluster);
 	//////
-	LevelData->Draw(cameraData);
 }
