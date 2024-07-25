@@ -183,9 +183,8 @@ uint32_t TexManager::LoadTexture(const std::string& filePath)
 {
 	if (CheckImageData(filePath)) {
 		SImageData texData;
-		DescriptorManagement::IndexIncrement();
-		texData.index = DescriptorManagement::GetIndex();
-		uint32_t descriptorSizeSRV = TexManager::GetInstance()->descriptorSizeSRV;
+		
+	
 		
 		ID3D12DescriptorHeap* srvDescriptorHeap = DxCommon::GetInstance()->GetsrvDescriptorHeap();
 
@@ -203,15 +202,17 @@ uint32_t TexManager::LoadTexture(const std::string& filePath)
 		srvDesc.Shader4ComponentMapping = D3D12_DEFAULT_SHADER_4_COMPONENT_MAPPING;
 		srvDesc.ViewDimension = D3D12_SRV_DIMENSION_TEXTURE2D;
 		srvDesc.Texture2D.MipLevels = UINT(metadata.mipLevels);
+		texData.index = DescriptorManagement::Allocate();
 
-		DescriptorManagement::CPUDescriptorHandle(descriptorSizeSRV, srvDesc, texData.resource);
+		DescriptorManagement::CreateShaderResourceView(texData.index, srvDesc, texData.resource);
 
-		DescriptorManagement::GPUDescriptorHandle(descriptorSizeSRV);
-		TexManager::GetInstance()->descriptorSizeSRV = descriptorSizeSRV;
+
+		
 
 		TexManager::GetInstance()->imageDatas[filePath] =
 			std::make_unique<ImageData>(filePath, texData);
 	}
+	TexManager* texManager = TexManager::GetInstance();
 	return TexManager::GetInstance()->imageDatas[filePath]->GetImageIndex();
 }
 
@@ -258,12 +259,7 @@ uint32_t TexManager::DDSLoadTexture(const std::string& filePath) {
 
 	if (CheckImageData(filePath)) {
 		SImageData texData;
-		DescriptorManagement::IndexIncrement();
-		texData.index = DescriptorManagement::GetIndex();
-		uint32_t descriptorSizeSRV = TexManager::GetInstance()->descriptorSizeSRV;
-		ID3D12Device* device = DxCommon::GetInstance()->GetDevice();
-		ID3D12DescriptorHeap* srvDescriptorHeap = DxCommon::GetInstance()->GetsrvDescriptorHeap();
-
+		
 		//Textureを読んで転送する
 		DirectX::ScratchImage mipImages = DDSLoadTextureData(filePath);
 		const DirectX::TexMetadata& metadata = mipImages.GetMetadata();
@@ -278,11 +274,11 @@ uint32_t TexManager::DDSLoadTexture(const std::string& filePath) {
 		srvDesc.Shader4ComponentMapping = D3D12_DEFAULT_SHADER_4_COMPONENT_MAPPING;
 		srvDesc.ViewDimension = D3D12_SRV_DIMENSION_TEXTURECUBE;
 		srvDesc.Texture2D.MipLevels = UINT(metadata.mipLevels);
+		texData.index = DescriptorManagement::Allocate();
 
-		DescriptorManagement::CPUDescriptorHandle(descriptorSizeSRV, srvDesc, texData.resource);
+		DescriptorManagement::CreateShaderResourceView(texData.index, srvDesc, texData.resource);
 
-		DescriptorManagement::GPUDescriptorHandle(descriptorSizeSRV);
-		TexManager::GetInstance()->descriptorSizeSRV = descriptorSizeSRV;
+		
 
 		TexManager::GetInstance()->imageDatas[filePath] =
 			std::make_unique<ImageData>(filePath, texData);

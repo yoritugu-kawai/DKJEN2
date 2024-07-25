@@ -17,6 +17,7 @@ ConstantBuffer<DirectionalLight> gDirectionalLight : register(b1);
 ConstantBuffer<Camera> gCamera : register(b2);
 
 Texture2D<float32_t4> gTexture : register(t0);
+
 SamplerState gSampler : register(s0);
 
 struct PixelShaderOutput

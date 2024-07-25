@@ -50,20 +50,20 @@ void JsonLoad::RecursiveJson(nlohmann::json& objects)
 			//トランスフォームのパラメータ
 			Transform transformEular;
 			//tを入れる
-			transformEular.translate.x = (float)transform["translation"][1];
+			transformEular.translate.x = (float)transform["translation"][0];
 			transformEular.translate.y = (float)transform["translation"][2];
-			transformEular.translate.z = (float)transform["translation"][0];
+			transformEular.translate.z = (float)transform["translation"][1];
 
 			//rを入れる
 			const float DEREES_TO_RADIUS_ = (float)std::numbers::pi / 180.0f;
-			transformEular.rotate.x = -(float)transform["rotation"][1] * DEREES_TO_RADIUS_;
+			transformEular.rotate.x = -(float)transform["rotation"][0] * DEREES_TO_RADIUS_;
 			transformEular.rotate.y = -(float)transform["rotation"][2] * DEREES_TO_RADIUS_;
-			transformEular.rotate.z = -(float)transform["rotation"][0] * DEREES_TO_RADIUS_;
+			transformEular.rotate.z = -(float)transform["rotation"][1] * DEREES_TO_RADIUS_;
 
 			//sを入れる
-			transformEular.scale.x = (float)transform["scaling"][1];
+			transformEular.scale.x = (float)transform["scaling"][0];
 			transformEular.scale.y = (float)transform["scaling"][2];
-			transformEular.scale.z = (float)transform["scaling"][0];
+			transformEular.scale.z = (float)transform["scaling"][1];
 
 			//srtを入れる
 			objectData.worldTransform_->SetScale(transformEular.scale);

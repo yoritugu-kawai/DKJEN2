@@ -10,27 +10,26 @@
 class DescriptorManagement
 {
 public:
+
 	static DescriptorManagement* GetInstance();
 	static void Initialize();
-	static D3D12_CPU_DESCRIPTOR_HANDLE CPUDescriptorHandle( uint32_t descriptorSizeSRV, D3D12_SHADER_RESOURCE_VIEW_DESC srvDesc, ComPtr <ID3D12Resource>textureResource);
-	static D3D12_GPU_DESCRIPTOR_HANDLE GPUDescriptorHandle( uint32_t descriptorSizeSRV);
-	static void rootParamerterCommand(UINT rootPatramerterIndex, uint32_t texhandle);
-	static void IndexIncrement() { DescriptorManagement::GetInstance()->index++; }
-	static uint32_t GetIndex() { return DescriptorManagement::GetInstance()->index; }
-#pragma region Get
-	static D3D12_CPU_DESCRIPTOR_HANDLE GetSRVHCPU(int index) { return DescriptorManagement::GetInstance()->SrvHandleCPU[index]; }
-	static D3D12_GPU_DESCRIPTOR_HANDLE GetSRVHGPU(int index) { return DescriptorManagement::GetInstance()->SrvHandleGPU[index]; }
+	static void CreateShaderResourceView(uint32_t index,D3D12_SHADER_RESOURCE_VIEW_DESC srvDesc, ComPtr <ID3D12Resource>textureResource);
+	static D3D12_CPU_DESCRIPTOR_HANDLE CPUDescriptorHandle( uint32_t index);
+	static D3D12_GPU_DESCRIPTOR_HANDLE GPUDescriptorHandle( uint32_t index);
+	static void rootParamerterCommand(UINT rootPatramerterIndex, uint32_t index);
+	//static void IndexIncrement() { DescriptorManagement::GetInstance()->index++; }
 
-#pragma endregion
+	static uint32_t Allocate() { 
+		uint32_t useIndex = DescriptorManagement::GetInstance()->index;
+		DescriptorManagement::GetInstance()->index++;
 
-#pragma region Set
-	static void SetSRVHCPU(D3D12_CPU_DESCRIPTOR_HANDLE SrvHCPU, int index) { DescriptorManagement::GetInstance()->SrvHandleCPU[index] = SrvHCPU; }
-	static void SetSRVHGPU(D3D12_GPU_DESCRIPTOR_HANDLE SrvHGPU, int index) { DescriptorManagement::GetInstance()->SrvHandleGPU[index] = SrvHGPU; }
-#pragma endregion
+		return useIndex;
+	
+	}
+
 private:
-	D3D12_CPU_DESCRIPTOR_HANDLE SrvHandleCPU[DESCRIPTER_MAX]{};
-	D3D12_GPU_DESCRIPTOR_HANDLE SrvHandleGPU[DESCRIPTER_MAX]{};
 
 	 uint32_t index=0;
+
 
 };

@@ -23,12 +23,13 @@ private:
 	Skeleton skeleton;
 	SkinCluster  skinCluster;
 	CameraData* cameraData;
+	//CameraData* cameraAnime;
 	unique_ptr<JsonLoad>LevelData;
 	unique_ptr<SkyBox> sky;
 	unique_ptr<Obj3D>player;
 	WorldTransform* worldTransform;
 	Vector3 cRot;
 	Vector3 cPos;
-	int animaionTime;
+	float animaionTime;
 };
 
