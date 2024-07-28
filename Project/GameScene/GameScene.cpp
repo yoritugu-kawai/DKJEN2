@@ -24,16 +24,12 @@ void GameScene::Initialize()
 	skeleton = bone->CreateSkeleton(modelData_.rootNode);
 	skinCluster = skin->CreateSkinCluster(skeleton, modelData_);
 	walk3d->Initialize(modelData_);
-	/*cameraAnime = new CameraData;
-	cameraAnime->Create();
-	cameraAnime->Update();
-	cameraAnime->SetRotate({ 0,0,0 });
-	cameraAnime->SetTranslate({ 0,0,-20 });*/
 	
-	///
+	
+	/*///
 	player = make_unique<Obj3D>();
 	ModelData modelDat_ = LoadObjManagement::NewLoadObjFile("resource", "wood.obj");
-	player->Initialize(modelDat_);
+	player->Initialize(modelDat_);*/
 
 
 }
@@ -67,7 +63,7 @@ void GameScene::Update()
 void GameScene::Draw()
 {
 	LevelData->Draw(cameraData);
-	player->Draw({ 1,1,1,1 }, cameraData, worldTransform);
+	//player->Draw({ 1,1,1,1 }, cameraData, worldTransform);
 	walk3d->Draw({ 1,1,1,1 }, cameraData, worldTransform, skinCluster);
 	//////
 }
