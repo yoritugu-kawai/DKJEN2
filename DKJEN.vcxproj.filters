@@ -71,9 +71,6 @@
     <Filter Include="GameProject\PLayer">
       <UniqueIdentifier>{7bce0c8f-fd6e-4a3a-a920-8b3d1b6dc9a1}</UniqueIdentifier>
     </Filter>
-    <Filter Include="GameProject\Enemy">
-      <UniqueIdentifier>{17086e15-e985-42c5-82c7-0f16d14b7f84}</UniqueIdentifier>
-    </Filter>
     <Filter Include="GameProject\GameSeen">
       <UniqueIdentifier>{9bc9cb5b-0eb8-4d77-a6dd-8e306d7bb627}</UniqueIdentifier>
     </Filter>
@@ -91,9 +88,6 @@
     </Filter>
     <Filter Include="GameProject\Block">
       <UniqueIdentifier>{00091886-7b6b-4e45-bbb9-8b919b0f7330}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="GameProject\ball">
-      <UniqueIdentifier>{e2719508-1e10-435f-9d96-1726b5bc63ce}</UniqueIdentifier>
     </Filter>
     <Filter Include="DKJEN\PostEffect">
       <UniqueIdentifier>{9aa792d5-5c85-47f8-9ae9-e7b7991a4970}</UniqueIdentifier>
@@ -262,9 +256,6 @@
     <ClCompile Include="GameProject\Player\Bullet.cpp">
       <Filter>GameProject\PLayer</Filter>
     </ClCompile>
-    <ClCompile Include="GameProject\Enemy\Enemy.cpp">
-      <Filter>GameProject\Enemy</Filter>
-    </ClCompile>
     <ClCompile Include="GameProject\GameSeen\PlaySeen\PlaySeen.cpp">
       <Filter>GameProject\GameSeen\PlaySeen</Filter>
     </ClCompile>
@@ -279,9 +270,6 @@
     </ClCompile>
     <ClCompile Include="DKJEN\Utilipy\CSVLoad.cpp">
       <Filter>DKJEN\Utilipy</Filter>
-    </ClCompile>
-    <ClCompile Include="GameProject\Ball\Ball.cpp">
-      <Filter>GameProject\ball</Filter>
     </ClCompile>
     <ClCompile Include="DKJEN\PostEffect\OffScreenRendering\RenderTextrure.cpp">
       <Filter>DKJEN\PostEffect\OffScreenRendering</Filter>
@@ -444,9 +432,6 @@
     <ClInclude Include="GameProject\Player\Bullet.h">
       <Filter>GameProject\PLayer</Filter>
     </ClInclude>
-    <ClInclude Include="GameProject\Enemy\Enemy.h">
-      <Filter>GameProject\Enemy</Filter>
-    </ClInclude>
     <ClInclude Include="GameProject\GameSeen\StartSeen\StartSeen.h">
       <Filter>GameProject\GameSeen\StartSeen</Filter>
     </ClInclude>
@@ -464,9 +449,6 @@
     </ClInclude>
     <ClInclude Include="DKJEN\Utilipy\CSVLoad.h">
       <Filter>DKJEN\Utilipy</Filter>
-    </ClInclude>
-    <ClInclude Include="GameProject\Ball\Ball.h">
-      <Filter>GameProject\ball</Filter>
     </ClInclude>
     <ClInclude Include="DKJEN\PostEffect\OffScreenRendering\RenderTextrure.h">
       <Filter>DKJEN\PostEffect\OffScreenRendering</Filter>

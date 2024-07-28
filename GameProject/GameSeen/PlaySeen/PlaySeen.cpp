@@ -2,8 +2,8 @@
 
 void PlaySeen::Initialize()
 {
-	ball_ = new Ball;
-	ball_->Initialize();
+	
+	
 	player_ = new Player;
 	player_->Initialize();
 	time = 12;

@@ -314,9 +314,7 @@ copy "$(WindowsSdkDir)bin\$(TargetPlatformVersion)\x64\dxil.dll" "$(TargetDir)dx
     <ClCompile Include="DKJEN\Utilipy\CSVLoad.cpp" />
     <ClCompile Include="DKJEN\Utilipy\Input.cpp" />
     <ClCompile Include="DKJEN\WorldTransform\WorldTransform.cpp" />
-    <ClCompile Include="GameProject\Ball\Ball.cpp" />
     <ClCompile Include="GameProject\Block\Block.cpp" />
-    <ClCompile Include="GameProject\Enemy\Enemy.cpp" />
     <ClCompile Include="GameProject\GameManager\GameManager.cpp" />
     <ClCompile Include="GameProject\GameSeen\PlaySeen\PlaySeen.cpp" />
     <ClCompile Include="GameProject\GameSeen\StartSeen\StartSeen.cpp" />
@@ -379,9 +377,7 @@ copy "$(WindowsSdkDir)bin\$(TargetPlatformVersion)\x64\dxil.dll" "$(TargetDir)dx
     <ClInclude Include="DKJEN\Utilipy\Pch.h" />
     <ClInclude Include="DKJEN\Utilipy\rektyk.h" />
     <ClInclude Include="DKJEN\WorldTransform\WorldTransform.h" />
-    <ClInclude Include="GameProject\Ball\Ball.h" />
     <ClInclude Include="GameProject\Block\Block.h" />
-    <ClInclude Include="GameProject\Enemy\Enemy.h" />
     <ClInclude Include="GameProject\GameManager\GameManager.h" />
     <ClInclude Include="GameProject\GameSeen\PlaySeen\PlaySeen.h" />
     <ClInclude Include="GameProject\GameSeen\StartSeen\StartSeen.h" />
