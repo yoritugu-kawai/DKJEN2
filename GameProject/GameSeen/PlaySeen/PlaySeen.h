@@ -21,7 +21,8 @@ public:
 	void UpdateBlockPopCommands();
 	void AllCollisions();
 private:
-	int speed_;
+	
+
 	int time;
 	///
 	Skinning* skin;
@@ -41,4 +42,7 @@ private:
 	Vector3 cRot;
 	Vector3 cPos;
 	float animaionTime;
+	Vector3 tPos_;
+
+	float speed_=0;
 };

@@ -27,7 +27,12 @@ void PlaySeen::Initialize()
 	skeleton = bone->CreateSkeleton(modelData_.rootNode);
 	skinCluster = skin->CreateSkinCluster(skeleton, modelData_);
 	walk3d->Initialize(modelData_);
-	
+	cRot = { 0.2f,-0.2f,0.0f };
+	cPos = { 0.0f,3.0f,-20.0f };
+
+	//
+	tPos_ = { 0.0f,0.0f,0.0f };
+	speed_= 0.01f;
 }
 
 void PlaySeen::LoadBlockPopData() {
@@ -49,14 +54,32 @@ void PlaySeen::Update(GameManager* gameManager)
 	LevelData->Update(cameraData);
 	cameraData->Update();
 	//cameraAnime->Update();
+	
+	cameraData->SetTranslate(cPos);
+	cameraData->SetRotate(cRot);
+
+
 	cRot = cameraData->GetRotate();
 	cPos = cameraData->GetTranslate();
 	ImGui::Begin("camera");
 	ImGui::DragFloat3("c", &cRot.x, 1.0f, -100.0f, 100.0f);
 	ImGui::DragFloat3("p", &cPos.x, 1.0f, -1000.0f, 100.0f);
 	ImGui::End();
-	cameraData->SetTranslate(cPos);
-	cameraData->SetRotate(cRot);
+
+	ImGui::Begin("Speed");
+	ImGui::DragFloat("c", &speed_, 1.0f, -100.0f, 100.0f);
+	
+	ImGui::End();
+
+	ImGui::Begin("pos");
+	ImGui::DragFloat3("c", &tPos_.x, 1.0f, -100.0f, 100.0f);
+
+	ImGui::End();
+	tPos_.z += speed_;
+	cPos.z += speed_;
+	//cPos.y += 0.01;
+	worldTransform->SetTranslate(tPos_);
+
 	worldTransform->UpdateMatrix(cameraData);
 	////Animation
 	bone->ApplyAnimation(skeleton, animatio, animaionTime);
