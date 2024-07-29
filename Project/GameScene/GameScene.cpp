@@ -11,7 +11,7 @@ void GameScene::Initialize()
 	worldTransform->Create();
 
 	LevelData = make_unique<JsonLoad>();
-	LevelData->Load("resource/json/", "wood.json");
+	LevelData->Load("resource/json/", "test.json");
 	///
 	skin =new Skinning;
 	bone =new Bone;
