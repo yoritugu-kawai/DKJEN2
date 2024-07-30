@@ -25,5 +25,5 @@ void StartSeen::Update(GameManager* gameManager)
 
 void StartSeen::Draw()
 {
-	sprite->Draw({128,72,0},{0,0,0},{0,0,0},{1.0f,1.0f,0.0f,1.0f});
+	sprite->Draw({128,72,0},{0,0,0},{0,0,0},{1.0f,1.0f,1.0f,1.0f});
 }
