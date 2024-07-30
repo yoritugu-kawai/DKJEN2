@@ -80,8 +80,9 @@ void Animation3D::Draw( Vector4 Color,CameraData*cameraData, WorldTransform* wor
 	commandList->SetGraphicsRootConstantBufferView(3, lightResource.Get()->GetGPUVirtualAddress());
 	commandList->SetGraphicsRootConstantBufferView(4, cameraData->GetColl()->GetGPUVirtualAddress());
 	commandList->SetGraphicsRootDescriptorTable(5, skinCluster.paletteSrvHandle.second);
-
-
+	/*if (eviromentTextureHandle_ != 0) {
+		DescriptorManagement::rootParamerterCommand(6, eviromentTextureHandle_);
+	}*/
 	DescriptorManagement::rootParamerterCommand(2, modelData_.tex);
 	commandList->DrawIndexedInstanced(UINT(modelData_.indices.size()), 1, 0, 0, 0);
 	//commandList->DrawInstanced(UINT(modelData_.vertices.size()), 1, 0, 0);

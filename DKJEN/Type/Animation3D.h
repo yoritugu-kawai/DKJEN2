@@ -90,7 +90,7 @@ private:
 	Vector3 direction_ = { 0.0f,1.0f,0.0f };
 
 	Vector3 pos;
-	
+	uint32_t eviromentTextureHandle_ = 0;
 	
 };
 

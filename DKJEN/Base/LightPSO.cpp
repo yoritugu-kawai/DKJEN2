@@ -66,7 +66,20 @@ void LightPSO::ShapePSO()
 	rootParameters[4].ParameterType = D3D12_ROOT_PARAMETER_TYPE_CBV;
 	rootParameters[4].ShaderVisibility = D3D12_SHADER_VISIBILITY_PIXEL;
 	rootParameters[4].Descriptor.ShaderRegister = 2;
-	//
+	//5
+	//D3D12_DESCRIPTOR_RANGE eDescriptorRange[1] = {};
+	//eDescriptorRange[0].BaseShaderRegister = 0;
+	//eDescriptorRange[0].NumDescriptors = 1;
+	//eDescriptorRange[0].RangeType = D3D12_DESCRIPTOR_RANGE_TYPE_SRV;
+	//eDescriptorRange[0].OffsetInDescriptorsFromTableStart = D3D12_DESCRIPTOR_RANGE_OFFSET_APPEND;
+	////
+	//rootParameters[5].ParameterType = D3D12_ROOT_PARAMETER_TYPE_DESCRIPTOR_TABLE;
+	//rootParameters[5].ShaderVisibility = D3D12_SHADER_VISIBILITY_PIXEL;
+	//rootParameters[5].DescriptorTable.pDescriptorRanges = eDescriptorRange;
+	//rootParameters[5].DescriptorTable.NumDescriptorRanges = _countof(eDescriptorRange);
+
+
+
 	D3D12_STATIC_SAMPLER_DESC staicSamplers[1] = {};
 	staicSamplers[0].Filter = D3D12_FILTER_MIN_MAG_MIP_LINEAR;
 	staicSamplers[0].AddressU = D3D12_TEXTURE_ADDRESS_MODE_WRAP;

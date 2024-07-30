@@ -16,7 +16,7 @@ ConstantBuffer<DirectionalLight> gDirectionalLight : register(b1);
 ConstantBuffer<Camera> gCamera: register(b2);
 
 Texture2D<float32_t4>gTexture : register(t0);
-//Texture2D<float32_t4> gETexture : register(t0);
+//Texture2D<float32_t4> gEnviromentTexture : register(t1);
 
 SamplerState gSampler : register(s0);
 
@@ -48,7 +48,7 @@ PixelShaderOutput main(VertexShaderOutput input) {
 	///
     float32_t3 cameraToPosition = normalize(input.worldPosition-gCamera.cameraPos);
     float32_t3 reflectedVector = reflect(cameraToPosition, normalize(input.normal));
-    //float32_t3 environmetColor = gETexture.Sample(gSampler, reflectedVector);
+   // float32_t3 environmetColor = gEnviromentTexture.Sample(gSampler, reflectedVector);
 	
     //output.color.rgb += environmetColor.rgb;
     output.color.rgb = diffuse + specular;
