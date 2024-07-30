@@ -46,4 +46,7 @@ private:
 	Vector3 tRot;
 
 	float speed_=0;
+	///
+	Sprite* dKey;
+	Sprite* aKey;
 };

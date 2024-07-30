@@ -35,6 +35,14 @@ void PlaySeen::Initialize()
 	tPos_ = { 0.0f,1.390f,0.0f };
 	tRot = { 0,0,0 };
 	speed_= 0.1f;
+	//
+	dKey = new Sprite;
+	uint32_t dTex = TexManager::LoadTexture("GameResource/D.png");
+	dKey->Initialize(dTex);
+	uint32_t aTex = TexManager::LoadTexture("GameResource/A.png");
+	aKey = new Sprite;
+	aKey->Initialize(aTex);
+
 }
 
 void PlaySeen::LoadBlockPopData() {
@@ -129,4 +137,7 @@ void PlaySeen::Draw()
 	LevelData->Draw(cameraData);
 	//player->Draw({ 1,1,1,1 }, cameraData, worldTransform);
 	walk3d->Draw({ 1,1,1,1 }, cameraData, worldTransform, skinCluster);
+
+	dKey->Draw({12.8f,12.8f,0,},{0,0,0}, { 130,580,0}, {1,1,1,1});
+	aKey->Draw({ 12.8f,12.8f,0, }, { 0,0,0 }, { 0,580,0 }, { 1,1,1,1 });
 }
