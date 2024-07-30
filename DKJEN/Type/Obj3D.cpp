@@ -52,9 +52,9 @@ void Obj3D::Draw( Vector4 Color,CameraData*cameraData, WorldTransform* worldTran
 	//lightData->direction = { 0.0f,1.0f,0.0f };
 	lightData->color = { 1.0f,1.0f,1.0f,1.0f };
 	lightData->intensity = 1.0f;
-	ImGui::Begin("direction");
+	/*ImGui::Begin("direction");
 	ImGui::SliderFloat3("t", &direction_.x, -1.0f, 1.0f);
-	ImGui::End();
+	ImGui::End();*/
 	lightData->direction = direction_;
 	
 	//
