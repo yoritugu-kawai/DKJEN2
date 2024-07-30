@@ -4,8 +4,8 @@
 #include"../Utilipy/rektyk.h"
 #include<json.hpp>
 #include"../Type/Animation3D.h"
-#include"DKJEN/Type/Obj3D.h"
-#include"DKJEN/Management/LoadObjManagement.h"
+#include"../../Type/Obj3D.h"
+#include"../../Management/LoadObjManagement.h"
 
 struct ObjectData {
 	/// <summary>

@@ -1,7 +1,7 @@
 #pragma once
 
 
-#include"GameProject/GameManager/GameManager.h"
+#include"../../GameProject/GameManager/GameManager.h"
 class GameScene
 {
 public:

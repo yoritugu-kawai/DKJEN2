@@ -1,5 +1,5 @@
 #pragma once
-#include"DKJEN/Math/Math.h"
+#include"../../Math/Math.h"
 #include"../Base/CreateBufferResource.h"
 #include"../Math/Math.h"
 #include"../Base/DxCommon.h"

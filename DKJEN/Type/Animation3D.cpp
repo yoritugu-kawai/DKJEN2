@@ -2,15 +2,15 @@
 
 void Animation3D::Initialize(ModelData modelData)
 {
-	
+
 	modelData_ = modelData;/*NewLoadObjFile( directoryPath,filename);*/
 
 	vetexResource = CreateBufferResource(sizeof(VertexData) * modelData_.vertices.size());
 	materialResource = CreateBufferResource(sizeof(Vector4));
-	
+
 	lightResource = CreateBufferResource(sizeof(DirectionalLight));
 	indexResource = CreateBufferResource(sizeof(uint32_t) * modelData_.indices.size());
-	
+
 	vertxBufferView.BufferLocation = vetexResource.Get()->GetGPUVirtualAddress();
 	vertxBufferView.SizeInBytes = UINT(sizeof(VertexData) * modelData_.vertices.size());
 	vertxBufferView.StrideInBytes = sizeof(VertexData);
@@ -18,17 +18,17 @@ void Animation3D::Initialize(ModelData modelData)
 	indexBufferViewSprite.BufferLocation = indexResource->GetGPUVirtualAddress();
 	indexBufferViewSprite.SizeInBytes = sizeof(uint32_t) * modelData_.indices.size();
 	indexBufferViewSprite.Format = DXGI_FORMAT_R32_UINT;
-    matrix = MakeIdentity4x4();
+	matrix = MakeIdentity4x4();
 
 	pos = { 0.0f,0.0f,5.0f };
-	
+
 }
 
-void Animation3D::Draw( Vector4 Color,CameraData*cameraData, WorldTransform* worldTransform, SkinCluster& skinCluster)
+void Animation3D::Draw(Vector4 Color, CameraData* cameraData, WorldTransform* worldTransform, SkinCluster& skinCluster)
 {
-	
-	
-	
+
+
+
 	//
 	VertexData* vertexData = nullptr;
 	Vector4* materialData = nullptr;
@@ -37,10 +37,10 @@ void Animation3D::Draw( Vector4 Color,CameraData*cameraData, WorldTransform* wor
 	uint32_t* indexData = nullptr;
 
 	vetexResource.Get()->Map(0, nullptr, reinterpret_cast<void**>(&vertexData));
-	materialResource.Get()->Map(0, nullptr, reinterpret_cast<void**>(&materialData));	
+	materialResource.Get()->Map(0, nullptr, reinterpret_cast<void**>(&materialData));
 	lightResource.Get()->Map(0, nullptr, reinterpret_cast<void**>(&lightData));
 	indexResource->Map(0, nullptr, reinterpret_cast<void**>(&indexData));
-	std::memcpy(vertexData, modelData_.vertices.data(), sizeof(VertexData)*modelData_.vertices.size());
+	std::memcpy(vertexData, modelData_.vertices.data(), sizeof(VertexData) * modelData_.vertices.size());
 	std::memcpy(indexData, modelData_.indices.data(), sizeof(uint32_t) * modelData_.indices.size());
 	//
 	// 
@@ -52,9 +52,13 @@ void Animation3D::Draw( Vector4 Color,CameraData*cameraData, WorldTransform* wor
 	//lightData->direction = { 0.0f,1.0f,0.0f };
 	lightData->color = { 1.0f,1.0f,1.0f,1.0f };
 	lightData->intensity = 1.0f;
-	ImGui::Begin("direction");
-	ImGui::SliderFloat3("t", &direction_.x, -1.0f, 1.0f);
-	ImGui::End();
+
+	//#ifdef _DEBUG
+	//ImGui::Begin("direction");
+	//ImGui::SliderFloat3("t", &direction_.x, -1.0f, 1.0f);
+	//ImGui::End();
+ //   #endif // _DEBUG
+	
 	lightData->direction = direction_;
 	D3D12_VERTEX_BUFFER_VIEW vbvs[2] = {
 

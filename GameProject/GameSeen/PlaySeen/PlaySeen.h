@@ -8,10 +8,10 @@
 
 
 
-#include"DKJEN/Management/TypeManagement.h"
-#include"DKJEN/Skinning/Animation/Skinning.h"
-#include"DKJEN/Skinning/Animation/Bone.h"
-#include"DKJEN/JsonLoad/JsonLoad.h"
+#include"../../Management/TypeManagement.h"
+#include"../../Skinning/Animation/Skinning.h"
+#include"../../Skinning/Animation/Bone.h"
+#include"../../JsonLoad/JsonLoad.h"
 class PlaySeen:public IScene {
 public:
 	void Initialize()override;
@@ -43,6 +43,7 @@ private:
 	Vector3 cPos;
 	float animaionTime;
 	Vector3 tPos_;
+	Vector3 tRot;
 
 	float speed_=0;
 };

@@ -253,9 +253,6 @@
     <ClCompile Include="GameProject\Player\Player.cpp">
       <Filter>GameProject\PLayer</Filter>
     </ClCompile>
-    <ClCompile Include="GameProject\Player\Bullet.cpp">
-      <Filter>GameProject\PLayer</Filter>
-    </ClCompile>
     <ClCompile Include="GameProject\GameSeen\PlaySeen\PlaySeen.cpp">
       <Filter>GameProject\GameSeen\PlaySeen</Filter>
     </ClCompile>
@@ -427,9 +424,6 @@
       <Filter>DKJEN\Type</Filter>
     </ClInclude>
     <ClInclude Include="GameProject\Player\Player.h">
-      <Filter>GameProject\PLayer</Filter>
-    </ClInclude>
-    <ClInclude Include="GameProject\Player\Bullet.h">
       <Filter>GameProject\PLayer</Filter>
     </ClInclude>
     <ClInclude Include="GameProject\GameSeen\StartSeen\StartSeen.h">

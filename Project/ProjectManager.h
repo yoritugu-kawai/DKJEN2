@@ -1,21 +1,21 @@
 #pragma once
-#include"DKJEN/Base/WinApp.h"
-#include"DKJEN/Base/TexManager.h"
+#include"../../Base/WinApp.h"
+#include"../../Base/TexManager.h"
 
-#include"DKJEN/Math/Math.h"
+#include"../../Math/Math.h"
 
-#include"DKJEN/Utilipy/rektyk.h"
+#include"../../Utilipy/rektyk.h"
 
-#include"DKJEN/WorldTransform/WorldTransform.h"
-#include"DKJEN/CameraProjection/CameraProjection.h"
+#include"../../WorldTransform/WorldTransform.h"
+#include"../../CameraProjection/CameraProjection.h"
 
-#include"DKJEN/Management/TypeManagement.h"
+#include"../../Management/TypeManagement.h"
 #pragma once
-#include "DKJEN/Management/FrameManagement.h"
-#include"DKJEN/Management/PSOCopileManagement.h"
-#include"DKJEN/Management/LoadObjManagement.h"
+#include "../../Management/FrameManagement.h"
+#include"../../Management/PSOCopileManagement.h"
+#include"../../Management/LoadObjManagement.h"
 const wchar_t Title[] = { L"ド根性エンジン" };
-#include"Project/GameScene/GameScene.h"
+#include"../Project/GameScene/GameScene.h"
 class ProjectManager
 {
 public:
