@@ -15,5 +15,7 @@ private:
 
 	
 	int time;
+
+	Sprite* sprite;
 	
 };

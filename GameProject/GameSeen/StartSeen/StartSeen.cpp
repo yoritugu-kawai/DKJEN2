@@ -3,6 +3,8 @@
 void StartSeen::Initialize()
 {
 	time = 12;
+	uint32_t tex = TexManager::LoadTexture("");
+	sprite->Initialize(tex);
 }
 
 void StartSeen::Update(GameManager* gameManager)
