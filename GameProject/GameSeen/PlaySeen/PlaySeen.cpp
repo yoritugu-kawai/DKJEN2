@@ -53,6 +53,7 @@ void PlaySeen::Update(GameManager* gameManager)
 	animaionTime += 1.0f / 60.0f;
 	LevelData->Update(cameraData);
 	cameraData->Update();
+
 	//cameraAnime->Update();
 	
 	cameraData->SetTranslate(cPos);
