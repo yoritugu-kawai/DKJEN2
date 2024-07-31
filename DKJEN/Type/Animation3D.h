@@ -72,7 +72,9 @@ public:
 	//ModelData NewLoadObjFile(const std::string& directoryPath, const std::string& filename);
 	//Node ReadNode(aiNode* node);
 	//アニメーション
-	
+	void SetEviromentTexture(uint32_t textureHandle) {
+		this->eviromentTextureHandle_ = textureHandle;
+	}
 private:
 	ComPtr<ID3D12Resource> vetexResource;
 	ComPtr<ID3D12Resource> materialResource;
