@@ -115,7 +115,7 @@ void  Particle::Darw(Vector3 scale, Vector3 rotate, Vector3 translate, Vector4 C
 		particles_[i].transform.translate = Add(particles_[i].transform.translate, particles_[i].Velocity);//;*kDeltaTime);
 	}
 	Matrix4x4 m2 = MakeAffineMatrix(uvTranformSprite.scale, uvTranformSprite.rotate, uvTranformSprite.translate);
-	materialDeta->uvTransform = m2;
+	//materialDeta->uvTransform = m2;
 
 
 	/*transformationMatrixResourceSprote->Map(0, nullptr, reinterpret_cast<void**>

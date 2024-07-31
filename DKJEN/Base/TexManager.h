@@ -48,7 +48,9 @@ struct CameraCBuffer {
 struct UVMaterial {
 
 	Vector4 color;
-	Matrix4x4 uvTransform;
+	float hue;
+	float saturation;
+	float value;
 
 };
 

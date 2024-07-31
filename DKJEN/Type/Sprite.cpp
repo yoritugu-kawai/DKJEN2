@@ -68,9 +68,14 @@ void Sprite::Draw(Vector3 scale, Vector3 rotate, Vector3 translate, Vector4 Colo
 	//ImGui::SliderFloat3("s", &uvTranformSprite.scale.x, -4.0f, 4.0f);
 	//ImGui::SliderFloat3("r", &uvTranformSprite.rotate.x, -4.0f, 4.0f);
 	//ImGui::End();
+	ImGui::Begin("sprite");
+	ImGui::DragFloat("Hue", &materialDeta->hue, 0.01f, -1.0f, 1.0f);
+	ImGui::DragFloat("Saturation", &materialDeta->saturation, 0.01f, -1.0f, 1.0f);
+	ImGui::DragFloat("Value", &materialDeta->value, 0.01f, -1.0f, 1.0f);
+	ImGui::End();
 
 	Matrix4x4 m2 = MakeAffineMatrix(uvTranformSprite.scale, uvTranformSprite.rotate, uvTranformSprite.translate);
-	materialDeta->uvTransform = m2;
+	//materialDeta->uvTransform = m2;
 
 
 	transformationMatrixResourceSprote.Get()->Map(0, nullptr, reinterpret_cast<void**>

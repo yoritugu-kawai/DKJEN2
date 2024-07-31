@@ -74,6 +74,8 @@ int WINAPI WinMain(HINSTANCE, HINSTANCE, LPSTR, int) {
 		ImGui::End();
 		cameraData->SetTranslate({ 0,0,-20 });
 		cameraData->SetRotate(cameraPos_);
+
+		
 		//////
 		//　ゲーム処理
 		//////
