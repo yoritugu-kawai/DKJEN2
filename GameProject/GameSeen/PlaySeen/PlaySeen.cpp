@@ -65,8 +65,7 @@ void PlaySeen::Update(GameManager* gameManager)
 	cameraData->Update();
 	//cameraAnime->Update();
 	
-	cameraData->SetTranslate(cPos);
-	cameraData->SetRotate(cRot);
+	
 
 #ifdef _DEBUG
 
@@ -87,7 +86,8 @@ void PlaySeen::Update(GameManager* gameManager)
 
 #endif // _DEBUG
 
-
+	cameraData->SetTranslate(cPos);
+	cameraData->SetRotate(cRot);
 
 	cRot = cameraData->GetRotate();
 	cPos = cameraData->GetTranslate();
@@ -138,6 +138,6 @@ void PlaySeen::Draw()
 	//player->Draw({ 1,1,1,1 }, cameraData, worldTransform);
 	walk3d->Draw({ 1,1,1,1 }, cameraData, worldTransform, skinCluster);
 
-	dKey->Draw({12.8f,12.8f,0,},{0,0,0}, { 130,580,0}, {1,1,1,1});
-	aKey->Draw({ 12.8f,12.8f,0, }, { 0,0,0 }, { 0,580,0 }, { 1,1,1,1 });
+	//dKey->Draw({12.8f,12.8f,0,},{0,0,0}, { 130,580,0}, {1,1,1,1});
+	//aKey->Draw({ 12.8f,12.8f,0, }, { 0,0,0 }, { 0,580,0 }, { 1,1,1,1 });
 }
