@@ -15,7 +15,7 @@ void GameScene::Initialize()
 	sky->Initialize(skyBoxHandle_);
 	skyWorldTransform = new WorldTransform;
 	skyWorldTransform->Create();
-	skyWorldTransform->SetScale({ 32.0f,32.0f,32.0f });
+	skyWorldTransform->SetScale({ 20.0f,20.0f,20.0f });
 
 	worldTransform = new WorldTransform;
 	worldTransform->Create();
@@ -34,15 +34,14 @@ void GameScene::Initialize()
 	walk3d->SetEviromentTexture(skyBoxHandle_);
 	/*gameManager_ = new GameManager;
 	gameManager_->Initialize();*/
-	cPos = { 0.0f,3.0f,-20.0f };
+	cPos = { 0.0f,0.0f,-20.0f };
 }
 
 void GameScene::Update()
 {
 	animaionTime += 1.0f / 60.0f;
 	
-	cameraData->Update();
-
+	
 	skyWorldTransform->UpdateMatrix(cameraData);
 	worldTransform->UpdateMatrix(cameraData);
 	bone->ApplyAnimation(skeleton, animatio, animaionTime);
@@ -56,15 +55,41 @@ void GameScene::Update()
 	
 	////
 	//gameManager_->Update();
+
+	const float MOVE = 0.05f;
+	if(Input::GetInstance()->PushKey(DIK_UP) == true) {
+		cPos.y += MOVE;
+	}
+	if (Input::GetInstance()->PushKey(DIK_DOWN) == true) {
+		cPos.y -= MOVE;
+	}
+	if (Input::GetInstance()->PushKey(DIK_RIGHT) == true) {
+		cPos.x += MOVE;
+	}
+	if (Input::GetInstance()->PushKey(DIK_LEFT) == true) {
+		cPos.x -= MOVE;
+	}
+	if (Input::GetInstance()->PushKey(DIK_W) == true) {
+		cPos.z += MOVE;
+	}
+	if (Input::GetInstance()->PushKey(DIK_S) == true) {
+		cPos.z -= MOVE;
+	}
+
 	cameraData->SetTranslate(cPos);
 	cameraData->SetRotate(cRot);
 
 
 	cRot = cameraData->GetRotate();
 	cPos = cameraData->GetTranslate();
+
+	cameraData->Update();
+
+	Matrix4x4 vp = Multiply(cameraData->GetView(), cameraData->GetProjection());
+
 	ImGui::Begin("camera");
-	ImGui::DragFloat3("c", &cRot.x, 1.0f, -100.0f, 100.0f);
-	ImGui::DragFloat3("p", &cPos.x, 1.0f, -1000.0f, 100.0f);
+	ImGui::DragFloat3("c", &cRot.x, 0.01f, -3.0f, 13.0f);
+	ImGui::DragFloat3("p", &cPos.x, 0.01f, -1000.0f, 100.0f);
 	ImGui::End();
 
 	

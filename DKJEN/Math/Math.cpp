@@ -311,7 +311,8 @@ Matrix4x4 MakePerspectiveFovMatrix(float fovY, float aspecrRatio, float nearClip
 //
 Matrix4x4 Inverse(const Matrix4x4& m) {
 	Matrix4x4 result{};
-	float as = m.m[0][0] * m.m[1][1] * m.m[2][2] * m.m[3][3] +
+	float as = 
+		m.m[0][0] * m.m[1][1] * m.m[2][2] * m.m[3][3] +
 		m.m[0][0] * m.m[1][2] * m.m[2][3] * m.m[3][1] +
 		m.m[0][0] * m.m[1][3] * m.m[2][1] * m.m[3][2] -
 

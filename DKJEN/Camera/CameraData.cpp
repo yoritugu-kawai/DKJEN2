@@ -16,6 +16,10 @@ void CameraData::Update()
 
 	Matrix4x4 rxyz = Multiply(rx, Multiply(ry, rz));
 	Matrix4x4 t = MakeTranslateMatrix(translate_);
+
+	Matrix4x4 s = MakeScaleMatrix({ 1.0f,1.0f,1.0f });
+	Matrix4x4 w = Multiply(s, Multiply(rxyz, t));
+
 	view_ = Multiply(Inverse(rxyz), Inverse(t));
 	projection_ = MakePerspectiveFovMatrix(fov_, aspectRiot_, nearClip_, farClip_);
 	buffer_.Get()->Map(0, nullptr, reinterpret_cast<void**>(&data_));
