@@ -39,11 +39,12 @@ public:
 	//~JsonLoad();
 	void Load(const std::string& directoryPath, const std::string& fileName);
 	void RecursiveJson(nlohmann::json& objects);
-
+	void SetRotate(Vector3 rotate) { rotate_ = rotate; }
 private:
 
 	std::map<std::string,ObjectData> models_;
 	std::vector<WorldTransform*> worldTransforms_;
+	Vector3 rotate_;
 	
 
 };

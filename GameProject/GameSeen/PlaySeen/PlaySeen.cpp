@@ -92,11 +92,11 @@ void PlaySeen::Update(GameManager* gameManager)
 	cRot = cameraData->GetRotate();
 	cPos = cameraData->GetTranslate();
 
-	
+	/*
 	tPos_.z += speed_;
-	cPos.z += speed_;
+	cPos.z += speed_;*/
 	
-	worldTransform->SetTranslate(tPos_);
+	//worldTransform->SetTranslate(tPos_);
 	worldTransform->SetRotate(tRot);
 	worldTransform->UpdateMatrix(cameraData);
 	////Animation
@@ -122,7 +122,7 @@ void PlaySeen::Update(GameManager* gameManager)
 		tRot.z = -1;
 	}
 
-
+	LevelData->SetRotate(tPos_);
 	time -= 1;
 	if (time < 0) {
 		if (worldTransform->GetTranslate().z>=55.0f) {

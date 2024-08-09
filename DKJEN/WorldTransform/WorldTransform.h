@@ -27,6 +27,7 @@ public:
 	void SetColor(Vector4 color) { color_ = color; }
 	void SetDeta(TransformationMatrix* data) { data_ = data; };
 #pragma endregion
+	const WorldTransform* parent_ = nullptr;
 private:
 	Vector3 scale_ = { 1.0f,1.0f,1.0f };
 	Vector3 rotate_ = { 0.0f,0.0f,0.0f };

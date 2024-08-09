@@ -23,6 +23,8 @@ void JsonLoad::Load(const std::string& directoryPath, const std::string& fileNam
 	assert(name.compare("scene") == 0);
 
 	RecursiveJson(deserialized["objects"]);
+	// = { 0.0f,0.0f,0.0f };
+
 }
 
 void JsonLoad::RecursiveJson(nlohmann::json& objects)
@@ -64,32 +66,31 @@ void JsonLoad::RecursiveJson(nlohmann::json& objects)
 			transformEular.scale.x = (float)transform["scaling"][0];
 			transformEular.scale.y = (float)transform["scaling"][2];
 			transformEular.scale.z = (float)transform["scaling"][1];
-
+			
 			//srtを入れる
 			objectData.worldTransform_->SetScale(transformEular.scale);
 			objectData.worldTransform_->SetRotate(transformEular.rotate);
+			
 			objectData.worldTransform_->SetTranslate(transformEular.translate);
 
 			models_[objectName] = move(objectData);
 
-
+			
 		}
 
 	}
 
 }
 
-void JsonLoad::Initialize(const std::string& directoryPath)
-{
-
-}
 
 
 void JsonLoad::Update(CameraData* cameraData) {
 	//ワールドトランスフォームの更新
 	for (auto& object : models_) {
 		auto& it = object.second;
+		it.worldTransform_->SetRotate(rotate_);
 		it.worldTransform_->UpdateMatrix(cameraData);
+		
 	}
 
 }
