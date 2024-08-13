@@ -29,10 +29,10 @@ void PlaySeen::Initialize()
 	walk3d->Initialize(modelData_);
 	cRot = { 0.0f,-0.0f,0.0f };
 
-	cPos = { 0.0f,3.0f,-20.0f };
+	cPos = { 0.0f,10.0f,-20.0f };
 
 	//
-	tPos_ = { 0.0f,1.390f,0.0f };
+	tPos_ = { 0.0f,0.0f,0.0f };
 	tRot = { 0,0,0 };
 	speed_= 0.1f;
 	//
@@ -70,7 +70,7 @@ void PlaySeen::Update(GameManager* gameManager)
 #ifdef _DEBUG
 
 	ImGui::Begin("camera");
-	ImGui::DragFloat3("c", &cRot.x, 1.0f, -100.0f, 100.0f);
+	ImGui::DragFloat3("c", &cRot.x, 0.1f, -100.0f, 100.0f);
 	ImGui::DragFloat3("p", &cPos.x, 1.0f, -1000.0f, 100.0f);
 	ImGui::End();
 
@@ -80,8 +80,8 @@ void PlaySeen::Update(GameManager* gameManager)
 	ImGui::End();
 
 	ImGui::Begin("pos");
-	ImGui::DragFloat3("p", &tPos_.x, 1.0f, -100.0f, 100.0f);
-	ImGui::DragFloat3("r", &tRot.x, 1.0f, -100.0f, 100.0f);
+	ImGui::DragFloat3("p", &tPos_.x, 0.1f, -100.0f, 100.0f);
+	ImGui::DragFloat3("r", &tRot.x, 0.1f, -100.0f, 100.0f);
 	ImGui::End();
 
 #endif // _DEBUG
@@ -92,11 +92,11 @@ void PlaySeen::Update(GameManager* gameManager)
 	cRot = cameraData->GetRotate();
 	cPos = cameraData->GetTranslate();
 
-	/*
-	tPos_.z += speed_;
-	cPos.z += speed_;*/
 	
-	//worldTransform->SetTranslate(tPos_);
+	tPos_.z += speed_;
+	cPos.z += speed_;
+	
+	worldTransform->SetTranslate(tPos_);
 	worldTransform->SetRotate(tRot);
 	worldTransform->UpdateMatrix(cameraData);
 	////Animation
@@ -110,26 +110,23 @@ void PlaySeen::Update(GameManager* gameManager)
 	/////////
 
 	if (Input::GetInstance()->PushKey(DIK_A)) {
-		cRot.z = 1;
-		tPos_.x = -1.7f;
-		tPos_.y = 1;
-		tRot.z = 1;
+		tRot.z += 0.1f;
+		cRot.z += 0.1f;
+
 	}
 	if (Input::GetInstance()->PushKey(DIK_D)) {
-		cRot.z = -1;
-		tPos_.x = 1.7f;
-		tPos_.y = 1;
-		tRot.z = -1;
+		tRot.z -= 0.1f;
+		cRot.z -= 0.1f;
 	}
 
-	LevelData->SetRotate(tPos_);
+	//LevelData->SetRotate(tPos_);
 	time -= 1;
-	if (time < 0) {
+	/*if (time < 0) {
 		if (worldTransform->GetTranslate().z>=55.0f) {
 			gameManager->ChangeState(new StartSeen);
 
 		}
-	}
+	}*/
 }
 
 void PlaySeen::Draw()

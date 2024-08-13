@@ -88,7 +88,7 @@ void JsonLoad::Update(CameraData* cameraData) {
 	//ワールドトランスフォームの更新
 	for (auto& object : models_) {
 		auto& it = object.second;
-		it.worldTransform_->SetRotate(rotate_);
+		//it.worldTransform_->SetRotate(rotate_);
 		it.worldTransform_->UpdateMatrix(cameraData);
 		
 	}
