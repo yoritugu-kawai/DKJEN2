@@ -316,7 +316,7 @@ copy "$(WindowsSdkDir)bin\$(TargetPlatformVersion)\x64\dxil.dll" "$(TargetDir)dx
     <ClCompile Include="DKJEN\WorldTransform\WorldTransform.cpp" />
     <ClCompile Include="GameProject\Block\Block.cpp" />
     <ClCompile Include="GameProject\GameManager\GameManager.cpp" />
-    <ClCompile Include="GameProject\GameSeen\PlaySeen\PlaySeen.cpp" />
+    <ClCompile Include="GameProject\GameSeen\PlayScene\PlayScene.cpp" />
     <ClCompile Include="GameProject\GameSeen\StartSeen\StartSeen.cpp" />
     <ClCompile Include="GameProject\Player\Player.cpp" />
     <ClCompile Include="main.cpp" />
@@ -378,7 +378,8 @@ copy "$(WindowsSdkDir)bin\$(TargetPlatformVersion)\x64\dxil.dll" "$(TargetDir)dx
     <ClInclude Include="DKJEN\WorldTransform\WorldTransform.h" />
     <ClInclude Include="GameProject\Block\Block.h" />
     <ClInclude Include="GameProject\GameManager\GameManager.h" />
-    <ClInclude Include="GameProject\GameSeen\PlaySeen\PlaySeen.h" />
+    <ClInclude Include="GameProject\GameSeen\PlayScene\PlayScene.h" />
+    <ClInclude Include="GameProject\GameSeen\SelectScene\SelectScene.h" />
     <ClInclude Include="GameProject\GameSeen\StartSeen\StartSeen.h" />
     <ClInclude Include="GameProject\GameSeen\StateSeen\IScene.h" />
     <ClInclude Include="GameProject\Player\Player.h" />

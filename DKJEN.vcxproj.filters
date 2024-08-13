@@ -77,9 +77,6 @@
     <Filter Include="GameProject\GameSeen\StartSeen">
       <UniqueIdentifier>{1a961d99-acb9-44bb-a34f-c23ab7b87fa1}</UniqueIdentifier>
     </Filter>
-    <Filter Include="GameProject\GameSeen\PlaySeen">
-      <UniqueIdentifier>{ef1e263d-edf5-407c-974d-cce7383fd4fd}</UniqueIdentifier>
-    </Filter>
     <Filter Include="GameProject\GameManager">
       <UniqueIdentifier>{764607de-351f-44d7-9fc3-765ec84dc2ba}</UniqueIdentifier>
     </Filter>
@@ -118,6 +115,12 @@
     </Filter>
     <Filter Include="Project\GameScene">
       <UniqueIdentifier>{fde56c3e-5949-4daf-bc06-6b5718261d22}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="GameProject\GameSeen\SelectScene">
+      <UniqueIdentifier>{260d44ec-ee28-4de5-a938-357b9997e1d7}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="GameProject\GameSeen\PlayPlayScene">
+      <UniqueIdentifier>{ef1e263d-edf5-407c-974d-cce7383fd4fd}</UniqueIdentifier>
     </Filter>
   </ItemGroup>
   <ItemGroup>
@@ -253,9 +256,6 @@
     <ClCompile Include="GameProject\Player\Player.cpp">
       <Filter>GameProject\PLayer</Filter>
     </ClCompile>
-    <ClCompile Include="GameProject\GameSeen\PlaySeen\PlaySeen.cpp">
-      <Filter>GameProject\GameSeen\PlaySeen</Filter>
-    </ClCompile>
     <ClCompile Include="GameProject\GameSeen\StartSeen\StartSeen.cpp">
       <Filter>GameProject\GameSeen\StartSeen</Filter>
     </ClCompile>
@@ -309,6 +309,9 @@
     </ClCompile>
     <ClCompile Include="DKJEN\Shader\CompileShaderManager.cpp">
       <Filter>DKJEN\Shader</Filter>
+    </ClCompile>
+    <ClCompile Include="GameProject\GameSeen\PlayScene\PlayScene.cpp">
+      <Filter>GameProject\GameSeen\PlayPlayScene</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
@@ -432,9 +435,6 @@
     <ClInclude Include="GameProject\GameSeen\StateSeen\IScene.h">
       <Filter>GameProject\GameSeen\IScene</Filter>
     </ClInclude>
-    <ClInclude Include="GameProject\GameSeen\PlaySeen\PlaySeen.h">
-      <Filter>GameProject\GameSeen\PlaySeen</Filter>
-    </ClInclude>
     <ClInclude Include="GameProject\GameManager\GameManager.h">
       <Filter>GameProject\GameManager</Filter>
     </ClInclude>
@@ -491,6 +491,12 @@
     </ClInclude>
     <ClInclude Include="DKJEN\Shader\CompileShaderManager.h">
       <Filter>DKJEN\Shader</Filter>
+    </ClInclude>
+    <ClInclude Include="GameProject\GameSeen\SelectScene\SelectScene.h">
+      <Filter>GameProject\GameSeen\SelectScene</Filter>
+    </ClInclude>
+    <ClInclude Include="GameProject\GameSeen\PlayScene\PlayScene.h">
+      <Filter>GameProject\GameSeen\PlayPlayScene</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>

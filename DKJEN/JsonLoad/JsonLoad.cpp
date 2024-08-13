@@ -73,6 +73,12 @@ void JsonLoad::RecursiveJson(nlohmann::json& objects)
 			
 			objectData.worldTransform_->SetTranslate(transformEular.translate);
 
+			if (object.contains("children") && object["children"].is_array()) {
+
+				for (nlohmann::json& child : object["children"]) {
+					RecursiveJson( child);
+				}
+			}
 			models_[objectName] = move(objectData);
 
 			

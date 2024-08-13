@@ -1,7 +1,7 @@
 #pragma once
 #include"../GameSeen/StateSeen/IScene.h"
 #include"../GameSeen/StartSeen/StartSeen.h"
-#include"../GameSeen/PlaySeen/PlaySeen.h"
+#include"../GameSeen/PlayScene/PlayScene.h"
 class GameManager
 {
 public:

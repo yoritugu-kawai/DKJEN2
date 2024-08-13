@@ -1,6 +1,6 @@
-#include "PlaySeen.h"
+#include "PlayScene.h"
 
-void PlaySeen::Initialize()
+void PlayScene::Initialize()
 {
 	
 	time = 12;
@@ -45,20 +45,20 @@ void PlaySeen::Initialize()
 
 }
 
-void PlaySeen::LoadBlockPopData() {
+void PlayScene::LoadBlockPopData() {
 
 
 }
 
-void PlaySeen::UpdateBlockPopCommands() {
+void PlayScene::UpdateBlockPopCommands() {
 
 	
 }
 
-void PlaySeen::AllCollisions() {
+void PlayScene::AllCollisions() {
 	
 }
-void PlaySeen::Update(GameManager* gameManager)
+void PlayScene::Update(GameManager* gameManager)
 {
 	animaionTime += 2.0f / 60.0f;
 	LevelData->Update(cameraData);
@@ -122,14 +122,14 @@ void PlaySeen::Update(GameManager* gameManager)
 	//LevelData->SetRotate(tPos_);
 	time -= 1;
 	/*if (time < 0) {
-		if (worldTransform->GetTranslate().z>=55.0f) {
+		if (worldTransform->GetTranslate().z>=234.0f) {
 			gameManager->ChangeState(new StartSeen);
 
 		}
 	}*/
 }
 
-void PlaySeen::Draw()
+void PlayScene::Draw()
 {
 	LevelData->Draw(cameraData);
 	//player->Draw({ 1,1,1,1 }, cameraData, worldTransform);

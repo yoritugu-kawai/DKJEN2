@@ -12,7 +12,7 @@
 #include"../../Skinning/Animation/Skinning.h"
 #include"../../Skinning/Animation/Bone.h"
 #include"../../JsonLoad/JsonLoad.h"
-class PlaySeen:public IScene {
+class PlayScene :public IScene {
 public:
 	void Initialize()override;
 	void Update(GameManager* gameManager)override;
