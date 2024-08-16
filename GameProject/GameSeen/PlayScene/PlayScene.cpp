@@ -49,6 +49,7 @@ void PlayScene::Initialize()
 void PlayScene::AllCollisions(GameManager* gameManager) {
 	for (auto& obj1 : LevelData->GetObjects()) {
 		auto& it = obj1.second;
+	
 			if (it.center.x - it.size.x / 3.2 < tPos_.x + worldTransform->GetScale().x / 4 &&
 				it.center.x + it.size.x / 3.2 > tPos_.x - worldTransform->GetScale().x / 4 &&
 				it.center.y - it.size.y / 3.2 < tPos_.y + worldTransform->GetScale().y / 4 &&
