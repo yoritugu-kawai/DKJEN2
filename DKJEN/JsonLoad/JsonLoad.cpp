@@ -79,7 +79,7 @@ void JsonLoad::RecursiveJson(nlohmann::json& objects)
 				nlohmann::json& collider = object["collider"];
 				//種別を取得
 				std::string colliderType = collider["colliderType"].get<std::string>();
-
+				
 
 				if (colliderType.compare("BOX") == 0) {
 					objectData.colliderType = collider["colliderType"];

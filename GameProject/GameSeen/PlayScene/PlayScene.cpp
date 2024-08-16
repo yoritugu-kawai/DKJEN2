@@ -50,12 +50,12 @@ void PlayScene::AllCollisions(GameManager* gameManager) {
 	for (auto& obj1 : LevelData->GetObjects()) {
 		auto& it = obj1.second;
 	
-			if (it.center.x - it.size.x / 3.2 < tPos_.x + worldTransform->GetScale().x / 4 &&
-				it.center.x + it.size.x / 3.2 > tPos_.x - worldTransform->GetScale().x / 4 &&
-				it.center.y - it.size.y / 3.2 < tPos_.y + worldTransform->GetScale().y / 4 &&
-				it.center.y + it.size.y / 3.2 > tPos_.y - worldTransform->GetScale().y / 4 &&
-				it.center.z - it.size.z / 3.2 < tPos_.z + worldTransform->GetScale().z / 4 &&
-				it.center.z + it.size.z / 3.2 > tPos_.z - worldTransform->GetScale().z / 4) {
+			if (it.center.x - it.size.x / 3.2 < tPos_.x + worldTransform->GetScale().x / 3 &&
+				it.center.x + it.size.x / 3.2 > tPos_.x - worldTransform->GetScale().x / 3 &&
+				it.center.y - it.size.y / 3.2 < tPos_.y + worldTransform->GetScale().y / 3 &&
+				it.center.y + it.size.y / 3.2 > tPos_.y - worldTransform->GetScale().y / 3 &&
+				it.center.z - it.size.z / 3.2 < tPos_.z + worldTransform->GetScale().z / 3 &&
+				it.center.z + it.size.z / 3.2 > tPos_.z - worldTransform->GetScale().z / 3) {
 				// 衝突処理
 				tPos_.z = 0;
 				cPos.z = 0;
