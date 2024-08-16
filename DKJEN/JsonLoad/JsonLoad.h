@@ -6,7 +6,7 @@
 #include"../Type/Animation3D.h"
 #include"../../Type/Obj3D.h"
 #include"../../Management/LoadObjManagement.h"
-#include"DKJEN/Collision/ABB/ABB.h"
+//#include"DKJEN/Collision/ABB/ABB.h"
 struct ObjectData {
 	/// <summary>
 	/// ファイル名

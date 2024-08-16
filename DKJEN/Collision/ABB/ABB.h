@@ -12,4 +12,4 @@
 //
 //    // AABB同士の衝突判定
 //    static bool CheckCollision(const ABB& obj1, const ABB& obj2);
-};
+//};
