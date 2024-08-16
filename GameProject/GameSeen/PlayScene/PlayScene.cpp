@@ -46,6 +46,8 @@ void PlayScene::Initialize()
 }
 
 
+
+
 void PlayScene::AllCollisions(GameManager* gameManager) {
 	for (auto& obj1 : LevelData->GetObjects()) {
 		auto& it = obj1.second;
