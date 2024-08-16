@@ -7,7 +7,7 @@
 #include"../../GameManager/GameManager.h"
 
 
-#include"../DKJEN/DKJEN/Collision/ABB/ABB.h"
+///#include"../DKJEN/DKJEN/Collision/ABB/ABB.h"
 #include"../../Management/TypeManagement.h"
 #include"../../Skinning/Animation/Skinning.h"
 #include"../../Skinning/Animation/Bone.h"
