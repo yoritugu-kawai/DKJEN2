@@ -45,19 +45,24 @@ void PlayScene::Initialize()
 
 }
 
-void PlayScene::LoadBlockPopData() {
 
-
+void PlayScene::AllCollisions(GameManager* gameManager) {
+	for (auto& obj1 : LevelData->GetObjects()) {
+		auto& it = obj1.second;
+			if (it.center.x - it.size.x / 3.2 < tPos_.x + worldTransform->GetScale().x / 4 &&
+				it.center.x + it.size.x / 3.2 > tPos_.x - worldTransform->GetScale().x / 4 &&
+				it.center.y - it.size.y / 3.2 < tPos_.y + worldTransform->GetScale().y / 4 &&
+				it.center.y + it.size.y / 3.2 > tPos_.y - worldTransform->GetScale().y / 4 &&
+				it.center.z - it.size.z / 3.2 < tPos_.z + worldTransform->GetScale().z / 4 &&
+				it.center.z + it.size.z / 3.2 > tPos_.z - worldTransform->GetScale().z / 4) {
+				// 衝突処理
+				tPos_.z = 0;
+				cPos.z = 0;
+			}
+		
+	}
 }
 
-void PlayScene::UpdateBlockPopCommands() {
-
-	
-}
-
-void PlayScene::AllCollisions() {
-	
-}
 void PlayScene::Update(GameManager* gameManager)
 {
 	animaionTime += 2.0f / 60.0f;
@@ -65,7 +70,7 @@ void PlayScene::Update(GameManager* gameManager)
 	cameraData->Update();
 	//cameraAnime->Update();
 	
-	
+	AllCollisions(gameManager);
 
 #ifdef _DEBUG
 
@@ -119,7 +124,7 @@ void PlayScene::Update(GameManager* gameManager)
 		cRot.z -= 0.1f;
 	}
 
-	//LevelData->SetRotate(tPos_);
+	
 	time -= 1;
 	/*if (time < 0) {
 		if (worldTransform->GetTranslate().z>=234.0f) {

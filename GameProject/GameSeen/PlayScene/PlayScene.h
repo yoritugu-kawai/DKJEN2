@@ -7,7 +7,7 @@
 #include"../../GameManager/GameManager.h"
 
 
-
+#include"../DKJEN/DKJEN/Collision/ABB/ABB.h"
 #include"../../Management/TypeManagement.h"
 #include"../../Skinning/Animation/Skinning.h"
 #include"../../Skinning/Animation/Bone.h"
@@ -17,10 +17,9 @@ public:
 	void Initialize()override;
 	void Update(GameManager* gameManager)override;
 	void Draw()override;
-	void LoadBlockPopData();
-	void UpdateBlockPopCommands();
-	void AllCollisions();
+	
 private:
+	void AllCollisions(GameManager* gameManager);
 	
 
 	int time;

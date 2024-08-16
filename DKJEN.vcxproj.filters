@@ -122,6 +122,12 @@
     <Filter Include="GameProject\GameSeen\PlayPlayScene">
       <UniqueIdentifier>{ef1e263d-edf5-407c-974d-cce7383fd4fd}</UniqueIdentifier>
     </Filter>
+    <Filter Include="DKJEN\Collision">
+      <UniqueIdentifier>{d98a8a46-8e5e-450c-9b2d-b1d53db251f8}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="DKJEN\Collision\ABB">
+      <UniqueIdentifier>{9ef0305a-c455-4dfe-b25d-621da9d4ad86}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <None Include=".editorconfig" />
@@ -313,6 +319,9 @@
     <ClCompile Include="GameProject\GameSeen\PlayScene\PlayScene.cpp">
       <Filter>GameProject\GameSeen\PlayPlayScene</Filter>
     </ClCompile>
+    <ClCompile Include="DKJEN\Collision\ABB\ABB.cpp">
+      <Filter>DKJEN\Collision\ABB</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="DKJEN\Utilipy\Input.h">
@@ -497,6 +506,9 @@
     </ClInclude>
     <ClInclude Include="GameProject\GameSeen\PlayScene\PlayScene.h">
       <Filter>GameProject\GameSeen\PlayPlayScene</Filter>
+    </ClInclude>
+    <ClInclude Include="DKJEN\Collision\ABB\ABB.h">
+      <Filter>DKJEN\Collision\ABB</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>

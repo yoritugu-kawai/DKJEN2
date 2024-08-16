@@ -282,6 +282,7 @@ copy "$(WindowsSdkDir)bin\$(TargetPlatformVersion)\x64\dxil.dll" "$(TargetDir)dx
     <ClCompile Include="DKJEN\Base\WinApp.cpp" />
     <ClCompile Include="DKJEN\CameraProjection\CameraProjection.cpp" />
     <ClCompile Include="DKJEN\Camera\CameraData.cpp" />
+    <ClCompile Include="DKJEN\Collision\ABB\ABB.cpp" />
     <ClCompile Include="DKJEN\externals\imgui\imgui.cpp" />
     <ClCompile Include="DKJEN\externals\imgui\imgui_demo.cpp" />
     <ClCompile Include="DKJEN\externals\imgui\imgui_draw.cpp" />
@@ -339,6 +340,7 @@ copy "$(WindowsSdkDir)bin\$(TargetPlatformVersion)\x64\dxil.dll" "$(TargetDir)dx
     <ClInclude Include="DKJEN\Base\WinApp.h" />
     <ClInclude Include="DKJEN\CameraProjection\CameraProjection.h" />
     <ClInclude Include="DKJEN\Camera\CameraData.h" />
+    <ClInclude Include="DKJEN\Collision\ABB\ABB.h" />
     <ClInclude Include="DKJEN\externals\imgui\imconfig.h" />
     <ClInclude Include="DKJEN\externals\imgui\imgui.h" />
     <ClInclude Include="DKJEN\externals\imgui\imgui_impl_dx12.h" />

@@ -74,8 +74,28 @@ void JsonLoad::RecursiveJson(nlohmann::json& objects)
 			objectData.worldTransform_->SetTranslate(transformEular.translate);
 
 			///当たり判定
+			if (object.contains("collider") == true) {
+
+				nlohmann::json& collider = object["collider"];
+				//種別を取得
+				std::string colliderType = collider["colliderType"].get<std::string>();
 
 
+				if (colliderType.compare("BOX") == 0) {
+					objectData.colliderType = collider["colliderType"];
+					//中心座標
+					objectData.center.x = (float)collider["center"][1];
+					objectData.center.y = (float)collider["center"][2];
+					objectData.center.z = -(float)collider["center"][0];
+					//サイズ
+					objectData.size.x = (float)collider["size"][1];
+					objectData.size.y = (float)collider["size"][2];
+					objectData.size.z = (float)collider["size"][0];
+
+
+
+				}
+			}
 			
 			models_[objectName] = move(objectData);
 
@@ -86,6 +106,30 @@ void JsonLoad::RecursiveJson(nlohmann::json& objects)
 
 }
 
+//void JsonLoad::Collider()
+//{
+//	int i = 0;
+//
+//	Vector3  value[2] = {};
+//
+//
+//	uint32_t count = 0;
+//	for (auto& object : models_) {
+//		auto& it = object.second;
+//
+//		if ((it).fileName == "branch.obj") {
+//			++i;
+//
+//			value[count] = (it).center;
+//
+//
+//			++count;
+//		}
+//	}
+//	value[0];
+//	value[1];
+//}
+
 
 
 void JsonLoad::Update(CameraData* cameraData) {
@@ -93,6 +137,7 @@ void JsonLoad::Update(CameraData* cameraData) {
 	for (auto& object : models_) {
 		auto& it = object.second;
 		//it.worldTransform_->SetRotate(rotate_);
+		
 		it.worldTransform_->UpdateMatrix(cameraData);
 		
 	}

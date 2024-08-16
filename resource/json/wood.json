@@ -44,6 +44,7 @@
             }
         },
         {
+            "file_name": "wood.obj",
             "type": "MESH",
             "name": "円柱",
             "transform": {
@@ -62,10 +63,10 @@
                     1.0,
                     1.0
                 ]
-            },
-            "file_name": "wood.obj"
+            }
         },
         {
+            "file_name": "branch.obj",
             "type": "MESH",
             "name": "立方体.004",
             "transform": {
@@ -85,9 +86,8 @@
                     1.0
                 ]
             },
-            "file_name": "branch.obj",
             "collider": {
-                "type": "BOX",
+                "colliderType": "BOX",
                 "center": [
                     0.0,
                     0.0,
@@ -101,6 +101,7 @@
             }
         },
         {
+            "file_name": "branch.obj",
             "type": "MESH",
             "name": "立方体.005",
             "transform": {
@@ -120,9 +121,8 @@
                     1.0
                 ]
             },
-            "file_name": "branch.obj",
             "collider": {
-                "type": "BOX",
+                "colliderType": "BOX",
                 "center": [
                     0.0,
                     0.0,
@@ -136,6 +136,7 @@
             }
         },
         {
+            "file_name": "branch.obj",
             "type": "MESH",
             "name": "立方体.006",
             "transform": {
@@ -155,9 +156,8 @@
                     1.0
                 ]
             },
-            "file_name": "branch.obj",
             "collider": {
-                "type": "BOX",
+                "colliderType": "BOX",
                 "center": [
                     0.0,
                     0.0,
@@ -171,6 +171,7 @@
             }
         },
         {
+            "file_name": "branch.obj",
             "type": "MESH",
             "name": "立方体.007",
             "transform": {
@@ -190,9 +191,8 @@
                     1.0
                 ]
             },
-            "file_name": "branch.obj",
             "collider": {
-                "type": "BOX",
+                "colliderType": "BOX",
                 "center": [
                     0.0,
                     0.0,
@@ -206,6 +206,7 @@
             }
         },
         {
+            "file_name": "branch.obj",
             "type": "MESH",
             "name": "立方体.008",
             "transform": {
@@ -225,9 +226,8 @@
                     1.0
                 ]
             },
-            "file_name": "branch.obj",
             "collider": {
-                "type": "BOX",
+                "colliderType": "BOX",
                 "center": [
                     0.0,
                     0.0,
@@ -241,6 +241,7 @@
             }
         },
         {
+            "file_name": "branch.obj",
             "type": "MESH",
             "name": "立方体.009",
             "transform": {
@@ -260,9 +261,8 @@
                     1.0
                 ]
             },
-            "file_name": "branch.obj",
             "collider": {
-                "type": "BOX",
+                "colliderType": "BOX",
                 "center": [
                     0.0,
                     0.0,
@@ -276,6 +276,7 @@
             }
         },
         {
+            "file_name": "branch.obj",
             "type": "MESH",
             "name": "立方体.010",
             "transform": {
@@ -295,9 +296,8 @@
                     1.0
                 ]
             },
-            "file_name": "branch.obj",
             "collider": {
-                "type": "BOX",
+                "colliderType": "BOX",
                 "center": [
                     0.0,
                     0.0,
@@ -311,6 +311,7 @@
             }
         },
         {
+            "file_name": "branch.obj",
             "type": "MESH",
             "name": "立方体.011",
             "transform": {
@@ -330,9 +331,8 @@
                     1.0
                 ]
             },
-            "file_name": "branch.obj",
             "collider": {
-                "type": "BOX",
+                "colliderType": "BOX",
                 "center": [
                     0.0,
                     0.0,
@@ -346,6 +346,7 @@
             }
         },
         {
+            "file_name": "branch.obj",
             "type": "MESH",
             "name": "立方体.001",
             "transform": {
@@ -365,9 +366,8 @@
                     1.0
                 ]
             },
-            "file_name": "branch.obj",
             "collider": {
-                "type": "BOX",
+                "colliderType": "BOX",
                 "center": [
                     0.0,
                     0.0,
@@ -381,6 +381,7 @@
             }
         },
         {
+            "file_name": "branch.obj",
             "type": "MESH",
             "name": "立方体.002",
             "transform": {
@@ -400,9 +401,8 @@
                     1.0
                 ]
             },
-            "file_name": "branch.obj",
             "collider": {
-                "type": "BOX",
+                "colliderType": "BOX",
                 "center": [
                     0.0,
                     0.0,
@@ -416,6 +416,7 @@
             }
         },
         {
+            "file_name": "branch.obj",
             "type": "MESH",
             "name": "立方体.003",
             "transform": {
@@ -435,9 +436,8 @@
                     1.0
                 ]
             },
-            "file_name": "branch.obj",
             "collider": {
-                "type": "BOX",
+                "colliderType": "BOX",
                 "center": [
                     0.0,
                     0.0,
@@ -451,6 +451,7 @@
             }
         },
         {
+            "file_name": "branch.obj",
             "type": "MESH",
             "name": "立方体.012",
             "transform": {
@@ -470,9 +471,8 @@
                     1.0
                 ]
             },
-            "file_name": "branch.obj",
             "collider": {
-                "type": "BOX",
+                "colliderType": "BOX",
                 "center": [
                     0.0,
                     0.0,
@@ -486,6 +486,7 @@
             }
         },
         {
+            "file_name": "branch.obj",
             "type": "MESH",
             "name": "立方体.013",
             "transform": {
@@ -505,9 +506,8 @@
                     1.0
                 ]
             },
-            "file_name": "branch.obj",
             "collider": {
-                "type": "BOX",
+                "colliderType": "BOX",
                 "center": [
                     0.0,
                     0.0,
@@ -521,6 +521,7 @@
             }
         },
         {
+            "file_name": "branch.obj",
             "type": "MESH",
             "name": "立方体.014",
             "transform": {
@@ -540,9 +541,8 @@
                     1.0
                 ]
             },
-            "file_name": "branch.obj",
             "collider": {
-                "type": "BOX",
+                "colliderType": "BOX",
                 "center": [
                     0.0,
                     0.0,
@@ -556,6 +556,7 @@
             }
         },
         {
+            "file_name": "branch.obj",
             "type": "MESH",
             "name": "立方体.015",
             "transform": {
@@ -575,9 +576,8 @@
                     1.0
                 ]
             },
-            "file_name": "branch.obj",
             "collider": {
-                "type": "BOX",
+                "colliderType": "BOX",
                 "center": [
                     0.0,
                     0.0,
@@ -591,6 +591,7 @@
             }
         },
         {
+            "file_name": "branch.obj",
             "type": "MESH",
             "name": "立方体.016",
             "transform": {
@@ -610,9 +611,8 @@
                     1.0
                 ]
             },
-            "file_name": "branch.obj",
             "collider": {
-                "type": "BOX",
+                "colliderType": "BOX",
                 "center": [
                     0.0,
                     0.0,
@@ -626,6 +626,7 @@
             }
         },
         {
+            "file_name": "branch.obj",
             "type": "MESH",
             "name": "立方体.017",
             "transform": {
@@ -645,9 +646,8 @@
                     1.0
                 ]
             },
-            "file_name": "branch.obj",
             "collider": {
-                "type": "BOX",
+                "colliderType": "BOX",
                 "center": [
                     0.0,
                     0.0,
@@ -661,6 +661,7 @@
             }
         },
         {
+            "file_name": "branch.obj",
             "type": "MESH",
             "name": "立方体.018",
             "transform": {
@@ -680,9 +681,8 @@
                     1.0
                 ]
             },
-            "file_name": "branch.obj",
             "collider": {
-                "type": "BOX",
+                "colliderType": "BOX",
                 "center": [
                     0.0,
                     0.0,
@@ -696,6 +696,7 @@
             }
         },
         {
+            "file_name": "branch.obj",
             "type": "MESH",
             "name": "立方体.019",
             "transform": {
@@ -715,9 +716,8 @@
                     1.0
                 ]
             },
-            "file_name": "branch.obj",
             "collider": {
-                "type": "BOX",
+                "colliderType": "BOX",
                 "center": [
                     0.0,
                     0.0,
@@ -731,6 +731,7 @@
             }
         },
         {
+            "file_name": "branch.obj",
             "type": "MESH",
             "name": "立方体.020",
             "transform": {
@@ -750,9 +751,8 @@
                     1.0
                 ]
             },
-            "file_name": "branch.obj",
             "collider": {
-                "type": "BOX",
+                "colliderType": "BOX",
                 "center": [
                     0.0,
                     0.0,
@@ -766,6 +766,7 @@
             }
         },
         {
+            "file_name": "branch.obj",
             "type": "MESH",
             "name": "立方体.021",
             "transform": {
@@ -785,9 +786,8 @@
                     1.0
                 ]
             },
-            "file_name": "branch.obj",
             "collider": {
-                "type": "BOX",
+                "colliderType": "BOX",
                 "center": [
                     0.0,
                     0.0,
@@ -801,6 +801,7 @@
             }
         },
         {
+            "file_name": "branch.obj",
             "type": "MESH",
             "name": "立方体.022",
             "transform": {
@@ -820,9 +821,8 @@
                     1.0
                 ]
             },
-            "file_name": "branch.obj",
             "collider": {
-                "type": "BOX",
+                "colliderType": "BOX",
                 "center": [
                     0.0,
                     0.0,
@@ -836,6 +836,7 @@
             }
         },
         {
+            "file_name": "branch.obj",
             "type": "MESH",
             "name": "立方体.023",
             "transform": {
@@ -855,9 +856,8 @@
                     1.0
                 ]
             },
-            "file_name": "branch.obj",
             "collider": {
-                "type": "BOX",
+                "colliderType": "BOX",
                 "center": [
                     0.0,
                     0.0,
