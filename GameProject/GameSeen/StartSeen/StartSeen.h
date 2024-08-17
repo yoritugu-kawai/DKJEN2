@@ -1,5 +1,6 @@
 #pragma once
 #include"../StateSeen/IScene.h"
+#include"../SelectScene/SelectScene.h"
 #include"../PlayScene/PlayScene.h"
 #include"../../../DKJEN/Type/Sprite.h"
 #include"../../GameManager/GameManager.h"

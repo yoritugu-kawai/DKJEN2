@@ -6,7 +6,7 @@
 #include"../../../DKJEN/Camera/CameraData.h"
 #include"../../../DKJEN/Type/Obj3D.h"
 #include"../../../DKJEN/Type/Particle.h"
-class SelectScene :public IScene {
+class clearScene :public IScene {
 public:
 	void Initialize()override;
 	void Update(GameManager* gameManager)override;

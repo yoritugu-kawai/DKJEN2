@@ -1,6 +1,6 @@
 #pragma once
 #include"../StateSeen/IScene.h"
-
+#include"../clearScene/clearScene.h"
 #include"../../Player/Player.h"
 #include"../../Block/Block.h"
 
@@ -17,10 +17,10 @@ public:
 	void Initialize()override;
 	void Update(GameManager* gameManager)override;
 	void Draw()override;
-	
+
 private:
 	void AllCollisions(GameManager* gameManager);
-	
+
 
 	int time;
 	///
@@ -44,7 +44,19 @@ private:
 	Vector3 tPos_;
 	Vector3 tRot;
 
-	float speed_=0;
+
+
+
+	unique_ptr<Obj3D> objectData;
+	WorldTransform* sphereWorldTransform_;
+
+
+	//デバッグ用。後で消す。
+	bool isInsideX = false;
+	bool isInsideZ = false;
+
+	float rotateTheta_ = 0.0f;
+	float speed_ = 0;
 	///
 	Sprite* dKey;
 	Sprite* aKey;

@@ -128,6 +128,9 @@
     <Filter Include="DKJEN\Collision\ABB">
       <UniqueIdentifier>{9ef0305a-c455-4dfe-b25d-621da9d4ad86}</UniqueIdentifier>
     </Filter>
+    <Filter Include="GameProject\GameSeen\clearScene">
+      <UniqueIdentifier>{6ce61fcc-827e-49be-8862-e25596136953}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <None Include=".editorconfig" />
@@ -322,6 +325,12 @@
     <ClCompile Include="DKJEN\Collision\ABB\ABB.cpp">
       <Filter>DKJEN\Collision\ABB</Filter>
     </ClCompile>
+    <ClCompile Include="GameProject\GameSeen\SelectScene\SelectScene.cpp">
+      <Filter>GameProject\GameSeen\SelectScene</Filter>
+    </ClCompile>
+    <ClCompile Include="GameProject\GameSeen\clearScene\clearScene.cpp">
+      <Filter>GameProject\GameSeen\clearScene</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="DKJEN\Utilipy\Input.h">
@@ -509,6 +518,9 @@
     </ClInclude>
     <ClInclude Include="DKJEN\Collision\ABB\ABB.h">
       <Filter>DKJEN\Collision\ABB</Filter>
+    </ClInclude>
+    <ClInclude Include="GameProject\GameSeen\clearScene\clearScene.h">
+      <Filter>GameProject\GameSeen\clearScene</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>
