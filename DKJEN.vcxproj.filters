@@ -131,6 +131,9 @@
     <Filter Include="GameProject\GameSeen\clearScene">
       <UniqueIdentifier>{6ce61fcc-827e-49be-8862-e25596136953}</UniqueIdentifier>
     </Filter>
+    <Filter Include="DKJEN\FirstScene">
+      <UniqueIdentifier>{7c5a56cd-d58d-483e-a02b-c67818f768fb}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <None Include=".editorconfig" />
@@ -331,6 +334,9 @@
     <ClCompile Include="GameProject\GameSeen\clearScene\clearScene.cpp">
       <Filter>GameProject\GameSeen\clearScene</Filter>
     </ClCompile>
+    <ClCompile Include="DKJEN\FirstScene\FirstScene.cpp">
+      <Filter>DKJEN\FirstScene</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="DKJEN\Utilipy\Input.h">
@@ -521,6 +527,9 @@
     </ClInclude>
     <ClInclude Include="GameProject\GameSeen\clearScene\clearScene.h">
       <Filter>GameProject\GameSeen\clearScene</Filter>
+    </ClInclude>
+    <ClInclude Include="DKJEN\FirstScene\FirstScene.h">
+      <Filter>DKJEN\FirstScene</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>
