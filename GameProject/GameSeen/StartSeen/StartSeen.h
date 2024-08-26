@@ -16,7 +16,7 @@ private:
 
 	
 	int time;
-
+	Vector4 color;
 	Sprite* sprite;
-	
+	Sprite* spriteBlack;
 };

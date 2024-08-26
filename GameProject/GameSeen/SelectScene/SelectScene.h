@@ -15,7 +15,8 @@ private:
 
 
 	int time;
-
+	float speed;
 	Sprite* sprite;
-
+	Vector4 color;
+	Sprite* spriteSelect;
 };

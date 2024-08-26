@@ -313,6 +313,7 @@ copy "$(WindowsSdkDir)bin\$(TargetPlatformVersion)\x64\dxil.dll" "$(TargetDir)dx
     <ClCompile Include="DKJEN\Type\Sphere.cpp" />
     <ClCompile Include="DKJEN\Type\Sprite.cpp" />
     <ClCompile Include="DKJEN\Type\Texture.cpp" />
+    <ClCompile Include="DKJEN\Utilipy\Audio.cpp" />
     <ClCompile Include="DKJEN\Utilipy\CSVLoad.cpp" />
     <ClCompile Include="DKJEN\Utilipy\Input.cpp" />
     <ClCompile Include="DKJEN\WorldTransform\WorldTransform.cpp" />
@@ -376,6 +377,8 @@ copy "$(WindowsSdkDir)bin\$(TargetPlatformVersion)\x64\dxil.dll" "$(TargetDir)dx
     <ClInclude Include="DKJEN\Type\Sphere.h" />
     <ClInclude Include="DKJEN\Type\Sprite.h" />
     <ClInclude Include="DKJEN\Type\Texture.h" />
+    <ClInclude Include="DKJEN\Utilipy\Audio.h" />
+    <ClInclude Include="DKJEN\Utilipy\AudioStruct.h" />
     <ClInclude Include="DKJEN\Utilipy\CSVLoad.h" />
     <ClInclude Include="DKJEN\Utilipy\Input.h" />
     <ClInclude Include="DKJEN\Utilipy\Sc.h" />

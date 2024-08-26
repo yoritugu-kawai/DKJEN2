@@ -34,7 +34,7 @@ void PlayScene::Initialize()
 	//
 	tPos_ = { 0.0f,0.0f,0.0f };
 	tRot = { 0,0,0 };
-	speed_ = 0.1f;
+	speed_ = 0.5f;
 	//
 	dKey = new Sprite;
 	uint32_t dTex = TexManager::LoadTexture("GameResource/D.png");
@@ -188,11 +188,11 @@ void PlayScene::Update(GameManager* gameManager)
 	cPos = cameraData->GetTranslate();
 
 
-	tPos_.z += speed_;
-	cPos.z += speed_;
+	//tPos_.z += speed_;
+	//cPos.z += speed_;
 
 
-	const float ROTATE_INTERVAL = 0.01f;
+	const float ROTATE_INTERVAL =0.01f;
 
 	///////////////////////Sphereで改善策を考える
 
@@ -202,11 +202,13 @@ void PlayScene::Update(GameManager* gameManager)
 	if (Input::GetInstance()->PushKey(DIK_RIGHT)) {
 		rotateTheta_ -= ROTATE_INTERVAL;
 		tRot.z -= ROTATE_INTERVAL;
+		tPos_.x -= ROTATE_INTERVAL;
 
 	}
 	if (Input::GetInstance()->PushKey(DIK_LEFT)) {
 		rotateTheta_ += ROTATE_INTERVAL;
 		tRot.z += ROTATE_INTERVAL;
+		tPos_.x += ROTATE_INTERVAL;
 	}
 
 	Vector3 sphereNewTranslate = {};
@@ -232,20 +234,6 @@ void PlayScene::Update(GameManager* gameManager)
 	//cPos.y = sphereNewTranslate.y;
 	const float CAMERA_OFFSET_DISTANCE = -10.0f;
 	cPos.z = sphereNewTranslate.z + CAMERA_OFFSET_DISTANCE;
-
-
-	///////////////////////
-
-
-
-
-
-
-
-
-
-
-
 
 
 	worldTransform->SetTranslate(tPos_);

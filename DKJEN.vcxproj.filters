@@ -337,6 +337,9 @@
     <ClCompile Include="DKJEN\FirstScene\FirstScene.cpp">
       <Filter>DKJEN\FirstScene</Filter>
     </ClCompile>
+    <ClCompile Include="DKJEN\Utilipy\Audio.cpp">
+      <Filter>DKJEN\Utilipy</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="DKJEN\Utilipy\Input.h">
@@ -530,6 +533,12 @@
     </ClInclude>
     <ClInclude Include="DKJEN\FirstScene\FirstScene.h">
       <Filter>DKJEN\FirstScene</Filter>
+    </ClInclude>
+    <ClInclude Include="DKJEN\Utilipy\Audio.h">
+      <Filter>DKJEN\Utilipy</Filter>
+    </ClInclude>
+    <ClInclude Include="DKJEN\Utilipy\AudioStruct.h">
+      <Filter>DKJEN\Utilipy</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>
