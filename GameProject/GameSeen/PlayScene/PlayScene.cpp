@@ -29,7 +29,7 @@ void PlayScene::Initialize()
 	walk3d->Initialize(modelData_);
 	cRot = { 0.0f,-0.0f,0.0f };
 
-	cPos = { 0.0f,10.0f,-20.0f };
+	cPos = { 0.0f,10.0f,10.0f };
 
 	//
 	tPos_ = { 0.0f,0.0f,0.0f };
@@ -153,6 +153,34 @@ void PlayScene::AllCollisions(GameManager* gameManager) {
 	}
 }
 
+void PlayScene::Operation()
+{
+
+	const float ROTATE_INTERVAL = 0.01f;
+
+	if (Input::GetInstance()->PushKey(DIK_RIGHT)) {
+		rotateTheta_ -= ROTATE_INTERVAL;
+		tRot.z -= ROTATE_INTERVAL;
+		//tPos_.x -= ROTATE_INTERVAL;
+
+	}
+	if (Input::GetInstance()->PushKey(DIK_LEFT)) {
+		rotateTheta_ += ROTATE_INTERVAL;
+		tRot.z += ROTATE_INTERVAL;
+		//tPos_.x += ROTATE_INTERVAL;
+	}
+	if (Input::GetInstance()->PushKey(DIK_A)) {
+		rotateTheta_ += ROTATE_INTERVAL;
+		tRot.z += ROTATE_INTERVAL;
+
+	}
+	if (Input::GetInstance()->PushKey(DIK_D)) {
+		rotateTheta_ -= ROTATE_INTERVAL;
+		tRot.z -= ROTATE_INTERVAL;
+	}
+
+}
+
 void PlayScene::Update(GameManager* gameManager)
 {
 	animaionTime += 2.0f / 60.0f;
@@ -188,29 +216,16 @@ void PlayScene::Update(GameManager* gameManager)
 	cPos = cameraData->GetTranslate();
 
 
-	//tPos_.z += speed_;
-	//cPos.z += speed_;
+	tPos_.z += speed_;
+	cPos.z += speed_;
 
 
-	const float ROTATE_INTERVAL =0.01f;
 
 	///////////////////////Sphereで改善策を考える
 
 	const float RADIUS = 8.0f;
 
-
-	if (Input::GetInstance()->PushKey(DIK_RIGHT)) {
-		rotateTheta_ -= ROTATE_INTERVAL;
-		tRot.z -= ROTATE_INTERVAL;
-		tPos_.x -= ROTATE_INTERVAL;
-
-	}
-	if (Input::GetInstance()->PushKey(DIK_LEFT)) {
-		rotateTheta_ += ROTATE_INTERVAL;
-		tRot.z += ROTATE_INTERVAL;
-		tPos_.x += ROTATE_INTERVAL;
-	}
-
+	Operation();
 	Vector3 sphereNewTranslate = {};
 
 	sphereNewTranslate.x = std::cosf(rotateTheta_ + std::numbers::pi_v<float> / 2.0f) * RADIUS;
@@ -230,8 +245,8 @@ void PlayScene::Update(GameManager* gameManager)
 	sphereWorldTransform_->SetTranslate(sphereNewTranslate);
 
 	cRot.z = rotateTheta_;
-	//cPos.x = sphereNewTranslate.x;
-	//cPos.y = sphereNewTranslate.y;
+	/*cPos.x = sphereNewTranslate.x;
+	cPos.y = sphereNewTranslate.y;*/
 	const float CAMERA_OFFSET_DISTANCE = -10.0f;
 	cPos.z = sphereNewTranslate.z + CAMERA_OFFSET_DISTANCE;
 
@@ -247,24 +262,7 @@ void PlayScene::Update(GameManager* gameManager)
 	//SkinCluster
 
 	skin->SkinUpdate(skinCluster, skeleton);
-	/////////
-
-
-	if (Input::GetInstance()->PushKey(DIK_A)) {
-		rotateTheta_ += ROTATE_INTERVAL;
-		tRot.z += ROTATE_INTERVAL;
-
-	}
-	if (Input::GetInstance()->PushKey(DIK_D)) {
-		rotateTheta_ -= ROTATE_INTERVAL;
-		tRot.z -= ROTATE_INTERVAL;
-	}
-
-
-
 	
-
-
 
 	//ワールドトランスフォームの更新
 
@@ -290,6 +288,6 @@ void PlayScene::Draw()
 	//objectData->Draw({ 1,1,1,1 }, cameraData, sphereWorldTransform_);
 
 
-	//dKey->Draw({12.8f,12.8f,0,},{0,0,0}, { 130,580,0}, {1,1,1,1});
-	//aKey->Draw({ 12.8f,12.8f,0, }, { 0,0,0 }, { 0,580,0 }, { 1,1,1,1 });
+	dKey->Draw({12.8f,12.8f,0,},{0,0,0}, { 130,580,0}, {1,1,1,1});
+	aKey->Draw({ 12.8f,12.8f,0, }, { 0,0,0 }, { 0,580,0 }, { 1,1,1,1 });
 }
