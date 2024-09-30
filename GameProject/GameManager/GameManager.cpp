@@ -2,7 +2,7 @@
 
 void GameManager::Initialize()
 {
-	iseen_ = new FirstScene;
+	iseen_ = new PlayScene;
 	iseen_->Initialize();
 }
 
