@@ -23,8 +23,22 @@ private:
 	Vector4 color;
 	Sprite* sprite;
 	Sprite* spriteBlack;
-	//
+	//モデル
 	unique_ptr<Obj3D> titleData_;
 	WorldTransform* titleWorldTransform_;
+	///手裏剣
+	unique_ptr<Obj3D> shurikenData_;
+	WorldTransform* shurikenWorldTransform_;
+	Vector3 shurikenPos;
+	///手裏剣2
+	unique_ptr<Obj3D> shurikenData2_;
+	WorldTransform* shurikenWorldTransform2_;
+	Vector3 shurikenPos2;
+	//
+	Vector3 shurikenRot;
+	float speed_;
+	float speed2_;
+	bool stop_;
+	int next_;
 
 };
