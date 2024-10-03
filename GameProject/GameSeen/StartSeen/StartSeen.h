@@ -13,10 +13,18 @@ public:
 	void Update(GameManager* gameManager)override;
 	void Draw()override;
 private:
+	/// <summary>
+	/// カメラ
+	/// </summary>
+	CameraData* cameraData;
+	Vector3 cPos;
 
-	
 	int time;
 	Vector4 color;
 	Sprite* sprite;
 	Sprite* spriteBlack;
+	//
+	unique_ptr<Obj3D> titleData_;
+	WorldTransform* titleWorldTransform_;
+
 };
