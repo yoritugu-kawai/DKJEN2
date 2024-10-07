@@ -12,6 +12,7 @@ public:
 	void Initialize()override;
 	void Update(GameManager* gameManager)override;
 	void Draw()override;
+	void ImGui()override;
 private:
 
 

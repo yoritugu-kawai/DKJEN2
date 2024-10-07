@@ -39,3 +39,7 @@ void FirstScene::Draw()
 	spriteBlack->Draw({ 128,72,0 }, { 0,0,0 }, { 0,0,0 }, {1.0f,1.0f,1.0f,1.0f});
 	spriteDKJEN->Draw({ 128,72,0 }, { 0,0,0 }, { 0,0,0 }, color);
 }
+
+void FirstScene::ImGui()
+{
+}

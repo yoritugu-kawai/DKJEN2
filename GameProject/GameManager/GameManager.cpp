@@ -9,6 +9,7 @@ void GameManager::Initialize()
 void GameManager::Update()
 {
 	iseen_->Update(this);
+	iseen_->ImGui();
 }
 
 void GameManager::Draw()

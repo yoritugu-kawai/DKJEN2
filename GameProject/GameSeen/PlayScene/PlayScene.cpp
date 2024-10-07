@@ -29,7 +29,7 @@ void PlayScene::Initialize()
 	walk3d->Initialize(modelData_);
 	cRot = { 0.0f,-0.0f,0.0f };
 
-	cPos = { 0.0f,10.0f,10.0f };
+	cPos = { 0.0f,9.0f,11.0f };
 
 	//
 	tPos_ = { 0.0f,0.0f,0.0f };
@@ -290,4 +290,8 @@ void PlayScene::Draw()
 
 	dKey->Draw({12.8f,12.8f,0,},{0,0,0}, { 130,580,0}, {1,1,1,1});
 	aKey->Draw({ 12.8f,12.8f,0, }, { 0,0,0 }, { 0,580,0 }, { 1,1,1,1 });
+}
+
+void PlayScene::ImGui()
+{
 }

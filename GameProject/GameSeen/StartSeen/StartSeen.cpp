@@ -12,10 +12,13 @@ void StartSeen::Initialize()
 	/*uint32_t tex = TexManager::LoadTexture("GameResource/title.png");
 	sprite = new Sprite;
 	sprite->Initialize(tex);
-	color = { 1.0f,1.0f,1.0f,1.0f };*/
+	;*/
+	//暗転
 	uint32_t texBlack = TexManager::LoadTexture("GameResource/black.png");
 	spriteBlack = new Sprite;
 	spriteBlack->Initialize(texBlack);
+	//posBlack = { -2280,0,0 };
+	//color = { 1.0f,1.0f,1.0f,1.0f };
 
 	//モデル
 	titleData_ = std::make_unique<Obj3D>();
@@ -52,7 +55,62 @@ void StartSeen::Update(GameManager* gameManager)
 	titleWorldTransform_->UpdateMatrix(cameraData);
 	shurikenWorldTransform_->UpdateMatrix(cameraData);
 	shurikenWorldTransform2_->UpdateMatrix(cameraData);
-	//color.w -= 0.01f;
+	cameraData->SetTranslate(cPos);
+
+	//手裏剣の回転
+	shurikenRot.z += 0.2;
+	if (shurikenRot.z>=3.0f) {
+		shurikenRot.z = 0;
+	}
+	shurikenWorldTransform_->SetRotate(shurikenRot);
+	shurikenWorldTransform2_->SetRotate(shurikenRot);
+	///スタートの動き
+	shurikenPos.x += speed_;
+	shurikenPos2.x += speed2_;
+	if (stop_ == false) {
+		if (shurikenPos.x >= 0.34f) {
+			speed_ = 0;
+		}
+		if (shurikenPos2.x >= 0.37f) {
+			speed2_ = 0;
+		}
+	}
+
+	shurikenWorldTransform_->SetTranslate(shurikenPos);
+	shurikenWorldTransform2_->SetTranslate(shurikenPos2);
+
+	//シーン移行
+	if (speed2_ == 0) {
+		if (Input::GetInstance()->PushKeyPressed(DIK_SPACE)) {
+			stop_ = true;
+
+		}
+	}
+	if (stop_ == true) {
+		//暗転座標
+		//posBlack.x +=30;
+		speed_ += 0.02;
+		speed2_ += 0.02;
+		next_ += 1;
+		color.w += 0.03;
+	}
+	if (next_ >= 60) {
+
+	gameManager->ChangeState(new clearScene);
+	}
+}
+
+void StartSeen::Draw()
+{
+	titleData_->Draw({ 1,1,1,1 }, cameraData, titleWorldTransform_);
+	shurikenData_->Draw({ 1,1,1,1 }, cameraData, shurikenWorldTransform_);
+	shurikenData2_->Draw({ 1,1,1,1 }, cameraData, shurikenWorldTransform2_);
+	
+	spriteBlack->Draw({ 256,72,0 }, { 0,0,0 }, posBlack, color);
+}
+
+void StartSeen::ImGui()
+{
 #ifdef _DEBUG
 	ImGui::Begin("Color");
 	ImGui::DragFloat4("c", &color.x, 0.1f, -1.0f, 1.0f);
@@ -68,52 +126,4 @@ void StartSeen::Update(GameManager* gameManager)
 	ImGui::DragFloat3("p", &shurikenRot.x, 0.1f, -1000.0f, 100.0f);
 	ImGui::End();
 #endif // _DEBUG
-	cameraData->SetTranslate(cPos);
-	shurikenRot.z += 0.2;
-	if (shurikenRot.z>=3.0f) {
-		shurikenRot.z = 0;
-	}
-	shurikenWorldTransform_->SetRotate(shurikenRot);
-	shurikenWorldTransform2_->SetRotate(shurikenRot);
-
-	shurikenPos.x += speed_;
-	shurikenPos2.x += speed2_;
-	if (stop_ == false) {
-		if (shurikenPos.x >= 0.34f) {
-			speed_ = 0;
-		}
-		if (shurikenPos2.x >= 0.37f) {
-			speed2_ = 0;
-		}
-	}
-
-	shurikenWorldTransform_->SetTranslate(shurikenPos);
-	shurikenWorldTransform2_->SetTranslate(shurikenPos2);
-
-
-	if (speed2_ == 0) {
-		if (Input::GetInstance()->PushKeyPressed(DIK_SPACE)) {
-			stop_ = true;
-
-		}
-	}
-	if (stop_ == true) {
-		speed_ += 0.02;
-		speed2_ += 0.02;
-		next_ += 1;
-		color.w += 0.03;
-	}
-	if (next_ >= 60) {
-
-	gameManager->ChangeState(new SelectScene);
-	}
-}
-
-void StartSeen::Draw()
-{
-	titleData_->Draw({ 1,1,1,1 }, cameraData, titleWorldTransform_);
-	shurikenData_->Draw({ 1,1,1,1 }, cameraData, shurikenWorldTransform_);
-	shurikenData2_->Draw({ 1,1,1,1 }, cameraData, shurikenWorldTransform2_);
-	
-	spriteBlack->Draw({ 128,72,0 }, { 0,0,0 }, { 0,0,0 }, color);
 }

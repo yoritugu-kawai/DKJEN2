@@ -43,3 +43,7 @@ void SelectScene::Draw()
 	spriteSelect->Draw({ 128,72,0 }, { 0,0,0 }, { 0,0,0 },{1,1,1,1});
 }
 
+void SelectScene::ImGui()
+{
+}
+

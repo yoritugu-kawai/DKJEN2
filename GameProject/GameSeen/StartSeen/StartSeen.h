@@ -12,6 +12,7 @@ public:
 	void Initialize()override;
 	void Update(GameManager* gameManager)override;
 	void Draw()override;
+	void ImGui()override;
 private:
 	/// <summary>
 	/// カメラ
@@ -22,7 +23,9 @@ private:
 	int time;
 	Vector4 color;
 	Sprite* sprite;
+	//暗転
 	Sprite* spriteBlack;
+	Vector3 posBlack;
 	//モデル
 	unique_ptr<Obj3D> titleData_;
 	WorldTransform* titleWorldTransform_;
