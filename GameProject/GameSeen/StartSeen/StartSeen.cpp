@@ -43,6 +43,37 @@ void StartSeen::Initialize()
 	ModelData shurikenModel2_ = LoadObjManagement::NewLoadObjFile("GameResource/Title/Obj", "Shuriken.obj");
 	shurikenData2_->Initialize(shurikenModel2_);
 	shurikenPos2 = { -1.07f,0.1f,0.0f };
+
+	///スペース
+	
+	Space = std::make_unique<Obj3D>();
+	SpaceWorldTransform_ = new WorldTransform();
+	SpaceWorldTransform_->Create();
+	SpaceWorldTransform_->SetScale({ 0.1f,0.1f,0.1f });
+	ModelData SpaceModel_ = LoadObjManagement::NewLoadObjFile("GameResource/Title/Obj", "Space.obj");
+	Space->Initialize(SpaceModel_);
+	SpacePos = { 0.0f,-0.6f,3.7f };
+	come = false;
+    ///ド
+	doData_ = std::make_unique<Obj3D>();
+	
+	ModelData doModel_ = LoadObjManagement::NewLoadObjFile("GameResource/Title/Obj", "do.obj");
+	doData_->Initialize(doModel_);
+	doWorldTransform_ = new WorldTransform();
+	doWorldTransform_->Create();
+	doWorldTransform_->SetScale({ 0.1f,0.1f,0.1f });
+	doPos = { 0.2f,-0.4f,2.3f };
+	///ン
+	nData_ = std::make_unique<Obj3D>();
+	ModelData nModel_ = LoadObjManagement::NewLoadObjFile("GameResource/Title/Obj", "nn.obj");
+	nData_->Initialize(nModel_);
+	nWorldTransform_ = new WorldTransform();
+	nWorldTransform_->Create();
+	nWorldTransform_->SetScale({ 0.1f,0.1f,0.1f });
+    nPos = { -0.1f,-0.4f,2.3f };
+	//ドン
+	
+
 	//
 	speed_ = 0.02;
 	speed2_ = 0.02;
@@ -55,6 +86,9 @@ void StartSeen::Update(GameManager* gameManager)
 	titleWorldTransform_->UpdateMatrix(cameraData);
 	shurikenWorldTransform_->UpdateMatrix(cameraData);
 	shurikenWorldTransform2_->UpdateMatrix(cameraData);
+	SpaceWorldTransform_->UpdateMatrix(cameraData);
+	doWorldTransform_->UpdateMatrix(cameraData);
+	nWorldTransform_->UpdateMatrix(cameraData);
 	cameraData->SetTranslate(cPos);
 
 	//手裏剣の回転
@@ -73,11 +107,17 @@ void StartSeen::Update(GameManager* gameManager)
 		}
 		if (shurikenPos2.x >= 0.37f) {
 			speed2_ = 0;
+			
+			come = true;
 		}
 	}
-
+	///座標
 	shurikenWorldTransform_->SetTranslate(shurikenPos);
 	shurikenWorldTransform2_->SetTranslate(shurikenPos2);
+	SpaceWorldTransform_->SetTranslate(SpacePos);
+	doWorldTransform_->SetTranslate(doPos);
+	nWorldTransform_->SetTranslate(nPos);
+
 
 	//シーン移行
 	if (speed2_ == 0) {
@@ -89,6 +129,8 @@ void StartSeen::Update(GameManager* gameManager)
 	if (stop_ == true) {
 		//暗転座標
 		//posBlack.x +=30;
+		doPos.z -= 0.1f;
+		nPos.z -= 0.1f;
 		speed_ += 0.02;
 		speed2_ += 0.02;
 		next_ += 1;
@@ -105,7 +147,12 @@ void StartSeen::Draw()
 	titleData_->Draw({ 1,1,1,1 }, cameraData, titleWorldTransform_);
 	shurikenData_->Draw({ 1,1,1,1 }, cameraData, shurikenWorldTransform_);
 	shurikenData2_->Draw({ 1,1,1,1 }, cameraData, shurikenWorldTransform2_);
-	
+	if (come==true) {
+	doData_->Draw({ 1,1,1,1 }, cameraData, doWorldTransform_);
+	nData_->Draw({ 1,1,1,1 }, cameraData, nWorldTransform_);
+	Space->Draw({ 1,1,1,1 }, cameraData, SpaceWorldTransform_);
+
+	}
 	spriteBlack->Draw({ 256,72,0 }, { 0,0,0 }, posBlack, color);
 }
 
@@ -123,7 +170,7 @@ void StartSeen::ImGui()
 
 	ImGui::Begin("shuriken");
 
-	ImGui::DragFloat3("p", &shurikenRot.x, 0.1f, -1000.0f, 100.0f);
+	ImGui::DragFloat3("p", &nPos.x, 0.1f, -1000.0f, 100.0f);
 	ImGui::End();
 #endif // _DEBUG
 }

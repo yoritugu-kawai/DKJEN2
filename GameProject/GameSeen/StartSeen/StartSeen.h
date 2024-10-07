@@ -37,6 +37,24 @@ private:
 	unique_ptr<Obj3D> shurikenData2_;
 	WorldTransform* shurikenWorldTransform2_;
 	Vector3 shurikenPos2;
+	//スペース
+	unique_ptr<Obj3D> Space;
+	WorldTransform* SpaceWorldTransform_;
+	Vector3 SpacePos;
+	bool come;
+	///ド
+	unique_ptr<Obj3D> doData_;
+	WorldTransform* doWorldTransform_;
+	Vector3 doPos;
+	//ン
+	unique_ptr<Obj3D> nData_;
+	WorldTransform* nWorldTransform_;
+	Vector3 nPos;
+	//
+	
+
+	
+	
 	//
 	Vector3 shurikenRot;
 	float speed_;
