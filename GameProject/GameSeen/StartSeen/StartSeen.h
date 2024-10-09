@@ -50,7 +50,10 @@ private:
 	unique_ptr<Obj3D> nData_;
 	WorldTransform* nWorldTransform_;
 	Vector3 nPos;
-	//
+	//床
+	unique_ptr<Obj3D> floorData_;
+	WorldTransform* floorWorldTransform_;
+	Vector3 floorPos;
 	
 
 	

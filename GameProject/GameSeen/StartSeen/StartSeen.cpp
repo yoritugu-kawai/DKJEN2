@@ -71,8 +71,13 @@ void StartSeen::Initialize()
 	nWorldTransform_->Create();
 	nWorldTransform_->SetScale({ 0.1f,0.1f,0.1f });
     nPos = { -0.1f,-0.4f,2.3f };
-	//ドン
-	
+	//床
+	floorData_ = std::make_unique<Obj3D>();
+	ModelData floorModel_ = LoadObjManagement::NewLoadObjFile("GameResource/Title/Obj", "ground.obj");
+	floorData_->Initialize(floorModel_);
+	floorWorldTransform_ = new WorldTransform();
+	floorWorldTransform_->Create();
+	floorWorldTransform_->SetScale({ 0.1f,0.1f,0.1f });
 
 	//
 	speed_ = 0.02;
@@ -89,6 +94,8 @@ void StartSeen::Update(GameManager* gameManager)
 	SpaceWorldTransform_->UpdateMatrix(cameraData);
 	doWorldTransform_->UpdateMatrix(cameraData);
 	nWorldTransform_->UpdateMatrix(cameraData);
+	floorWorldTransform_->UpdateMatrix(cameraData);
+
 	cameraData->SetTranslate(cPos);
 
 	//手裏剣の回転
@@ -117,7 +124,7 @@ void StartSeen::Update(GameManager* gameManager)
 	SpaceWorldTransform_->SetTranslate(SpacePos);
 	doWorldTransform_->SetTranslate(doPos);
 	nWorldTransform_->SetTranslate(nPos);
-
+	floorWorldTransform_->SetTranslate(floorPos);
 
 	//シーン移行
 	if (speed2_ == 0) {
@@ -144,6 +151,7 @@ void StartSeen::Update(GameManager* gameManager)
 
 void StartSeen::Draw()
 {
+	floorData_->Draw({ 1,1,1,1 }, cameraData, floorWorldTransform_);
 	titleData_->Draw({ 1,1,1,1 }, cameraData, titleWorldTransform_);
 	shurikenData_->Draw({ 1,1,1,1 }, cameraData, shurikenWorldTransform_);
 	shurikenData2_->Draw({ 1,1,1,1 }, cameraData, shurikenWorldTransform2_);
@@ -170,7 +178,7 @@ void StartSeen::ImGui()
 
 	ImGui::Begin("shuriken");
 
-	ImGui::DragFloat3("p", &nPos.x, 0.1f, -1000.0f, 100.0f);
+	ImGui::DragFloat3("p", &floorPos.x, 0.1f, -1000.0f, 100.0f);
 	ImGui::End();
 #endif // _DEBUG
 }
