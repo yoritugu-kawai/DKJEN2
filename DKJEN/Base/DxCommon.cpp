@@ -192,7 +192,7 @@ void DxCommon::CreateSwapChain()
 	swapChainDesc.BufferUsage = DXGI_USAGE_RENDER_TARGET_OUTPUT;
 	swapChainDesc.BufferCount = 2;
 	swapChainDesc.SwapEffect = DXGI_SWAP_EFFECT_FLIP_DISCARD;
-	HRESULT hr = dxgiFactory->CreateSwapChainForHwnd(
+	[[maybe_unused]] HRESULT hr = dxgiFactory->CreateSwapChainForHwnd(
 		commandQueue, WinApp::GetInstance()->GetHwnd(),
 		&swapChainDesc, nullptr, nullptr, reinterpret_cast<IDXGISwapChain1**>(&swapChain));
 	assert(SUCCEEDED(hr));
@@ -263,7 +263,7 @@ ID3D12DescriptorHeap* DxCommon::CreateDescriptorDesc(ID3D12Device* device, D3D12
 	descriptorHeapDesc.NumDescriptors = numDescriptors;
 	descriptorHeapDesc.Flags = shaderVisible ? D3D12_DESCRIPTOR_HEAP_FLAG_SHADER_VISIBLE : D3D12_DESCRIPTOR_HEAP_FLAG_NONE;
 
-	HRESULT hr = device->CreateDescriptorHeap(&descriptorHeapDesc, IID_PPV_ARGS(&descriptorHeap));
+	[[maybe_unused]] HRESULT hr = device->CreateDescriptorHeap(&descriptorHeapDesc, IID_PPV_ARGS(&descriptorHeap));
 
 	assert(SUCCEEDED(hr));
 
@@ -401,7 +401,7 @@ void DxCommon::CreateFeneEvent()
 	HANDLE fenceEvent;//
 	ID3D12Device* device = DxCommon::GetInstance()->device;
 	///
-	HRESULT hr = device->CreateFence(fenceValue, D3D12_FENCE_FLAG_NONE, IID_PPV_ARGS(&fence));
+	[[maybe_unused]]HRESULT hr = device->CreateFence(fenceValue, D3D12_FENCE_FLAG_NONE, IID_PPV_ARGS(&fence));
 	assert(SUCCEEDED(hr));
 
 	fenceEvent = CreateEvent(NULL, FALSE, FALSE, NULL);
@@ -466,7 +466,7 @@ ID3D12Resource* DxCommon::CreateDepthStencilTextureRsource(ID3D12Device* device,
 
 	// Resourceの生成
 	ID3D12Resource* resource = nullptr;
-	HRESULT hr = device->CreateCommittedResource(
+	[[maybe_unused]] HRESULT hr = device->CreateCommittedResource(
 		&heapProperties, // Heapの設定
 		D3D12_HEAP_FLAG_NONE, // Hepaの特殊な設定。特になし
 		&resourceDesc, // Resourceの設定

@@ -20,7 +20,7 @@ public:
 	void ImGui()override;
 
 private:
-	void AllCollisions(GameManager* gameManager);
+	void AllCollisions();
 	void Operation();
 
 	int time;

@@ -3,8 +3,7 @@
 SkinCluster Skinning::CreateSkinCluster(const Skeleton& skeleton, const ModelData& modelData)
 {
 	SkinCluster skinCluster;
-	ID3D12Device* device = DxCommon::GetInstance()->GetDevice();
-
+	
 
 	DescriptorManagement::GetInstance();
 	
@@ -57,11 +56,11 @@ SkinCluster Skinning::CreateSkinCluster(const Skeleton& skeleton, const ModelDat
 			auto& currentInfluence = skinCluster.mappedInfluence[vertexWeight.vertexIndex];
 
 
-			for (uint32_t index = 0; index < NUM_MAX_INFLUENCE; ++index) {
+			for (uint32_t indexf = 0; indexf < NUM_MAX_INFLUENCE; ++indexf) {
 
-				if (currentInfluence.weights[index] == 0.0f) {
-					currentInfluence.weights[index] = vertexWeight.weight;
-					currentInfluence.jointIndices[index] = (*it).second;
+				if (currentInfluence.weights[indexf] == 0.0f) {
+					currentInfluence.weights[indexf] = vertexWeight.weight;
+					currentInfluence.jointIndices[indexf] = (*it).second;
 					break;
 				}
 

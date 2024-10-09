@@ -13,6 +13,9 @@ public:
 	void Update(GameManager* gameManager)override;
 	void Draw()override;
 	void ImGui()override;
+
+	void UpdateMatrix();
+	void Set();
 private:
 	/// <summary>
 	/// カメラ
@@ -54,8 +57,12 @@ private:
 	unique_ptr<Obj3D> floorData_;
 	WorldTransform* floorWorldTransform_;
 	Vector3 floorPos;
-	
-
+	Vector3 floorSize;
+	//木
+	unique_ptr<Obj3D> treeData_;
+	WorldTransform* treeWorldTransform_;
+	Vector3 treePos;
+	Vector3 treeSize;
 	
 	
 	//

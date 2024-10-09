@@ -14,9 +14,8 @@ void Animation3D::Initialize(ModelData modelData)
 	vertxBufferView.BufferLocation = vetexResource.Get()->GetGPUVirtualAddress();
 	vertxBufferView.SizeInBytes = UINT(sizeof(VertexData) * modelData_.vertices.size());
 	vertxBufferView.StrideInBytes = sizeof(VertexData);
-
 	indexBufferViewSprite.BufferLocation = indexResource->GetGPUVirtualAddress();
-	indexBufferViewSprite.SizeInBytes = sizeof(uint32_t) * modelData_.indices.size();
+	indexBufferViewSprite.SizeInBytes = static_cast<UINT>(sizeof(uint32_t) * modelData_.indices.size());
 	indexBufferViewSprite.Format = DXGI_FORMAT_R32_UINT;
 	matrix = MakeIdentity4x4();
 
@@ -32,7 +31,7 @@ void Animation3D::Draw(Vector4 Color, CameraData* cameraData, WorldTransform* wo
 	//
 	VertexData* vertexData = nullptr;
 	Vector4* materialData = nullptr;
-	TransformationMatrix* matrixData = nullptr;
+	
 	DirectionalLight* lightData = nullptr;
 	uint32_t* indexData = nullptr;
 
@@ -58,7 +57,7 @@ void Animation3D::Draw(Vector4 Color, CameraData* cameraData, WorldTransform* wo
 	//ImGui::SliderFloat3("t", &direction_.x, -1.0f, 1.0f);
 	//ImGui::End();
  //   #endif // _DEBUG
-	
+
 	lightData->direction = direction_;
 	D3D12_VERTEX_BUFFER_VIEW vbvs[2] = {
 

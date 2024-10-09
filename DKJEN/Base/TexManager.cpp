@@ -10,18 +10,18 @@ TexManager* TexManager::GetInstance()
 
 void TexManager::Initiluze()
 {
-	uint32_t descriptorSizeSRV= TexManager::GetInstance()->descriptorSizeSRV;
-	uint32_t descriptorSizeRTV= TexManager::GetInstance()->descriptorSizeRTV;
-	uint32_t descriptorSizeDSV= TexManager::GetInstance()->descriptorSizeDSV;
+	uint32_t descriptorSizeSRV = TexManager::GetInstance()->descriptorSizeSRV;
+	uint32_t descriptorSizeRTV = TexManager::GetInstance()->descriptorSizeRTV;
+	uint32_t descriptorSizeDSV = TexManager::GetInstance()->descriptorSizeDSV;
 	CoInitializeEx(0, COINIT_MULTITHREADED);
 	ID3D12Device* device = DxCommon::GetInstance()->GetDevice();
 	descriptorSizeSRV = device->GetDescriptorHandleIncrementSize(D3D12_DESCRIPTOR_HEAP_TYPE_CBV_SRV_UAV);
 	descriptorSizeRTV = device->GetDescriptorHandleIncrementSize(D3D12_DESCRIPTOR_HEAP_TYPE_RTV);
 	descriptorSizeDSV = device->GetDescriptorHandleIncrementSize(D3D12_DESCRIPTOR_HEAP_TYPE_DSV);
 	LoadCount = 0;
-	TexManager::GetInstance()->descriptorSizeSRV=  descriptorSizeSRV ;
-	TexManager::GetInstance()->descriptorSizeRTV =  descriptorSizeRTV ;
-	TexManager::GetInstance()->descriptorSizeDSV =  descriptorSizeDSV ;
+	TexManager::GetInstance()->descriptorSizeSRV = descriptorSizeSRV;
+	TexManager::GetInstance()->descriptorSizeRTV = descriptorSizeRTV;
+	TexManager::GetInstance()->descriptorSizeDSV = descriptorSizeDSV;
 
 }
 
@@ -48,7 +48,7 @@ DirectX::ScratchImage TexManager::LoadTextureData(const std::string& filePath)
 ID3D12Resource* TexManager::CreateTexResource(const DirectX::TexMetadata& metadata)
 {
 	ID3D12Device* device = DxCommon::GetInstance()->GetDevice();
-	
+
 	//1.metadataを基にResourceの設定
 	D3D12_RESOURCE_DESC resourceDesc{};
 	resourceDesc.Width = UINT(metadata.width);
@@ -68,7 +68,7 @@ ID3D12Resource* TexManager::CreateTexResource(const DirectX::TexMetadata& metada
 
 	//3.Resourceを生成する
 	ID3D12Resource* resource = nullptr;
-	HRESULT hr = device->CreateCommittedResource(
+	[[maybe_unused]]  HRESULT hr = device->CreateCommittedResource(
 		&heapProperties,
 		D3D12_HEAP_FLAG_NONE,
 		&resourceDesc,
@@ -81,7 +81,7 @@ ID3D12Resource* TexManager::CreateTexResource(const DirectX::TexMetadata& metada
 }
 
 
-ID3D12Resource* TexManager::DDSCreateTexResource( const DirectX::TexMetadata& metadata)
+ID3D12Resource* TexManager::DDSCreateTexResource(const DirectX::TexMetadata& metadata)
 {
 	ID3D12Device* device = DxCommon::GetInstance()->GetDevice();
 	//1.metadataを基にResourceの設定
@@ -93,14 +93,14 @@ ID3D12Resource* TexManager::DDSCreateTexResource( const DirectX::TexMetadata& me
 	resourceDesc.Format = metadata.format;
 	resourceDesc.SampleDesc.Count = 1;
 	resourceDesc.Dimension = D3D12_RESOURCE_DIMENSION(metadata.dimension);
-	
+
 	//2.利用するHeapの設定。非常に特殊な運用。02_04exで一般的なケース版がある
 	D3D12_HEAP_PROPERTIES heapProperties{};
 	heapProperties.Type = D3D12_HEAP_TYPE_DEFAULT;
-	
+
 	//3.Resourceを生成する
 	ID3D12Resource* resource = nullptr;
-	HRESULT hr = device->CreateCommittedResource(
+	[[maybe_unused]] HRESULT hr = device->CreateCommittedResource(
 		&heapProperties,
 		D3D12_HEAP_FLAG_NONE,
 		&resourceDesc,
@@ -111,7 +111,6 @@ ID3D12Resource* TexManager::DDSCreateTexResource( const DirectX::TexMetadata& me
 	assert(SUCCEEDED(hr));
 	return resource;
 }
-
 
 
 
@@ -127,7 +126,7 @@ void TexManager::UploadTexData(ID3D12Resource* texture, const DirectX::ScratchIm
 		const DirectX::Image* img = mipImages.GetImage(mipLevel, 0, 0);
 
 		//Textureに転送
-		HRESULT hr = texture->WriteToSubresource(
+		[[maybe_unused]]  HRESULT hr = texture->WriteToSubresource(
 			UINT(mipLevel),
 			nullptr, //全領域へコピー
 			img->pixels, //元データアドレス
@@ -140,7 +139,6 @@ void TexManager::UploadTexData(ID3D12Resource* texture, const DirectX::ScratchIm
 
 }
 
-[[nodiscard]]
 ID3D12Resource* TexManager::DDSUploadTexData(ID3D12Resource* texture, const DirectX::ScratchImage& mipImages)
 {
 	ID3D12GraphicsCommandList* commandList = DxCommon::GetInstance()->GetCommandList();
@@ -153,12 +151,12 @@ ID3D12Resource* TexManager::DDSUploadTexData(ID3D12Resource* texture, const Dire
 	UpdateSubresources(commandList, texture, intermediateResource, 0, 0, UINT(subresources.size()), subresources.data());
 
 	D3D12_RESOURCE_BARRIER barrier{};
-	barrier.Type=D3D12_RESOURCE_BARRIER_TYPE_TRANSITION;
-	barrier.Flags=D3D12_RESOURCE_BARRIER_FLAG_NONE;
-	barrier.Transition.pResource=texture;
-	barrier.Transition.Subresource=D3D12_RESOURCE_BARRIER_ALL_SUBRESOURCES;
-	barrier.Transition.StateBefore=D3D12_RESOURCE_STATE_COPY_DEST;
-	barrier.Transition.StateAfter=D3D12_RESOURCE_STATE_GENERIC_READ;
+	barrier.Type = D3D12_RESOURCE_BARRIER_TYPE_TRANSITION;
+	barrier.Flags = D3D12_RESOURCE_BARRIER_FLAG_NONE;
+	barrier.Transition.pResource = texture;
+	barrier.Transition.Subresource = D3D12_RESOURCE_BARRIER_ALL_SUBRESOURCES;
+	barrier.Transition.StateBefore = D3D12_RESOURCE_STATE_COPY_DEST;
+	barrier.Transition.StateAfter = D3D12_RESOURCE_STATE_GENERIC_READ;
 	commandList->ResourceBarrier(1, &barrier);
 	return intermediateResource;
 
@@ -172,7 +170,7 @@ void TexManager::ShaderResourceView()
 
 bool TexManager::CheckImageData(string filePath)
 {
-	if (TexManager::GetInstance()->imageDatas.find(filePath)== TexManager::GetInstance()->imageDatas.end()) {
+	if (TexManager::GetInstance()->imageDatas.find(filePath) == TexManager::GetInstance()->imageDatas.end()) {
 		return true;
 	}
 	return false;
@@ -183,10 +181,10 @@ uint32_t TexManager::LoadTexture(const std::string& filePath)
 {
 	if (CheckImageData(filePath)) {
 		SImageData texData;
-		
-	
-		
-		ID3D12DescriptorHeap* srvDescriptorHeap = DxCommon::GetInstance()->GetsrvDescriptorHeap();
+
+
+
+		//ID3D12DescriptorHeap* srvDescriptorHeap = DxCommon::GetInstance()->GetsrvDescriptorHeap();
 
 		//Textureを読んで転送する
 		DirectX::ScratchImage mipImages = LoadTextureData(filePath);
@@ -207,12 +205,12 @@ uint32_t TexManager::LoadTexture(const std::string& filePath)
 		DescriptorManagement::CreateShaderResourceView(texData.index, srvDesc, texData.resource);
 
 
-		
+
 
 		TexManager::GetInstance()->imageDatas[filePath] =
 			std::make_unique<ImageData>(filePath, texData);
 	}
-	TexManager* texManager = TexManager::GetInstance();
+	//TexManager* texManager = TexManager::GetInstance();
 	return TexManager::GetInstance()->imageDatas[filePath]->GetImageIndex();
 }
 
@@ -235,7 +233,7 @@ DirectX::ScratchImage TexManager::DDSLoadTextureData(const std::string& filePath
 
 	}
 
-	
+
 	//ミップマップ...元画像より小さなテクスチャ群
 	DirectX::ScratchImage mipImages{};
 	//圧縮フォーマットかどうかを調べる
@@ -259,7 +257,7 @@ uint32_t TexManager::DDSLoadTexture(const std::string& filePath) {
 
 	if (CheckImageData(filePath)) {
 		SImageData texData;
-		
+
 		//Textureを読んで転送する
 		DirectX::ScratchImage mipImages = DDSLoadTextureData(filePath);
 		const DirectX::TexMetadata& metadata = mipImages.GetMetadata();
@@ -278,7 +276,7 @@ uint32_t TexManager::DDSLoadTexture(const std::string& filePath) {
 
 		DescriptorManagement::CreateShaderResourceView(texData.index, srvDesc, texData.resource);
 
-		
+
 
 		TexManager::GetInstance()->imageDatas[filePath] =
 			std::make_unique<ImageData>(filePath, texData);

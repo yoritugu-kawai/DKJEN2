@@ -26,9 +26,6 @@
     <Filter Include="DKJEN\Type">
       <UniqueIdentifier>{fdf38c82-c957-481f-aceb-4fbc77966666}</UniqueIdentifier>
     </Filter>
-    <Filter Include="ImguiEx">
-      <UniqueIdentifier>{f81999c5-8832-4650-bad1-7d9fb5e33586}</UniqueIdentifier>
-    </Filter>
     <Filter Include="DKJEN\Base\DxCommon">
       <UniqueIdentifier>{59756443-50a2-4544-9739-d9e410191d33}</UniqueIdentifier>
     </Filter>
@@ -177,27 +174,6 @@
     </ClCompile>
     <ClCompile Include="DKJEN\Shader\PolygonCompileShader.cpp">
       <Filter>DKJEN\Shader</Filter>
-    </ClCompile>
-    <ClCompile Include="DKJEN\externals\imgui\imgui.cpp">
-      <Filter>ImguiEx</Filter>
-    </ClCompile>
-    <ClCompile Include="DKJEN\externals\imgui\imgui_demo.cpp">
-      <Filter>ImguiEx</Filter>
-    </ClCompile>
-    <ClCompile Include="DKJEN\externals\imgui\imgui_draw.cpp">
-      <Filter>ImguiEx</Filter>
-    </ClCompile>
-    <ClCompile Include="DKJEN\externals\imgui\imgui_impl_dx12.cpp">
-      <Filter>ImguiEx</Filter>
-    </ClCompile>
-    <ClCompile Include="DKJEN\externals\imgui\imgui_impl_win32.cpp">
-      <Filter>ImguiEx</Filter>
-    </ClCompile>
-    <ClCompile Include="DKJEN\externals\imgui\imgui_tables.cpp">
-      <Filter>ImguiEx</Filter>
-    </ClCompile>
-    <ClCompile Include="DKJEN\externals\imgui\imgui_widgets.cpp">
-      <Filter>ImguiEx</Filter>
     </ClCompile>
     <ClCompile Include="DKJEN\Management\FrameManagement.cpp">
       <Filter>DKJEN\Management</Filter>
@@ -360,30 +336,6 @@
     <ClInclude Include="DKJEN\Shader\PolygonCompileShader.h">
       <Filter>DKJEN\Shader</Filter>
     </ClInclude>
-    <ClInclude Include="DKJEN\externals\imgui\imconfig.h">
-      <Filter>ImguiEx</Filter>
-    </ClInclude>
-    <ClInclude Include="DKJEN\externals\imgui\imgui.h">
-      <Filter>ImguiEx</Filter>
-    </ClInclude>
-    <ClInclude Include="DKJEN\externals\imgui\imgui_impl_dx12.h">
-      <Filter>ImguiEx</Filter>
-    </ClInclude>
-    <ClInclude Include="DKJEN\externals\imgui\imgui_impl_win32.h">
-      <Filter>ImguiEx</Filter>
-    </ClInclude>
-    <ClInclude Include="DKJEN\externals\imgui\imgui_internal.h">
-      <Filter>ImguiEx</Filter>
-    </ClInclude>
-    <ClInclude Include="DKJEN\externals\imgui\imstb_rectpack.h">
-      <Filter>ImguiEx</Filter>
-    </ClInclude>
-    <ClInclude Include="DKJEN\externals\imgui\imstb_textedit.h">
-      <Filter>ImguiEx</Filter>
-    </ClInclude>
-    <ClInclude Include="DKJEN\externals\imgui\imstb_truetype.h">
-      <Filter>ImguiEx</Filter>
-    </ClInclude>
     <ClInclude Include="DKJEN\Management\FrameManagement.h">
       <Filter>DKJEN\Management</Filter>
     </ClInclude>
@@ -540,11 +492,6 @@
     <ClInclude Include="DKJEN\Utilipy\AudioStruct.h">
       <Filter>DKJEN\Utilipy</Filter>
     </ClInclude>
-  </ItemGroup>
-  <ItemGroup>
-    <Text Include="DKJEN\externals\imgui\LICENSE.txt">
-      <Filter>ImguiEx</Filter>
-    </Text>
   </ItemGroup>
   <ItemGroup>
     <FxCompile Include="resource\hlsl\LightObject.PS.hlsl">

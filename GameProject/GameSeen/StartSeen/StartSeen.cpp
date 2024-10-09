@@ -77,29 +77,31 @@ void StartSeen::Initialize()
 	floorData_->Initialize(floorModel_);
 	floorWorldTransform_ = new WorldTransform();
 	floorWorldTransform_->Create();
-	floorWorldTransform_->SetScale({ 0.1f,0.1f,0.1f });
-
+	floorSize = { 0.9f,0.1f,0.9f };
+	floorPos = {0.0f,-1.1f,14.1f};
+	floorWorldTransform_->SetScale(floorSize);
+	//木
+	treeData_ = std::make_unique<Obj3D>();
+	ModelData treeModel_ = LoadObjManagement::NewLoadObjFile("GameResource/Title/Obj", "wood.obj");
+	treeData_->Initialize(treeModel_);
+	treeWorldTransform_ = new WorldTransform();
+	treeWorldTransform_->Create();
+	treeSize = { 0.1f,0.1f,0.1f };
+	treePos = { -5.0f,-1.5f,14.0f };
 	//
-	speed_ = 0.02;
-	speed2_ = 0.02;
+	speed_ = 0.02f;
+	speed2_ = 0.02f;
 	stop_ = false;
 }
 
 void StartSeen::Update(GameManager* gameManager)
 {
-	cameraData->Update();
-	titleWorldTransform_->UpdateMatrix(cameraData);
-	shurikenWorldTransform_->UpdateMatrix(cameraData);
-	shurikenWorldTransform2_->UpdateMatrix(cameraData);
-	SpaceWorldTransform_->UpdateMatrix(cameraData);
-	doWorldTransform_->UpdateMatrix(cameraData);
-	nWorldTransform_->UpdateMatrix(cameraData);
-	floorWorldTransform_->UpdateMatrix(cameraData);
-
-	cameraData->SetTranslate(cPos);
+	UpdateMatrix();
+	Set();
+	
 
 	//手裏剣の回転
-	shurikenRot.z += 0.2;
+	shurikenRot.z += 0.2f;
 	if (shurikenRot.z>=3.0f) {
 		shurikenRot.z = 0;
 	}
@@ -118,14 +120,7 @@ void StartSeen::Update(GameManager* gameManager)
 			come = true;
 		}
 	}
-	///座標
-	shurikenWorldTransform_->SetTranslate(shurikenPos);
-	shurikenWorldTransform2_->SetTranslate(shurikenPos2);
-	SpaceWorldTransform_->SetTranslate(SpacePos);
-	doWorldTransform_->SetTranslate(doPos);
-	nWorldTransform_->SetTranslate(nPos);
-	floorWorldTransform_->SetTranslate(floorPos);
-
+	
 	//シーン移行
 	if (speed2_ == 0) {
 		if (Input::GetInstance()->PushKeyPressed(DIK_SPACE)) {
@@ -138,10 +133,10 @@ void StartSeen::Update(GameManager* gameManager)
 		//posBlack.x +=30;
 		doPos.z -= 0.1f;
 		nPos.z -= 0.1f;
-		speed_ += 0.02;
-		speed2_ += 0.02;
+		speed_ += 0.02f;
+		speed2_ += 0.02f;
 		next_ += 1;
-		color.w += 0.03;
+		color.w += 0.03f;
 	}
 	if (next_ >= 60) {
 
@@ -151,6 +146,7 @@ void StartSeen::Update(GameManager* gameManager)
 
 void StartSeen::Draw()
 {
+	treeData_->Draw({ 1,1,1,1 }, cameraData, treeWorldTransform_);
 	floorData_->Draw({ 1,1,1,1 }, cameraData, floorWorldTransform_);
 	titleData_->Draw({ 1,1,1,1 }, cameraData, titleWorldTransform_);
 	shurikenData_->Draw({ 1,1,1,1 }, cameraData, shurikenWorldTransform_);
@@ -177,8 +173,38 @@ void StartSeen::ImGui()
 	ImGui::End();
 
 	ImGui::Begin("shuriken");
-
-	ImGui::DragFloat3("p", &floorPos.x, 0.1f, -1000.0f, 100.0f);
+	ImGui::DragFloat3("s", &treeSize.x, 0.1f, -1000.0f, 100.0f);
+	ImGui::DragFloat3("p", &treePos.x, 0.1f, -1000.0f, 100.0f);
 	ImGui::End();
 #endif // _DEBUG
+}
+
+void StartSeen::UpdateMatrix()
+{
+	cameraData->Update();
+	titleWorldTransform_->UpdateMatrix(cameraData);
+	shurikenWorldTransform_->UpdateMatrix(cameraData);
+	shurikenWorldTransform2_->UpdateMatrix(cameraData);
+	SpaceWorldTransform_->UpdateMatrix(cameraData);
+	doWorldTransform_->UpdateMatrix(cameraData);
+	nWorldTransform_->UpdateMatrix(cameraData);
+	floorWorldTransform_->UpdateMatrix(cameraData);
+	treeWorldTransform_->UpdateMatrix(cameraData);
+	
+	cameraData->SetTranslate(cPos);
+
+}
+
+void StartSeen::Set()
+{
+	///座標
+	shurikenWorldTransform_->SetTranslate(shurikenPos);
+	shurikenWorldTransform2_->SetTranslate(shurikenPos2);
+	SpaceWorldTransform_->SetTranslate(SpacePos);
+	doWorldTransform_->SetTranslate(doPos);
+	nWorldTransform_->SetTranslate(nPos);
+	floorWorldTransform_->SetTranslate(floorPos);
+	treeWorldTransform_->SetTranslate(treePos);
+	//
+	floorWorldTransform_->SetScale(floorSize);
 }

@@ -16,7 +16,7 @@ void Obj3D::Initialize(ModelData modelData)
 	vertxBufferView.StrideInBytes = sizeof(VertexData);
 
 	indexBufferViewSprite.BufferLocation = indexResource->GetGPUVirtualAddress();
-	indexBufferViewSprite.SizeInBytes = sizeof(uint32_t) * modelData_.indices.size();
+	indexBufferViewSprite.SizeInBytes = static_cast<UINT>(sizeof(uint32_t)) * static_cast<UINT>(modelData_.indices.size());
 	indexBufferViewSprite.Format = DXGI_FORMAT_R32_UINT;
     matrix = MakeIdentity4x4();
 
@@ -32,7 +32,7 @@ void Obj3D::Draw( Vector4 Color,CameraData*cameraData, WorldTransform* worldTran
 	//
 	VertexData* vertexData = nullptr;
 	Vector4* materialData = nullptr;
-	TransformationMatrix* matrixData = nullptr;
+	
 	DirectionalLight* lightData = nullptr;
 	uint32_t* indexData = nullptr;
 

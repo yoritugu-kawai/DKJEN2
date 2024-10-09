@@ -698,6 +698,7 @@ Vector3 TransformRot(const Vector3& vector, const Matrix4x4& matrix) {
 }
 Quaternion MultiplyQuaternion(const Quaternion& lhs, const Quaternion& rhs)
 {
+	lhs, rhs;
 	return Quaternion();
 }
 

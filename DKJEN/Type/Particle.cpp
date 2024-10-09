@@ -12,7 +12,7 @@ void Particle::Initialize(uint32_t  tex)
 	materialResource = CreateBufferResource(sizeof(UVMaterial));
 	indexResourceSprite = CreateBufferResource(sizeof(uint32_t) * 6);
 
-	const uint32_t kNumInstance = 10;
+	
 	instancingResource = CreateBufferResource(sizeof(TransformationMatrix) * kNumInstance);
 	matrix = MakeIdentity4x4();
 	vertexBufferViewSprite.BufferLocation = vertexResourceSprite->GetGPUVirtualAddress();
@@ -29,7 +29,7 @@ void Particle::Initialize(uint32_t  tex)
 		particles_[i].transform.translate = { i * 0.1f,i * 0.1f,i * 0.1f + 20.0f };
 
 		particles_[i].Velocity = { 0.0f,0.0f,0.0f };
-		const float kDeltaTime = 1.0f / 60.0f;
+		
 	}
 	SRV();
 }
@@ -104,8 +104,8 @@ void  Particle::Darw(Vector3 scale, Vector3 rotate, Vector3 translate, Vector4 C
 		reinterpret_cast<void**>(&materialDeta));
 	materialDeta->color = Color;
 	Vertex({translate.x,translate.y,translate.x,1});
-	
-
+	scale;
+	rotate;
 	std::mt19937 randomEngine(this->seedGenerator());
 	std::uniform_real_distribution<float>  distribution(-0.1f,0.1f);
 
@@ -152,7 +152,6 @@ void  Particle::Darw(Vector3 scale, Vector3 rotate, Vector3 translate, Vector4 C
 
 void Particle::SRV()
 {
-	ID3D12Device* device = DxCommon::GetInstance()->GetDevice();
 	
 	
 	instancingIndex_ = DescriptorManagement::Allocate();

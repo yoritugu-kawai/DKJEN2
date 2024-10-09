@@ -28,8 +28,7 @@ void ParticlePSO::ShapePSO()
 {
 
 	ID3D12Device* device = DxCommon::GetInstance()->GetDevice();
-	ID3D12GraphicsCommandList* commandList = DxCommon::GetInstance()->GetCommandList();
-
+	
 	PSOProperty ShapePSO;
 
 	ShaderMode shader = CompileShaderManager::GetInstance()->GetShaders().shape.Particle;

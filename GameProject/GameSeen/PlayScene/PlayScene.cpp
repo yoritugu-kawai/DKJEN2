@@ -56,7 +56,7 @@ void PlayScene::Initialize()
 
 
 
-void PlayScene::AllCollisions(GameManager* gameManager) {
+void PlayScene::AllCollisions() {
 	for (auto& obj1 : LevelData->GetObjects()) {
 		auto& it = obj1.second;
 
@@ -66,12 +66,12 @@ void PlayScene::AllCollisions(GameManager* gameManager) {
 		}
 
 
-		float left = it.center.x - it.size.x / 3.2 + it.worldTransform_->GetTranslate().x;
-		float right = it.center.x + it.size.x / 3.2 + it.worldTransform_->GetTranslate().x;
-		float down = it.center.y - it.size.y / 3.2 + it.worldTransform_->GetTranslate().y;
-		float up = it.center.y + it.size.y / 3.2 + it.worldTransform_->GetTranslate().y;
-		float front = it.center.z - it.size.z / 3.2 + it.worldTransform_->GetTranslate().z;
-		float back = it.center.z + it.size.z / 3.2 + it.worldTransform_->GetTranslate().z;
+		float left = static_cast<float>(it.center.x - it.size.x / 3.2 + it.worldTransform_->GetTranslate().x);
+		float right = static_cast<float>(it.center.x + it.size.x / 3.2 + it.worldTransform_->GetTranslate().x);
+		float down = static_cast<float>(it.center.y - it.size.y / 3.2 + it.worldTransform_->GetTranslate().y);
+		float up = static_cast<float>(it.center.y + it.size.y / 3.2 + it.worldTransform_->GetTranslate().y);
+		float front = static_cast<float>(it.center.z - it.size.z / 3.2 + it.worldTransform_->GetTranslate().z);
+		float back = static_cast<float>(it.center.z + it.size.z / 3.2 + it.worldTransform_->GetTranslate().z);
 
 
 #ifdef _DEBUG
@@ -98,8 +98,8 @@ void PlayScene::AllCollisions(GameManager* gameManager) {
 
 
 
-
-
+		down;
+		up;
 		//+ worldTransform->GetScale().x / 3
 
 		//down < tPos_.y&&
@@ -188,7 +188,7 @@ void PlayScene::Update(GameManager* gameManager)
 	cameraData->Update();
 	//cameraAnime->Update();
 
-	AllCollisions(gameManager);
+	AllCollisions();
 
 #ifdef _DEBUG
 
