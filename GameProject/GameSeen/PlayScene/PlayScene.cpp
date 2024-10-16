@@ -275,7 +275,9 @@ void PlayScene::Move()
 
 void PlayScene::Update(GameManager* gameManager)
 {
+
 	Move();
+
 	if (worldTransform->GetTranslate().z >= 234.0f) {
 		gameManager->ChangeState(new clearScene);
 
