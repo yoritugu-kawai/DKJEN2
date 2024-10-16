@@ -18,7 +18,7 @@ public:
 	void Update(GameManager* gameManager)override;
 	void Draw()override;
 	void ImGui()override;
-
+	void Move();
 private:
 	void AllCollisions();
 	void Operation();

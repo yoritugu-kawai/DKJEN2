@@ -16,6 +16,7 @@ public:
 
 	void UpdateMatrix();
 	void Set();
+	
 private:
 	/// <summary>
 	/// カメラ

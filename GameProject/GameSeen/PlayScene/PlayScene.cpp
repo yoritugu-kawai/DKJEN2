@@ -181,7 +181,7 @@ void PlayScene::Operation()
 
 }
 
-void PlayScene::Update(GameManager* gameManager)
+void PlayScene::Move()
 {
 	animaionTime += 2.0f / 60.0f;
 	LevelData->Update(cameraData);
@@ -262,7 +262,7 @@ void PlayScene::Update(GameManager* gameManager)
 	//SkinCluster
 
 	skin->SkinUpdate(skinCluster, skeleton);
-	
+
 
 	//ワールドトランスフォームの更新
 
@@ -270,6 +270,12 @@ void PlayScene::Update(GameManager* gameManager)
 
 
 
+
+}
+
+void PlayScene::Update(GameManager* gameManager)
+{
+	Move();
 	if (worldTransform->GetTranslate().z >= 234.0f) {
 		gameManager->ChangeState(new clearScene);
 
@@ -295,3 +301,4 @@ void PlayScene::Draw()
 void PlayScene::ImGui()
 {
 }
+
