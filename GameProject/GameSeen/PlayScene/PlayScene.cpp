@@ -35,14 +35,17 @@ void PlayScene::Initialize()
 	tPos_ = { 0.0f,0.0f,0.0f };
 	tRot = { 0,0,0 };
 	speed_ = 0.5f;
-	//
-	dKey = new Sprite;
-	uint32_t dTex = TexManager::LoadTexture("GameResource/D.png");
-	dKey->Initialize(dTex);
-	uint32_t aTex = TexManager::LoadTexture("GameResource/A.png");
-	aKey = new Sprite;
-	aKey->Initialize(aTex);
-
+	//カウントダウン
+	count3 = new Sprite;
+	uint32_t Tex3 = TexManager::LoadTexture("GameResource/Play/3.png");
+	count3->Initialize(Tex3);
+	uint32_t Tex2 = TexManager::LoadTexture("GameResource/Play/2.png");
+	count2 = new Sprite;
+	count2->Initialize(Tex2);
+	uint32_t Tex1 = TexManager::LoadTexture("GameResource/Play/1.png");
+	count1 = new Sprite;
+	count1->Initialize(Tex1);
+	//プレイヤー
 	objectData = std::make_unique<Obj3D>();
 	sphereWorldTransform_ = new WorldTransform();
 
@@ -51,6 +54,8 @@ void PlayScene::Initialize()
 
 	ModelData boxData_ = LoadObjManagement::NewLoadObjFile("resource/Sphere/", "Sphere.obj");
 	objectData->Initialize(boxData_);
+	// カウントダウン
+	countdown = 3;
 }
 
 
@@ -275,9 +280,10 @@ void PlayScene::Move()
 
 void PlayScene::Update(GameManager* gameManager)
 {
-
-	Move();
-
+	countdown -= 1.0f/60;
+	if (countdown<=0) {
+		Move();
+	}
 	if (worldTransform->GetTranslate().z >= 234.0f) {
 		gameManager->ChangeState(new clearScene);
 
@@ -295,9 +301,15 @@ void PlayScene::Draw()
 
 	//objectData->Draw({ 1,1,1,1 }, cameraData, sphereWorldTransform_);
 
-
-	dKey->Draw({12.8f,12.8f,0,},{0,0,0}, { 130,580,0}, {1,1,1,1});
-	aKey->Draw({ 12.8f,12.8f,0, }, { 0,0,0 }, { 0,580,0 }, { 1,1,1,1 });
+	if (countdown <= 3&& countdown >= 2) {
+		count3->Draw({32.0f,32.0f,0, }, { 0,0,0 }, { 480,260,0 }, { 1,1,1,1 });
+	}
+	if (countdown <= 2 && countdown >= 1) {
+		count2->Draw({ 32.0f,32.0f,0, }, { 0,0,0 }, { 480,260,0 }, { 1,1,1,1 });
+	}
+	if (countdown <= 1 && countdown >= 0) {
+		count1->Draw({ 32.0f,32.0f,0, }, { 0,0,0 }, { 480,260,0 }, { 1,1,1,1 });
+	}
 }
 
 void PlayScene::ImGui()

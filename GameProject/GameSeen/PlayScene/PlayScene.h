@@ -59,6 +59,8 @@ private:
 	float rotateTheta_ = 0.0f;
 	float speed_ = 0;
 	///
-	Sprite* dKey;
-	Sprite* aKey;
+	Sprite* count3;
+	Sprite* count2;
+	Sprite* count1;
+	float countdown;
 };
