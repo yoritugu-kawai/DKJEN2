@@ -4,8 +4,9 @@
 class CameraData
 {
 public:
-	
+	//初期化
 	void Create();
+	//更新
 	void Update();
 	
 #pragma region Get

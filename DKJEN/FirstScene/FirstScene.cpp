@@ -2,6 +2,7 @@
 
 void FirstScene::Initialize()
 {
+	//ロゴ
 	time = 12;
 	uint32_t texDKJEN = TexManager::LoadTexture("resource/DKJEN/DKJEN.png");
 	uint32_t texBlack = TexManager::LoadTexture("GameResource/black.png");

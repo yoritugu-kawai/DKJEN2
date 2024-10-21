@@ -9,9 +9,13 @@
 #include"../../../DKJEN/Type/Particle.h"
 class FirstScene :public IScene {
 public:
+	//初期化
 	void Initialize()override;
+	//更新
 	void Update(GameManager* gameManager)override;
+	//描画
 	void Draw()override;
+	//ui
 	void ImGui()override;
 private:
 
