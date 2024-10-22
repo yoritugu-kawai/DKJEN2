@@ -8,6 +8,7 @@ public:
 	virtual void Update(GameManager* gameManager) = 0;
 	virtual void Draw() = 0;
 	virtual void ImGui() = 0;
+	virtual ~IScene() {};
 
 private:
 	

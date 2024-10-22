@@ -282,8 +282,8 @@ void PlayScene::Update(GameManager* gameManager)
 {
 	countdown -= 1.0f/60;
 	if (countdown<=0) {
-		//Move();
-		gameManager->ChangeState(new clearScene);
+		Move();
+		//gameManager->ChangeState(new PlayScene);
 	}
 	if (worldTransform->GetTranslate().z >= 234.0f) {
 		gameManager->ChangeState(new clearScene);
