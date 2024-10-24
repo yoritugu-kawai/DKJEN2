@@ -146,17 +146,20 @@ void StartSeen::Update(GameManager* gameManager)
 
 void StartSeen::Draw()
 {
+	//モデル
 	treeData_->Draw({ 1,1,1,1 }, cameraData, treeWorldTransform_);
 	floorData_->Draw({ 1,1,1,1 }, cameraData, floorWorldTransform_);
 	titleData_->Draw({ 1,1,1,1 }, cameraData, titleWorldTransform_);
 	shurikenData_->Draw({ 1,1,1,1 }, cameraData, shurikenWorldTransform_);
 	shurikenData2_->Draw({ 1,1,1,1 }, cameraData, shurikenWorldTransform2_);
+	//ドンとスペース
 	if (come==true) {
 	doData_->Draw({ 1,1,1,1 }, cameraData, doWorldTransform_);
 	nData_->Draw({ 1,1,1,1 }, cameraData, nWorldTransform_);
 	Space->Draw({ 1,1,1,1 }, cameraData, SpaceWorldTransform_);
 
 	}
+	//暗転
 	spriteBlack->Draw({ 256,72,0 }, { 0,0,0 }, posBlack, color);
 }
 
