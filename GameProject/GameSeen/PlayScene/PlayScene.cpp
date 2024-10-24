@@ -32,8 +32,8 @@ void PlayScene::Initialize()
 	cPos = { 0.0f,9.0f,11.0f };
 
 	//
-	tPos_ = { 0.0f,0.0f,0.0f };
-	tRot = { 0,0,0 };
+	playerPos_ = { 0.0f,0.0f,0.0f };
+	playerRot = { 0,0,0 };
 	speed_ = 1.0f;
 	//カウントダウン
 	count3 = new Sprite;
@@ -62,6 +62,7 @@ void PlayScene::Initialize()
 
 
 void PlayScene::AllCollisions() {
+	// 衝突処理
 	for (auto& obj1 : LevelData->GetObjects()) {
 		auto& it = obj1.second;
 
@@ -96,7 +97,7 @@ void PlayScene::AllCollisions() {
 #ifdef _DEBUG
 		ImGui::Begin("Player");
 		Vector3 playerTranslate = worldTransform->GetTranslate();
-		ImGui::InputFloat3("tPos", &tPos_.x);
+		ImGui::InputFloat3("tPos", &playerPos_.x);
 		ImGui::InputFloat3("Translate", &playerTranslate.x);
 		ImGui::End();
 #endif // _DEBUG
@@ -105,11 +106,7 @@ void PlayScene::AllCollisions() {
 
 		down;
 		up;
-		//+ worldTransform->GetScale().x / 3
-
-		//down < tPos_.y&&
-			//up > tPos_.y&&
-
+		
 		Vector3 sphereWorldPosition = {
 			sphereWorldTransform_->GetMatWorld_().m[3][0],
 		sphereWorldTransform_->GetMatWorld_().m[3][1],
@@ -128,7 +125,7 @@ void PlayScene::AllCollisions() {
 			if (front <sphereWorldPosition.z &&
 				back> sphereWorldPosition.z) {
 				isInsideZ = true;
-				tPos_.z = 0;
+				playerPos_.z = 0;
 				cPos.z = 0;
 			}
 			else {
@@ -146,14 +143,14 @@ void PlayScene::AllCollisions() {
 #endif // _DEBUG
 
 
-		if (left < tPos_.x &&
-			right > tPos_.x &&
-			front < tPos_.z &&
-			back> tPos_.z) {
-			// 衝突処理
-			//tPos_.z = 0;
-			//cPos.z = 0;
-		}
+		//if (left <  playerPos_.x &&
+		//	right > playerPos_.x &&
+		//	front < playerPos_.z &&
+		//	back> playerPos_.z) {
+		//	// 衝突処理
+		//	//tPos_.z = 0;
+		//	//cPos.z = 0;
+		//}
 
 	}
 }
@@ -165,23 +162,23 @@ void PlayScene::Operation()
 
 	if (Input::GetInstance()->PushKey(DIK_RIGHT)) {
 		rotateTheta_ -= ROTATE_INTERVAL;
-		tRot.z -= ROTATE_INTERVAL;
+		playerRot.z -= ROTATE_INTERVAL;
 		//tPos_.x -= ROTATE_INTERVAL;
 
 	}
 	if (Input::GetInstance()->PushKey(DIK_LEFT)) {
 		rotateTheta_ += ROTATE_INTERVAL;
-		tRot.z += ROTATE_INTERVAL;
+		playerRot.z += ROTATE_INTERVAL;
 		//tPos_.x += ROTATE_INTERVAL;
 	}
 	if (Input::GetInstance()->PushKey(DIK_A)) {
 		rotateTheta_ += ROTATE_INTERVAL;
-		tRot.z += ROTATE_INTERVAL;
+		playerRot.z += ROTATE_INTERVAL;
 
 	}
 	if (Input::GetInstance()->PushKey(DIK_D)) {
 		rotateTheta_ -= ROTATE_INTERVAL;
-		tRot.z -= ROTATE_INTERVAL;
+		playerRot.z -= ROTATE_INTERVAL;
 	}
 
 }
@@ -208,8 +205,8 @@ void PlayScene::Move()
 	ImGui::End();
 
 	ImGui::Begin("pos");
-	ImGui::DragFloat3("p", &tPos_.x, 0.1f, -100.0f, 100.0f);
-	ImGui::DragFloat3("r", &tRot.x, 0.1f, -100.0f, 100.0f);
+	ImGui::DragFloat3("p", &playerPos_.x, 0.1f, -100.0f, 100.0f);
+	ImGui::DragFloat3("r", &playerRot.x, 0.1f, -100.0f, 100.0f);
 	ImGui::End();
 
 #endif // _DEBUG
@@ -221,7 +218,7 @@ void PlayScene::Move()
 	cPos = cameraData->GetTranslate();
 
 
-	tPos_.z += speed_;
+	playerPos_.z += speed_;
 	cPos.z += speed_;
 
 
@@ -235,7 +232,7 @@ void PlayScene::Move()
 
 	sphereNewTranslate.x = std::cosf(rotateTheta_ + std::numbers::pi_v<float> / 2.0f) * RADIUS;
 	sphereNewTranslate.y = std::sinf(rotateTheta_ + std::numbers::pi_v<float> / 2.0f) * RADIUS;
-	sphereNewTranslate.z = tPos_.z;
+	sphereNewTranslate.z = playerPos_.z;
 
 
 
@@ -257,7 +254,7 @@ void PlayScene::Move()
 
 
 	worldTransform->SetTranslate(tPos_);
-	worldTransform->SetRotate(tRot);
+	worldTransform->SetRotate(playerRot);
 	worldTransform->UpdateMatrix(cameraData);
 	////Animation
 	bone->ApplyAnimation(skeleton, animatio, animaionTime);
@@ -295,13 +292,15 @@ void PlayScene::Update(GameManager* gameManager)
 
 void PlayScene::Draw()
 {
+	//json
 	LevelData->Draw(cameraData);
+	//プレイヤー
 	//player->Draw({ 1,1,1,1 }, cameraData, worldTransform);
 	walk3d->Draw({ 1,1,1,1 }, cameraData, worldTransform, skinCluster);
 
 
 	//objectData->Draw({ 1,1,1,1 }, cameraData, sphereWorldTransform_);
-
+	//カウントダウン
 	if (countdown <= 3&& countdown >= 2) {
 		count3->Draw({32.0f,32.0f,0, }, { 0,0,0 }, { 480,260,0 }, { 1,1,1,1 });
 	}
