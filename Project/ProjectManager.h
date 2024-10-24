@@ -19,7 +19,8 @@ const wchar_t Title[] = { L"ド根性エンジン" };
 class ProjectManager
 {
 public:
-	void Initialize();
+	
+	//更新処理
 	void Gear();
 
 private:

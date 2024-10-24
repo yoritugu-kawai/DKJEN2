@@ -9,10 +9,13 @@
 #include"../../../DKJEN/Type/Particle.h"
 class StartSeen:public IScene {
 public:
-	//デフォ
+	//初期化
 	void Initialize()override;
+	//更新処理
 	void Update(GameManager* gameManager)override;
+	//描画
 	void Draw()override;
+	//ImGui
 	void ImGui()override;
 	
 	void UpdateMatrix();
@@ -68,7 +71,7 @@ private:
 	Vector3 treeSize;
 	
 	
-	//
+	//変数
 	Vector3 shurikenRot;
 	float speed_;
 	float speed2_;

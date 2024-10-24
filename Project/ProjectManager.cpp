@@ -1,12 +1,9 @@
 #include "ProjectManager.h"
 
-void ProjectManager::Initialize()
-{
-	
-}
 
 void ProjectManager::Gear()
 {
+	//はじめ
 	WinApp::Initialize(Title);
 	DxCommon::Initialize();
 	ImguiManager::Initialize();
@@ -18,7 +15,7 @@ void ProjectManager::Gear()
 	game = new GameScene;
 
 	game->Initialize();
-	
+	//更新
 	while (WinApp::GetInstance()->WinMsg())
 	{
 		FrameManagement::BeginFrame();

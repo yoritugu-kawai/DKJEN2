@@ -5,6 +5,7 @@
 class Player
 {
 public:
+	//全部変更予定
 	void Initialize();
 	void Input();
 	void Update();
@@ -13,7 +14,7 @@ public:
 
 
 private:
-	
+	//全部変更予定
 	Sprite* sprite_;
 	Vector3 pos_;
 

@@ -2,13 +2,6 @@
 
 void GameScene::Initialize()
 {
-	
-	
-	
-	/*///
-	player = make_unique<Obj3D>();
-	ModelData modelDat_ = LoadObjManagement::NewLoadObjFile("resource", "wood.obj");
-	player->Initialize(modelDat_);*/
 
 	gameManager_ = new GameManager;
 	gameManager_->Initialize();

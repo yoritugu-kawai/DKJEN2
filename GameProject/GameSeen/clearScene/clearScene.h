@@ -8,14 +8,17 @@
 #include"../../../DKJEN/Type/Particle.h"
 class clearScene :public IScene {
 public:
-	//全部変更予定
+	//初期化
 	void Initialize()override;
+	//更新処理
 	void Update(GameManager* gameManager)override;
+	//描画
 	void Draw()override;
+	//ImGui
 	void ImGui()override;
 private:
 
-
+	//全部変更予定
 	int time;
 
 	Vector4 color;

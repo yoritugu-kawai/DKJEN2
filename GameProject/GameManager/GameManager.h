@@ -6,9 +6,14 @@
 class GameManager
 {
 public:
+	//初期化
 	void Initialize();
+	//更新処理
 	void Update();
+	//描画
 	void Draw();
+	//シーン切り替え
 	void ChangeState(IScene* stateSeen);
+	//ステイトパターン
 	IScene*iseen_ = nullptr;
 };
