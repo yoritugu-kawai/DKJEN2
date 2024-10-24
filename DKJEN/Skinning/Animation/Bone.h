@@ -1,7 +1,7 @@
 #pragma once
 #include"Animation.h"
-#include"../../Utilipy/Sc.h"
-#include"../../Utilipy/Pch.h"
+#include"../../Utilipy/SkinCluster.h"
+#include"../../Utilipy/AdditionInclude.h"
 #include"../../Management/LoadObjManagement.h"
 
 class Bone

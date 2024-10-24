@@ -285,9 +285,9 @@ copy "$(WindowsSdkDir)bin\$(TargetPlatformVersion)\x64\dxil.dll" "$(TargetDir)dx
     <ClInclude Include="DKJEN\Utilipy\AudioStruct.h" />
     <ClInclude Include="DKJEN\Utilipy\CSVLoad.h" />
     <ClInclude Include="DKJEN\Utilipy\Input.h" />
-    <ClInclude Include="DKJEN\Utilipy\Sc.h" />
-    <ClInclude Include="DKJEN\Utilipy\Pch.h" />
-    <ClInclude Include="DKJEN\Utilipy\rektyk.h" />
+    <ClInclude Include="DKJEN\Utilipy\SkinCluster.h" />
+    <ClInclude Include="DKJEN\Utilipy\AdditionInclude.h" />
+    <ClInclude Include="DKJEN\Utilipy\D3DResourceLeaker.h" />
     <ClInclude Include="DKJEN\WorldTransform\WorldTransform.h" />
     <ClInclude Include="GameProject\Block\Block.h" />
     <ClInclude Include="GameProject\GameManager\GameManager.h" />

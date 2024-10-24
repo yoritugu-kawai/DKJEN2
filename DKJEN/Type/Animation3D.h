@@ -10,9 +10,9 @@
 #include"../CameraProjection/CameraProjection.h"
 #include"../Camera/CameraData.h"
 #include"../WorldTransform/WorldTransform.h"
-#include"../Utilipy/Pch.h"
+#include"../Utilipy/AdditionInclude.h"
 //#include"../Skinning/Animation/Animation.h"
-#include"../Utilipy/Sc.h"
+#include"../Utilipy/SkinCluster.h"
 #include<assimp/Importer.hpp>
 #include<assimp/scene.h>
 #include<assimp/postprocess.h>

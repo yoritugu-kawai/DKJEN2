@@ -253,7 +253,7 @@ void PlayScene::Move()
 	cPos.z = sphereNewTranslate.z + CAMERA_OFFSET_DISTANCE;
 
 
-	worldTransform->SetTranslate(tPos_);
+	worldTransform->SetTranslate(playerPos_);
 	worldTransform->SetRotate(playerRot);
 	worldTransform->UpdateMatrix(cameraData);
 	////Animation

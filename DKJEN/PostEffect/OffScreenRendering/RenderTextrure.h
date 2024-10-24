@@ -1,5 +1,5 @@
 #pragma once
-#include"../../Utilipy/Pch.h"
+#include"../../Utilipy/AdditionInclude.h"
 #include"../../Math/Math.h"
 #include"../../Base/DxCommon.h"
 

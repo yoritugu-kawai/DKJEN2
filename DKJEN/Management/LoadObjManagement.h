@@ -1,8 +1,8 @@
 #pragma once
 #include"../Type/Animation3D.h"
 #include"../Skinning/Animation/Animation.h"
-#include"../Utilipy/Pch.h"
-#include"../Utilipy/Sc.h"
+#include"../Utilipy/AdditionInclude.h"
+#include"../Utilipy/SkinCluster.h"
 struct Joint {
 	QuaternionTransform transform;
 	Matrix4x4 localMatrix;

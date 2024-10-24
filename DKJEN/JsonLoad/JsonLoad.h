@@ -1,7 +1,7 @@
 #pragma once
 #include <string>
-#include"../Utilipy/Pch.h"
-#include"../Utilipy/rektyk.h"
+#include"../Utilipy/AdditionInclude.h"
+#include"../Utilipy/D3DResourceLeaker.h"
 #include<json.hpp>
 #include"../Type/Animation3D.h"
 #include"../../Type/Obj3D.h"
