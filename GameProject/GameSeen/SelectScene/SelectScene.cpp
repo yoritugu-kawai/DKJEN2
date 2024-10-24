@@ -1,5 +1,9 @@
 #include "SelectScene.h"
-
+/// <summary>
+/// 全変更
+/// 保留
+/// 
+/// </summary>
 void SelectScene::Initialize()
 {
 	time = 12;

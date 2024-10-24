@@ -1,5 +1,12 @@
 #include "Player.h"
-
+/// <summary>
+/// 
+/// 
+/// 全直し予定
+/// 使うから保留
+/// 
+/// 
+/// </summary>
 void Player::Initialize()
 {
 	sprite_ = new Sprite;

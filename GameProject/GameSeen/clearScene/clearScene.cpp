@@ -1,5 +1,12 @@
 #include "clearScene.h"
-
+/// <summary>
+/// 
+/// 
+/// 全変更保留
+/// 
+/// 
+/// 
+/// </summary>
 void clearScene::Initialize()
 {
 	uint32_t texClear = TexManager::LoadTexture("GameResource/clear.png");

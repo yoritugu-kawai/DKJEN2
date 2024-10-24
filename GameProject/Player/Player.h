@@ -1,7 +1,14 @@
 #pragma once
 #include"../../DKJEN/Type/Sprite.h"
 #include"../../DKJEN/Utilipy/Input.h"
-
+/// <summary>
+/// 
+/// 
+/// 全直し予定
+/// 使うから保留
+/// 
+/// 
+/// </summary>
 class Player
 {
 public:

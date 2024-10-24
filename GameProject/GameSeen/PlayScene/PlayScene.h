@@ -30,7 +30,8 @@ private:
 	//操作
 	void Operation();
 
-	int time;
+	
+	
 	///プレイヤーのアニメーション
 	Skinning* skin;
 	Bone* bone;
@@ -42,15 +43,20 @@ private:
 	float animaionTime;
 	Vector3 playerPos_;
 	Vector3 playerRot;
+	int time;
+
 	//カメラ
 	CameraData* cameraData;
 	Vector3 cRot;
 	Vector3 cPos;
 	//CameraData* cameraAnime;
+	
 	//json
 	unique_ptr<JsonLoad>LevelData;
+	
 	//スカイボックス
 	unique_ptr<SkyBox> sky;
+
 	//プレイヤーの当たり判定
 	unique_ptr<Obj3D>player;
 	WorldTransform* worldTransform;
