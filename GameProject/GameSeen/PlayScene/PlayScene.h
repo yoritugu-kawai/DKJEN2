@@ -42,8 +42,8 @@ private:
 	Vector3 cRot;
 	Vector3 cPos;
 	float animaionTime;
-	Vector3 tPos_;
-	Vector3 tRot;
+	Vector3 playerPos_;
+	Vector3 playerRot;
 
 
 

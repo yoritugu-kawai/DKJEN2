@@ -9,12 +9,14 @@
 #include"../../../DKJEN/Type/Particle.h"
 class StartSeen:public IScene {
 public:
+	//デフォ
 	void Initialize()override;
 	void Update(GameManager* gameManager)override;
 	void Draw()override;
 	void ImGui()override;
-
+	
 	void UpdateMatrix();
+	//セッター
 	void Set();
 	
 private:

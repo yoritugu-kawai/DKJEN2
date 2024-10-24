@@ -34,7 +34,7 @@ void PlayScene::Initialize()
 	//
 	tPos_ = { 0.0f,0.0f,0.0f };
 	tRot = { 0,0,0 };
-	speed_ = 0.5f;
+	speed_ = 1.0f;
 	//カウントダウン
 	count3 = new Sprite;
 	uint32_t Tex3 = TexManager::LoadTexture("GameResource/Play/3.png");
@@ -188,7 +188,7 @@ void PlayScene::Operation()
 
 void PlayScene::Move()
 {
-	animaionTime += 2.0f / 60.0f;
+	animaionTime += 2.0f / 50.0f;
 	LevelData->Update(cameraData);
 	cameraData->Update();
 	//cameraAnime->Update();
@@ -283,9 +283,9 @@ void PlayScene::Update(GameManager* gameManager)
 	countdown -= 1.0f/60;
 	if (countdown<=0) {
 		Move();
-		//gameManager->ChangeState(new PlayScene);
+		
 	}
-	if (worldTransform->GetTranslate().z >= 234.0f) {
+	if (worldTransform->GetTranslate().z >= 940.0f) {
 		gameManager->ChangeState(new clearScene);
 
 	}

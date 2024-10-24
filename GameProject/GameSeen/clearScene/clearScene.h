@@ -8,6 +8,7 @@
 #include"../../../DKJEN/Type/Particle.h"
 class clearScene :public IScene {
 public:
+	//全部変更予定
 	void Initialize()override;
 	void Update(GameManager* gameManager)override;
 	void Draw()override;

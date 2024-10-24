@@ -14,7 +14,7 @@ public:
 private:
 	
 	/// <summary>
-	/// 
+	/// ゲームまとめ
 	/// </summary>
 	GameManager* gameManager_;
 };
