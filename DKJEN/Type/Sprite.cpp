@@ -62,12 +62,12 @@ void Sprite::Draw(Vector3 scale, Vector3 rotate, Vector3 translate, Vector4 Colo
 	materialDeta->color = Color;
 	Vertex();
 
-	//ImGui::Begin("sprite");
-	//ImGui::Text("uv");
-	//ImGui::SliderFloat3("t", &uvTranformSprite.translate.x, -4.0f, 4.0f);
-	//ImGui::SliderFloat3("s", &uvTranformSprite.scale.x, -4.0f, 4.0f);
-	//ImGui::SliderFloat3("r", &uvTranformSprite.rotate.x, -4.0f, 4.0f);
-	//ImGui::End();
+	/*ImGui::Begin("sprite");
+	ImGui::Text("uv");
+	ImGui::SliderFloat3("t", &uvTranformSprite.translate.x, -4.0f, 4.0f);
+	ImGui::SliderFloat3("s", &uvTranformSprite.scale.x, -4.0f, 4.0f);
+	ImGui::SliderFloat3("r", &uvTranformSprite.rotate.x, -4.0f, 4.0f);
+	ImGui::End();*/
 
 	Matrix4x4 m2 = MakeAffineMatrix(uvTranformSprite.scale, uvTranformSprite.rotate, uvTranformSprite.translate);
 	materialDeta->uvTransform = m2;

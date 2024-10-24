@@ -29,7 +29,7 @@ void TexturePSO::ShapePSO()
 
 	PSOProperty ShapePSO;
 
-	ShaderMode shader = TextureCompileShader::GetInstance()->GetShaders().shape;
+	ShaderMode shader = CompileShaderManager::GetInstance()->GetShaders().shape.Texture;
 
 	//RootSignature作成
 	D3D12_ROOT_SIGNATURE_DESC descriptionRootSignature{};

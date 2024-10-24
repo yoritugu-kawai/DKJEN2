@@ -1,21 +1,9 @@
-<?xml version="1.0" encoding="utf-8"?>
+﻿<?xml version="1.0" encoding="utf-8"?>
 <Project DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
   <ItemGroup Label="ProjectConfigurations">
-    <ProjectConfiguration Include="Debug|Win32">
-      <Configuration>Debug</Configuration>
-      <Platform>Win32</Platform>
-    </ProjectConfiguration>
-    <ProjectConfiguration Include="Demo|Win32">
-      <Configuration>Demo</Configuration>
-      <Platform>Win32</Platform>
-    </ProjectConfiguration>
     <ProjectConfiguration Include="Demo|x64">
       <Configuration>Demo</Configuration>
       <Platform>x64</Platform>
-    </ProjectConfiguration>
-    <ProjectConfiguration Include="Release|Win32">
-      <Configuration>Release</Configuration>
-      <Platform>Win32</Platform>
     </ProjectConfiguration>
     <ProjectConfiguration Include="Debug|x64">
       <Configuration>Debug</Configuration>
@@ -34,26 +22,6 @@
     <WindowsTargetPlatformVersion>10.0</WindowsTargetPlatformVersion>
   </PropertyGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.Default.props" />
-  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'" Label="Configuration">
-    <ConfigurationType>Application</ConfigurationType>
-    <UseDebugLibraries>true</UseDebugLibraries>
-    <PlatformToolset>v143</PlatformToolset>
-    <CharacterSet>Unicode</CharacterSet>
-  </PropertyGroup>
-  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'" Label="Configuration">
-    <ConfigurationType>Application</ConfigurationType>
-    <UseDebugLibraries>false</UseDebugLibraries>
-    <PlatformToolset>v143</PlatformToolset>
-    <WholeProgramOptimization>true</WholeProgramOptimization>
-    <CharacterSet>Unicode</CharacterSet>
-  </PropertyGroup>
-  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Demo|Win32'" Label="Configuration">
-    <ConfigurationType>Application</ConfigurationType>
-    <UseDebugLibraries>false</UseDebugLibraries>
-    <PlatformToolset>v143</PlatformToolset>
-    <WholeProgramOptimization>true</WholeProgramOptimization>
-    <CharacterSet>Unicode</CharacterSet>
-  </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'" Label="Configuration">
     <ConfigurationType>Application</ConfigurationType>
     <UseDebugLibraries>true</UseDebugLibraries>
@@ -79,15 +47,6 @@
   </ImportGroup>
   <ImportGroup Label="Shared">
   </ImportGroup>
-  <ImportGroup Label="PropertySheets" Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
-    <Import Project="$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props" Condition="exists('$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props')" Label="LocalAppDataPlatform" />
-  </ImportGroup>
-  <ImportGroup Label="PropertySheets" Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
-    <Import Project="$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props" Condition="exists('$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props')" Label="LocalAppDataPlatform" />
-  </ImportGroup>
-  <ImportGroup Condition="'$(Configuration)|$(Platform)'=='Demo|Win32'" Label="PropertySheets">
-    <Import Project="$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props" Condition="exists('$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props')" Label="LocalAppDataPlatform" />
-  </ImportGroup>
   <ImportGroup Label="PropertySheets" Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">
     <Import Project="$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props" Condition="exists('$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props')" Label="LocalAppDataPlatform" />
   </ImportGroup>
@@ -98,53 +57,18 @@
     <Import Project="$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props" Condition="exists('$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props')" Label="LocalAppDataPlatform" />
   </ImportGroup>
   <PropertyGroup Label="UserMacros" />
-  <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
-    <ClCompile>
-      <WarningLevel>Level3</WarningLevel>
-      <SDLCheck>true</SDLCheck>
-      <PreprocessorDefinitions>WIN32;_DEBUG;_WINDOWS;%(PreprocessorDefinitions)</PreprocessorDefinitions>
-      <ConformanceMode>true</ConformanceMode>
-    </ClCompile>
-    <Link>
-      <SubSystem>Windows</SubSystem>
-      <GenerateDebugInformation>true</GenerateDebugInformation>
-    </Link>
-  </ItemDefinitionGroup>
-  <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
-    <ClCompile>
-      <WarningLevel>Level3</WarningLevel>
-      <FunctionLevelLinking>true</FunctionLevelLinking>
-      <IntrinsicFunctions>true</IntrinsicFunctions>
-      <SDLCheck>true</SDLCheck>
-      <PreprocessorDefinitions>WIN32;NDEBUG;_WINDOWS;%(PreprocessorDefinitions)</PreprocessorDefinitions>
-      <ConformanceMode>true</ConformanceMode>
-    </ClCompile>
-    <Link>
-      <SubSystem>Windows</SubSystem>
-      <EnableCOMDATFolding>true</EnableCOMDATFolding>
-      <OptimizeReferences>true</OptimizeReferences>
-      <GenerateDebugInformation>true</GenerateDebugInformation>
-    </Link>
-  </ItemDefinitionGroup>
-  <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Demo|Win32'">
-    <ClCompile>
-      <WarningLevel>Level3</WarningLevel>
-      <FunctionLevelLinking>true</FunctionLevelLinking>
-      <IntrinsicFunctions>true</IntrinsicFunctions>
-      <SDLCheck>true</SDLCheck>
-      <PreprocessorDefinitions>WIN32;NDEBUG;_WINDOWS;%(PreprocessorDefinitions)</PreprocessorDefinitions>
-      <ConformanceMode>true</ConformanceMode>
-    </ClCompile>
-    <Link>
-      <SubSystem>Windows</SubSystem>
-      <EnableCOMDATFolding>true</EnableCOMDATFolding>
-      <OptimizeReferences>true</OptimizeReferences>
-      <GenerateDebugInformation>true</GenerateDebugInformation>
-    </Link>
-  </ItemDefinitionGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">
+    <IncludePath>$(ProjectDir)DKJEN\externals\json;$(ProjectDir)DKJEN\externals\imgui\ImGui;$(IncludePath)</IncludePath>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Demo|x64'">
+    <IncludePath>$(ProjectDir)DKJEN\externals\json;$(ProjectDir)DKJEN\externals\imgui\ImGui;$(IncludePath)</IncludePath>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'">
+    <IncludePath>$(ProjectDir)DKJEN\externals\json;$(ProjectDir)DKJEN\externals\imgui\ImGui;$(IncludePath)</IncludePath>
+  </PropertyGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">
     <ClCompile>
-      <WarningLevel>Level3</WarningLevel>
+      <WarningLevel>Level4</WarningLevel>
       <SDLCheck>true</SDLCheck>
       <PreprocessorDefinitions>_DEBUG;_WINDOWS;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <ConformanceMode>true</ConformanceMode>
@@ -152,6 +76,9 @@
       <AdditionalOptions>/utf-8 %(AdditionalOptions)</AdditionalOptions>
       <AdditionalIncludeDirectories>$(ProjectDir);$(ProjectDir)DKJEN\externals\assimp\include;%(AdditionalIncludeDirectories);$(ProjectDir)$DKJEN\Type\Obj3D</AdditionalIncludeDirectories>
       <RuntimeLibrary>MultiThreadedDebug</RuntimeLibrary>
+      <MultiProcessorCompilation>true</MultiProcessorCompilation>
+      <Optimization>Disabled</Optimization>
+      <TreatWarningAsError>true</TreatWarningAsError>
     </ClCompile>
     <Link>
       <SubSystem>Windows</SubSystem>
@@ -167,7 +94,7 @@ copy "$(WindowsSdkDir)bin\$(TargetPlatformVersion)\x64\dxil.dll" "$(TargetDir)dx
   </ItemDefinitionGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'">
     <ClCompile>
-      <WarningLevel>Level3</WarningLevel>
+      <WarningLevel>Level4</WarningLevel>
       <FunctionLevelLinking>true</FunctionLevelLinking>
       <IntrinsicFunctions>true</IntrinsicFunctions>
       <SDLCheck>true</SDLCheck>
@@ -177,6 +104,9 @@ copy "$(WindowsSdkDir)bin\$(TargetPlatformVersion)\x64\dxil.dll" "$(TargetDir)dx
       <AdditionalOptions>/utf-8 %(AdditionalOptions)</AdditionalOptions>
       <AdditionalIncludeDirectories>$(ProjectDir)DKJEN\externals\assimp\include;%(AdditionalIncludeDirectories);$(ProjectDir)$DKJEN\Type\Obj3D</AdditionalIncludeDirectories>
       <RuntimeLibrary>MultiThreaded</RuntimeLibrary>
+      <MultiProcessorCompilation>true</MultiProcessorCompilation>
+      <Optimization>MinSpace</Optimization>
+      <TreatWarningAsError>true</TreatWarningAsError>
     </ClCompile>
     <Link>
       <SubSystem>Windows</SubSystem>
@@ -194,7 +124,7 @@ copy "$(WindowsSdkDir)bin\$(TargetPlatformVersion)\x64\dxil.dll" "$(TargetDir)dx
   </ItemDefinitionGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Demo|x64'">
     <ClCompile>
-      <WarningLevel>Level3</WarningLevel>
+      <WarningLevel>Level4</WarningLevel>
       <FunctionLevelLinking>true</FunctionLevelLinking>
       <IntrinsicFunctions>true</IntrinsicFunctions>
       <SDLCheck>true</SDLCheck>
@@ -203,6 +133,9 @@ copy "$(WindowsSdkDir)bin\$(TargetPlatformVersion)\x64\dxil.dll" "$(TargetDir)dx
       <LanguageStandard>stdcpp20</LanguageStandard>
       <AdditionalOptions>/utf-8 %(AdditionalOptions)</AdditionalOptions>
       <AdditionalIncludeDirectories>$(ProjectDir)DKJEN\externals\assimp\include;%(AdditionalIncludeDirectories);$(ProjectDir)$DKJEN\Type\Obj3D</AdditionalIncludeDirectories>
+      <MultiProcessorCompilation>true</MultiProcessorCompilation>
+      <Optimization>Disabled</Optimization>
+      <TreatWarningAsError>true</TreatWarningAsError>
     </ClCompile>
     <Link>
       <SubSystem>Windows</SubSystem>
@@ -218,6 +151,11 @@ copy "$(WindowsSdkDir)bin\$(TargetPlatformVersion)\x64\dxil.dll" "$(TargetDir)dx
   </ItemDefinitionGroup>
   <ItemGroup>
     <None Include=".editorconfig" />
+    <None Include="resource\hlsl\AnimationObject3D.hlsli">
+      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">true</ExcludedFromBuild>
+      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Demo|x64'">true</ExcludedFromBuild>
+      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Release|x64'">true</ExcludedFromBuild>
+    </None>
     <None Include="resource\hlsl\CopyImage.hlsli">
       <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">true</ExcludedFromBuild>
       <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Demo|x64'">true</ExcludedFromBuild>
@@ -243,13 +181,20 @@ copy "$(WindowsSdkDir)bin\$(TargetPlatformVersion)\x64\dxil.dll" "$(TargetDir)dx
       <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Demo|x64'">true</ExcludedFromBuild>
       <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Release|x64'">true</ExcludedFromBuild>
     </None>
+    <None Include="resource\hlsl\SkyBox.hlsli">
+      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">true</ExcludedFromBuild>
+      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Demo|x64'">true</ExcludedFromBuild>
+      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Release|x64'">true</ExcludedFromBuild>
+    </None>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="DKJEN\Base\CreateBufferResource.cpp" />
     <ClCompile Include="DKJEN\Base\DxCommon.cpp" />
     <ClCompile Include="DKJEN\Base\Function.cpp" />
-    <ClCompile Include="DKJEN\Base\TexManager.cpp" />
     <ClCompile Include="DKJEN\Base\LightPSO.cpp" />
+    <ClCompile Include="DKJEN\Base\SkyBoxPSO.cpp" />
+    <ClCompile Include="DKJEN\Base\TexManager.cpp" />
+    <ClCompile Include="DKJEN\Base\Animation3DPSO.cpp" />
     <ClCompile Include="DKJEN\Base\Log.cpp" />
     <ClCompile Include="DKJEN\Base\ParyiclePSO.cpp" />
     <ClCompile Include="DKJEN\Base\PolygonPSO.cpp" />
@@ -258,14 +203,9 @@ copy "$(WindowsSdkDir)bin\$(TargetPlatformVersion)\x64\dxil.dll" "$(TargetDir)dx
     <ClCompile Include="DKJEN\Base\WinApp.cpp" />
     <ClCompile Include="DKJEN\CameraProjection\CameraProjection.cpp" />
     <ClCompile Include="DKJEN\Camera\CameraData.cpp" />
-    <ClCompile Include="DKJEN\externals\imgui\imgui.cpp" />
-    <ClCompile Include="DKJEN\externals\imgui\imgui_demo.cpp" />
-    <ClCompile Include="DKJEN\externals\imgui\imgui_draw.cpp" />
-    <ClCompile Include="DKJEN\externals\imgui\imgui_impl_dx12.cpp" />
-    <ClCompile Include="DKJEN\externals\imgui\imgui_impl_win32.cpp" />
-    <ClCompile Include="DKJEN\externals\imgui\imgui_tables.cpp" />
-    <ClCompile Include="DKJEN\externals\imgui\imgui_widgets.cpp" />
+    <ClCompile Include="DKJEN\FirstScene\FirstScene.cpp" />
     <ClCompile Include="DKJEN\Imgui\imguiManager.cpp" />
+    <ClCompile Include="DKJEN\JsonLoad\JsonLoad.cpp" />
     <ClCompile Include="DKJEN\Management\DescriptorManagement.cpp" />
     <ClCompile Include="DKJEN\Management\FrameManagement.cpp" />
     <ClCompile Include="DKJEN\Management\LoadObjManagement.cpp" />
@@ -273,37 +213,42 @@ copy "$(WindowsSdkDir)bin\$(TargetPlatformVersion)\x64\dxil.dll" "$(TargetDir)dx
     <ClCompile Include="DKJEN\Management\TypeManagement.cpp" />
     <ClCompile Include="DKJEN\Math\Math.cpp" />
     <ClCompile Include="DKJEN\PostEffect\OffScreenRendering\RenderTextrure.cpp" />
-    <ClCompile Include="DKJEN\Shader\LightCompileShader.cpp" />
-    <ClCompile Include="DKJEN\Shader\ParticleCompileShader.cpp" />
+    <ClCompile Include="DKJEN\Shader\CompileShaderManager.cpp" />
     <ClCompile Include="DKJEN\Shader\PolygonCompileShader.cpp" />
-    <ClCompile Include="DKJEN\Shader\SpriteCompileShader.cpp" />
-    <ClCompile Include="DKJEN\Shader\TextureCompileShader.cpp" />
+    <ClCompile Include="DKJEN\Skinning\Animation\Bone.cpp" />
+    <ClCompile Include="DKJEN\Skinning\Animation\Skinning.cpp" />
     <ClCompile Include="DKJEN\TexDeta\Image\ImageData.cpp" />
+    <ClCompile Include="DKJEN\Type\Animation3D.cpp" />
     <ClCompile Include="DKJEN\Type\Obj3D.cpp" />
     <ClCompile Include="DKJEN\Type\Particle.cpp" />
     <ClCompile Include="DKJEN\Type\Polygon.cpp" />
+    <ClCompile Include="DKJEN\Type\SkyBox.cpp" />
     <ClCompile Include="DKJEN\Type\Sphere.cpp" />
     <ClCompile Include="DKJEN\Type\Sprite.cpp" />
     <ClCompile Include="DKJEN\Type\Texture.cpp" />
+    <ClCompile Include="DKJEN\Utilipy\Audio.cpp" />
     <ClCompile Include="DKJEN\Utilipy\CSVLoad.cpp" />
     <ClCompile Include="DKJEN\Utilipy\Input.cpp" />
     <ClCompile Include="DKJEN\WorldTransform\WorldTransform.cpp" />
-    <ClCompile Include="GameProject\Ball\Ball.cpp" />
     <ClCompile Include="GameProject\Block\Block.cpp" />
-    <ClCompile Include="GameProject\Enemy\Enemy.cpp" />
     <ClCompile Include="GameProject\GameManager\GameManager.cpp" />
-    <ClCompile Include="GameProject\GameSeen\PlaySeen\PlaySeen.cpp" />
+    <ClCompile Include="GameProject\GameSeen\clearScene\clearScene.cpp" />
+    <ClCompile Include="GameProject\GameSeen\PlayScene\PlayScene.cpp" />
+    <ClCompile Include="GameProject\GameSeen\SelectScene\SelectScene.cpp" />
     <ClCompile Include="GameProject\GameSeen\StartSeen\StartSeen.cpp" />
-    <ClCompile Include="GameProject\Player\Bullet.cpp" />
     <ClCompile Include="GameProject\Player\Player.cpp" />
     <ClCompile Include="main.cpp" />
+    <ClCompile Include="Project\GameScene\GameScene.cpp" />
+    <ClCompile Include="Project\ProjectManager.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="DKJEN\Base\CreateBufferResource.h" />
     <ClInclude Include="DKJEN\Base\DxCommon.h" />
     <ClInclude Include="DKJEN\Base\Function.h" />
-    <ClInclude Include="DKJEN\Base\TexManager.h" />
     <ClInclude Include="DKJEN\Base\LightPSO.h" />
+    <ClInclude Include="DKJEN\Base\SkyBoxPSO.h" />
+    <ClInclude Include="DKJEN\Base\TexManager.h" />
+    <ClInclude Include="DKJEN\Base\Animation3DPSO.h" />
     <ClInclude Include="DKJEN\Base\Log.h" />
     <ClInclude Include="DKJEN\Base\ParyiclePSO.h" />
     <ClInclude Include="DKJEN\Base\PolygonPSO.h" />
@@ -312,15 +257,9 @@ copy "$(WindowsSdkDir)bin\$(TargetPlatformVersion)\x64\dxil.dll" "$(TargetDir)dx
     <ClInclude Include="DKJEN\Base\WinApp.h" />
     <ClInclude Include="DKJEN\CameraProjection\CameraProjection.h" />
     <ClInclude Include="DKJEN\Camera\CameraData.h" />
-    <ClInclude Include="DKJEN\externals\imgui\imconfig.h" />
-    <ClInclude Include="DKJEN\externals\imgui\imgui.h" />
-    <ClInclude Include="DKJEN\externals\imgui\imgui_impl_dx12.h" />
-    <ClInclude Include="DKJEN\externals\imgui\imgui_impl_win32.h" />
-    <ClInclude Include="DKJEN\externals\imgui\imgui_internal.h" />
-    <ClInclude Include="DKJEN\externals\imgui\imstb_rectpack.h" />
-    <ClInclude Include="DKJEN\externals\imgui\imstb_textedit.h" />
-    <ClInclude Include="DKJEN\externals\imgui\imstb_truetype.h" />
+    <ClInclude Include="DKJEN\FirstScene\FirstScene.h" />
     <ClInclude Include="DKJEN\Imgui\imguiManager.h" />
+    <ClInclude Include="DKJEN\JsonLoad\JsonLoad.h" />
     <ClInclude Include="DKJEN\Management\FrameManagement.h" />
     <ClInclude Include="DKJEN\Management\DescriptorManagement.h" />
     <ClInclude Include="DKJEN\Management\PSOCopileManagement.h" />
@@ -328,43 +267,58 @@ copy "$(WindowsSdkDir)bin\$(TargetPlatformVersion)\x64\dxil.dll" "$(TargetDir)dx
     <ClInclude Include="DKJEN\Management\LoadObjManagement.h" />
     <ClInclude Include="DKJEN\Math\Math.h" />
     <ClInclude Include="DKJEN\PostEffect\OffScreenRendering\RenderTextrure.h" />
-    <ClInclude Include="DKJEN\Shader\LightCompileShader.h" />
-    <ClInclude Include="DKJEN\Shader\ParticleCompileShader.h" />
+    <ClInclude Include="DKJEN\Shader\CompileShaderManager.h" />
     <ClInclude Include="DKJEN\Shader\PolygonCompileShader.h" />
-    <ClInclude Include="DKJEN\Shader\SpriteCompileShader.h" />
-    <ClInclude Include="DKJEN\Shader\TextureCompileShader.h" />
     <ClInclude Include="DKJEN\Skinning\Animation\Animation.h" />
+    <ClInclude Include="DKJEN\Skinning\Animation\Bone.h" />
+    <ClInclude Include="DKJEN\Skinning\Animation\Skinning.h" />
     <ClInclude Include="DKJEN\TexDeta\Image\ImageData.h" />
+    <ClInclude Include="DKJEN\Type\Animation3D.h" />
     <ClInclude Include="DKJEN\Type\Obj3D.h" />
     <ClInclude Include="DKJEN\Type\Particle.h" />
     <ClInclude Include="DKJEN\Type\Polygon.h" />
+    <ClInclude Include="DKJEN\Type\SkyBox.h" />
     <ClInclude Include="DKJEN\Type\Sphere.h" />
     <ClInclude Include="DKJEN\Type\Sprite.h" />
     <ClInclude Include="DKJEN\Type\Texture.h" />
+    <ClInclude Include="DKJEN\Utilipy\Audio.h" />
+    <ClInclude Include="DKJEN\Utilipy\AudioStruct.h" />
     <ClInclude Include="DKJEN\Utilipy\CSVLoad.h" />
     <ClInclude Include="DKJEN\Utilipy\Input.h" />
+    <ClInclude Include="DKJEN\Utilipy\Sc.h" />
     <ClInclude Include="DKJEN\Utilipy\Pch.h" />
     <ClInclude Include="DKJEN\Utilipy\rektyk.h" />
     <ClInclude Include="DKJEN\WorldTransform\WorldTransform.h" />
-    <ClInclude Include="GameProject\Ball\Ball.h" />
     <ClInclude Include="GameProject\Block\Block.h" />
-    <ClInclude Include="GameProject\Enemy\Enemy.h" />
     <ClInclude Include="GameProject\GameManager\GameManager.h" />
-    <ClInclude Include="GameProject\GameSeen\PlaySeen\PlaySeen.h" />
+    <ClInclude Include="GameProject\GameSeen\clearScene\clearScene.h" />
+    <ClInclude Include="GameProject\GameSeen\PlayScene\PlayScene.h" />
+    <ClInclude Include="GameProject\GameSeen\SelectScene\SelectScene.h" />
     <ClInclude Include="GameProject\GameSeen\StartSeen\StartSeen.h" />
     <ClInclude Include="GameProject\GameSeen\StateSeen\IScene.h" />
-    <ClInclude Include="GameProject\Player\Bullet.h" />
     <ClInclude Include="GameProject\Player\Player.h" />
-  </ItemGroup>
-  <ItemGroup>
-    <Text Include="DKJEN\externals\imgui\LICENSE.txt" />
+    <ClInclude Include="Project\GameScene\GameScene.h" />
+    <ClInclude Include="Project\ProjectManager.h" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="DKJEN\externals\DirectXTex\DirectXTex_Desktop_2022_Win10.vcxproj">
       <Project>{371b9fa9-4c90-4ac6-a123-aced756d6c77}</Project>
     </ProjectReference>
+    <ProjectReference Include="DKJEN\externals\imgui\ImGui\ImGui.vcxproj">
+      <Project>{0e8a3ead-819c-4d30-aa68-2a891171cffd}</Project>
+    </ProjectReference>
   </ItemGroup>
   <ItemGroup>
+    <FxCompile Include="resource\hlsl\AnimationObject3D.PS.hlsl">
+      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">true</ExcludedFromBuild>
+      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Demo|x64'">true</ExcludedFromBuild>
+      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Release|x64'">true</ExcludedFromBuild>
+    </FxCompile>
+    <FxCompile Include="resource\hlsl\AnimationObject3D.VS.hlsl">
+      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">true</ExcludedFromBuild>
+      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Demo|x64'">true</ExcludedFromBuild>
+      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Release|x64'">true</ExcludedFromBuild>
+    </FxCompile>
     <FxCompile Include="resource\hlsl\LightObject.PS.hlsl">
       <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">true</ExcludedFromBuild>
       <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Demo|x64'">true</ExcludedFromBuild>
@@ -391,6 +345,16 @@ copy "$(WindowsSdkDir)bin\$(TargetPlatformVersion)\x64\dxil.dll" "$(TargetDir)dx
       <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Release|x64'">true</ExcludedFromBuild>
     </FxCompile>
     <FxCompile Include="resource\hlsl\PolygonOdject3d.PS.hlsl">
+      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">true</ExcludedFromBuild>
+      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Demo|x64'">true</ExcludedFromBuild>
+      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Release|x64'">true</ExcludedFromBuild>
+    </FxCompile>
+    <FxCompile Include="resource\hlsl\SkyBox.PS.hlsl">
+      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">true</ExcludedFromBuild>
+      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Demo|x64'">true</ExcludedFromBuild>
+      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Release|x64'">true</ExcludedFromBuild>
+    </FxCompile>
+    <FxCompile Include="resource\hlsl\SkyBox.VS.hlsl">
       <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">true</ExcludedFromBuild>
       <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Demo|x64'">true</ExcludedFromBuild>
       <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Release|x64'">true</ExcludedFromBuild>

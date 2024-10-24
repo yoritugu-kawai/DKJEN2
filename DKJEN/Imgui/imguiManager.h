@@ -1,6 +1,7 @@
 #pragma once
 #include"../Base/DxCommon.h"
 #include"../Base/WinApp.h"
+#include"../Management/DescriptorManagement.h"
 class ImguiManager
 {
 public:

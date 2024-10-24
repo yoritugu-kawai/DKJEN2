@@ -1,11 +1,5 @@
 #include"PSOCopileManagement.h"
 
-//PSOCopileManagement PSOCopileManagement::GetInstance()
-//{
-//	static PSOCopileManagement instance;
-//
-//	return &instance;
-//}
 
 PSOCopileManagement* PSOCopileManagement::GetInstance()
 {
@@ -15,39 +9,35 @@ PSOCopileManagement* PSOCopileManagement::GetInstance()
 
 void PSOCopileManagement::Set()
 {
-	TextureCompileShader::DXC();
-	PolygonCompileShader::DXC();
-	SpriteCompileShader::DXC();
-	LightCompileShader::DXC();
-	ParticleCompileShader::DXC();
 
-	TextureCompileShader::ShaderCompile();
-	PolygonCompileShader::ShaderCompile();
-	SpriteCompileShader::ShaderCompile();
-	LightCompileShader::ShaderCompile();
-	ParticleCompileShader::ShaderCompile();
+	CompileShaderManager::DXC();
+
+
+	CompileShaderManager::ShaderCompile();
+	
 
 	TexturePSO::CreatePSO();
-	PolygonPSO::CreatePSO();
+	//PolygonPSO::CreatePSO();
 	SpritePSO::CreatePSO();
-	LightPSO::CreatePSO();
+	Animation3DPSO::CreatePSO();
 	ParticlePSO::CreatePSO();
+	LightPSO::CreatePSO();
+	SkyBoxPSO::CreatePSO();
 
 
 }
 
 void PSOCopileManagement::Release()
 {
-	TextureCompileShader::Release();
-	PolygonCompileShader::Release();
-	SpriteCompileShader::Release();
-	LightCompileShader::Release();
-	ParticleCompileShader::Release();
+	CompileShaderManager::Release();
+	
 
 	TexturePSO::Release();
-	PolygonPSO::Release();
+	///PolygonPSO::Release();
 	SpritePSO::Release();
-	LightPSO::Release();
+	Animation3DPSO::Release();
 	ParticlePSO::Release();
+	LightPSO::Release();
+	SkyBoxPSO::Release();
 
 }

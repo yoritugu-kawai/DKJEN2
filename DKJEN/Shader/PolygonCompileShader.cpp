@@ -107,12 +107,12 @@ void PolygonCompileShader::ShaderCompile()
 		);
 
 
-	PolygonCompileShader::GetInstance()->shaders_.shape = shape;
+	PolygonCompileShader::GetInstance()->shaders_.shape.Animation = shape;
 }
 
 void PolygonCompileShader::Release()
 {
-	PolygonCompileShader::GetInstance()->shaders_.shape.pixelBlob->Release();
-	PolygonCompileShader::GetInstance()->shaders_.shape.vertexBlob->Release();
+	PolygonCompileShader::GetInstance()->shaders_.shape.Animation.pixelBlob->Release();
+	PolygonCompileShader::GetInstance()->shaders_.shape.Animation.vertexBlob->Release();
 }
 

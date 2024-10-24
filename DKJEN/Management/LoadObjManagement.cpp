@@ -15,43 +15,66 @@ ModelData LoadObjManagement::NewLoadObjFile(const std::string& directoryPath, co
 	assert(scene->HasMeshes());
 	//Node
 	modelData.rootNode = ReadNode(scene->mRootNode);
-
 	for (uint32_t meshIndex = 0; meshIndex < scene->mNumMeshes; ++meshIndex) {
 		aiMesh* mesh = scene->mMeshes[meshIndex];
 		assert(mesh->HasNormals());
 		assert(mesh->HasTextureCoords(0));
-
+		modelData.vertices.resize(mesh->mNumVertices);
+		for (uint32_t vertexIndex = 0; vertexIndex < mesh->mNumVertices; ++vertexIndex) {
+			aiVector3D& position = mesh->mVertices[vertexIndex];
+			aiVector3D& normal = mesh->mNormals[vertexIndex];
+			aiVector3D& texcoord = mesh->mTextureCoords[0][vertexIndex];
+			//
+			modelData.vertices[vertexIndex].position = { -position.x,position.y,position.z,1.0f };
+			modelData.vertices[vertexIndex].normal = { -normal.x ,normal.y,normal.z };
+			modelData.vertices[vertexIndex].texcoord = { texcoord.x,texcoord.y };
+		}
 		for (uint32_t faceIndex = 0; faceIndex < mesh->mNumFaces; ++faceIndex) {
 			aiFace& face = mesh->mFaces[faceIndex];
 			assert(face.mNumIndices == 3);
 
 			for (uint32_t element = 0; element < face.mNumIndices; ++element) {
 				uint32_t vertexIndex = face.mIndices[element];
-				aiVector3D& position = mesh->mVertices[vertexIndex];
-				aiVector3D& normal = mesh->mNormals[vertexIndex];
-				aiVector3D& texcoord = mesh->mTextureCoords[0][vertexIndex];
-				VertexData vertex;
-				vertex.position = { position.x,position.y,position.z,1.0f };
-				vertex.normal = { normal.x ,normal.y,normal.z };
-				vertex.texcoord = { texcoord.x,texcoord.y };
-				vertex.position.x *= -1.0f;
-				vertex.normal.x *= -1.0f;
-				modelData.vertices.push_back(vertex);
-
-				for (uint32_t materialIndex = 0; materialIndex < scene->mNumMaterials; ++materialIndex) {
-					aiMaterial* material = scene->mMaterials[materialIndex];
-					if (material->GetTextureCount(aiTextureType_DIFFUSE) != 0) {
-						aiString textureFilePath;
-						material->GetTexture(aiTextureType_DIFFUSE, 0, &textureFilePath);
-						modelData.material.textureFilePath = directoryPath + "/" + textureFilePath.C_Str();
-					}
-				}
+				modelData.indices.push_back(vertexIndex);
 			}
 		}
+		for (uint32_t materialIndex = 0; materialIndex < scene->mNumMaterials; ++materialIndex) {
+			aiMaterial* material = scene->mMaterials[materialIndex];
+			if (material->GetTextureCount(aiTextureType_DIFFUSE) != 0) {
+				aiString textureFilePath;
+				material->GetTexture(aiTextureType_DIFFUSE, 0, &textureFilePath);
+				modelData.material.textureFilePath = directoryPath + "/" + textureFilePath.C_Str();
+			}
+		}
+
+		for (uint32_t boneIndex = 0; boneIndex < mesh->mNumBones; ++boneIndex) {
+			aiBone* bone = mesh->mBones[boneIndex];
+			std::string jointName = bone->mName.C_Str();
+			JointWeightData& jointWeightData = modelData.skinClusterData[jointName];
+
+			aiMatrix4x4 bindPosMatrixAssimp = bone->mOffsetMatrix.Inverse();
+			aiVector3D scale, translate;
+			aiQuaternion rotate;
+			bindPosMatrixAssimp.Decompose(scale, rotate, translate);
+
+			Matrix4x4 scaleMatrix = MakeScaleMatrix({ scale.x,scale.y,scale.z });
+			Matrix4x4 rotateMatrix = MakeRotateMatrix({ rotate.x,-rotate.y,-rotate.z,rotate.w });
+			Matrix4x4 translateMatrix = MakeTranslateMatrix({ -translate.x, translate.y, translate.z });
+
+
+			Matrix4x4 bindPoseMatrix = Multiply(scaleMatrix, Multiply(rotateMatrix, translateMatrix));
+			jointWeightData.inverseBindPoseMatrix= Inverse(bindPoseMatrix);
+
+			for (uint32_t weightIndex = 0; weightIndex < bone->mNumWeights; ++weightIndex) {
+				jointWeightData.vertexWeights.push_back({ bone->mWeights[weightIndex].mWeight, bone->mWeights[weightIndex].mVertexId });
+			}
+
+		}
 	}
-	modelData.tex= TexManager::LoadTexture(modelData.material.textureFilePath);
+
+	modelData.tex = TexManager::LoadTexture(modelData.material.textureFilePath);
 	return modelData;
-	
+
 }
 
 MaterialData LoadObjManagement::LoadMaterialTemplateFile(const std::string& directoryPath, const std::string& filename)
@@ -82,31 +105,40 @@ MaterialData LoadObjManagement::LoadMaterialTemplateFile(const std::string& dire
 Node LoadObjManagement::ReadNode(aiNode* node)
 {
 	Node result;
-	aiMatrix4x4 aiLocalMatrix = node->mTransformation;
-	aiLocalMatrix.Transpose();
-	result.localMatrix.m[0][0] = aiLocalMatrix[0][0];
+	//aiMatrix4x4 aiLocalMatrix = node->mTransformation;
+	//aiLocalMatrix.Transpose();
+	//result.localMatrix.m[0][0] = aiLocalMatrix[0][0];
+
+
+	aiVector3D scale, tranalte;
+	aiQuaternion rotate;
+	node->mTransformation.Decompose(scale, rotate, tranalte);
+	result.transform.scale = { scale.x,scale.y,scale.z };
+	result.transform.rotate = { rotate.x,-rotate.y,-rotate.z,rotate.w };
+	result.transform.tranalte = { -tranalte.x,tranalte.y,tranalte.z };
+
+	Matrix4x4  translateMatrix = MakeTranslateMatrix(result.transform.tranalte);
+	Matrix4x4 rotateMatrix = MakeRotateMatrix(result.transform.rotate);
+	Matrix4x4 scaleMatrix = MakeScaleMatrix(result.transform.scale);
+
+
+	result.localMatrix = Multiply(scaleMatrix, Multiply(rotateMatrix, translateMatrix));
+
 
 	result.name = node->mName.C_Str();
 	result.chidren.resize(node->mNumChildren);
 	for (uint32_t childIndex = 0; childIndex < node->mNumChildren; ++childIndex) {
 		result.chidren[childIndex] = ReadNode(node->mChildren[childIndex]);
 	}
-	aiVector3D scale, tranalte;
-	aiQuaternion rotate;
-	node->mTransformation.Decompose(scale, rotate, tranalte);
-	result.transform.scale = {scale.x,scale .y,scale .z};
-	result.transform.rotate = { rotate.x,-rotate.y,-rotate.z,rotate.w};
-	result.transform.tranalte = { -tranalte.x,tranalte.y,tranalte.z };
-	result.localMatrix = MakeAffineMatrix(result.transform.scale, result.transform.rotate, result.transform.tranalte);
-
 
 	return result;
 }
 
 Animation LoadObjManagement::LoadAnimationFile(const std::string& directoryPath, const std::string& filename)
 {
-	
-	Animation animation=LoadObjManagement::GetInstance()->animation;
+
+	///Animation animation =LoadObjManagement::GetInstance()->animation;
+	Animation animation;
 	Assimp::Importer importer;
 	std::string filePath = directoryPath + "/" + filename;
 	const aiScene* scene = importer.ReadFile(filePath.c_str(), 0);
@@ -114,7 +146,7 @@ Animation LoadObjManagement::LoadAnimationFile(const std::string& directoryPath,
 	aiAnimation* animationAssimp = scene->mAnimations[0];
 	animation.duration = float(animationAssimp->mDuration / animationAssimp->mTicksPerSecond);
 	//
-	
+
 
 
 	for (uint32_t channelIndex = 0; channelIndex < animationAssimp->mNumChannels; ++channelIndex) {
@@ -148,9 +180,9 @@ Animation LoadObjManagement::LoadAnimationFile(const std::string& directoryPath,
 
 
 	}
-	
-	 LoadObjManagement::GetInstance()->animation = animation;
-												
+
+	//LoadObjManagement::GetInstance()->animation = animation;
+
 	return animation;
 }
 
@@ -163,7 +195,7 @@ Vector3 LoadObjManagement::Calculatevalue(const std::vector<KeyframeVector3>& ke
 	for (size_t index = 0; index < keyframes.size() - 1; ++index) {
 		size_t nextIndex = index + 1;
 		if (keyframes[index].time <= time && time <= keyframes[nextIndex].time) {
-			float t = (time - keyframes[index].time) / (keyframes[nextIndex].time, keyframes[index].time);
+			float t = (time - keyframes[index].time) / (keyframes[nextIndex].time - keyframes[index].time);
 			return Lerp(keyframes[index].value, keyframes[nextIndex].value, t);
 		}
 	}
@@ -178,71 +210,16 @@ Quaternion LoadObjManagement::QCalculatevalue(const std::vector<KeyframeQuaterni
 
 	for (size_t index = 0; index < keyframes.size() - 1; ++index) {
 		size_t nextIndex = index + 1;
-	
+
 		if (keyframes[index].time <= time && time <= keyframes[nextIndex].time) {
-			
+
 			float t = (time - keyframes[index].time) / (keyframes[nextIndex].time - keyframes[index].time);
-			
+
+			Quaternion result = Slerp(keyframes[index].value, keyframes[nextIndex].value, t);
+
 			return Slerp(keyframes[index].value, keyframes[nextIndex].value, t);
 		}
 	}
-	
+
 	return (*keyframes.rbegin()).value;
-}
-
-Matrix4x4 LoadObjManagement::AnimationUpdate(ModelData modelData,Animation animation)
-{
-	
-	
-	float animaionTime = LoadObjManagement::GetInstance()->animaionTime;
-	TransformationMatrix* data_=LoadObjManagement::GetInstance()->data_;
-	
-	animaionTime += 1.0f / 60.0f;
-	animaionTime = std::fmod(animaionTime, animation.duration);
-	NodeAnimation& rootNodeAnimation = animation.nodeAnimations[modelData.rootNode.name];
-	Vector3 translate = Calculatevalue(rootNodeAnimation.translate.keyframes, animaionTime);
-	Quaternion rotate = QCalculatevalue(rootNodeAnimation.rotate.keyframes, animaionTime);
-	Vector3 scale = Calculatevalue(rootNodeAnimation.scale.keyframes, animaionTime);
-	Matrix4x4 localMtrix = MakeAffineMatrix(scale, rotate, translate);
-	/*Matrix4x4 vP = Multiply(cameraData->GetView(), cameraData->GetProjection());
-
-	data_->World = Multiply(localMtrix, Multiply(worldTransform->GetMatWorld_(), vP));
-	data_->WVP = Multiply(localMtrix,worldTransform->GetMatWorld_());
-	worldTransform->SetDeta(data_);*/
-	
-	LoadObjManagement::GetInstance()->animaionTime = animaionTime;
-	LoadObjManagement::GetInstance()->data_ = data_;
-	return localMtrix;
-	
-}
-
-Skeleton LoadObjManagement::CreateSkeleton(const Node& rootNode)
-{
-	Skeleton skeleton;
-	skeleton.root = CreateJoint(rootNode, {}, skeleton.joints);
-
-	for (const Joint& joint : skeleton.joints) {
-		skeleton.jointMap.emplace(joint.name, joint.index);
-	}
-
-	return skeleton;
-}
-
-int32_t LoadObjManagement::CreateJoint(const Node& node, const optional<int32_t>& parent, vector<Joint>& joints)
-{
-	Joint joint;
-
-	joint.name = node.name;
-	joint.localMatrix = node.localMatrix;
-	joint.skeletonSpaceMatrix = MakeIdentity4x4();
-	joint.transform = node.transform;
-	joint.index = int32_t(joints.size());
-	joint.parent = parent;
-	joints.push_back(joint);
-	for (const Node& child : node.chidren) {
-		int32_t childIndex = CreateJoint(child, joint.index, joints);
-		joints[joint.index].children.push_back(childIndex);
-	}
-
-	return joint.index;
 }

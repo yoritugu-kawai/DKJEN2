@@ -1,6 +1,6 @@
 #pragma once
 #include"DxCommon.h"
-#include"../Shader/LightCompileShader.h"
+#include"../Shader/CompileShaderManager.h"
 
 class LightPSO
 {

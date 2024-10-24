@@ -4,7 +4,7 @@
 #include"../Base/PolygonPSO.h"
 
 #include"../Base/SpritePSO.h"
-#include"../Base/LightPSO.h"
+#include"../Base/Animation3DPSO.h"
 #include"../Base/TexManager.h"
 class Sphere
 {

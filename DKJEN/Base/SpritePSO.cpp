@@ -27,11 +27,10 @@ void SpritePSO::ShapePSO()
 {
 
 	ID3D12Device* device = DxCommon::GetInstance()->GetDevice();
-	ID3D12GraphicsCommandList* commandList = DxCommon::GetInstance()->GetCommandList();
-
+	
 	PSOProperty ShapePSO;
 
-	ShaderMode shader = SpriteCompileShader::GetInstance()->GetShaders().shape;
+	ShaderMode shader = CompileShaderManager::GetInstance()->GetShaders().shape.Sprite;
 
 	//RootSignature作成
 	D3D12_ROOT_SIGNATURE_DESC descriptionRootSignature{};

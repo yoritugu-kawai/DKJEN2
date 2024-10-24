@@ -1,6 +1,6 @@
 #pragma once
 #include"DxCommon.h"
-#include"../Shader/SpriteCompileShader.h"
+#include"../Shader/CompileShaderManager.h"
 
 class SpritePSO
 {

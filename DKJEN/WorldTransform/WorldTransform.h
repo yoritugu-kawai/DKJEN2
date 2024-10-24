@@ -8,7 +8,8 @@ class WorldTransform
 {
 public:
 	void Create();
-	void UpdateMatrix(CameraData* cameraData, Matrix4x4 mtrix);
+	void UpdateMatrix(CameraData* cameraData);
+	void AnimationUpdateMatrix(CameraData* cameraData, Matrix4x4 mtrix);
 	
 #pragma region Get
 	Matrix4x4 GetMatWorld_() { return matWorld_; }
@@ -26,12 +27,15 @@ public:
 	void SetColor(Vector4 color) { color_ = color; }
 	void SetDeta(TransformationMatrix* data) { data_ = data; };
 #pragma endregion
+	const WorldTransform* parent_ = nullptr;
 private:
 	Vector3 scale_ = { 1.0f,1.0f,1.0f };
 	Vector3 rotate_ = { 0.0f,0.0f,0.0f };
 	Vector3 translate_ = {0.0f,0.0f,0.0f};
 	Vector4 color_ = { 1,1,1,1 };
 	Matrix4x4 matWorld_;
+	Matrix4x4 wvp_ = {};
+	Matrix4x4 worldInverseTranspose_ = {};
 	TransformationMatrix *data_ ;
 	ComPtr<ID3D12Resource> buffer_ = nullptr;
 };

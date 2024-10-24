@@ -1,6 +1,6 @@
 #pragma once
 #include"DxCommon.h"
-#include"../Shader/TextureCompileShader.h"
+#include"../Shader/CompileShaderManager.h"
 
 class TexturePSO
 {

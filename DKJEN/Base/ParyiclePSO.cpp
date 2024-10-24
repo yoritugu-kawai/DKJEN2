@@ -28,11 +28,10 @@ void ParticlePSO::ShapePSO()
 {
 
 	ID3D12Device* device = DxCommon::GetInstance()->GetDevice();
-	ID3D12GraphicsCommandList* commandList = DxCommon::GetInstance()->GetCommandList();
-
+	
 	PSOProperty ShapePSO;
 
-	ShaderMode shader = ParticleCompileShader::GetInstance()->GetShaders().shape;
+	ShaderMode shader = CompileShaderManager::GetInstance()->GetShaders().shape.Particle;
 
 	//RootSignature作成
 	D3D12_ROOT_SIGNATURE_DESC descriptionRootSignature{};

@@ -1,7 +1,7 @@
 #pragma once
 #include"../../DKJEN/Type/Sprite.h"
 #include"../../DKJEN/Utilipy/Input.h"
-#include"Bullet.h"
+
 class Player
 {
 public:
@@ -13,7 +13,7 @@ public:
 
 
 private:
-	Bullet* bullet_;
+	
 	Sprite* sprite_;
 	Vector3 pos_;
 

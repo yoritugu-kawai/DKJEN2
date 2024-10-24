@@ -26,9 +26,6 @@
     <Filter Include="DKJEN\Type">
       <UniqueIdentifier>{fdf38c82-c957-481f-aceb-4fbc77966666}</UniqueIdentifier>
     </Filter>
-    <Filter Include="ImguiEx">
-      <UniqueIdentifier>{f81999c5-8832-4650-bad1-7d9fb5e33586}</UniqueIdentifier>
-    </Filter>
     <Filter Include="DKJEN\Base\DxCommon">
       <UniqueIdentifier>{59756443-50a2-4544-9739-d9e410191d33}</UniqueIdentifier>
     </Filter>
@@ -71,17 +68,11 @@
     <Filter Include="GameProject\PLayer">
       <UniqueIdentifier>{7bce0c8f-fd6e-4a3a-a920-8b3d1b6dc9a1}</UniqueIdentifier>
     </Filter>
-    <Filter Include="GameProject\Enemy">
-      <UniqueIdentifier>{17086e15-e985-42c5-82c7-0f16d14b7f84}</UniqueIdentifier>
-    </Filter>
     <Filter Include="GameProject\GameSeen">
       <UniqueIdentifier>{9bc9cb5b-0eb8-4d77-a6dd-8e306d7bb627}</UniqueIdentifier>
     </Filter>
     <Filter Include="GameProject\GameSeen\StartSeen">
       <UniqueIdentifier>{1a961d99-acb9-44bb-a34f-c23ab7b87fa1}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="GameProject\GameSeen\PlaySeen">
-      <UniqueIdentifier>{ef1e263d-edf5-407c-974d-cce7383fd4fd}</UniqueIdentifier>
     </Filter>
     <Filter Include="GameProject\GameManager">
       <UniqueIdentifier>{764607de-351f-44d7-9fc3-765ec84dc2ba}</UniqueIdentifier>
@@ -91,9 +82,6 @@
     </Filter>
     <Filter Include="GameProject\Block">
       <UniqueIdentifier>{00091886-7b6b-4e45-bbb9-8b919b0f7330}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="GameProject\ball">
-      <UniqueIdentifier>{e2719508-1e10-435f-9d96-1726b5bc63ce}</UniqueIdentifier>
     </Filter>
     <Filter Include="DKJEN\PostEffect">
       <UniqueIdentifier>{9aa792d5-5c85-47f8-9ae9-e7b7991a4970}</UniqueIdentifier>
@@ -116,6 +104,33 @@
     <Filter Include="DKJEN\Skinning\Animation">
       <UniqueIdentifier>{e62aa1b2-7ef5-4eee-a7dd-4d5cbfa1fe39}</UniqueIdentifier>
     </Filter>
+    <Filter Include="DKJEN\JsonLoad">
+      <UniqueIdentifier>{2276947b-0523-4f49-9bf1-0677c5d01f9d}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Project">
+      <UniqueIdentifier>{252dfcb2-4e23-49dc-82e4-c72182a216b2}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Project\GameScene">
+      <UniqueIdentifier>{fde56c3e-5949-4daf-bc06-6b5718261d22}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="GameProject\GameSeen\SelectScene">
+      <UniqueIdentifier>{260d44ec-ee28-4de5-a938-357b9997e1d7}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="GameProject\GameSeen\PlayPlayScene">
+      <UniqueIdentifier>{ef1e263d-edf5-407c-974d-cce7383fd4fd}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="DKJEN\Collision">
+      <UniqueIdentifier>{d98a8a46-8e5e-450c-9b2d-b1d53db251f8}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="DKJEN\Collision\ABB">
+      <UniqueIdentifier>{9ef0305a-c455-4dfe-b25d-621da9d4ad86}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="GameProject\GameSeen\clearScene">
+      <UniqueIdentifier>{6ce61fcc-827e-49be-8862-e25596136953}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="DKJEN\FirstScene">
+      <UniqueIdentifier>{7c5a56cd-d58d-483e-a02b-c67818f768fb}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <None Include=".editorconfig" />
@@ -132,6 +147,12 @@
       <Filter>hlsl</Filter>
     </None>
     <None Include="resource\hlsl\Paticle.hlsli">
+      <Filter>hlsl</Filter>
+    </None>
+    <None Include="resource\hlsl\AnimationObject3D.hlsli">
+      <Filter>hlsl</Filter>
+    </None>
+    <None Include="resource\hlsl\SkyBox.hlsli">
       <Filter>hlsl</Filter>
     </None>
   </ItemGroup>
@@ -151,38 +172,8 @@
     <ClCompile Include="DKJEN\Math\Math.cpp">
       <Filter>DKJEN\Math</Filter>
     </ClCompile>
-    <ClCompile Include="DKJEN\Shader\LightCompileShader.cpp">
-      <Filter>DKJEN\Shader</Filter>
-    </ClCompile>
     <ClCompile Include="DKJEN\Shader\PolygonCompileShader.cpp">
       <Filter>DKJEN\Shader</Filter>
-    </ClCompile>
-    <ClCompile Include="DKJEN\Shader\SpriteCompileShader.cpp">
-      <Filter>DKJEN\Shader</Filter>
-    </ClCompile>
-    <ClCompile Include="DKJEN\Shader\TextureCompileShader.cpp">
-      <Filter>DKJEN\Shader</Filter>
-    </ClCompile>
-    <ClCompile Include="DKJEN\externals\imgui\imgui.cpp">
-      <Filter>ImguiEx</Filter>
-    </ClCompile>
-    <ClCompile Include="DKJEN\externals\imgui\imgui_demo.cpp">
-      <Filter>ImguiEx</Filter>
-    </ClCompile>
-    <ClCompile Include="DKJEN\externals\imgui\imgui_draw.cpp">
-      <Filter>ImguiEx</Filter>
-    </ClCompile>
-    <ClCompile Include="DKJEN\externals\imgui\imgui_impl_dx12.cpp">
-      <Filter>ImguiEx</Filter>
-    </ClCompile>
-    <ClCompile Include="DKJEN\externals\imgui\imgui_impl_win32.cpp">
-      <Filter>ImguiEx</Filter>
-    </ClCompile>
-    <ClCompile Include="DKJEN\externals\imgui\imgui_tables.cpp">
-      <Filter>ImguiEx</Filter>
-    </ClCompile>
-    <ClCompile Include="DKJEN\externals\imgui\imgui_widgets.cpp">
-      <Filter>ImguiEx</Filter>
     </ClCompile>
     <ClCompile Include="DKJEN\Management\FrameManagement.cpp">
       <Filter>DKJEN\Management</Filter>
@@ -202,7 +193,7 @@
     <ClCompile Include="DKJEN\Base\WinApp.cpp">
       <Filter>DKJEN\Base\Win</Filter>
     </ClCompile>
-    <ClCompile Include="DKJEN\Base\LightPSO.cpp">
+    <ClCompile Include="DKJEN\Base\Animation3DPSO.cpp">
       <Filter>DKJEN\Base\PSO</Filter>
     </ClCompile>
     <ClCompile Include="DKJEN\Base\Function.cpp">
@@ -220,9 +211,6 @@
     <ClCompile Include="DKJEN\Type\Texture.cpp">
       <Filter>DKJEN\Type\2D</Filter>
     </ClCompile>
-    <ClCompile Include="DKJEN\Type\Obj3D.cpp">
-      <Filter>DKJEN\Type\3D</Filter>
-    </ClCompile>
     <ClCompile Include="DKJEN\Type\Sphere.cpp">
       <Filter>DKJEN\Type\3D</Filter>
     </ClCompile>
@@ -231,9 +219,6 @@
     </ClCompile>
     <ClCompile Include="DKJEN\CameraProjection\CameraProjection.cpp">
       <Filter>DKJEN\CameraProjection</Filter>
-    </ClCompile>
-    <ClCompile Include="DKJEN\Shader\ParticleCompileShader.cpp">
-      <Filter>DKJEN\Shader</Filter>
     </ClCompile>
     <ClCompile Include="DKJEN\Base\ParyiclePSO.cpp">
       <Filter>DKJEN\Base\PSO</Filter>
@@ -259,15 +244,6 @@
     <ClCompile Include="GameProject\Player\Player.cpp">
       <Filter>GameProject\PLayer</Filter>
     </ClCompile>
-    <ClCompile Include="GameProject\Player\Bullet.cpp">
-      <Filter>GameProject\PLayer</Filter>
-    </ClCompile>
-    <ClCompile Include="GameProject\Enemy\Enemy.cpp">
-      <Filter>GameProject\Enemy</Filter>
-    </ClCompile>
-    <ClCompile Include="GameProject\GameSeen\PlaySeen\PlaySeen.cpp">
-      <Filter>GameProject\GameSeen\PlaySeen</Filter>
-    </ClCompile>
     <ClCompile Include="GameProject\GameSeen\StartSeen\StartSeen.cpp">
       <Filter>GameProject\GameSeen\StartSeen</Filter>
     </ClCompile>
@@ -280,9 +256,6 @@
     <ClCompile Include="DKJEN\Utilipy\CSVLoad.cpp">
       <Filter>DKJEN\Utilipy</Filter>
     </ClCompile>
-    <ClCompile Include="GameProject\Ball\Ball.cpp">
-      <Filter>GameProject\ball</Filter>
-    </ClCompile>
     <ClCompile Include="DKJEN\PostEffect\OffScreenRendering\RenderTextrure.cpp">
       <Filter>DKJEN\PostEffect\OffScreenRendering</Filter>
     </ClCompile>
@@ -291,6 +264,57 @@
     </ClCompile>
     <ClCompile Include="DKJEN\Management\LoadObjManagement.cpp">
       <Filter>DKJEN\Management</Filter>
+    </ClCompile>
+    <ClCompile Include="DKJEN\Skinning\Animation\Skinning.cpp">
+      <Filter>DKJEN\Skinning\Animation</Filter>
+    </ClCompile>
+    <ClCompile Include="DKJEN\Skinning\Animation\Bone.cpp">
+      <Filter>DKJEN\Skinning\Animation</Filter>
+    </ClCompile>
+    <ClCompile Include="DKJEN\Type\Animation3D.cpp">
+      <Filter>DKJEN\Type\3D</Filter>
+    </ClCompile>
+    <ClCompile Include="DKJEN\Type\Obj3D.cpp">
+      <Filter>DKJEN\Type\3D</Filter>
+    </ClCompile>
+    <ClCompile Include="DKJEN\Base\LightPSO.cpp">
+      <Filter>DKJEN\Base\PSO</Filter>
+    </ClCompile>
+    <ClCompile Include="DKJEN\JsonLoad\JsonLoad.cpp">
+      <Filter>DKJEN\JsonLoad</Filter>
+    </ClCompile>
+    <ClCompile Include="Project\ProjectManager.cpp">
+      <Filter>Project</Filter>
+    </ClCompile>
+    <ClCompile Include="Project\GameScene\GameScene.cpp">
+      <Filter>Project\GameScene</Filter>
+    </ClCompile>
+    <ClCompile Include="DKJEN\Type\SkyBox.cpp">
+      <Filter>DKJEN\Type\3D</Filter>
+    </ClCompile>
+    <ClCompile Include="DKJEN\Base\SkyBoxPSO.cpp">
+      <Filter>DKJEN\Base\PSO</Filter>
+    </ClCompile>
+    <ClCompile Include="DKJEN\Shader\CompileShaderManager.cpp">
+      <Filter>DKJEN\Shader</Filter>
+    </ClCompile>
+    <ClCompile Include="GameProject\GameSeen\PlayScene\PlayScene.cpp">
+      <Filter>GameProject\GameSeen\PlayPlayScene</Filter>
+    </ClCompile>
+    <ClCompile Include="DKJEN\Collision\ABB\ABB.cpp">
+      <Filter>DKJEN\Collision\ABB</Filter>
+    </ClCompile>
+    <ClCompile Include="GameProject\GameSeen\SelectScene\SelectScene.cpp">
+      <Filter>GameProject\GameSeen\SelectScene</Filter>
+    </ClCompile>
+    <ClCompile Include="GameProject\GameSeen\clearScene\clearScene.cpp">
+      <Filter>GameProject\GameSeen\clearScene</Filter>
+    </ClCompile>
+    <ClCompile Include="DKJEN\FirstScene\FirstScene.cpp">
+      <Filter>DKJEN\FirstScene</Filter>
+    </ClCompile>
+    <ClCompile Include="DKJEN\Utilipy\Audio.cpp">
+      <Filter>DKJEN\Utilipy</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
@@ -309,41 +333,8 @@
     <ClInclude Include="DKJEN\Management\PSOCopileManagement.h">
       <Filter>DKJEN\Management</Filter>
     </ClInclude>
-    <ClInclude Include="DKJEN\Shader\LightCompileShader.h">
-      <Filter>DKJEN\Shader</Filter>
-    </ClInclude>
     <ClInclude Include="DKJEN\Shader\PolygonCompileShader.h">
       <Filter>DKJEN\Shader</Filter>
-    </ClInclude>
-    <ClInclude Include="DKJEN\Shader\SpriteCompileShader.h">
-      <Filter>DKJEN\Shader</Filter>
-    </ClInclude>
-    <ClInclude Include="DKJEN\Shader\TextureCompileShader.h">
-      <Filter>DKJEN\Shader</Filter>
-    </ClInclude>
-    <ClInclude Include="DKJEN\externals\imgui\imconfig.h">
-      <Filter>ImguiEx</Filter>
-    </ClInclude>
-    <ClInclude Include="DKJEN\externals\imgui\imgui.h">
-      <Filter>ImguiEx</Filter>
-    </ClInclude>
-    <ClInclude Include="DKJEN\externals\imgui\imgui_impl_dx12.h">
-      <Filter>ImguiEx</Filter>
-    </ClInclude>
-    <ClInclude Include="DKJEN\externals\imgui\imgui_impl_win32.h">
-      <Filter>ImguiEx</Filter>
-    </ClInclude>
-    <ClInclude Include="DKJEN\externals\imgui\imgui_internal.h">
-      <Filter>ImguiEx</Filter>
-    </ClInclude>
-    <ClInclude Include="DKJEN\externals\imgui\imstb_rectpack.h">
-      <Filter>ImguiEx</Filter>
-    </ClInclude>
-    <ClInclude Include="DKJEN\externals\imgui\imstb_textedit.h">
-      <Filter>ImguiEx</Filter>
-    </ClInclude>
-    <ClInclude Include="DKJEN\externals\imgui\imstb_truetype.h">
-      <Filter>ImguiEx</Filter>
     </ClInclude>
     <ClInclude Include="DKJEN\Management\FrameManagement.h">
       <Filter>DKJEN\Management</Filter>
@@ -363,7 +354,7 @@
     <ClInclude Include="DKJEN\Base\WinApp.h">
       <Filter>DKJEN\Base\Win</Filter>
     </ClInclude>
-    <ClInclude Include="DKJEN\Base\LightPSO.h">
+    <ClInclude Include="DKJEN\Base\Animation3DPSO.h">
       <Filter>DKJEN\Base\PSO</Filter>
     </ClInclude>
     <ClInclude Include="DKJEN\Base\Function.h">
@@ -381,9 +372,6 @@
     <ClInclude Include="DKJEN\Type\Texture.h">
       <Filter>DKJEN\Type\2D</Filter>
     </ClInclude>
-    <ClInclude Include="DKJEN\Type\Obj3D.h">
-      <Filter>DKJEN\Type\3D</Filter>
-    </ClInclude>
     <ClInclude Include="DKJEN\Type\Sphere.h">
       <Filter>DKJEN\Type\3D</Filter>
     </ClInclude>
@@ -392,9 +380,6 @@
     </ClInclude>
     <ClInclude Include="DKJEN\CameraProjection\CameraProjection.h">
       <Filter>DKJEN\CameraProjection</Filter>
-    </ClInclude>
-    <ClInclude Include="DKJEN\Shader\ParticleCompileShader.h">
-      <Filter>DKJEN\Shader</Filter>
     </ClInclude>
     <ClInclude Include="DKJEN\Base\ParyiclePSO.h">
       <Filter>DKJEN\Base\PSO</Filter>
@@ -423,20 +408,11 @@
     <ClInclude Include="GameProject\Player\Player.h">
       <Filter>GameProject\PLayer</Filter>
     </ClInclude>
-    <ClInclude Include="GameProject\Player\Bullet.h">
-      <Filter>GameProject\PLayer</Filter>
-    </ClInclude>
-    <ClInclude Include="GameProject\Enemy\Enemy.h">
-      <Filter>GameProject\Enemy</Filter>
-    </ClInclude>
     <ClInclude Include="GameProject\GameSeen\StartSeen\StartSeen.h">
       <Filter>GameProject\GameSeen\StartSeen</Filter>
     </ClInclude>
     <ClInclude Include="GameProject\GameSeen\StateSeen\IScene.h">
       <Filter>GameProject\GameSeen\IScene</Filter>
-    </ClInclude>
-    <ClInclude Include="GameProject\GameSeen\PlaySeen\PlaySeen.h">
-      <Filter>GameProject\GameSeen\PlaySeen</Filter>
     </ClInclude>
     <ClInclude Include="GameProject\GameManager\GameManager.h">
       <Filter>GameProject\GameManager</Filter>
@@ -446,9 +422,6 @@
     </ClInclude>
     <ClInclude Include="DKJEN\Utilipy\CSVLoad.h">
       <Filter>DKJEN\Utilipy</Filter>
-    </ClInclude>
-    <ClInclude Include="GameProject\Ball\Ball.h">
-      <Filter>GameProject\ball</Filter>
     </ClInclude>
     <ClInclude Include="DKJEN\PostEffect\OffScreenRendering\RenderTextrure.h">
       <Filter>DKJEN\PostEffect\OffScreenRendering</Filter>
@@ -462,11 +435,63 @@
     <ClInclude Include="DKJEN\Management\LoadObjManagement.h">
       <Filter>DKJEN\Management</Filter>
     </ClInclude>
-  </ItemGroup>
-  <ItemGroup>
-    <Text Include="DKJEN\externals\imgui\LICENSE.txt">
-      <Filter>ImguiEx</Filter>
-    </Text>
+    <ClInclude Include="DKJEN\Utilipy\Sc.h">
+      <Filter>DKJEN\Utilipy</Filter>
+    </ClInclude>
+    <ClInclude Include="DKJEN\Skinning\Animation\Skinning.h">
+      <Filter>DKJEN\Skinning\Animation</Filter>
+    </ClInclude>
+    <ClInclude Include="DKJEN\Skinning\Animation\Bone.h">
+      <Filter>DKJEN\Skinning\Animation</Filter>
+    </ClInclude>
+    <ClInclude Include="DKJEN\Type\Animation3D.h">
+      <Filter>DKJEN\Type\3D</Filter>
+    </ClInclude>
+    <ClInclude Include="DKJEN\Type\Obj3D.h">
+      <Filter>DKJEN\Type\3D</Filter>
+    </ClInclude>
+    <ClInclude Include="DKJEN\Base\LightPSO.h">
+      <Filter>DKJEN\Base\PSO</Filter>
+    </ClInclude>
+    <ClInclude Include="DKJEN\JsonLoad\JsonLoad.h">
+      <Filter>DKJEN\JsonLoad</Filter>
+    </ClInclude>
+    <ClInclude Include="Project\ProjectManager.h">
+      <Filter>Project</Filter>
+    </ClInclude>
+    <ClInclude Include="Project\GameScene\GameScene.h">
+      <Filter>Project\GameScene</Filter>
+    </ClInclude>
+    <ClInclude Include="DKJEN\Type\SkyBox.h">
+      <Filter>DKJEN\Type\3D</Filter>
+    </ClInclude>
+    <ClInclude Include="DKJEN\Base\SkyBoxPSO.h">
+      <Filter>DKJEN\Base\PSO</Filter>
+    </ClInclude>
+    <ClInclude Include="DKJEN\Shader\CompileShaderManager.h">
+      <Filter>DKJEN\Shader</Filter>
+    </ClInclude>
+    <ClInclude Include="GameProject\GameSeen\SelectScene\SelectScene.h">
+      <Filter>GameProject\GameSeen\SelectScene</Filter>
+    </ClInclude>
+    <ClInclude Include="GameProject\GameSeen\PlayScene\PlayScene.h">
+      <Filter>GameProject\GameSeen\PlayPlayScene</Filter>
+    </ClInclude>
+    <ClInclude Include="DKJEN\Collision\ABB\ABB.h">
+      <Filter>DKJEN\Collision\ABB</Filter>
+    </ClInclude>
+    <ClInclude Include="GameProject\GameSeen\clearScene\clearScene.h">
+      <Filter>GameProject\GameSeen\clearScene</Filter>
+    </ClInclude>
+    <ClInclude Include="DKJEN\FirstScene\FirstScene.h">
+      <Filter>DKJEN\FirstScene</Filter>
+    </ClInclude>
+    <ClInclude Include="DKJEN\Utilipy\Audio.h">
+      <Filter>DKJEN\Utilipy</Filter>
+    </ClInclude>
+    <ClInclude Include="DKJEN\Utilipy\AudioStruct.h">
+      <Filter>DKJEN\Utilipy</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <FxCompile Include="resource\hlsl\LightObject.PS.hlsl">
@@ -497,6 +522,18 @@
       <Filter>hlsl</Filter>
     </FxCompile>
     <FxCompile Include="resource\hlsl\TextureOdject3d.PS.hlsl">
+      <Filter>hlsl</Filter>
+    </FxCompile>
+    <FxCompile Include="resource\hlsl\AnimationObject3D.VS.hlsl">
+      <Filter>hlsl</Filter>
+    </FxCompile>
+    <FxCompile Include="resource\hlsl\AnimationObject3D.PS.hlsl">
+      <Filter>hlsl</Filter>
+    </FxCompile>
+    <FxCompile Include="resource\hlsl\SkyBox.PS.hlsl">
+      <Filter>hlsl</Filter>
+    </FxCompile>
+    <FxCompile Include="resource\hlsl\SkyBox.VS.hlsl">
       <Filter>hlsl</Filter>
     </FxCompile>
   </ItemGroup>

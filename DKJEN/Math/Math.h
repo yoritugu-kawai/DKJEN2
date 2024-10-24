@@ -11,6 +11,10 @@
 #include <cassert>
 #include <cmath>
 #include <numbers>
+#include<limits>
+#include<iostream>
+#include<cstdint>
+
 
 #include"../Utilipy/Pch.h"
 #include"../Base/Log.h"
@@ -39,8 +43,19 @@ struct  ShaderMode
 	IDxcBlob* vertexBlob;
 	IDxcBlob* pixelBlob;
 };
+struct RootSader
+{
+	ShaderMode Animation;
+	ShaderMode Obj3D;
+	ShaderMode Texture;
+	ShaderMode Particle;
+	ShaderMode SkyBox;
+	ShaderMode Sprite;
+};
+
+
 struct Shaders {
-	ShaderMode shape;
+	RootSader shape;
 };
 
 struct Vector2 {
@@ -126,6 +141,7 @@ inline Quaternion operator*(const float t, const Quaternion& q) {
 	return { q.w * t,q.x * t,q.y * t,q.z * t };
 }
 
+
 /// <summary>
 /// 数学
 /// </summary>
@@ -156,7 +172,7 @@ Vector3 TransformRot(const Vector3& vector, const Matrix4x4& matrix);
 
 Vector3 Subract(const Vector3& v1, const Vector3& v2);
 float Dot(const Vector3& v1, const Vector3& v2);
-Vector3 SlerpFanc(const Vector3& v1, const Vector3& v2,float f);
+Vector3 SlerpFanc(const Vector3& v1, const Vector3& v2, float f);
 Matrix4x4 MakeViewportMatrix(
 	float left, float top, float width, float height, float minDepth, float maxDepth);
 Vector3 Transform3(const Vector3& vector, const Matrix4x4& matrix);
@@ -189,3 +205,4 @@ float FLerp(float t, const float& s, const float& e);
 Quaternion QLerp(float t, const Quaternion& s, const Quaternion& e);
 Matrix4x4 MakeQuatAffineMatrix(const Vector3& scale, const Matrix4x4& rotate, const Vector3& translate);
 Matrix4x4 MakeAffineMatrix(const Vector3& scale, const Quaternion& quaternion, const Vector3& translate);
+Matrix4x4 MakeTransposeMatrix(const Matrix4x4 m);

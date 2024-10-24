@@ -1,5 +1,8 @@
 #pragma once
 #include"../Base/Log.h"
+//#include"../Math/Math.h"
+//#include"DKJEN/WorldTransform/WorldTransform.h"
+
 
 #include<Windows.h>
 #include <cstdint>
@@ -16,7 +19,7 @@
 #include<chrono>
 #include<random>
 #include<map>
-
+#include <span>
 
 #pragma comment(lib,"winmm.lib")
 
@@ -45,3 +48,5 @@
 using namespace std;
 using namespace std::chrono;
 using Microsoft::WRL::ComPtr;
+
+

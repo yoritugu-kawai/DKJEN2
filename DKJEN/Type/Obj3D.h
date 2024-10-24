@@ -3,39 +3,19 @@
 #include"../Base/CreateBufferResource.h"
 #include"../Math/Math.h"
 #include"../Base/DxCommon.h"
-//#include"../Base/SpritePSO.h"
-//#include"../Base/TexturePSO.h"
+
 #include"../Base/LightPSO.h"
 
 #include"../CameraProjection/CameraProjection.h"
 #include"../Camera/CameraData.h"
 #include"../WorldTransform/WorldTransform.h"
 #include"../Utilipy/Pch.h"
-//#include"../Skinning/Animation/Animation.h"
+
 
 #include<assimp/Importer.hpp>
 #include<assimp/scene.h>
 #include<assimp/postprocess.h>
-
-struct  Node
-{
-	QuaternionTransform transform;
-	Matrix4x4 localMatrix;
-	std::string name;
-	std::vector<Node> chidren;
-};
-
-struct MaterialData {
-	std::string textureFilePath;
-};
-
-struct ModelData
-{
-	std::vector<VertexData>vertices;
-	MaterialData material;
-	Node rootNode;
-	uint32_t tex;
-};
+#include"Animation3D.h"
 
 
 class Obj3D {
@@ -67,11 +47,11 @@ private:
 	ComPtr<ID3D12Resource> materialResource;
 
 	ComPtr<ID3D12Resource> lightResource;
-	
+	ComPtr<ID3D12Resource> indexResource;
 
 
 	D3D12_VERTEX_BUFFER_VIEW vertxBufferView{};
-	
+	D3D12_INDEX_BUFFER_VIEW indexBufferViewSprite;
 	ModelData modelData_;
 	Matrix4x4 matrix;
 	//TexProeerty  tex_;
