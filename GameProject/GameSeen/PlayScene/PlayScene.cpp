@@ -56,6 +56,10 @@ void PlayScene::Initialize()
 	objectData->Initialize(boxData_);
 	// カウントダウン
 	countdown = 3;
+
+	//コライダー　
+	collisionManager_ =make_unique<CollisionManager>();
+
 }
 
 
@@ -153,6 +157,20 @@ void PlayScene::AllCollisions() {
 		//}
 
 	}
+}
+
+void PlayScene::NewAllCollisions()
+{
+	collisionManager_->CollideClear();
+	const std::list<EnemyBullet*>& enemyBullets = enemy_->GetBullets();
+	
+	//collisionManager_->ColliderPush(player_);
+	collisionManager_->ColliderPush(enemy_);
+	for (EnemyBullet* bullet : enemyBullets) {
+		collisionManager_->ColliderPush(bullet);
+	}
+	collisionManager_->CheckAllCollisions();
+
 }
 
 void PlayScene::Operation()

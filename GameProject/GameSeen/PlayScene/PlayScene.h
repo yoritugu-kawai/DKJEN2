@@ -5,7 +5,7 @@
 #include"../../Block/Block.h"
 
 #include"../../GameManager/GameManager.h"
-
+#include"DKJEN/Collder/CollisionManager.h"
 
 ///#include"../DKJEN/DKJEN/Collision/ABB/ABB.h"
 #include"../../Management/TypeManagement.h"
@@ -27,6 +27,7 @@ public:
 private:
 	//当たり判定
 	void AllCollisions();
+	void NewAllCollisions();
 	//操作
 	void Operation();
 
@@ -62,8 +63,7 @@ private:
 	WorldTransform* worldTransform;
 	unique_ptr<Obj3D> objectData;
 	WorldTransform* sphereWorldTransform_;
-
-
+	unique_ptr<CollisionManager>collisionManager_ = nullptr;
 
 
 

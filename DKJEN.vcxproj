@@ -203,6 +203,7 @@ copy "$(WindowsSdkDir)bin\$(TargetPlatformVersion)\x64\dxil.dll" "$(TargetDir)dx
     <ClCompile Include="DKJEN\Base\WinApp.cpp" />
     <ClCompile Include="DKJEN\CameraProjection\CameraProjection.cpp" />
     <ClCompile Include="DKJEN\Camera\CameraData.cpp" />
+    <ClCompile Include="DKJEN\Collder\CollisionManager.cpp" />
     <ClCompile Include="DKJEN\FirstScene\FirstScene.cpp" />
     <ClCompile Include="DKJEN\Imgui\imguiManager.cpp" />
     <ClCompile Include="DKJEN\JsonLoad\JsonLoad.cpp" />
@@ -257,6 +258,9 @@ copy "$(WindowsSdkDir)bin\$(TargetPlatformVersion)\x64\dxil.dll" "$(TargetDir)dx
     <ClInclude Include="DKJEN\Base\WinApp.h" />
     <ClInclude Include="DKJEN\CameraProjection\CameraProjection.h" />
     <ClInclude Include="DKJEN\Camera\CameraData.h" />
+    <ClInclude Include="DKJEN\Collder\Collder.h" />
+    <ClInclude Include="DKJEN\Collder\CollisionConfig.h" />
+    <ClInclude Include="DKJEN\Collder\CollisionManager.h" />
     <ClInclude Include="DKJEN\FirstScene\FirstScene.h" />
     <ClInclude Include="DKJEN\Imgui\imguiManager.h" />
     <ClInclude Include="DKJEN\JsonLoad\JsonLoad.h" />
