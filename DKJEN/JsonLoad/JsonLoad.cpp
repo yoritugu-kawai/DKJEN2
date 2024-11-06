@@ -32,21 +32,21 @@ void JsonLoad::RecursiveJson(nlohmann::json& objects)
 	for (nlohmann::json& object : objects) {
 		assert(object.contains("type"));
 
-		std::string objectName = object["name"].get<std::string>();
-		std::string type = object["type"].get<std::string>();
-		ObjectData objectData;
+		string objectName = object["name"].get<string>();
+		string type = object["type"].get<string>();
+		unique_ptr<ObjectData> objectData=make_unique<ObjectData>();
 
 
-		objectData.object_ = make_shared<Obj3D>();
-		objectData.worldTransform_ = make_shared<WorldTransform>();
+		//objectData = make_shared<Obj3D>();
+		//objectData.worldTransform_ = make_shared<WorldTransform>();
 
-		objectData.worldTransform_->Create();
+		objectData->Initialize();
 
 		if (type.compare("MESH") == 0) {
 			if (object.contains("file_name")) {
-				objectData.fileName = object["file_name"];
-				ModelData boxData_ = LoadObjManagement::NewLoadObjFile("resource/",objectData.fileName);
-				objectData.object_->Initialize(boxData_);
+				objectData->SetFileName(object["file_name"]);
+				ModelData boxData_ = LoadObjManagement::NewLoadObjFile("resource/",objectData->GetFileName());
+				objectData->ObjectInitialize(boxData_);
 			}
 			nlohmann::json& transform = object["transform"];
 			//トランスフォームのパラメータ
@@ -57,7 +57,7 @@ void JsonLoad::RecursiveJson(nlohmann::json& objects)
 			transformEular.translate.z = (float)transform["translation"][1];
 
 			//rを入れる
-			const float DEREES_TO_RADIUS_ = (float)std::numbers::pi / 180.0f;
+			const float DEREES_TO_RADIUS_ = (float)numbers::pi / 180.0f;
 			transformEular.rotate.x = -(float)transform["rotation"][0] * DEREES_TO_RADIUS_;
 			transformEular.rotate.y = -(float)transform["rotation"][2] * DEREES_TO_RADIUS_;
 			transformEular.rotate.z = -(float)transform["rotation"][1] * DEREES_TO_RADIUS_;
@@ -68,29 +68,29 @@ void JsonLoad::RecursiveJson(nlohmann::json& objects)
 			transformEular.scale.z = (float)transform["scaling"][1];
 			
 			//srtを入れる
-			objectData.worldTransform_->SetScale(transformEular.scale);
-			objectData.worldTransform_->SetRotate(transformEular.rotate);
+			objectData->SetScale(transformEular.scale);
+			objectData->SetRotate(transformEular.rotate);
 			
-			objectData.worldTransform_->SetTranslate(transformEular.translate);
+			objectData->SetTranslate(transformEular.translate);
 
 			///当たり判定
 			if (object.contains("collider") == true) {
 
 				nlohmann::json& collider = object["collider"];
 				//種別を取得
-				std::string colliderType = collider["colliderType"].get<std::string>();
+			string colliderType = collider["colliderType"].get<string>();
 				
 
 				if (colliderType.compare("BOX") == 0) {
-					objectData.colliderType = collider["colliderType"];
+					objectData->SetColliderType(collider["colliderType"]);
 					//中心座標
-					objectData.center.x = (float)collider["center"][1];
-					objectData.center.y = (float)collider["center"][2];
-					objectData.center.z = -(float)collider["center"][0];
+					objectData->SetCenterX((float)collider["center"][1]);
+					objectData->SetCenterY((float)collider["center"][2]);
+					objectData->SetCenterZ(-(float)collider["center"][0]);
 					//サイズ
-					objectData.size.x = (float)collider["size"][1];
-					objectData.size.y = (float)collider["size"][2];
-					objectData.size.z = (float)collider["size"][0];
+					objectData->SetSizeX((float)collider["size"][1]);
+					objectData->SetSizeX((float)collider["size"][2]);
+					objectData->SetSizeX((float)collider["size"][0]);
 
 
 

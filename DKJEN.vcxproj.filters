@@ -313,6 +313,9 @@
     <ClCompile Include="DKJEN\Collder\CollisionManager.cpp">
       <Filter>DKJEN\Collder</Filter>
     </ClCompile>
+    <ClCompile Include="ObjectData.cpp">
+      <Filter>ソース ファイル</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="DKJEN\Utilipy\Input.h">
@@ -494,6 +497,9 @@
     </ClInclude>
     <ClInclude Include="DKJEN\Collder\CollisionManager.h">
       <Filter>DKJEN\Collder</Filter>
+    </ClInclude>
+    <ClInclude Include="ObjectData.h">
+      <Filter>DKJEN\JsonLoad</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>
