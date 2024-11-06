@@ -25,9 +25,9 @@ public:
 	void SetCenterY(float y) { center.y = y; }
 	void SetCenterZ(float z) { center.z = z; }
 
-	void SetizeX(float x) { center.x = x; }
-	void SetizeY(float y) { center.y = y; }
-	void SetizeZ(float z) { center.z = z; }
+	void SetSizeX(float x) { size.x = x; }
+	void SetSizeY(float y) { size.y = y; }
+	void SetSizeZ(float z) { size.z = z; }
 #pragma endregion
 private:
 	/// <summary>

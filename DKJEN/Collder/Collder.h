@@ -1,6 +1,6 @@
-﻿#pragma once
+#pragma once
 #include<format>
-#include"Vector3.h"
+#include"DKJEN/Math/Math.h"
 class Collider {
 public:
 	// セッター

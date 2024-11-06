@@ -67,110 +67,111 @@ void PlayScene::Initialize()
 
 void PlayScene::AllCollisions() {
 	// 衝突処理
-	for (auto& obj1 : LevelData->GetObjects()) {
-		auto& it = obj1.second;
-
-
-		if (it.fileName == "wood.obj") {
-			continue;
-		}
-
-
-		float left = static_cast<float>(it.center.x - it.size.x / 3.2 + it.worldTransform_->GetTranslate().x);
-		float right = static_cast<float>(it.center.x + it.size.x / 3.2 + it.worldTransform_->GetTranslate().x);
-		float down = static_cast<float>(it.center.y - it.size.y / 3.2 + it.worldTransform_->GetTranslate().y);
-		float up = static_cast<float>(it.center.y + it.size.y / 3.2 + it.worldTransform_->GetTranslate().y);
-		float front = static_cast<float>(it.center.z - it.size.z / 3.2 + it.worldTransform_->GetTranslate().z);
-		float back = static_cast<float>(it.center.z + it.size.z / 3.2 + it.worldTransform_->GetTranslate().z);
-
-
-#ifdef _DEBUG
-		ImGui::Begin("Branch");
-		ImGui::InputFloat("Left", &left);
-		ImGui::InputFloat("Right", &right);
-		ImGui::InputFloat("Down", &down);
-		ImGui::InputFloat("Up", &up);
-		ImGui::InputFloat("Front", &front);
-		ImGui::InputFloat("Back", &back);
-
-
-		ImGui::End();
-#endif // _DEBUG
-
-
-#ifdef _DEBUG
-		ImGui::Begin("Player");
-		Vector3 playerTranslate = worldTransform->GetTranslate();
-		ImGui::InputFloat3("tPos", &playerPos_.x);
-		ImGui::InputFloat3("Translate", &playerTranslate.x);
-		ImGui::End();
-#endif // _DEBUG
-
-
-
-		down;
-		up;
-		
-		Vector3 sphereWorldPosition = {
-			sphereWorldTransform_->GetMatWorld_().m[3][0],
-		sphereWorldTransform_->GetMatWorld_().m[3][1],
-		sphereWorldTransform_->GetMatWorld_().m[3][2] };
-
-		if (left < sphereWorldPosition.x &&
-			right > sphereWorldPosition.x) {
-			isInsideX = true;
-			
-		}
-		else {
-			isInsideX = false;
-		}
-
-		if (isInsideX == true) {
-			if (front <sphereWorldPosition.z &&
-				back> sphereWorldPosition.z) {
-				isInsideZ = true;
-				playerPos_.z = 0;
-				cPos.z = 0;
-			}
-			else {
-				isInsideZ = false;
-			}
-		}
-		
-
-#ifdef _DEBUG
-		ImGui::Begin("IsInside");
-		ImGui::Checkbox("X", &isInsideX);
-		ImGui::Checkbox("Z", &isInsideZ);
-
-		ImGui::End();
-#endif // _DEBUG
-
-
-		//if (left <  playerPos_.x &&
-		//	right > playerPos_.x &&
-		//	front < playerPos_.z &&
-		//	back> playerPos_.z) {
-		//	// 衝突処理
-		//	//tPos_.z = 0;
-		//	//cPos.z = 0;
-		//}
-
-	}
+//	for (auto& obj1 : LevelData->GetObjects()) {
+//		auto& it = obj1.second;
+//
+//
+//		if (it.fileName == "wood.obj") {
+//			continue;
+//		}
+//
+//
+//		float left = static_cast<float>(it.center.x - it.size.x / 3.2 + it.worldTransform_->GetTranslate().x);
+//		float right = static_cast<float>(it.center.x + it.size.x / 3.2 + it.worldTransform_->GetTranslate().x);
+//		float down = static_cast<float>(it.center.y - it.size.y / 3.2 + it.worldTransform_->GetTranslate().y);
+//		float up = static_cast<float>(it.center.y + it.size.y / 3.2 + it.worldTransform_->GetTranslate().y);
+//		float front = static_cast<float>(it.center.z - it.size.z / 3.2 + it.worldTransform_->GetTranslate().z);
+//		float back = static_cast<float>(it.center.z + it.size.z / 3.2 + it.worldTransform_->GetTranslate().z);
+//
+//
+//#ifdef _DEBUG
+//		ImGui::Begin("Branch");
+//		ImGui::InputFloat("Left", &left);
+//		ImGui::InputFloat("Right", &right);
+//		ImGui::InputFloat("Down", &down);
+//		ImGui::InputFloat("Up", &up);
+//		ImGui::InputFloat("Front", &front);
+//		ImGui::InputFloat("Back", &back);
+//
+//
+//		ImGui::End();
+//#endif // _DEBUG
+//
+//
+//#ifdef _DEBUG
+//		ImGui::Begin("Player");
+//		Vector3 playerTranslate = worldTransform->GetTranslate();
+//		ImGui::InputFloat3("tPos", &playerPos_.x);
+//		ImGui::InputFloat3("Translate", &playerTranslate.x);
+//		ImGui::End();
+//#endif // _DEBUG
+//
+//
+//
+//		down;
+//		up;
+//		
+//		Vector3 sphereWorldPosition = {
+//			sphereWorldTransform_->GetMatWorld_().m[3][0],
+//		sphereWorldTransform_->GetMatWorld_().m[3][1],
+//		sphereWorldTransform_->GetMatWorld_().m[3][2] };
+//
+//		if (left < sphereWorldPosition.x &&
+//			right > sphereWorldPosition.x) {
+//			isInsideX = true;
+//			
+//		}
+//		else {
+//			isInsideX = false;
+//		}
+//
+//		if (isInsideX == true) {
+//			if (front <sphereWorldPosition.z &&
+//				back> sphereWorldPosition.z) {
+//				isInsideZ = true;
+//				playerPos_.z = 0;
+//				cPos.z = 0;
+//			}
+//			else {
+//				isInsideZ = false;
+//			}
+//		}
+//		
+//
+//#ifdef _DEBUG
+//		ImGui::Begin("IsInside");
+//		ImGui::Checkbox("X", &isInsideX);
+//		ImGui::Checkbox("Z", &isInsideZ);
+//
+//		ImGui::End();
+//#endif // _DEBUG
+//
+//
+//		//if (left <  playerPos_.x &&
+//		//	right > playerPos_.x &&
+//		//	front < playerPos_.z &&
+//		//	back> playerPos_.z) {
+//		//	// 衝突処理
+//		//	//tPos_.z = 0;
+//		//	//cPos.z = 0;
+//		//}
+//
+//	}
 }
 
 void PlayScene::NewAllCollisions()
 {
-	collisionManager_->CollideClear();
-	const std::list<EnemyBullet*>& enemyBullets = enemy_->GetBullets();
-	
-	//collisionManager_->ColliderPush(player_);
-	collisionManager_->ColliderPush(enemy_);
-	for (EnemyBullet* bullet : enemyBullets) {
-		collisionManager_->ColliderPush(bullet);
-	}
-	collisionManager_->CheckAllCollisions();
+	for (auto& obj1 : LevelData->GetObjects()) {
+		auto& it = obj1.second;
 
+
+		if ( == "wood.obj") {
+			continue;
+		}
+		collisionManager_->CollideClear();
+	    collisionManager_->ColliderPush(it.center);
+		collisionManager_->CheckAllCollisions();
+	}
 }
 
 void PlayScene::Operation()
