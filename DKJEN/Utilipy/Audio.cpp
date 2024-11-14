@@ -962,9 +962,9 @@ void Audio::SendChannels(uint32_t audioHandle,uint32_t channelNumber){
 	XAUDIO2_SEND_DESCRIPTOR send = { 0, Audio::GetInstance()->submixVoice_[0]};
 	XAUDIO2_VOICE_SENDS sendlist = { channelNumber, &send };
 
-	HRESULT hr = {};
+	//HRESULT hr = {};
 	audioInformation_[audioHandle].pSourceVoice_->SetOutputVoices(&sendlist);
-	assert(SUCCEEDED(hr));
+	//assert(SUCCEEDED(hr));
 }
 
 void Audio::CreateReverb(uint32_t audioHandle,uint32_t channel) {

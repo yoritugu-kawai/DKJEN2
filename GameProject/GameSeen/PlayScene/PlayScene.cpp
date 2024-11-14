@@ -45,17 +45,30 @@ void PlayScene::Initialize()
 	uint32_t Tex1 = TexManager::LoadTexture("GameResource/Play/1.png");
 	count1 = new Sprite;
 	count1->Initialize(Tex1);
+
+	//ダッシュ
+	ran3 = new Sprite;
+	uint32_t ranTex3 = TexManager::LoadTexture("GameResource/Play/ran3.png");
+	ran3->Initialize(ranTex3);
+	uint32_t ranTex2 = TexManager::LoadTexture("GameResource/Play/ran2.png");
+	ran2 = new Sprite;
+	ran2->Initialize(ranTex2);
+	uint32_t ranTex1 = TexManager::LoadTexture("GameResource/Play/ran1.png");
+	ran1 = new Sprite;
+	ran1->Initialize(ranTex1);
 	//プレイヤー
 	objectData = std::make_unique<Obj3D>();
-	sphereWorldTransform_ = new WorldTransform();
+	sphereWorldTransform_ = make_unique< WorldTransform>();
 
 	sphereWorldTransform_->Create();
 	sphereWorldTransform_->SetScale({ 1.0f,1.0f,1.0f });
-
+	color = { 1,1,1,1 };
 	ModelData boxData_ = LoadObjManagement::NewLoadObjFile("resource/Sphere/", "Sphere.obj");
 	objectData->Initialize(boxData_);
 	// カウントダウン
 	countdown = 3;
+	startTime = 1.5f;
+	change = 1;
 }
 
 
@@ -65,6 +78,8 @@ void PlayScene::AllCollisions() {
 	// 衝突処理
 	for (auto& obj1 : LevelData->GetObjects()) {
 		auto& it = obj1.second;
+
+
 
 
 		if (it.fileName == "wood.obj") {
@@ -125,14 +140,35 @@ void PlayScene::AllCollisions() {
 			if (front <sphereWorldPosition.z &&
 				back> sphereWorldPosition.z) {
 				isInsideZ = true;
-				playerPos_.z = 0;
-				cPos.z = 0;
+				playerPos_.z -= 15;
+				cPos.z -= 15;
+				speed_ = 0;
+				startTime = 0;
+				color = { 1,0,0,1 };
+				change = 0;
+				
 			}
 			else {
 				isInsideZ = false;
+			
+				
+			}
+			
+		}
+		startTime += 0.1f;
+		if (speed_<=0.91f) {
+			if (startTime > 50) {
+
+				speed_ += 0.0003f;
+				
 			}
 		}
-		
+		if (speed_>=0.9f) {
+			speed_ = 1.0f;
+			color = { 1,1,1,1 };
+			change = 1;
+			
+		}
 
 #ifdef _DEBUG
 		ImGui::Begin("IsInside");
@@ -161,15 +197,20 @@ void PlayScene::Operation()
 	const float ROTATE_INTERVAL = 0.01f;
 
 	if (Input::GetInstance()->PushKey(DIK_RIGHT)) {
-		rotateTheta_ -= ROTATE_INTERVAL;
-		playerRot.z -= ROTATE_INTERVAL;
+		if (playerRot.z>=-0.68f) {
+			rotateTheta_ -= ROTATE_INTERVAL;
+			playerRot.z -= ROTATE_INTERVAL;
+		}
+		
 		//tPos_.x -= ROTATE_INTERVAL;
 
 	}
 	if (Input::GetInstance()->PushKey(DIK_LEFT)) {
-		rotateTheta_ += ROTATE_INTERVAL;
-		playerRot.z += ROTATE_INTERVAL;
-		//tPos_.x += ROTATE_INTERVAL;
+		if (playerRot.z <= 0.95f) {
+			rotateTheta_ += ROTATE_INTERVAL;
+			playerRot.z += ROTATE_INTERVAL;
+			//tPos_.x += ROTATE_INTERVAL;
+		}
 	}
 	if (Input::GetInstance()->PushKey(DIK_A)) {
 		rotateTheta_ += ROTATE_INTERVAL;
@@ -185,6 +226,7 @@ void PlayScene::Operation()
 
 void PlayScene::Move()
 {
+	//0.96,-0.7
 	animaionTime += 2.0f / 50.0f;
 	LevelData->Update(cameraData);
 	cameraData->Update();
@@ -253,7 +295,7 @@ void PlayScene::Move()
 	cPos.z = sphereNewTranslate.z + CAMERA_OFFSET_DISTANCE;
 
 
-	worldTransform->SetTranslate(tPos_);
+	worldTransform->SetTranslate(playerPos_);
 	worldTransform->SetRotate(playerRot);
 	worldTransform->UpdateMatrix(cameraData);
 	////Animation
@@ -278,11 +320,18 @@ void PlayScene::Move()
 void PlayScene::Update(GameManager* gameManager)
 {
 	countdown -= 1.0f/60;
-	if (countdown<=0) {
+	ranTime += 1.0f / 10;
+
+	if (ranTime <= 3 && ranTime >= 2) {
+		
+		ranTime = 0;
+	}
+	
+	//if (countdown<=0) {
 		Move();
 		
-	}
-	if (worldTransform->GetTranslate().z >= 940.0f) {
+	//}
+	if (worldTransform->GetTranslate().z >= 1400.0f) {
 		gameManager->ChangeState(new clearScene);
 
 	}
@@ -296,9 +345,9 @@ void PlayScene::Draw()
 	LevelData->Draw(cameraData);
 	//プレイヤー
 	//player->Draw({ 1,1,1,1 }, cameraData, worldTransform);
-	walk3d->Draw({ 1,1,1,1 }, cameraData, worldTransform, skinCluster);
+	walk3d->Draw(color, cameraData, worldTransform, skinCluster);
 
-
+	
 	//objectData->Draw({ 1,1,1,1 }, cameraData, sphereWorldTransform_);
 	//カウントダウン
 	if (countdown <= 3&& countdown >= 2) {
@@ -310,6 +359,20 @@ void PlayScene::Draw()
 	if (countdown <= 1 && countdown >= 0) {
 		count1->Draw({ 32.0f,32.0f,0, }, { 0,0,0 }, { 480,260,0 }, { 1,1,1,1 });
 	}
+	//ダッシュ
+	if (change==1) {
+
+	if (ranTime <= 3 && ranTime >= 2) {
+		ran3->Draw({ 128.0f,72.0f,0, }, { 0,0,0 }, { 0,0,0 }, { 1,1,1,1 });
+	}
+	if (ranTime <= 2 && ranTime >= 1) {
+		ran2->Draw({ 128.0f,72.0f,0, }, { 0,0,0 }, { 0,0,0 }, { 1,1,1,1 });
+	}
+	if (ranTime <= 1 && ranTime >= 0) {
+		ran1->Draw({ 128.0f,72.0f,0, }, { 0,0,0 }, { 0,0,0 }, { 1,1,1,1 });
+	}
+	}
+
 }
 
 void PlayScene::ImGui()

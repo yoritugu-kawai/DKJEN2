@@ -44,6 +44,7 @@ private:
 	Vector3 playerPos_;
 	Vector3 playerRot;
 	int time;
+	Vector4 color;
 
 	//カメラ
 	CameraData* cameraData;
@@ -61,7 +62,7 @@ private:
 	unique_ptr<Obj3D>player;
 	WorldTransform* worldTransform;
 	unique_ptr<Obj3D> objectData;
-	WorldTransform* sphereWorldTransform_;
+	unique_ptr<WorldTransform> sphereWorldTransform_;
 
 
 
@@ -81,4 +82,11 @@ private:
 	Sprite* count2;
 	Sprite* count1;
 	float countdown;
+	float startTime;
+	///ダッシュ
+	Sprite* ran3;
+	Sprite* ran2;
+	Sprite* ran1;
+	float change;
+	float ranTime;
 };

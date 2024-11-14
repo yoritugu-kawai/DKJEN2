@@ -4,7 +4,7 @@
 
 #include"../../Math/Math.h"
 
-#include"../../Utilipy/rektyk.h"
+#include"../../Utilipy/D3DResourceLeaker.h"
 
 #include"../../WorldTransform/WorldTransform.h"
 #include"../../CameraProjection/CameraProjection.h"

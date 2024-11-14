@@ -119,12 +119,6 @@
     <Filter Include="GameProject\GameSeen\PlayPlayScene">
       <UniqueIdentifier>{ef1e263d-edf5-407c-974d-cce7383fd4fd}</UniqueIdentifier>
     </Filter>
-    <Filter Include="DKJEN\Collision">
-      <UniqueIdentifier>{d98a8a46-8e5e-450c-9b2d-b1d53db251f8}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="DKJEN\Collision\ABB">
-      <UniqueIdentifier>{9ef0305a-c455-4dfe-b25d-621da9d4ad86}</UniqueIdentifier>
-    </Filter>
     <Filter Include="GameProject\GameSeen\clearScene">
       <UniqueIdentifier>{6ce61fcc-827e-49be-8862-e25596136953}</UniqueIdentifier>
     </Filter>
@@ -301,9 +295,6 @@
     <ClCompile Include="GameProject\GameSeen\PlayScene\PlayScene.cpp">
       <Filter>GameProject\GameSeen\PlayPlayScene</Filter>
     </ClCompile>
-    <ClCompile Include="DKJEN\Collision\ABB\ABB.cpp">
-      <Filter>DKJEN\Collision\ABB</Filter>
-    </ClCompile>
     <ClCompile Include="GameProject\GameSeen\SelectScene\SelectScene.cpp">
       <Filter>GameProject\GameSeen\SelectScene</Filter>
     </ClCompile>
@@ -321,10 +312,10 @@
     <ClInclude Include="DKJEN\Utilipy\Input.h">
       <Filter>DKJEN\Utilipy</Filter>
     </ClInclude>
-    <ClInclude Include="DKJEN\Utilipy\Pch.h">
+    <ClInclude Include="DKJEN\Utilipy\AdditionInclude.h">
       <Filter>DKJEN\Utilipy</Filter>
     </ClInclude>
-    <ClInclude Include="DKJEN\Utilipy\rektyk.h">
+    <ClInclude Include="DKJEN\Utilipy\D3DResourceLeaker.h">
       <Filter>DKJEN\Utilipy</Filter>
     </ClInclude>
     <ClInclude Include="DKJEN\Imgui\imguiManager.h">
@@ -435,7 +426,7 @@
     <ClInclude Include="DKJEN\Management\LoadObjManagement.h">
       <Filter>DKJEN\Management</Filter>
     </ClInclude>
-    <ClInclude Include="DKJEN\Utilipy\Sc.h">
+    <ClInclude Include="DKJEN\Utilipy\SkinCluster.h">
       <Filter>DKJEN\Utilipy</Filter>
     </ClInclude>
     <ClInclude Include="DKJEN\Skinning\Animation\Skinning.h">
@@ -476,9 +467,6 @@
     </ClInclude>
     <ClInclude Include="GameProject\GameSeen\PlayScene\PlayScene.h">
       <Filter>GameProject\GameSeen\PlayPlayScene</Filter>
-    </ClInclude>
-    <ClInclude Include="DKJEN\Collision\ABB\ABB.h">
-      <Filter>DKJEN\Collision\ABB</Filter>
     </ClInclude>
     <ClInclude Include="GameProject\GameSeen\clearScene\clearScene.h">
       <Filter>GameProject\GameSeen\clearScene</Filter>
