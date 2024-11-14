@@ -62,7 +62,7 @@ private:
 	unique_ptr<Obj3D>player;
 	WorldTransform* worldTransform;
 	unique_ptr<Obj3D> objectData;
-	WorldTransform* sphereWorldTransform_;
+	unique_ptr<WorldTransform> sphereWorldTransform_;
 
 
 

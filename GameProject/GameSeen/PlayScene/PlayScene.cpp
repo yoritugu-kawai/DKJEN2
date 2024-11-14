@@ -58,7 +58,7 @@ void PlayScene::Initialize()
 	ran1->Initialize(ranTex1);
 	//プレイヤー
 	objectData = std::make_unique<Obj3D>();
-	sphereWorldTransform_ = new WorldTransform();
+	sphereWorldTransform_ = make_unique< WorldTransform>();
 
 	sphereWorldTransform_->Create();
 	sphereWorldTransform_->SetScale({ 1.0f,1.0f,1.0f });
