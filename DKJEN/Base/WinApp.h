@@ -18,7 +18,7 @@ public :
 	static const int32_t Height() { return WinApp::GetInstance()->kClientHeight_; }
 	static HWND GetHwnd() { return WinApp::GetInstance()->hwnd_; }
 	static WNDCLASS GetWc() { return WinApp::GetInstance()->wc_; }
-     ~WinApp();
+    
 
 private:
 	MSG msg{};
