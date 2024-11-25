@@ -9,6 +9,10 @@
 /// </summary>
 void clearScene::Initialize()
 {
+	uint32_t tex = TexManager::LoadTexture("GameResource/clear/scol.png");
+	sprite = new Sprite;
+	sprite->Initialize(tex);
+
 	//プレイヤー
 	cameraData = new CameraData;
 	cameraData->Create();
@@ -139,13 +143,7 @@ void clearScene::Update(GameManager* gameManager)
 	worldTransform2->SetRotate(playerRot);
 	worldTransform3->SetRotate(playerRot);
 	cameraData->SetTranslate(cPos);
-#ifdef _DEBUG
-	ImGui::Begin("Color");
-	ImGui::DragFloat4("c", &animaionTime, 0.1f, -1.0f, 1.0f);
-	ImGui::DragFloat4("s", &playerPos_.x, 0.1f, -500.0f, 1000.0f);
-	ImGui::DragFloat3("p", &cPos.x, 1.0f, -1000.0f, 100.0f);
-	ImGui::End();
-#endif // _DEBUG
+
 	color.w -= 0.01f;
 	worldTransform->UpdateMatrix(cameraData);
 	worldTransform2->UpdateMatrix(cameraData);
@@ -160,7 +158,6 @@ void clearScene::Update(GameManager* gameManager)
 
 void clearScene::Draw()
 {
-
 	if (animaionTime <= 2.3) {
 
 		walk3d->Draw({ 1,1,1,1 }, cameraData, worldTransform, skinCluster);
@@ -189,8 +186,26 @@ void clearScene::Draw()
 	}
 
 	treeData_->Draw({ 1,1,1,1 }, cameraData, treeWorldTransform_);
+	sprite->Draw({ 128,72,0 }, { 0,0,0 }, { 0,0,0 }, {1,1,1,1});
 }
 
 void clearScene::ImGui()
 {
+#ifdef _DEBUG
+	ImGui::Begin("Color");
+	ImGui::DragFloat4("c", &animaionTime, 0.1f, -1.0f, 1.0f);
+	ImGui::DragFloat4("s", &playerPos_.x, 0.1f, -500.0f, 1000.0f);
+	ImGui::DragFloat3("p", &cPos.x, 1.0f, -1000.0f, 100.0f);
+	
+	float flame = ImGui::GetIO().Framerate;
+	if (ImGui::TreeNode("System"))
+	{
+
+
+		ImGui::Text("FPS::%f", flame);
+		ImGui::TreePop();
+	}
+	ImGui::End();
+
+#endif // _DEBUG
 }

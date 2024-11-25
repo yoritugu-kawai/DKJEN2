@@ -140,7 +140,7 @@ void StartSeen::Update(GameManager* gameManager)
 	}
 	if (next_ >= 60) {
 
-	gameManager->ChangeState(new clearScene);
+	gameManager->ChangeState(new PlayScene);
 	}
 }
 

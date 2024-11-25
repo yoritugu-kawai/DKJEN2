@@ -91,4 +91,7 @@ private:
 	WorldTransform* treeWorldTransform_;
 	Vector3 treePos;
 	Vector3 treeSize;
+	///
+	Sprite* sprite;
+	
 };
