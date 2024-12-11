@@ -12,7 +12,7 @@ void GameScene::Initialize()
 	cameraData->Update();
 
 	sky = make_unique<SkyBox>();
-	uint32_t skyBoxHandle_ = TexManager::DDSLoadTexture("rostock_laage_airport_4k.dds");
+	uint32_t skyBoxHandle_ = TexManager::DDSLoadTexture("test.dds");
 	sky->Initialize(skyBoxHandle_);
 	worldTransform = new WorldTransform;
 	worldTransform->Create();

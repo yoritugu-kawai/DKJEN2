@@ -169,7 +169,7 @@ DirectX::ScratchImage TexManager::DDSLoadTextureData(const std::string& filePath
 
 	}
 
-	
+	//ミップマップの作成
 	//ミップマップ...元画像より小さなテクスチャ群
 	DirectX::ScratchImage mipImages{};
 	//圧縮フォーマットかどうかを調べる
