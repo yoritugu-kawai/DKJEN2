@@ -214,14 +214,12 @@ uint32_t TexManager::LoadTexture(const std::string& filePath)
 	return TexManager::GetInstance()->imageDatas[filePath]->GetImageIndex();
 }
 const D3D12_RESOURCE_DESC TexManager::GetResourceDesc(uint32_t textureHandle) {
-	
 	auto it = handleToFilePathMap_.find(textureHandle);
 	if (it != handleToFilePathMap_.end()) {
 		const std::string& filePath = it->second;
-		return textureInformation_[filePath].resource_->GetDesc();
+		return imageDatas[filePath]->GetResource()->GetDesc();
 	}
 
-	// エラーハンドリング: 見つからなかった場合の空のリソース記述子を返す
 	return D3D12_RESOURCE_DESC{};
 }
 
@@ -281,7 +279,7 @@ uint32_t TexManager::DDSLoadTexture(const std::string& filePath) {
 		D3D12_SHADER_RESOURCE_VIEW_DESC srvDesc{};
 		srvDesc.Format = metadata.format;
 		srvDesc.Shader4ComponentMapping = D3D12_DEFAULT_SHADER_4_COMPONENT_MAPPING;
-		srvDesc.ViewDimension = D3D12_SRV_DIMENSION_TEXTURECUBE;
+		srvDesc.ViewDimension = D3D12_SRV_DIMENSION_TEXTURE2D;
 		srvDesc.Texture2D.MipLevels = UINT(metadata.mipLevels);
 		texData.index = DescriptorManagement::Allocate();
 
@@ -291,6 +289,9 @@ uint32_t TexManager::DDSLoadTexture(const std::string& filePath) {
 
 		TexManager::GetInstance()->imageDatas[filePath] =
 			std::make_unique<ImageData>(filePath, texData);
+
+
+		TexManager::GetInstance()->handleToFilePathMap_[texData.index] = filePath;
 	}
 	return TexManager::GetInstance()->imageDatas[filePath]->GetImageIndex();
 }

@@ -10,7 +10,7 @@ void Test::Initialize()
 void Test::Update(GameManager* gameManager)
 {
 	gameManager;
-	dds->SetScale({ 100,100 });
+	//dds->SetScale({ 10,10 });
 }
 
 void Test::Draw()

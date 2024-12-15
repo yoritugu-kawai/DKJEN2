@@ -14,6 +14,7 @@ public:
 	static DescriptorManagement* GetInstance();
 	static void Initialize();
 	static void CreateShaderResourceView(uint32_t index,D3D12_SHADER_RESOURCE_VIEW_DESC srvDesc, ComPtr <ID3D12Resource>textureResource);
+	static void CreateShaderResourceViewForTexture2D(const uint32_t& srvIndex, ID3D12Resource* pResource, const  DXGI_FORMAT& format, const UINT& mipLevels, const bool& isCubeMap);
 	static D3D12_CPU_DESCRIPTOR_HANDLE CPUDescriptorHandle( uint32_t index);
 	static D3D12_GPU_DESCRIPTOR_HANDLE GPUDescriptorHandle( uint32_t index);
 	static void rootParamerterCommand(UINT rootPatramerterIndex, uint32_t index);
