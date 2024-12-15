@@ -314,7 +314,10 @@
       <Filter>DKJEN\TexDeta\DDS</Filter>
     </ClCompile>
     <ClCompile Include="DKJEN\Type\DDSSprite.cpp">
-      <Filter>DKJEN\TexDeta\DDS</Filter>
+      <Filter>DKJEN\Type</Filter>
+    </ClCompile>
+    <ClCompile Include="Project\GameScene\test.cpp">
+      <Filter>ソース ファイル</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
@@ -491,6 +494,9 @@
     </ClInclude>
     <ClInclude Include="DKJEN\TexDeta\DDS\DDS.h" />
     <ClInclude Include="DKJEN\Type\DDSSprite.h" />
+    <ClInclude Include="Project\GameScene\test.h">
+      <Filter>GameProject\GameSeen</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <FxCompile Include="resource\hlsl\LightObject.PS.hlsl">

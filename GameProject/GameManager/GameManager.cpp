@@ -3,7 +3,7 @@
 void GameManager::Initialize()
 {
 	//初期化
-	iseen_ = new StartSeen;
+	iseen_ = new Test;
 	iseen_->Initialize();
 }
 

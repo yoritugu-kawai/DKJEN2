@@ -14,7 +14,7 @@
 #include"../Management/DescriptorManagement.h"
 #include"../../Base/CreateBufferResource.h"
 #include"../Math/Math.h"
-struct MaterialData {
+struct DDSMaterialData {
 	Vector4 color;
 	int32_t lightingKinds;
 	float padding[3];
@@ -166,7 +166,7 @@ private:
 	ComPtr<ID3D12Resource> vertexResource_ = nullptr;
 
 	ComPtr<ID3D12Resource> materialResource_ = nullptr;
-	MaterialData* materialData_ = nullptr;
+	DDSMaterialData* materialData_ = nullptr;
 
 	ComPtr<ID3D12Resource> transformationMatrixResource_ = nullptr;
 	TransformationMatrix* transformationMatrixData_ = nullptr;
@@ -220,9 +220,8 @@ private:
 
 	int textureIndex_ = 0;
 
-	//テクスチャの情報
-	D3D12_RESOURCE_DESC resourceDesc_{};
-
+	
+	
 	//サイズ
 	Vector2 size_ = {};
 
@@ -257,8 +256,14 @@ private:
 
 	//テクスチャハンドル
 	uint32_t textureHandle_ = 0u;
-
+	Vector4 transX_ = { 10.f,0.0f,0.0f,1.0f };
+	Vector4 transY_ = { 0.0f,10.0f,0.0f,1.0f };
+	Vector4 transXY_ = { 10.0f,10.0f,0.0f,1.0f };
 	//ブレンドモード
 	uint32_t blendModeNumber_ = 1;
+	Vector2 texcoord00LT = { 0.0f,0.0f };
+	Vector2 texcoord10RT = { 1.0f,0.0f };
+	Vector2 texcoord01LD = { 0.0f,1.0f };
+	Vector2 texcoord11RD = { 1.0f,1.0f };
 };
 

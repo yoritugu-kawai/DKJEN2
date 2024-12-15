@@ -44,7 +44,7 @@
 #include<xaudio2.h>
 #pragma comment(lib,"xaudio2.lib")
 #pragma endregion
-using namespace DirectX;
+
 using namespace std;
 using namespace std::chrono;
 using Microsoft::WRL::ComPtr;

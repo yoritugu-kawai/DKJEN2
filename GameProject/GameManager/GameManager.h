@@ -2,6 +2,7 @@
 #include"../GameSeen/StateSeen/IScene.h"
 #include"../GameSeen/StartSeen/StartSeen.h"
 #include"../GameSeen/PlayScene/PlayScene.h"
+#include"Project/GameScene/test.h"
 #include"../../DKJEN/FirstScene/FirstScene.h"
 class GameManager
 {
