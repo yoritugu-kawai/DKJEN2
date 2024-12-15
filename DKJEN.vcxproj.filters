@@ -125,6 +125,9 @@
     <Filter Include="DKJEN\FirstScene">
       <UniqueIdentifier>{7c5a56cd-d58d-483e-a02b-c67818f768fb}</UniqueIdentifier>
     </Filter>
+    <Filter Include="DKJEN\TexDeta\DDS">
+      <UniqueIdentifier>{6329410d-a419-4cf6-986b-2f4ddc18fab4}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <None Include=".editorconfig" />
@@ -307,6 +310,12 @@
     <ClCompile Include="DKJEN\Utilipy\Audio.cpp">
       <Filter>DKJEN\Utilipy</Filter>
     </ClCompile>
+    <ClCompile Include="DKJEN\TexDeta\DDS\DDS.cpp">
+      <Filter>DKJEN\TexDeta\DDS</Filter>
+    </ClCompile>
+    <ClCompile Include="DKJEN\Type\DDSSprite.cpp">
+      <Filter>DKJEN\TexDeta\DDS</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="DKJEN\Utilipy\Input.h">
@@ -480,6 +489,8 @@
     <ClInclude Include="DKJEN\Utilipy\AudioStruct.h">
       <Filter>DKJEN\Utilipy</Filter>
     </ClInclude>
+    <ClInclude Include="DKJEN\TexDeta\DDS\DDS.h" />
+    <ClInclude Include="DKJEN\Type\DDSSprite.h" />
   </ItemGroup>
   <ItemGroup>
     <FxCompile Include="resource\hlsl\LightObject.PS.hlsl">

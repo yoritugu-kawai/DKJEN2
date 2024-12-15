@@ -204,5 +204,5 @@ float LengthQuaternion(const Quaternion& q);
 float FLerp(float t, const float& s, const float& e);
 Quaternion QLerp(float t, const Quaternion& s, const Quaternion& e);
 Matrix4x4 MakeQuatAffineMatrix(const Vector3& scale, const Matrix4x4& rotate, const Vector3& translate);
-Matrix4x4 MakeAffineMatrix(const Vector3& scale, const Quaternion& quaternion, const Vector3& translate);
+//Matrix4x4 MakeAffineMatrix(const Vector3& scale, const Quaternion& quaternion, const Vector3& translate);
 Matrix4x4 MakeTransposeMatrix(const Matrix4x4 m);

@@ -67,6 +67,7 @@ class TexManager
 {
 public:
 	static TexManager* GetInstance();
+     const D3D12_RESOURCE_DESC GetResourceDesc(uint32_t textureHandle);
 
 	static void Initiluze();
 	static uint32_t LoadTexture(const std::string& filePath);
@@ -84,18 +85,35 @@ public:
 
 	static void ShaderResourceView();
 	static uint32_t GetDescriptorSizeSRV(){return TexManager::GetInstance()->descriptorSizeSRV;}
-	
-private:
 
+
+
+private:
+	struct TextureInformation {
+
+		//リソース
+		ComPtr<ID3D12Resource> resource_ = nullptr;
+		ComPtr<ID3D12Resource> internegiateResource_ = nullptr;
+
+		DirectX::ScratchImage mipImages_ = {};
+		D3D12_SHADER_RESOURCE_VIEW_DESC srvDesc_ = {};
+
+
+		//読み込んだテクスチャの名前
+		std::string name_ = {};
+
+		//テクスチャハンドル
+		uint32_t handle_ = 0;
+	};
 	DxCommon dxcommon_;
 
 	uint32_t descriptorSizeSRV;
 	uint32_t descriptorSizeRTV;
 	uint32_t descriptorSizeDSV;
-	
+	std::map<std::string, TextureInformation> textureInformation_{};
 	std::map<string, std::unique_ptr<ImageData>>imageDatas;
 	static bool CheckImageData(string filePath);
-
+	std::map<uint32_t, std::string> handleToFilePathMap_{};
 	///
 	
 };

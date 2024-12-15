@@ -986,17 +986,17 @@ Matrix4x4 MakeQuatAffineMatrix(const Vector3& scale, const Matrix4x4& rotate, co
 	result.m[3][3] = 1;
 	return result;
 }
-Matrix4x4 MakeAffineMatrix(const Vector3& scale, const Quaternion& quaternion, const Vector3& translate) {
-	Matrix4x4 result{};
-
-	Matrix4x4 scaleMatrix = MakeScaleMatrix(scale);
-	Matrix4x4 rotateMatrix = MakeRotateMatrix(quaternion);
-	Matrix4x4 translateMatrix = MakeTranslateMatrix(translate);
-
-	result = Multiply(scaleMatrix, Multiply(rotateMatrix, translateMatrix));
-
-	return result;
-}
+//Matrix4x4 MakeAffineMatrix(const Vector3& scale, const Quaternion& quaternion, const Vector3& translate) {
+//	Matrix4x4 result{};
+//
+//	Matrix4x4 scaleMatrix = MakeScaleMatrix(scale);
+//	Matrix4x4 rotateMatrix = MakeRotateMatrix(quaternion);
+//	Matrix4x4 translateMatrix = MakeTranslateMatrix(translate);
+//
+//	result = Multiply(scaleMatrix, Multiply(rotateMatrix, translateMatrix));
+//
+//	return result;
+//}
 Matrix4x4 MakeTransposeMatrix(const Matrix4x4 m) {
 	Matrix4x4 result = {};
 

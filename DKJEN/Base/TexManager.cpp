@@ -213,6 +213,17 @@ uint32_t TexManager::LoadTexture(const std::string& filePath)
 	//TexManager* texManager = TexManager::GetInstance();
 	return TexManager::GetInstance()->imageDatas[filePath]->GetImageIndex();
 }
+const D3D12_RESOURCE_DESC TexManager::GetResourceDesc(uint32_t textureHandle) {
+	
+	auto it = handleToFilePathMap_.find(textureHandle);
+	if (it != handleToFilePathMap_.end()) {
+		const std::string& filePath = it->second;
+		return textureInformation_[filePath].resource_->GetDesc();
+	}
+
+	// エラーハンドリング: 見つからなかった場合の空のリソース記述子を返す
+	return D3D12_RESOURCE_DESC{};
+}
 
 DirectX::ScratchImage TexManager::DDSLoadTextureData(const std::string& filePath) {
 
