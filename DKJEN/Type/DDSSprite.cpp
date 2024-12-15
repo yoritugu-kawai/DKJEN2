@@ -1,9 +1,5 @@
 #include "DDSSprite.h"
 
-#include "TextureManager.h"
-
-
-//動的配列
 #include <vector>
 
 
@@ -40,7 +36,7 @@ void DDSSprite::Initialize(uint32_t textureHandle, Vector3 position) {
 	color_ = { 1.0f,1.0f,1.0f,1.0f };
 
 
-	resourceDesc_ = TextureManager::GetInstance()->GetResourceDesc(textureHandle_);
+	resourceDesc_ = TexManager::GetInstance()->GetResourceDesc(textureHandle_);
 	size_ = { float(resourceDesc_.Width),float(resourceDesc_.Height) };
 
 
@@ -160,7 +156,7 @@ void DDSSprite::Draw() {
 	//遠視投影行列
 	Matrix4x4 viewMatrix = MakeIdentity4x4();
 
-	Matrix4x4 projectionMatrix = MakeOrthographicMatrix(0.0f, 0.0f, float(WindowsSetup::GetInstance()->GetClientWidth()), float(WindowsSetup::GetInstance()->GetClientHeight()), 0.0f, 100.0f);
+	Matrix4x4 projectionMatrix = MakeOrthographicMatrix(0.0f, 0.0f, float(WinApp::GetInstance()->Width()), float(WinApp::GetInstance()->Height()), 0.0f, 100.0f);
 
 	//WVP行列を作成
 	Matrix4x4 worldViewProjectionMatrixSprite = Multiply(worldMatrix, Multiply(viewMatrix, projectionMatrix));
@@ -180,38 +176,31 @@ void DDSSprite::Draw() {
 	materialData_->lightingKinds = 0;
 	materialData_->shininess = 0.0f;
 
-	Matrix4x4 uvTransformMatrix = Matrix4x4Calculation::MakeScaleMatrix(uvTransformSprite_.scale);
-	uvTransformMatrix = Matrix4x4Calculation::Multiply(uvTransformMatrix, Matrix4x4Calculation::MakeRotateZMatrix(uvTransformSprite_.rotate.z));
-	uvTransformMatrix = Matrix4x4Calculation::Multiply(uvTransformMatrix, Matrix4x4Calculation::MakeTranslateMatrix(uvTransformSprite_.translate));
+	Matrix4x4 uvTransformMatrix = MakeScaleMatrix(uvTransformSprite_.scale);
+	uvTransformMatrix = Multiply(uvTransformMatrix,MakeRotateZMatrix(uvTransformSprite_.rotate.z));
+	uvTransformMatrix = Multiply(uvTransformMatrix, MakeTranslateMatrix(uvTransformSprite_.translate));
 	materialData_->uvTransform = uvTransformMatrix;
-
-
+	PSOProperty pso_ = SpritePSO::GetInstance()->GetPSO().Texture;
+    ID3D12GraphicsCommandList* commandList = DxCommon::GetInstance()->GetCommandList();
 	//コマンドを積む
-	DirectXSetup::GetInstance()->GetCommandList()->SetGraphicsRootSignature(PipelineManager::GetInstance()->GetSpriteRootSignature().Get());
-	DirectXSetup::GetInstance()->GetCommandList()->SetPipelineState(PipelineManager::GetInstance()->GetSpriteGraphicsPipelineState().Get());
+	commandList->SetGraphicsRootSignature(pso_.rootSignature);
+	commandList->SetPipelineState(pso_.GraphicsPipelineState);
 
-
-	//RootSignatureを設定。PSOに設定しているけど別途設定が必要
-	DirectXSetup::GetInstance()->GetCommandList()->IASetVertexBuffers(0, 1, &vertexBufferView_);
-	//IBVを設定
-	DirectXSetup::GetInstance()->GetCommandList()->IASetIndexBuffer(&indexBufferView_);
-
-	//形状を設定。PSOに設定しているものとはまた別。同じものを設定すると考えよう
-	DirectXSetup::GetInstance()->GetCommandList()->IASetPrimitiveTopology(D3D_PRIMITIVE_TOPOLOGY_TRIANGLELIST);
-
-	//CBVを設定する
-	DirectXSetup::GetInstance()->GetCommandList()->SetGraphicsRootConstantBufferView(0, materialResource_->GetGPUVirtualAddress());
-	DirectXSetup::GetInstance()->GetCommandList()->SetGraphicsRootConstantBufferView(1, transformationMatrixResource_->GetGPUVirtualAddress());
+	commandList->IASetVertexBuffers(0, 1, &vertexBufferView_);
+	commandList->IASetIndexBuffer(&indexBufferView_);
+	commandList->IASetPrimitiveTopology(D3D_PRIMITIVE_TOPOLOGY_TRIANGLELIST);
+	commandList->SetGraphicsRootConstantBufferView(0, materialResource_->GetGPUVirtualAddress());
+	commandList->SetGraphicsRootConstantBufferView(1, transformationMatrixResource_->GetGPUVirtualAddress());
 
 
 	if (textureHandle_ != 0) {
-		TextureManager::GraphicsCommand(2, textureHandle_);
+		DescriptorManagement::rootParamerterCommand(2, textureHandle_);
 
 	}
 
 	//今度はこっちでドローコールをするよ
 	//描画(DrawCall)6個のインデックスを使用し1つのインスタンスを描画。
-	DirectXSetup::GetInstance()->GetCommandList()->DrawIndexedInstanced(6, 1, 0, 0, 0);
+	commandList->DrawIndexedInstanced(6, 1, 0, 0, 0);
 
 
 }
