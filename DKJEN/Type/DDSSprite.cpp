@@ -36,7 +36,9 @@ void DDSSprite::Initialize(uint32_t textureHandle, Vector3 position) {
 	color_ = { 1.0f,1.0f,1.0f,1.0f };
 
 
-	
+	resourceDesc_ = TexManager::GetInstance()->GetResourceDesc(textureHandle_);
+	size_ = { float(resourceDesc_.Width),float(resourceDesc_.Height) };
+
 
 
 	vertexResource_ = CreateBufferResource(sizeof(VertexData) * 6);
@@ -80,23 +82,58 @@ void DDSSprite::Draw() {
 
 	vertexResource_->Map(0, nullptr, reinterpret_cast<void**>(&vertexData_));
 
+	float left = (0.0f - anchorPoint_.x) * size_.x;
+	float right = (1.0f - anchorPoint_.x) * size_.x;
+	float top = (0.0f - anchorPoint_.y) * size_.y;
+	float bottom = (1.0f - anchorPoint_.y) * size_.y;
+
+
+	float texLeft = 0.0f;
+	float texRight = 1.0f;
+	float texTop = 0.0f;
+	float texBottom = 1.0f;
+
+
+	if (isUVSetting_ == true) {
+		//uv
+		texLeft = textureLeftTop_.x / resourceDesc_.Width;
+		texRight = (textureLeftTop_.x + textureSize_.x) / resourceDesc_.Width;
+		texTop = textureLeftTop_.y / resourceDesc_.Height;
+		texBottom = (textureLeftTop_.y + textureSize_.y) / resourceDesc_.Height;
+	}
+
+
+
+
+	//左右反転
+	if (isFlipX_ == true) {
+		left = -left;
+		right = -right;
+	}
+	//上下反転
+	if (isFlipY_ == true) {
+		top = -top;
+		bottom = -bottom;
+	}
+
+
 	//1枚目の三角形
 	//左下
-	vertexData_[LEFT_BOTTOM].position = { transX_ };
-	vertexData_[LEFT_BOTTOM].texcoord = { texcoord01LD };
+	vertexData_[LEFT_BOTTOM].position = { left,bottom,0.0f,1.0f };
+	vertexData_[LEFT_BOTTOM].texcoord = { texLeft,texBottom };
 
 	//左上
-	vertexData_[LEFT_TOP].position = { 0.0f,0.0f,0.0f,1.0f };
-	vertexData_[LEFT_TOP].texcoord = { texcoord00LT };
+	vertexData_[LEFT_TOP].position = { left,top,0.0f,1.0f };
+	vertexData_[LEFT_TOP].texcoord = { texLeft,texTop };
 
 	//右下
-	vertexData_[RIGHT_BOTTOM].position = { transXY_ };
-	vertexData_[RIGHT_BOTTOM].texcoord = { texcoord11RD };
+	vertexData_[RIGHT_BOTTOM].position = { right,bottom,0.0f,1.0f };
+	vertexData_[RIGHT_BOTTOM].texcoord = { texRight,texBottom };
 
 
 	//右上
-	vertexData_[RIGHT_TOP].position = { transX_ };
-	vertexData_[RIGHT_TOP].texcoord = { texcoord10RT };
+	vertexData_[RIGHT_TOP].position = { right,top,0.0f,1.0f };
+	vertexData_[RIGHT_TOP].texcoord = { texRight,texTop };
 
 
 
@@ -129,6 +166,8 @@ void DDSSprite::Draw() {
 
 	transformationMatrixResource_->Unmap(0, nullptr);
 
+
+	
 	materialResource_->Map(0, nullptr, reinterpret_cast<void**>(&materialData_));
 	materialData_->color = color_;
 	//ライティングしない
@@ -157,7 +196,6 @@ void DDSSprite::Draw() {
 
 	}
 
-	
 	commandList->DrawIndexedInstanced(6, 1, 0, 0, 0);
 
 
