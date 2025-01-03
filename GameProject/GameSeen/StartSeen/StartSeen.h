@@ -43,9 +43,9 @@ private:
 	WorldTransform* shurikenWorldTransform_;
 	Vector3 shurikenPos;
 	///手裏剣2
-	unique_ptr<Obj3D> shurikenData2_;
-	WorldTransform* shurikenWorldTransform2_;
-	Vector3 shurikenPos2;
+	unique_ptr<Obj3D> shurikenDataNext_;
+	WorldTransform* shurikenWorldTransformNext_;
+	Vector3 shurikenPosNext;
 	//スペース
 	unique_ptr<Obj3D> Space;
 	WorldTransform* SpaceWorldTransform_;
@@ -74,7 +74,7 @@ private:
 	//変数
 	Vector3 shurikenRot;
 	float speed_;
-	float speed2_;
+	float nextSpeed_;
 	bool stop_;
 	int next_;
 

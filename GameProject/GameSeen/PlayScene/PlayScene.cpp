@@ -69,6 +69,10 @@ void PlayScene::Initialize()
 	countdown = 3;
 	startTime = 1.5f;
 	change = 1;
+
+	//後ろに下がる
+	back = 15;
+	damagCeolor = { 1,0,0,1 };
 }
 
 
@@ -140,11 +144,11 @@ void PlayScene::AllCollisions() {
 			if (front <sphereWorldPosition.z &&
 				back> sphereWorldPosition.z) {
 				isInsideZ = true;
-				playerPos_.z -= 15;
-				cPos.z -= 15;
+				playerPos_.z -= back;
+				cPos.z -= back;
 				speed_ = 0;
 				startTime = 0;
-				color = { 1,0,0,1 };
+				color = damagCeolor;
 				change = 0;
 				
 			}

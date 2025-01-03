@@ -24,5 +24,6 @@ public:
 	void Gear();
 
 private:
+	//宣言
 	GameScene* game;
 };
