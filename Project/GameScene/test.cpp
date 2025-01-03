@@ -2,7 +2,7 @@
 
 void Test::Initialize()
 {
-	uint32_t tex = TexManager::GetInstance()->DDSLoadTexture("test.dds");
+	uint32_t tex = TexManager::GetInstance()->DDSLoadTexture("e.dds");
 	Vector3 position = { .x = 10.0f,.y = 10.0f,.z = 10.0f };
 	dds.reset(DDSSprite::Create(tex, position));
 }

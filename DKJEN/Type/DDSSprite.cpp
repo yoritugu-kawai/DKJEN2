@@ -70,20 +70,20 @@ void DDSSprite::Draw() {
 	//1枚目の三角形
 	//左下
 	vertexData_[LEFT_BOTTOM].position = { transX_ };
-	vertexData_[LEFT_BOTTOM].texcoord = { textureLeftTop_.x / resourceDesc_.Width,(textureLeftTop_.y + textureSize_.y) / resourceDesc_.Height };
+	vertexData_[LEFT_BOTTOM].texcoord = { 0.0f,1.0f };
 
 	//左上
 	vertexData_[LEFT_TOP].position = { 0.0f,0.0f,0.0f,1.0f };
-	vertexData_[LEFT_TOP].texcoord = { textureLeftTop_.x / resourceDesc_.Width,textureLeftTop_.y / resourceDesc_.Height };
+	vertexData_[LEFT_TOP].texcoord = { 0.0f,0.0f };
 
 	//右下
 	vertexData_[RIGHT_BOTTOM].position = { transXY_ };
-	vertexData_[RIGHT_BOTTOM].texcoord = { (textureLeftTop_.x + textureSize_.x) / resourceDesc_.Width,(textureLeftTop_.y + textureSize_.y) / resourceDesc_.Height };
+	vertexData_[RIGHT_BOTTOM].texcoord = { 1.0f,1.0f };
 
 
 	//右上
 	vertexData_[RIGHT_TOP].position = { transY_ };
-	vertexData_[RIGHT_TOP].texcoord = { (textureLeftTop_.x + textureSize_.x) / resourceDesc_.Width,textureLeftTop_.y / resourceDesc_.Height };
+	vertexData_[RIGHT_TOP].texcoord = { 1.0f,0.0f };
 
 
 
@@ -120,12 +120,11 @@ void DDSSprite::Draw() {
 	materialData_->color = color_;
 	//ライティングしない
 	materialData_->lightingKinds = 0;
-	materialData_->shininess = 0.0f;
-
 	Matrix4x4 uvTransformMatrix = MakeScaleMatrix(uvTransformSprite_.scale);
 	uvTransformMatrix = Multiply(uvTransformMatrix, MakeRotateZMatrix(uvTransformSprite_.rotate.z));
 	uvTransformMatrix = Multiply(uvTransformMatrix, MakeTranslateMatrix(uvTransformSprite_.translate));
 	materialData_->uvTransform = uvTransformMatrix;
+
 	PSOProperty pso_ = SpritePSO::GetInstance()->GetPSO().Texture;
 	ID3D12GraphicsCommandList* commandList = DxCommon::GetInstance()->GetCommandList();
 	//コマンドを積む

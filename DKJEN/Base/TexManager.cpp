@@ -276,21 +276,15 @@ uint32_t TexManager::DDSLoadTexture(const std::string& filePath) {
 		DDSUploadTexData(texData.resource.Get(), mipImages);
 
 		//テキストのシェダ－
-		D3D12_SHADER_RESOURCE_VIEW_DESC srvDesc{};
-		srvDesc.Format = metadata.format;
-		srvDesc.Shader4ComponentMapping = D3D12_DEFAULT_SHADER_4_COMPONENT_MAPPING;
-		srvDesc.ViewDimension = D3D12_SRV_DIMENSION_TEXTURE2D;
-		srvDesc.Texture2D.MipLevels = UINT(metadata.mipLevels);
 		texData.index = DescriptorManagement::Allocate();
 
-		DescriptorManagement::CreateShaderResourceView(texData.index, srvDesc, texData.resource);
-
+		DescriptorManagement::CreateShaderResourceViewForTexture2D(texData.index, texData.resource.Get(), metadata.format, UINT(metadata.mipLevels), metadata.IsCubemap());
 
 
 		TexManager::GetInstance()->imageDatas[filePath] =
 			std::make_unique<ImageData>(filePath, texData);
 
-
+		
 		TexManager::GetInstance()->handleToFilePathMap_[texData.index] = filePath;
 	}
 	return TexManager::GetInstance()->imageDatas[filePath]->GetImageIndex();

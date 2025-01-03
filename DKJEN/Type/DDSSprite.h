@@ -19,8 +19,7 @@ struct DDSMaterialData {
 	int32_t lightingKinds;
 	float padding[3];
 	Matrix4x4 uvTransform;
-	float shininess;
-	bool isEnviromentMap;
+	
 };
 class DDSSprite {
 public:
@@ -250,9 +249,9 @@ private:
 
 	//テクスチャハンドル
 	uint32_t textureHandle_ = 0u;
-	Vector4 transX_ = { 0.0f,720.0f,0.0f,1.0f };
-	Vector4 transY_ = { 1280.0f,720.0f,0.0f,1.0f };
-	Vector4 transXY_ = { 1280.0f,720.0f,0.0f,1.0f };
+	Vector4 transX_ = { 0.0f,700.0f,0.0f,1.0f };
+	Vector4 transY_ = { 1200.0f,0.0f,0.0f,1.0f };
+	Vector4 transXY_ = { 1200.0f,700.0f,0.0f,1.0f };
 	//ブレンドモード
 	uint32_t blendModeNumber_ = 1;
 	Vector2 texcoord00LT = { 0.0f,0.0f };
