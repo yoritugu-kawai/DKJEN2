@@ -89,6 +89,6 @@ private:
 	Sprite* ran1;
 	float change;
 	float ranTime;
-	float back;
+	float backDamag;
 	Vector4 damagCeolor;
 };

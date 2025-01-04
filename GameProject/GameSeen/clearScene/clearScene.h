@@ -71,13 +71,13 @@ private:
 	Vector4 color;
 	WorldTransform* worldTransform;
 	/// <summary>
-	/// /
+	/// /プレイヤーの踊り
 	/// </summary>
 	unique_ptr<Animation3D> walk3d2;
 	Vector3 playerPos2_;
 	WorldTransform* worldTransform2;
 	//
-
+	/////プレイヤーの踊り
 	unique_ptr<Animation3D> walk3d3;
 	Vector3 playerPos3_;
 	WorldTransform* worldTransform3;
