@@ -8,19 +8,34 @@
 
 
 ///#include"../DKJEN/DKJEN/Collision/ABB/ABB.h"
-#include"../../Management/TypeManagement.h"
-#include"../../Skinning/Animation/Skinning.h"
-#include"../../Skinning/Animation/Bone.h"
-#include"../../JsonLoad/JsonLoad.h"
+#include"../DKJEN/DKJEN/Management/TypeManagement.h"
+#include"../DKJEN/DKJEN/Skinning/Animation/Skinning.h"
+#include"../DKJEN/DKJEN/Skinning/Animation/Bone.h"
+#include"../DKJEN/DKJEN/JsonLoad/JsonLoad.h"
 class PlayScene :public IScene {
 public:
-	//初期化
+	//
+	/// <summary>
+	/// 初期化
+	/// </summary>
 	void Initialize()override;
-	//更新処理
+	
+	/// <summary>
+	/// //更新処理
+	/// </summary>
+	/// <param name="gameManager"></param>
 	void Update(GameManager* gameManager)override;
-	//描画
+	
+	/// <summary>
+	/// //描画
+	/// </summary>
+
 	void Draw()override;
-	//ImGui
+	
+	/// <summary>
+	/// //ImGui
+	/// </summary>
+
 	void ImGui()override;
 	//プレイヤーの動き
 	void Move();
@@ -30,8 +45,8 @@ private:
 	//操作
 	void Operation();
 
-	
-	
+
+
 	///プレイヤーのアニメーション
 	Skinning* skin;
 	Bone* bone;
@@ -51,10 +66,10 @@ private:
 	Vector3 cRot;
 	Vector3 cPos;
 	//CameraData* cameraAnime;
-	
+
 	//json
 	unique_ptr<JsonLoad>LevelData;
-	
+
 	//スカイボックス
 	unique_ptr<SkyBox> sky;
 
@@ -68,7 +83,7 @@ private:
 
 
 
-	
+
 
 
 	//デバッグ用。後で消す。
@@ -89,4 +104,6 @@ private:
 	Sprite* ran1;
 	float change;
 	float ranTime;
+	float backDamag;
+	Vector4 damagCeolor;
 };

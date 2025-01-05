@@ -47,6 +47,8 @@ void Input::NoneJoyState(XINPUT_STATE& state)
 	{
 		return;
 	}
+
+
 }
 bool Input::GetJoystickState(XINPUT_STATE& state)
 {

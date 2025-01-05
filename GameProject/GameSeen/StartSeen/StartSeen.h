@@ -9,13 +9,26 @@
 #include"../../../DKJEN/Type/Particle.h"
 class StartSeen:public IScene {
 public:
-	//初期化
+	/// <summary>
+		/// 初期化
+		/// </summary>
 	void Initialize()override;
-	//更新処理
+
+	/// <summary>
+	/// //更新処理
+	/// </summary>
+	/// <param name="gameManager"></param>
 	void Update(GameManager* gameManager)override;
-	//描画
+
+	/// <summary>
+	/// //描画
+	/// </summary>
+
 	void Draw()override;
-	//ImGui
+
+	/// <summary>
+	/// //ImGui
+	/// </summary>
 	void ImGui()override;
 	
 	void UpdateMatrix();
@@ -43,9 +56,9 @@ private:
 	WorldTransform* shurikenWorldTransform_;
 	Vector3 shurikenPos;
 	///手裏剣2
-	unique_ptr<Obj3D> shurikenData2_;
-	WorldTransform* shurikenWorldTransform2_;
-	Vector3 shurikenPos2;
+	unique_ptr<Obj3D> shurikenDataNext_;
+	WorldTransform* shurikenWorldTransformNext_;
+	Vector3 shurikenPosNext;
 	//スペース
 	unique_ptr<Obj3D> Space;
 	WorldTransform* SpaceWorldTransform_;
@@ -74,7 +87,7 @@ private:
 	//変数
 	Vector3 shurikenRot;
 	float speed_;
-	float speed2_;
+	float nextSpeed_;
 	bool stop_;
 	int next_;
 

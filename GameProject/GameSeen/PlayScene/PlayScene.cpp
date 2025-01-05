@@ -4,7 +4,13 @@ void PlayScene::Initialize()
 {
 
 	time = 12;
-	/////
+	/////カメラ
+	/*
+	初期化
+	更新
+	セッター回転
+	セッター座標
+	*/
 	cameraData = new CameraData;
 	cameraData->Create();
 	cameraData->Update();
@@ -69,6 +75,10 @@ void PlayScene::Initialize()
 	countdown = 3;
 	startTime = 1.5f;
 	change = 1;
+
+	//後ろに下がる
+	backDamag = 15;
+	damagCeolor = { 1,0,0,1 };
 }
 
 
@@ -81,12 +91,12 @@ void PlayScene::AllCollisions() {
 
 
 
-
+		//当たるオブジェクトの指定
 		if (it.fileName == "wood.obj") {
 			continue;
 		}
 
-
+		//それぞれの座標
 		float left = static_cast<float>(it.center.x - it.size.x / 3.2 + it.worldTransform_->GetTranslate().x);
 		float right = static_cast<float>(it.center.x + it.size.x / 3.2 + it.worldTransform_->GetTranslate().x);
 		float down = static_cast<float>(it.center.y - it.size.y / 3.2 + it.worldTransform_->GetTranslate().y);
@@ -118,15 +128,15 @@ void PlayScene::AllCollisions() {
 #endif // _DEBUG
 
 
-
+		//デバック用
 		down;
 		up;
-		
+		//座標のまとめ
 		Vector3 sphereWorldPosition = {
 			sphereWorldTransform_->GetMatWorld_().m[3][0],
 		sphereWorldTransform_->GetMatWorld_().m[3][1],
 		sphereWorldTransform_->GetMatWorld_().m[3][2] };
-
+		//条件式
 		if (left < sphereWorldPosition.x &&
 			right > sphereWorldPosition.x) {
 			isInsideX = true;
@@ -140,11 +150,11 @@ void PlayScene::AllCollisions() {
 			if (front <sphereWorldPosition.z &&
 				back> sphereWorldPosition.z) {
 				isInsideZ = true;
-				playerPos_.z -= 15;
-				cPos.z -= 15;
+				playerPos_.z -= backDamag;
+				cPos.z -= backDamag;
 				speed_ = 0;
 				startTime = 0;
-				color = { 1,0,0,1 };
+				color = damagCeolor;
 				change = 0;
 				
 			}
@@ -155,6 +165,8 @@ void PlayScene::AllCollisions() {
 			}
 			
 		}
+
+		//当たった時の後ろに下がる処理
 		startTime += 0.1f;
 		if (speed_<=0.91f) {
 			if (startTime > 50) {
@@ -193,7 +205,7 @@ void PlayScene::AllCollisions() {
 
 void PlayScene::Operation()
 {
-
+	//操作
 	const float ROTATE_INTERVAL = 0.01f;
 
 	if (Input::GetInstance()->PushKey(DIK_RIGHT)) {
@@ -213,13 +225,19 @@ void PlayScene::Operation()
 		}
 	}
 	if (Input::GetInstance()->PushKey(DIK_A)) {
-		rotateTheta_ += ROTATE_INTERVAL;
-		playerRot.z += ROTATE_INTERVAL;
+		if (playerRot.z <= 0.95f) {
+		
+			rotateTheta_ += ROTATE_INTERVAL;
+			playerRot.z += ROTATE_INTERVAL;
+		}
 
 	}
 	if (Input::GetInstance()->PushKey(DIK_D)) {
-		rotateTheta_ -= ROTATE_INTERVAL;
-		playerRot.z -= ROTATE_INTERVAL;
+		if (playerRot.z >= -0.68f) {
+			rotateTheta_ -= ROTATE_INTERVAL;
+			playerRot.z -= ROTATE_INTERVAL;
+		}
+
 	}
 
 }
@@ -227,39 +245,24 @@ void PlayScene::Operation()
 void PlayScene::Move()
 {
 	//0.96,-0.7
+	//アニメーション
 	animaionTime += 2.0f / 50.0f;
 	LevelData->Update(cameraData);
 	cameraData->Update();
 	//cameraAnime->Update();
-
+	
+	//当たり判定
 	AllCollisions();
 
-#ifdef _DEBUG
 
-	ImGui::Begin("camera");
-	ImGui::DragFloat3("c", &cRot.x, 0.1f, -100.0f, 100.0f);
-	ImGui::DragFloat3("p", &cPos.x, 1.0f, -1000.0f, 100.0f);
-	ImGui::End();
-
-	ImGui::Begin("Speed");
-	ImGui::DragFloat("c", &speed_, 1.0f, -100.0f, 100.0f);
-
-	ImGui::End();
-
-	ImGui::Begin("pos");
-	ImGui::DragFloat3("p", &playerPos_.x, 0.1f, -100.0f, 100.0f);
-	ImGui::DragFloat3("r", &playerRot.x, 0.1f, -100.0f, 100.0f);
-	ImGui::End();
-
-#endif // _DEBUG
-
+	///座標
 	cameraData->SetTranslate(cPos);
 	cameraData->SetRotate(cRot);
 
 	cRot = cameraData->GetRotate();
 	cPos = cameraData->GetTranslate();
 
-
+	//プレイヤーの動き
 	playerPos_.z += speed_;
 	cPos.z += speed_;
 
@@ -319,6 +322,7 @@ void PlayScene::Move()
 
 void PlayScene::Update(GameManager* gameManager)
 {
+	//次の更新処理
 	countdown -= 1.0f/60;
 	ranTime += 1.0f / 10;
 
@@ -377,5 +381,23 @@ void PlayScene::Draw()
 
 void PlayScene::ImGui()
 {
+#ifdef _DEBUG
+
+	ImGui::Begin("camera");
+	ImGui::DragFloat3("c", &cRot.x, 0.1f, -100.0f, 100.0f);
+	ImGui::DragFloat3("p", &cPos.x, 1.0f, -1000.0f, 100.0f);
+	ImGui::End();
+
+	ImGui::Begin("Speed");
+	ImGui::DragFloat("c", &speed_, 1.0f, -100.0f, 100.0f);
+
+	ImGui::End();
+
+	ImGui::Begin("pos");
+	ImGui::DragFloat3("p", &playerPos_.x, 0.1f, -100.0f, 100.0f);
+	ImGui::DragFloat3("r", &playerRot.x, 0.1f, -100.0f, 100.0f);
+	ImGui::End();
+
+#endif // _DEBUG
 }
 
