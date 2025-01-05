@@ -2,8 +2,8 @@
 #include"../Base/WinApp.h"
 #include"../Base/DxCommon.h"
 #include"../Base/Function.h"
-#include"../externals/DirectXTex/d3dx12.h"
-#include"../externals/DirectXTex/DirectXTex.h"
+#include"externals/DirectXTex/d3dx12.h"
+#include"externals/DirectXTex/DirectXTex.h"
 #include"../Base/TexManager.h"
 #define DESCRIPTER_MAX 64
 

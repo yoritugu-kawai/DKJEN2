@@ -225,14 +225,15 @@ void PlayScene::Operation()
 		}
 	}
 	if (Input::GetInstance()->PushKey(DIK_A)) {
-		if (playerRot.z >= -0.68f) {
+		if (playerRot.z <= 0.95f) {
+		
 			rotateTheta_ += ROTATE_INTERVAL;
 			playerRot.z += ROTATE_INTERVAL;
 		}
 
 	}
 	if (Input::GetInstance()->PushKey(DIK_D)) {
-		if (playerRot.z <= 0.95f) {
+		if (playerRot.z >= -0.68f) {
 			rotateTheta_ -= ROTATE_INTERVAL;
 			playerRot.z -= ROTATE_INTERVAL;
 		}

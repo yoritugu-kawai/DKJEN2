@@ -4,8 +4,8 @@
 #include"../Utilipy/D3DResourceLeaker.h"
 #include<json.hpp>
 #include"../Type/Animation3D.h"
-#include"../../Type/Obj3D.h"
-#include"../../Management/LoadObjManagement.h"
+#include"../DKJEN/DKJEN/Type/Obj3D.h"
+#include"../DKJEN/DKJEN/Management/LoadObjManagement.h"
 //#include"DKJEN/Collision/ABB/ABB.h"
 struct ObjectData {
 	/// <summary>

@@ -8,10 +8,10 @@
 
 
 ///#include"../DKJEN/DKJEN/Collision/ABB/ABB.h"
-#include"../../Management/TypeManagement.h"
-#include"../../Skinning/Animation/Skinning.h"
-#include"../../Skinning/Animation/Bone.h"
-#include"../../JsonLoad/JsonLoad.h"
+#include"../DKJEN/DKJEN/Management/TypeManagement.h"
+#include"../DKJEN/DKJEN/Skinning/Animation/Skinning.h"
+#include"../DKJEN/DKJEN/Skinning/Animation/Bone.h"
+#include"../DKJEN/DKJEN/JsonLoad/JsonLoad.h"
 class PlayScene :public IScene {
 public:
 	//
