@@ -4,7 +4,13 @@ void PlayScene::Initialize()
 {
 
 	time = 12;
-	/////
+	/////カメラ
+	/*
+	初期化
+	更新
+	セッター回転
+	セッター座標
+	*/
 	cameraData = new CameraData;
 	cameraData->Create();
 	cameraData->Update();
@@ -243,27 +249,11 @@ void PlayScene::Move()
 	LevelData->Update(cameraData);
 	cameraData->Update();
 	//cameraAnime->Update();
+	
 	//当たり判定
 	AllCollisions();
 
-#ifdef _DEBUG
 
-	ImGui::Begin("camera");
-	ImGui::DragFloat3("c", &cRot.x, 0.1f, -100.0f, 100.0f);
-	ImGui::DragFloat3("p", &cPos.x, 1.0f, -1000.0f, 100.0f);
-	ImGui::End();
-
-	ImGui::Begin("Speed");
-	ImGui::DragFloat("c", &speed_, 1.0f, -100.0f, 100.0f);
-
-	ImGui::End();
-
-	ImGui::Begin("pos");
-	ImGui::DragFloat3("p", &playerPos_.x, 0.1f, -100.0f, 100.0f);
-	ImGui::DragFloat3("r", &playerRot.x, 0.1f, -100.0f, 100.0f);
-	ImGui::End();
-
-#endif // _DEBUG
 	///座標
 	cameraData->SetTranslate(cPos);
 	cameraData->SetRotate(cRot);
@@ -390,5 +380,23 @@ void PlayScene::Draw()
 
 void PlayScene::ImGui()
 {
+#ifdef _DEBUG
+
+	ImGui::Begin("camera");
+	ImGui::DragFloat3("c", &cRot.x, 0.1f, -100.0f, 100.0f);
+	ImGui::DragFloat3("p", &cPos.x, 1.0f, -1000.0f, 100.0f);
+	ImGui::End();
+
+	ImGui::Begin("Speed");
+	ImGui::DragFloat("c", &speed_, 1.0f, -100.0f, 100.0f);
+
+	ImGui::End();
+
+	ImGui::Begin("pos");
+	ImGui::DragFloat3("p", &playerPos_.x, 0.1f, -100.0f, 100.0f);
+	ImGui::DragFloat3("r", &playerRot.x, 0.1f, -100.0f, 100.0f);
+	ImGui::End();
+
+#endif // _DEBUG
 }
 

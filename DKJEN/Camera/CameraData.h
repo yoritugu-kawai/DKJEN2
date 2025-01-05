@@ -1,6 +1,9 @@
 #pragma once
 #include"../Base/TexManager.h"
 #include"../CameraProjection/CameraProjection.h"
+namespace Engine::Manager
+{
+}
 class CameraData
 {
 public:

@@ -14,13 +14,26 @@
 #include"../../JsonLoad/JsonLoad.h"
 class clearScene :public IScene {
 public:
-	//初期化
+	/// <summary>
+	/// 初期化
+	/// </summary>
 	void Initialize()override;
-	//更新処理
+
+	/// <summary>
+	/// //更新処理
+	/// </summary>
+	/// <param name="gameManager"></param>
 	void Update(GameManager* gameManager)override;
-	//描画
+
+	/// <summary>
+	/// //描画
+	/// </summary>
+
 	void Draw()override;
-	//ImGui
+
+	/// <summary>
+	/// //ImGui
+	/// </summary>
 	void ImGui()override;
 private:
 
