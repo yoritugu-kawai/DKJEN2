@@ -58,13 +58,13 @@
   </ImportGroup>
   <PropertyGroup Label="UserMacros" />
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">
-    <IncludePath>$(ProjectDir)DKJEN\externals\json;$(ProjectDir)DKJEN\externals\imgui\ImGui;$(IncludePath)</IncludePath>
+    <IncludePath>$(ProjectDir)externals\json;$(ProjectDir)externals\imgui\ImGui;$(IncludePath)</IncludePath>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Demo|x64'">
-    <IncludePath>$(ProjectDir)DKJEN\externals\json;$(ProjectDir)DKJEN\externals\imgui\ImGui;$(IncludePath)</IncludePath>
+    <IncludePath>$(ProjectDir)externals\json;$(ProjectDir)externals\imgui\ImGui;$(IncludePath)</IncludePath>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'">
-    <IncludePath>$(ProjectDir)DKJEN\externals\json;$(ProjectDir)DKJEN\externals\imgui\ImGui;$(IncludePath)</IncludePath>
+    <IncludePath>$(ProjectDir)externals\json;$(ProjectDir)externals\imgui\ImGui;$(IncludePath)</IncludePath>
   </PropertyGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">
     <ClCompile>
@@ -74,7 +74,7 @@
       <ConformanceMode>true</ConformanceMode>
       <LanguageStandard>stdcpp20</LanguageStandard>
       <AdditionalOptions>/utf-8 %(AdditionalOptions)</AdditionalOptions>
-      <AdditionalIncludeDirectories>$(ProjectDir);$(ProjectDir)DKJEN\externals\assimp\include;%(AdditionalIncludeDirectories);$(ProjectDir)$DKJEN\Type\Obj3D</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>$(ProjectDir);$(ProjectDir)DKJEN\externals\assimp\include;%(AdditionalIncludeDirectories);$(ProjectDir)$DKJEN\Type\Obj3D;$(ProjectDir)externals\assimp\include</AdditionalIncludeDirectories>
       <RuntimeLibrary>MultiThreadedDebug</RuntimeLibrary>
       <MultiProcessorCompilation>true</MultiProcessorCompilation>
       <Optimization>Disabled</Optimization>
@@ -83,7 +83,7 @@
     <Link>
       <SubSystem>Windows</SubSystem>
       <GenerateDebugInformation>true</GenerateDebugInformation>
-      <AdditionalLibraryDirectories>$(ProjectDir)DKJEN\externals\assimp\lib\Debug;%(AdditionalLibraryDirectories)</AdditionalLibraryDirectories>
+      <AdditionalLibraryDirectories>$(ProjectDir)externals\assimp\lib\Debug;%(AdditionalLibraryDirectories)</AdditionalLibraryDirectories>
       <AdditionalDependencies>assimp-vc143-mtd.lib;%(AdditionalDependencies)</AdditionalDependencies>
     </Link>
     <PostBuildEvent>
@@ -102,7 +102,7 @@ copy "$(WindowsSdkDir)bin\$(TargetPlatformVersion)\x64\dxil.dll" "$(TargetDir)dx
       <ConformanceMode>true</ConformanceMode>
       <LanguageStandard>stdcpp20</LanguageStandard>
       <AdditionalOptions>/utf-8 %(AdditionalOptions)</AdditionalOptions>
-      <AdditionalIncludeDirectories>$(ProjectDir)DKJEN\externals\assimp\include;%(AdditionalIncludeDirectories);$(ProjectDir)$DKJEN\Type\Obj3D</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>$(ProjectDir)DKJEN\externals\assimp\include;%(AdditionalIncludeDirectories);$(ProjectDir)$DKJEN\Type\Obj3D;$(ProjectDir)externals\assimp\include</AdditionalIncludeDirectories>
       <RuntimeLibrary>MultiThreaded</RuntimeLibrary>
       <MultiProcessorCompilation>true</MultiProcessorCompilation>
       <Optimization>MinSpace</Optimization>
@@ -113,7 +113,7 @@ copy "$(WindowsSdkDir)bin\$(TargetPlatformVersion)\x64\dxil.dll" "$(TargetDir)dx
       <EnableCOMDATFolding>true</EnableCOMDATFolding>
       <OptimizeReferences>true</OptimizeReferences>
       <GenerateDebugInformation>true</GenerateDebugInformation>
-      <AdditionalLibraryDirectories>$(ProjectDir)DKJEN\externals\assimp\lib\Release;%(AdditionalLibraryDirectories)</AdditionalLibraryDirectories>
+      <AdditionalLibraryDirectories>$(ProjectDir)externals\assimp\lib\Release;%(AdditionalLibraryDirectories)</AdditionalLibraryDirectories>
       <AdditionalDependencies>assimp-vc143-mt.lib;%(AdditionalDependencies)</AdditionalDependencies>
     </Link>
     <PostBuildEvent>
@@ -132,7 +132,7 @@ copy "$(WindowsSdkDir)bin\$(TargetPlatformVersion)\x64\dxil.dll" "$(TargetDir)dx
       <ConformanceMode>true</ConformanceMode>
       <LanguageStandard>stdcpp20</LanguageStandard>
       <AdditionalOptions>/utf-8 %(AdditionalOptions)</AdditionalOptions>
-      <AdditionalIncludeDirectories>$(ProjectDir)DKJEN\externals\assimp\include;%(AdditionalIncludeDirectories);$(ProjectDir)$DKJEN\Type\Obj3D</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>$(ProjectDir)DKJEN\externals\assimp\include;%(AdditionalIncludeDirectories);$(ProjectDir)$DKJEN\Type\Obj3D;$(ProjectDir)externals\assimp\include</AdditionalIncludeDirectories>
       <MultiProcessorCompilation>true</MultiProcessorCompilation>
       <Optimization>Disabled</Optimization>
       <TreatWarningAsError>true</TreatWarningAsError>

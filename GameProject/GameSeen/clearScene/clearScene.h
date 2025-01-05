@@ -8,29 +8,29 @@
 #include"../../../DKJEN/Type/Particle.h"
 
 
-#include"../../Management/TypeManagement.h"
-#include"../../Skinning/Animation/Skinning.h"
-#include"../../Skinning/Animation/Bone.h"
-#include"../../JsonLoad/JsonLoad.h"
+#include"../DKJEN/DKJEN/Management/TypeManagement.h"
+#include"../DKJEN/DKJEN/Skinning/Animation/Skinning.h"
+#include"../DKJEN/DKJEN/Skinning/Animation/Bone.h"
+#include"../DKJEN/DKJEN/JsonLoad/JsonLoad.h"
 class clearScene :public IScene {
 public:
 	/// <summary>
 	/// 初期化
 	/// </summary>
 	void Initialize()override;
-
+	
 	/// <summary>
 	/// //更新処理
 	/// </summary>
 	/// <param name="gameManager"></param>
 	void Update(GameManager* gameManager)override;
-
+	
 	/// <summary>
 	/// //描画
 	/// </summary>
 
 	void Draw()override;
-
+	
 	/// <summary>
 	/// //ImGui
 	/// </summary>
