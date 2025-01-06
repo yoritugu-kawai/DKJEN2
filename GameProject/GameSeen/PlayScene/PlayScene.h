@@ -44,8 +44,8 @@ private:
 	void AllCollisions();
 	//操作
 	void Operation();
-
-
+	//特殊操作
+	void Gimmick();
 
 	///プレイヤーのアニメーション
 	Skinning* skin;
@@ -91,7 +91,7 @@ private:
 	bool isInsideZ = false;
 
 	float rotateTheta_ = 0.0f;
-	float speed_ = 0;
+	
 	///カウントダウン
 	Sprite* count3;
 	Sprite* count2;
@@ -106,4 +106,12 @@ private:
 	float ranTime;
 	float backDamag;
 	Vector4 damagCeolor;
+	float ROTATE_INTERVAL;
+	//特殊ギミック用
+	float standardTime;
+	float normalTime;
+	float actionTime;
+	float standardSpeed_;
+	float normalSpeed_;
+	float actionSpeed_;
 };

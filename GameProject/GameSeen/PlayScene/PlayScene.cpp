@@ -40,7 +40,7 @@ void PlayScene::Initialize()
 	//
 	playerPos_ = { 0.0f,0.0f,0.0f };
 	playerRot = { 0,0,0 };
-	speed_ = 1.0f;
+	
 	//カウントダウン
 	count3 = new Sprite;
 	uint32_t Tex3 = TexManager::LoadTexture("GameResource/Play/3.png");
@@ -71,6 +71,8 @@ void PlayScene::Initialize()
 	color = { 1,1,1,1 };
 	ModelData boxData_ = LoadObjManagement::NewLoadObjFile("resource/Sphere/", "Sphere.obj");
 	objectData->Initialize(boxData_);
+	ROTATE_INTERVAL = 0.01f;
+
 	// カウントダウン
 	countdown = 3;
 	startTime = 1.5f;
@@ -79,6 +81,13 @@ void PlayScene::Initialize()
 	//後ろに下がる
 	backDamag = 15;
 	damagCeolor = { 1,0,0,1 };
+	//そうさ　
+	normalTime = 2.0f / 50.0f;
+	actionTime = 2.0f / 200.0f;
+	standardTime = 0;
+	standardSpeed_ = 0.0f;
+	normalSpeed_ = 1.0f;
+	actionSpeed_ = 0.1f;
 }
 
 
@@ -152,7 +161,7 @@ void PlayScene::AllCollisions() {
 				isInsideZ = true;
 				playerPos_.z -= backDamag;
 				cPos.z -= backDamag;
-				speed_ = 0;
+				standardSpeed_ = 0;
 				startTime = 0;
 				color = damagCeolor;
 				change = 0;
@@ -167,16 +176,18 @@ void PlayScene::AllCollisions() {
 		}
 
 		//当たった時の後ろに下がる処理
-		startTime += 0.1f;
-		if (speed_<=0.91f) {
-			if (startTime > 50) {
+		if (change == 0) {
+			startTime += 0.1f;
+			if (standardSpeed_ <= 0.91f) {
+				if (startTime > 50) {
 
-				speed_ += 0.0003f;
-				
+					standardSpeed_ += 0.0003f;
+
+				}
 			}
 		}
-		if (speed_>=0.9f) {
-			speed_ = 1.0f;
+		if (standardSpeed_ >=0.9f) {
+			standardSpeed_ = 1.0f;
 			color = { 1,1,1,1 };
 			change = 1;
 			
@@ -206,7 +217,7 @@ void PlayScene::AllCollisions() {
 void PlayScene::Operation()
 {
 	//操作
-	const float ROTATE_INTERVAL = 0.01f;
+	
 
 	if (Input::GetInstance()->PushKey(DIK_RIGHT)) {
 		if (playerRot.z>=-0.68f) {
@@ -242,11 +253,31 @@ void PlayScene::Operation()
 
 }
 
+void PlayScene::Gimmick()
+{
+	if (Input::GetInstance()->PushKey(DIK_SPACE)) {
+		
+		standardTime= actionTime;
+		if (change == 1) {
+			standardSpeed_ = actionSpeed_;
+		}
+	}
+	else {
+		
+		standardTime= normalTime;
+		if (change == 1) {
+			standardSpeed_ = normalSpeed_;
+		}
+	}
+
+}
+
 void PlayScene::Move()
 {
+	Gimmick();
 	//0.96,-0.7
 	//アニメーション
-	animaionTime += 2.0f / 50.0f;
+	animaionTime += standardTime;
 	LevelData->Update(cameraData);
 	cameraData->Update();
 	//cameraAnime->Update();
@@ -263,8 +294,8 @@ void PlayScene::Move()
 	cPos = cameraData->GetTranslate();
 
 	//プレイヤーの動き
-	playerPos_.z += speed_;
-	cPos.z += speed_;
+	playerPos_.z += standardSpeed_;
+	cPos.z += standardSpeed_;
 
 
 
@@ -389,7 +420,7 @@ void PlayScene::ImGui()
 	ImGui::End();
 
 	ImGui::Begin("Speed");
-	ImGui::DragFloat("c", &speed_, 1.0f, -100.0f, 100.0f);
+	ImGui::DragFloat("c", &standardSpeed_, 1.0f, -100.0f, 100.0f);
 
 	ImGui::End();
 
