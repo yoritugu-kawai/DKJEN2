@@ -1,6 +1,7 @@
 #pragma once
 #include"DxCommon.h"
 #include"../Math/Math.h"
+
 #include"externals/imgui/ImGui/imgui.h"
 #include"externals/imgui/ImGui/imgui_impl_dx12.h"
 #include"externals/imgui/ImGui/imgui_impl_win32.h"
