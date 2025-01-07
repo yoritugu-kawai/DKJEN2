@@ -6,6 +6,9 @@
 #include"externals/imgui/ImGui/imgui_impl_dx12.h"
 #include"externals/imgui/ImGui/imgui_impl_win32.h"
 extern IMGUI_IMPL_API LRESULT ImGui_ImplWin32_WndProcHandler(HWND hwnd, UINT msg, WPARAM wParam, LPARAM lParam);
+namespace Engine::WinApp {
+
+
 class WinApp 
 {
 public :
@@ -30,5 +33,5 @@ private:
 	const int32_t kClientHeight_ = 720;
 	//ID3D12Debug1* deugController = nullptr;
 };
-
+}
 

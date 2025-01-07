@@ -1,4 +1,5 @@
 #include "CameraData.h"
+using namespace Engine::WinApp;
 
 void CameraData::Create()
 {
