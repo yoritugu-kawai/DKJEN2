@@ -16,7 +16,7 @@ void PlayScene::Initialize()
 	cameraData->Update();
 	cameraData->SetRotate({ 0,0,0 });
 	cameraData->SetTranslate({ 0,0,-20 });
-	worldTransform = new WorldTransform;
+	worldTransform =  WorldTransform;
 	worldTransform->Create();
 
 	LevelData = make_unique<JsonLoad>();
@@ -72,6 +72,31 @@ void PlayScene::Initialize()
 	ModelData boxData_ = LoadObjManagement::NewLoadObjFile("resource/Sphere/", "Sphere.obj");
 	objectData->Initialize(boxData_);
 	ROTATE_INTERVAL = 0.01f;
+	///2D画像
+	uint32_t texA = TexManager::LoadTexture("GameResource/Play/ki/A.png");
+	spriteA = make_unique <Sprite>();
+	spriteA->Initialize(texA);
+
+	uint32_t texAKi = TexManager::LoadTexture("GameResource/Play/ki/Aki.png");
+	spriteAKi = make_unique <Sprite>();
+	spriteAKi->Initialize(texAKi);
+
+	uint32_t texD = TexManager::LoadTexture("GameResource/Play/ki/D.png");
+	spriteD = make_unique <Sprite>();
+	spriteD->Initialize(texD);
+	
+	uint32_t texBKi = TexManager::LoadTexture("GameResource/Play/ki/Dki.png");
+	spriteDKi = make_unique <Sprite>();
+	spriteDKi->Initialize(texBKi);
+
+	uint32_t texSPACE = TexManager::LoadTexture("GameResource/Play/ki/Space.png");
+	spriteSPACE = make_unique <Sprite>();
+	spriteSPACE->Initialize(texSPACE);
+	
+	uint32_t texSPACEKi = TexManager::LoadTexture("GameResource/Play/ki/Spaceki.png");
+	spriteSPACEKi = make_unique <Sprite>();
+	spriteSPACEKi->Initialize(texSPACEKi);
+
 
 	// カウントダウン
 	countdown = 3;
@@ -88,6 +113,10 @@ void PlayScene::Initialize()
 	standardSpeed_ = 0.0f;
 	normalSpeed_ = 1.0f;
 	actionSpeed_ = 0.1f;
+	///
+	countdownBox = 1.0f / 60;
+	ranTimeBox = 1.0f / 10;
+	clear = 1400.0f;
 }
 
 
@@ -272,6 +301,7 @@ void PlayScene::Gimmick()
 
 }
 
+
 void PlayScene::Move()
 {
 	Gimmick();
@@ -354,8 +384,8 @@ void PlayScene::Move()
 void PlayScene::Update(GameManager* gameManager)
 {
 	//次の更新処理
-	countdown -= 1.0f/60;
-	ranTime += 1.0f / 10;
+	countdown -= countdownBox;
+	ranTime += ranTimeBox;
 
 	if (ranTime <= 3 && ranTime >= 2) {
 		
@@ -366,7 +396,7 @@ void PlayScene::Update(GameManager* gameManager)
 		Move();
 		
 	//}
-	if (worldTransform->GetTranslate().z >= 1400.0f) {
+	if (worldTransform->GetTranslate().z >= clear) {
 		gameManager->ChangeState(new clearScene);
 
 	}
@@ -376,17 +406,27 @@ void PlayScene::Update(GameManager* gameManager)
 
 void PlayScene::Draw()
 {
+	Draw2D();
 	//json
 	LevelData->Draw(cameraData);
 	//プレイヤー
 	//player->Draw({ 1,1,1,1 }, cameraData, worldTransform);
 	walk3d->Draw(color, cameraData, worldTransform, skinCluster);
 
-	
+	////UI
+	spriteA->Draw({ 5.0f,5.0f,0, }, { 0,0,0 }, { 450,500,0 }, { 1,1,1,1 });
+	spriteAKi->Draw({ 5.0f,5.0f,0, }, { 0,0,0 }, { 450,450,0 }, { 1,1,1,1 });
+	spriteD->Draw({ 5.0f,5.0f,0, }, { 0,0,0 }, { 800,500,0 }, { 1,1,1,1 });
+	spriteDKi->Draw({ 5.0f,5.0f,0, }, { 0,0,0 }, { 800,450,0 }, { 1,1,1,1 });
+
+	spriteSPACE->Draw({ 5.0f,5.0f,0, }, { 0,0,0 }, { 630,250,0 }, { 1,1,1,1 });
+	spriteSPACEKi->Draw({ 5.0f,5.0f,0, }, { 0,0,0 }, { 630,200,0 }, { 1,1,1,1 });
+
+
 	//objectData->Draw({ 1,1,1,1 }, cameraData, sphereWorldTransform_);
 	//カウントダウン
-	if (countdown <= 3&& countdown >= 2) {
-		count3->Draw({32.0f,32.0f,0, }, { 0,0,0 }, { 480,260,0 }, { 1,1,1,1 });
+	if (countdown <= 3 && countdown >= 2) {
+		count3->Draw({ 32.0f,32.0f,0, }, { 0,0,0 }, { 480,260,0 }, { 1,1,1,1 });
 	}
 	if (countdown <= 2 && countdown >= 1) {
 		count2->Draw({ 32.0f,32.0f,0, }, { 0,0,0 }, { 480,260,0 }, { 1,1,1,1 });
@@ -395,19 +435,24 @@ void PlayScene::Draw()
 		count1->Draw({ 32.0f,32.0f,0, }, { 0,0,0 }, { 480,260,0 }, { 1,1,1,1 });
 	}
 	//ダッシュ
-	if (change==1) {
+	if (change == 1) {
 
-	if (ranTime <= 3 && ranTime >= 2) {
-		ran3->Draw({ 128.0f,72.0f,0, }, { 0,0,0 }, { 0,0,0 }, { 1,1,1,1 });
+		if (ranTime <= 3 && ranTime >= 2) {
+			ran3->Draw({ 128.0f,72.0f,0, }, { 0,0,0 }, { 0,0,0 }, { 1,1,1,1 });
+		}
+		if (ranTime <= 2 && ranTime >= 1) {
+			ran2->Draw({ 128.0f,72.0f,0, }, { 0,0,0 }, { 0,0,0 }, { 1,1,1,1 });
+		}
+		if (ranTime <= 1 && ranTime >= 0) {
+			ran1->Draw({ 128.0f,72.0f,0, }, { 0,0,0 }, { 0,0,0 }, { 1,1,1,1 });
+		}
 	}
-	if (ranTime <= 2 && ranTime >= 1) {
-		ran2->Draw({ 128.0f,72.0f,0, }, { 0,0,0 }, { 0,0,0 }, { 1,1,1,1 });
-	}
-	if (ranTime <= 1 && ranTime >= 0) {
-		ran1->Draw({ 128.0f,72.0f,0, }, { 0,0,0 }, { 0,0,0 }, { 1,1,1,1 });
-	}
-	}
+	
 
+}
+void PlayScene::Draw2D()
+{
+	
 }
 
 void PlayScene::ImGui()

@@ -28,8 +28,8 @@ public:
 	
 	/// <summary>
 	/// //描画
+	/// 
 	/// </summary>
-
 	void Draw()override;
 	
 	/// <summary>
@@ -46,7 +46,8 @@ private:
 	void Operation();
 	//特殊操作
 	void Gimmick();
-
+	//UI
+	void Draw2D();
 	///プレイヤーのアニメーション
 	Skinning* skin;
 	Bone* bone;
@@ -76,11 +77,17 @@ private:
 	//プレイヤーの当たり判定
 	unique_ptr<Obj3D>player;
 	WorldTransform* worldTransform;
+
 	unique_ptr<Obj3D> objectData;
 	unique_ptr<WorldTransform> sphereWorldTransform_;
 
-
-
+	//
+	unique_ptr < Sprite> spriteA;
+	unique_ptr < Sprite> spriteAKi;
+	unique_ptr < Sprite> spriteD;
+	unique_ptr < Sprite> spriteDKi;
+	unique_ptr < Sprite> spriteSPACE;
+	unique_ptr < Sprite> spriteSPACEKi;
 
 
 
@@ -114,4 +121,8 @@ private:
 	float standardSpeed_;
 	float normalSpeed_;
 	float actionSpeed_;
+	///急遽変数
+	float countdownBox;
+	float ranTimeBox;
+	float clear;
 };
