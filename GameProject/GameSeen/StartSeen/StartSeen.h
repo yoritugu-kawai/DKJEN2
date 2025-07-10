@@ -7,6 +7,16 @@
 #include"../../../DKJEN/Camera/CameraData.h"
 #include"../../../DKJEN/Type/Obj3D.h"
 #include"../../../DKJEN/Type/Particle.h"
+
+
+#include"../StateSeen/IScene.h"
+#include"../clearScene/clearScene.h"
+#include"../../Player/Player.h"
+#include"../../Block/Block.h"
+#include"../DKJEN/DKJEN/Management/TypeManagement.h"
+#include"../DKJEN/DKJEN/Skinning/Animation/Skinning.h"
+#include"../DKJEN/DKJEN/Skinning/Animation/Bone.h"
+#include"../DKJEN/DKJEN/JsonLoad/JsonLoad.h"
 class StartSeen:public IScene {
 public:
 	/// <summary>
@@ -82,7 +92,21 @@ private:
 	WorldTransform* treeWorldTransform_;
 	Vector3 treePos;
 	Vector3 treeSize;
-	
+	//木
+	unique_ptr<Obj3D> treeData2_;
+	WorldTransform* treeWorldTransform2_;
+	Vector3 treePos2;
+	Vector3 treeSize2;
+	//木
+	unique_ptr<Obj3D> treeData3_;
+	WorldTransform* treeWorldTransform3_;
+	Vector3 treePos3;
+	Vector3 treeSize3;
+	//木
+	unique_ptr<Obj3D> treeData4_;
+	WorldTransform* treeWorldTransform4_;
+	Vector3 treePos4;
+	Vector3 treeSize4;
 	
 	//変数
 	Vector3 shurikenRot;
@@ -90,5 +114,15 @@ private:
 	float nextSpeed_;
 	bool stop_;
 	int next_;
-
+	///
+	Skinning* skin;
+	Bone* bone;
+	LoadObjManagement* lod;
+	unique_ptr<Animation3D> walk3d;
+	Animation animatio;
+	Skeleton skeleton;
+	SkinCluster  skinCluster;
+	float animaionTime;
+	WorldTransform* worldTransform;
+	Vector3 playerPos_;
 };

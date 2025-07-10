@@ -125,4 +125,5 @@ private:
 	float countdownBox;
 	float ranTimeBox;
 	float clear;
+	int disappear;
 };

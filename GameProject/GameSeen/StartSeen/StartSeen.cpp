@@ -152,6 +152,46 @@ void StartSeen::Initialize()
 	treeSize = { 0.1f,0.1f,0.1f };
 	treePos = { -5.0f,-1.5f,14.0f };
 
+	treeData2_ = std::make_unique<Obj3D>();
+	ModelData treeModel2_ = LoadObjManagement::NewLoadObjFile("GameResource/Title/Obj", "wood.obj");
+	treeData2_->Initialize(treeModel2_);
+	treeWorldTransform2_ = new WorldTransform();
+	treeWorldTransform2_->Create();
+	treeSize2 = { 0.1f,0.1f,0.1f };
+	treePos2 = { -1.0f,-1.5f,14.0f };
+	
+	treeData3_ = std::make_unique<Obj3D>();
+	ModelData treeModel3_ = LoadObjManagement::NewLoadObjFile("GameResource/Title/Obj", "wood.obj");
+	treeData3_->Initialize(treeModel3_);
+	treeWorldTransform3_ = new WorldTransform();
+	treeWorldTransform3_->Create();
+	treeSize3 = { 0.1f,0.1f,0.1f };
+	treePos3 = { 2.0f,-1.5f,14.0f };
+	
+	treeData4_ = std::make_unique<Obj3D>();
+	ModelData treeModel4_ = LoadObjManagement::NewLoadObjFile("GameResource/Title/Obj", "wood.obj");
+	treeData4_->Initialize(treeModel4_);
+	treeWorldTransform4_ = new WorldTransform();
+	treeWorldTransform4_->Create();
+	treeSize4 = { 0.1f,0.1f,0.1f };
+	treePos4 = { 5.0f,-1.5f,14.0f };
+	////
+	worldTransform = new  WorldTransform;
+	worldTransform->Create();
+
+	skin = new Skinning;
+	bone = new Bone;
+	lod = new LoadObjManagement;
+
+	walk3d = make_unique<Animation3D>();
+	ModelData modelData_ = LoadObjManagement::NewLoadObjFile("resource/hu", "Run.gltf");
+
+	animatio = lod->LoadAnimationFile("resource/hu", "Run.gltf");
+	skeleton = bone->CreateSkeleton(modelData_.rootNode);
+	skinCluster = skin->CreateSkinCluster(skeleton, modelData_);
+	walk3d->Initialize(modelData_);
+	playerPos_ = { -5.0f,-8.4f,12.0f };
+	
 
 	//
 	speed_ = 0.02f;
@@ -161,9 +201,21 @@ void StartSeen::Initialize()
 
 void StartSeen::Update(GameManager* gameManager)
 {
+	playerPos_.x += 0.1f;
+	if (playerPos_.x>=5) {
+		playerPos_.x = -5;
+	}
 	UpdateMatrix();
 	Set();
-	
+	animaionTime += 1.0f / 60;
+	bone->ApplyAnimation(skeleton, animatio, animaionTime);
+	//Skeleton
+
+	bone->Update(skeleton);
+	//SkinCluster
+
+	skin->SkinUpdate(skinCluster, skeleton);
+
 
 	//手裏剣の回転
 	shurikenRot.z += 0.2f;
@@ -213,6 +265,9 @@ void StartSeen::Draw()
 {
 	//木のモデル
 	treeData_->Draw({ 1,1,1,1 }, cameraData, treeWorldTransform_);
+	treeData2_->Draw({ 1,1,1,1 }, cameraData, treeWorldTransform2_);
+	treeData3_->Draw({ 1,1,1,1 }, cameraData, treeWorldTransform3_);
+	treeData4_->Draw({ 1,1,1,1 }, cameraData, treeWorldTransform4_);
 	//地面のモデル
 	floorData_->Draw({ 1,1,1,1 }, cameraData, floorWorldTransform_);
 	//タイトルのモデル
@@ -222,6 +277,7 @@ void StartSeen::Draw()
 	//手裏剣2のモデル
 	shurikenDataNext_->Draw({ 1,1,1,1 }, cameraData, shurikenWorldTransformNext_);
 	//ドンとスペース
+	//walk3d->Draw(color, cameraData, worldTransform, skinCluster);
 	if (come==true) {
 	doData_->Draw({ 1,1,1,1 }, cameraData, doWorldTransform_);
 	nData_->Draw({ 1,1,1,1 }, cameraData, nWorldTransform_);
@@ -246,7 +302,7 @@ void StartSeen::ImGui()
 
 	ImGui::Begin("shuriken");
 	ImGui::DragFloat3("s", &treeSize.x, 0.1f, -1000.0f, 100.0f);
-	ImGui::DragFloat3("p", &treePos.x, 0.1f, -1000.0f, 100.0f);
+	ImGui::DragFloat3("p", &playerPos_.x, 0.1f, -1000.0f, 100.0f);
 	ImGui::End();
 #endif // _DEBUG
 }
@@ -271,9 +327,14 @@ void StartSeen::UpdateMatrix()
 	floorWorldTransform_->UpdateMatrix(cameraData);
 	//木座標のアップデート
 	treeWorldTransform_->UpdateMatrix(cameraData);
-	
+	//木座標のアップデート
+	treeWorldTransform2_->UpdateMatrix(cameraData);
+	//木座標のアップデート
+	treeWorldTransform3_->UpdateMatrix(cameraData);
+	//木座標のアップデート
+	treeWorldTransform4_->UpdateMatrix(cameraData);
 	cameraData->SetTranslate(cPos);
-
+	 worldTransform->UpdateMatrix(cameraData);
 }
 
 void StartSeen::Set()
@@ -292,8 +353,17 @@ void StartSeen::Set()
 	floorWorldTransform_->SetTranslate(floorPos);
 	///木座標の読み込み
 	treeWorldTransform_->SetTranslate(treePos);
+	///木座標の読み込み
+	treeWorldTransform2_->SetTranslate(treePos2);
+	///木座標の読み込み
+	treeWorldTransform3_->SetTranslate(treePos3);
+	///木座標の読み込み
+	treeWorldTransform4_->SetTranslate(treePos4);
 	//地面大きさの読み込み
 	floorWorldTransform_->SetScale(floorSize);
 	//カメラ座標の読み込み
 	cameraData->SetTranslate(cPos);
+
+
+	worldTransform->SetTranslate({ playerPos_ });
 }

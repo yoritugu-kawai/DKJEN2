@@ -16,7 +16,7 @@ void PlayScene::Initialize()
 	cameraData->Update();
 	cameraData->SetRotate({ 0,0,0 });
 	cameraData->SetTranslate({ 0,0,-20 });
-	worldTransform =  WorldTransform;
+	worldTransform = new  WorldTransform;
 	worldTransform->Create();
 
 	LevelData = make_unique<JsonLoad>();
@@ -71,7 +71,7 @@ void PlayScene::Initialize()
 	color = { 1,1,1,1 };
 	ModelData boxData_ = LoadObjManagement::NewLoadObjFile("resource/Sphere/", "Sphere.obj");
 	objectData->Initialize(boxData_);
-	ROTATE_INTERVAL = 0.01f;
+	ROTATE_INTERVAL = 0.02f;
 	///2D画像
 	uint32_t texA = TexManager::LoadTexture("GameResource/Play/ki/A.png");
 	spriteA = make_unique <Sprite>();
@@ -117,6 +117,7 @@ void PlayScene::Initialize()
 	countdownBox = 1.0f / 60;
 	ranTimeBox = 1.0f / 10;
 	clear = 1400.0f;
+	disappear = 1;
 }
 
 
@@ -284,8 +285,9 @@ void PlayScene::Operation()
 
 void PlayScene::Gimmick()
 {
+	disappear = 1;
 	if (Input::GetInstance()->PushKey(DIK_SPACE)) {
-		
+		disappear = 0;
 		standardTime= actionTime;
 		if (change == 1) {
 			standardSpeed_ = actionSpeed_;
@@ -435,19 +437,20 @@ void PlayScene::Draw()
 		count1->Draw({ 32.0f,32.0f,0, }, { 0,0,0 }, { 480,260,0 }, { 1,1,1,1 });
 	}
 	//ダッシュ
-	if (change == 1) {
+	if (disappear == 1) {
+		if (change == 1) {
 
-		if (ranTime <= 3 && ranTime >= 2) {
-			ran3->Draw({ 128.0f,72.0f,0, }, { 0,0,0 }, { 0,0,0 }, { 1,1,1,1 });
-		}
-		if (ranTime <= 2 && ranTime >= 1) {
-			ran2->Draw({ 128.0f,72.0f,0, }, { 0,0,0 }, { 0,0,0 }, { 1,1,1,1 });
-		}
-		if (ranTime <= 1 && ranTime >= 0) {
-			ran1->Draw({ 128.0f,72.0f,0, }, { 0,0,0 }, { 0,0,0 }, { 1,1,1,1 });
+			if (ranTime <= 3 && ranTime >= 2) {
+				ran3->Draw({ 128.0f,72.0f,0, }, { 0,0,0 }, { 0,0,0 }, { 1,1,1,1 });
+			}
+			if (ranTime <= 2 && ranTime >= 1) {
+				ran2->Draw({ 128.0f,72.0f,0, }, { 0,0,0 }, { 0,0,0 }, { 1,1,1,1 });
+			}
+			if (ranTime <= 1 && ranTime >= 0) {
+				ran1->Draw({ 128.0f,72.0f,0, }, { 0,0,0 }, { 0,0,0 }, { 1,1,1,1 });
+			}
 		}
 	}
-	
 
 }
 void PlayScene::Draw2D()
