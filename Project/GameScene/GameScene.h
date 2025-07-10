@@ -17,6 +17,7 @@ private:
 	/// <summary>
 	/// ゲームまとめ
 	/// </summary>
-
+	int Count_ = 0;
+	float time_ = 0;
 };
 
