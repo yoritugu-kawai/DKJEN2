@@ -21,5 +21,5 @@ public:
 
 private:
 	//宣言
-	
+	GameScene* game;
 };

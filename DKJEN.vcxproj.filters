@@ -65,9 +65,6 @@
     <Filter Include="GameProject">
       <UniqueIdentifier>{27acabb8-0b2c-46ab-81b3-bb38ba355ed6}</UniqueIdentifier>
     </Filter>
-    <Filter Include="GameProject\PLayer">
-      <UniqueIdentifier>{7bce0c8f-fd6e-4a3a-a920-8b3d1b6dc9a1}</UniqueIdentifier>
-    </Filter>
     <Filter Include="GameProject\GameSeen">
       <UniqueIdentifier>{9bc9cb5b-0eb8-4d77-a6dd-8e306d7bb627}</UniqueIdentifier>
     </Filter>
@@ -79,9 +76,6 @@
     </Filter>
     <Filter Include="GameProject\GameSeen\IScene">
       <UniqueIdentifier>{4ec2fd1e-22ed-42d1-b495-58e00011cbd8}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="GameProject\Block">
-      <UniqueIdentifier>{00091886-7b6b-4e45-bbb9-8b919b0f7330}</UniqueIdentifier>
     </Filter>
     <Filter Include="DKJEN\PostEffect">
       <UniqueIdentifier>{9aa792d5-5c85-47f8-9ae9-e7b7991a4970}</UniqueIdentifier>
@@ -112,9 +106,6 @@
     </Filter>
     <Filter Include="Project\GameScene">
       <UniqueIdentifier>{fde56c3e-5949-4daf-bc06-6b5718261d22}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="GameProject\GameSeen\SelectScene">
-      <UniqueIdentifier>{260d44ec-ee28-4de5-a938-357b9997e1d7}</UniqueIdentifier>
     </Filter>
     <Filter Include="GameProject\GameSeen\PlayPlayScene">
       <UniqueIdentifier>{ef1e263d-edf5-407c-974d-cce7383fd4fd}</UniqueIdentifier>
@@ -235,17 +226,11 @@
     <ClCompile Include="DKJEN\Base\CreateBufferResource.cpp">
       <Filter>DKJEN\Base\CreateBufferResource</Filter>
     </ClCompile>
-    <ClCompile Include="GameProject\Player\Player.cpp">
-      <Filter>GameProject\PLayer</Filter>
-    </ClCompile>
     <ClCompile Include="GameProject\GameSeen\StartSeen\StartSeen.cpp">
       <Filter>GameProject\GameSeen\StartSeen</Filter>
     </ClCompile>
     <ClCompile Include="GameProject\GameManager\GameManager.cpp">
       <Filter>GameProject\GameManager</Filter>
-    </ClCompile>
-    <ClCompile Include="GameProject\Block\Block.cpp">
-      <Filter>GameProject\Block</Filter>
     </ClCompile>
     <ClCompile Include="DKJEN\Utilipy\CSVLoad.cpp">
       <Filter>DKJEN\Utilipy</Filter>
@@ -294,9 +279,6 @@
     </ClCompile>
     <ClCompile Include="GameProject\GameSeen\PlayScene\PlayScene.cpp">
       <Filter>GameProject\GameSeen\PlayPlayScene</Filter>
-    </ClCompile>
-    <ClCompile Include="GameProject\GameSeen\SelectScene\SelectScene.cpp">
-      <Filter>GameProject\GameSeen\SelectScene</Filter>
     </ClCompile>
     <ClCompile Include="GameProject\GameSeen\clearScene\clearScene.cpp">
       <Filter>GameProject\GameSeen\clearScene</Filter>
@@ -396,9 +378,6 @@
     <ClInclude Include="DKJEN\Type\Particle.h">
       <Filter>DKJEN\Type</Filter>
     </ClInclude>
-    <ClInclude Include="GameProject\Player\Player.h">
-      <Filter>GameProject\PLayer</Filter>
-    </ClInclude>
     <ClInclude Include="GameProject\GameSeen\StartSeen\StartSeen.h">
       <Filter>GameProject\GameSeen\StartSeen</Filter>
     </ClInclude>
@@ -407,9 +386,6 @@
     </ClInclude>
     <ClInclude Include="GameProject\GameManager\GameManager.h">
       <Filter>GameProject\GameManager</Filter>
-    </ClInclude>
-    <ClInclude Include="GameProject\Block\Block.h">
-      <Filter>GameProject\Block</Filter>
     </ClInclude>
     <ClInclude Include="DKJEN\Utilipy\CSVLoad.h">
       <Filter>DKJEN\Utilipy</Filter>
@@ -461,9 +437,6 @@
     </ClInclude>
     <ClInclude Include="DKJEN\Shader\CompileShaderManager.h">
       <Filter>DKJEN\Shader</Filter>
-    </ClInclude>
-    <ClInclude Include="GameProject\GameSeen\SelectScene\SelectScene.h">
-      <Filter>GameProject\GameSeen\SelectScene</Filter>
     </ClInclude>
     <ClInclude Include="GameProject\GameSeen\PlayScene\PlayScene.h">
       <Filter>GameProject\GameSeen\PlayPlayScene</Filter>
