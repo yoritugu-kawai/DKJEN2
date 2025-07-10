@@ -10,8 +10,7 @@ void ProjectManager::Gear()
 	Input::Initialize();
 	PSOCopileManagement::Set();
 	TexManager::Initiluze();
-	game = new GameScene;
-	game->Initialize();
+
 	//ここまで
 	
 	
@@ -22,9 +21,9 @@ void ProjectManager::Gear()
 		FrameManagement::BeginFrame();
 
 		//更新
-		game->Update();
+		
 		///描画
-		game->Draw();
+		
 		
 		//終わり
 		FrameManagement::EndFrame();
